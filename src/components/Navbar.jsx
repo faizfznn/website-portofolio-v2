@@ -25,7 +25,7 @@ function Navbar() {
   }, [active, navLinks, isHovering]);
 
   return (
-    <nav className="w-auto h-[59px] bg-black border border-[#2A2A2A] rounded-full flex items-center justify-center space-x-4 px-6">
+    <nav className="w-fit h-[59px] bg-black border border-[#2A2A2A] rounded-full flex items-center justify-center space-x-4 px-6">
       {/* Logo di Kiri */}
       <img src={Logo} alt="Logo" className="h-7" />
 
