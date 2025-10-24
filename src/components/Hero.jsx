@@ -1,7 +1,6 @@
 import aboutImage from "../assets/about.jpg";
 import indoFlag from "../assets/bendera.png";
 
-
 const Hero = () => {
   return (
     <section className="flex w-full px-[50px] h-fit justify-center items-center gap-[138px]">
@@ -19,11 +18,33 @@ const Hero = () => {
         </div>
 
         <div className="flex items-start gap-2">
-          <button className="flex  w-fit h-[56px] px-10 justify-center items-center rounded-full border-[1px] bg-black border-[#323232] text-white font-normal text-[16px]">
+          <button
+            className="
+    flex w-fit h-[56px] px-10 justify-center items-center
+    rounded-full
+    border border-[rgba(0,0,0,0.2)]
+    text-white text-[16px] font-normal
+    bg-gradient-to-b from-[#323232] to-[#000000]
+    shadow-[inset_0_0_8px_0_#FFFFFF]
+  "
+          >
             Get in touch
           </button>
-          <button className="flex w-fit h-[56px] px-10 justify-center items-center rounded-full border-[1px] border-[#CAD3DC] bg-white text-black text-[16px] font-normal">
-            See portfolio
+
+          {/* === Tombol See Portfolio yang Diperbaiki === */}
+          <button className="relative w-fit h-[56px] px-10 rounded-full border-[1px] border-[#CAD3DC] bg-white text-black text-[16px] font-normal overflow-hidden group">
+            {/* Elemen tak terlihat untuk menjaga ukuran tombol */}
+            <span className="opacity-0">See portfolio</span>
+
+            {/* Teks 1: Awalnya terlihat */}
+            <span className="absolute inset-0 flex justify-center items-center transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
+              See portfolio
+            </span>
+
+            {/* Teks 2: Awalnya tersembunyi di bawah */}
+            <span className="absolute inset-0 flex justify-center items-center translate-y-full transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
+              See portfolio
+            </span>
           </button>
         </div>
       </div>
