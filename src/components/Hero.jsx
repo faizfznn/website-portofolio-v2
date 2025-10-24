@@ -1,5 +1,6 @@
 import aboutImage from "../assets/about.jpg";
 import indoFlag from "../assets/bendera.png";
+import stars from "../assets/stars.png";
 
 const Hero = () => {
   return (
@@ -10,37 +11,52 @@ const Hero = () => {
           <h1
             className="text-5xl font-normal text-black leading-14"
             style={{
-              fontFamily: '"Bricolage Grotesque", sans-serif',
+              fontFamily: '"Lato", sans-serif',
             }}
           >
-            I’m crafting apps that users want to open again, again, and again...
+            Crafting seamless digital experiences, from pixel to code.{" "}
           </h1>
         </div>
 
         <div className="flex items-start gap-2">
+          {/* === Tombol Get in Touch (DIPERBAIKI) === */}
           <button
             className="
-    flex w-fit h-[56px] px-10 justify-center items-center
-    rounded-full
+    relative group flex w-fit h-[56px] px-10 justify-center items-center
+    rounded-[24px] overflow-hidden
     border border-[rgba(0,0,0,0.2)]
     text-white text-[16px] font-normal
     bg-gradient-to-b from-[#323232] to-[#000000]
     shadow-[inset_0_0_8px_0_#FFFFFF]
+    transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]
+    hover:shadow-[inset_0_10px_29.1px_0_rgba(255,255,255,0.4)]
   "
           >
-            Get in touch
+            {/* === LAPISAN BINTANG === */}
+            <img
+              src={stars}
+              alt="stars"
+              className="
+      absolute left-1/2 top-1/2
+      w-[600%] h-[600%]
+      -translate-x-1/2 -translate-y-1/2
+      object-cover opacity-60
+      animate-[spin_7s_linear_infinite]
+      group-hover:[animation-play-state:paused]
+      pointer-events-none
+    "
+            />
+
+            {/* === TEKS BUTTON === */}
+            <span className="relative z-10">Get in touch</span>
           </button>
 
-          {/* === Tombol See Portfolio yang Diperbaiki === */}
+          {/* === Tombol See Portfolio === */}
           <button className="relative w-fit h-[56px] px-10 rounded-full border-[1px] border-[#CAD3DC] bg-white text-black text-[16px] font-normal group">
-            {/* Container dengan overflow hidden hanya untuk teks */}
             <span className="relative inline-block overflow-hidden h-[1.2em]">
-              {/* Teks 1: Awalnya terlihat */}
               <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
                 See portfolio
               </span>
-
-              {/* Teks 2: Awalnya tersembunyi di bawah */}
               <span className="absolute left-0 top-0 inline-block translate-y-full transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
                 See portfolio
               </span>
@@ -49,7 +65,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* === CARD KANAN === */}
+      {/* === CARD KANAN (Tidak ada perubahan) === */}
       <div
         className="
           inline-flex 
@@ -74,15 +90,12 @@ const Hero = () => {
           transform: "rotate(3deg)",
         }}
       >
-        {/* === FOTO PROFIL === */}
         <div
           className="w-[200px] h-[200px] rounded-[28px] bg-cover bg-center shadow-[0_2px_10px_rgba(0,0,0,0.1)]"
           style={{
             backgroundImage: `url(${aboutImage})`,
           }}
         ></div>
-
-        {/* === STATUS BADGE === */}
         <div className="h-[48px] flex p-4 gap-2 justify-center items-center bg-white rounded-full self-stretch">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -92,8 +105,6 @@ const Hero = () => {
             Available for freelance
           </span>
         </div>
-
-        {/* === LOKASI BADGE === */}
         <div className="h-[48px] flex p-4 gap-2 justify-center items-center bg-white rounded-full self-stretch">
           <img
             src={indoFlag}

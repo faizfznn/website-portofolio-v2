@@ -4,7 +4,7 @@ import Logo from "../assets/Logo.png"; // Pastikan path logo sudah benar
 function Navbar() {
   const [active, setActive] = useState("Home");
   const [isHovering, setIsHovering] = useState(false);
-  const navLinks = ["Home", "About", "Writing"];
+  const navLinks = ["Home", "Portfolio", "About Me"];
 
   const indicatorRef = useRef(null);
   const itemsRef = useRef([]);
