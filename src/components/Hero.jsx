@@ -32,18 +32,18 @@ const Hero = () => {
           </button>
 
           {/* === Tombol See Portfolio yang Diperbaiki === */}
-          <button className="relative w-fit h-[56px] px-10 rounded-full border-[1px] border-[#CAD3DC] bg-white text-black text-[16px] font-normal overflow-hidden group">
-            {/* Elemen tak terlihat untuk menjaga ukuran tombol */}
-            <span className="opacity-0">See portfolio</span>
+          <button className="relative w-fit h-[56px] px-10 rounded-full border-[1px] border-[#CAD3DC] bg-white text-black text-[16px] font-normal group">
+            {/* Container dengan overflow hidden hanya untuk teks */}
+            <span className="relative inline-block overflow-hidden h-[1.2em]">
+              {/* Teks 1: Awalnya terlihat */}
+              <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
+                See portfolio
+              </span>
 
-            {/* Teks 1: Awalnya terlihat */}
-            <span className="absolute inset-0 flex justify-center items-center transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
-              See portfolio
-            </span>
-
-            {/* Teks 2: Awalnya tersembunyi di bawah */}
-            <span className="absolute inset-0 flex justify-center items-center translate-y-full transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
-              See portfolio
+              {/* Teks 2: Awalnya tersembunyi di bawah */}
+              <span className="absolute left-0 top-0 inline-block translate-y-full transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
+                See portfolio
+              </span>
             </span>
           </button>
         </div>
