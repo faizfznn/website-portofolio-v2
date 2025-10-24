@@ -1,22 +1,28 @@
 import aboutImage from "../assets/about.jpg";
 import indoFlag from "../assets/bendera.png";
 
+
 const Hero = () => {
   return (
-    <section className="w-full text-white py-24 px-6 flex flex-col md:flex-row items-center justify-between gap-16">
-      {/* === LEFT COLUMN === */}
-      <div className="flex-1 text-center md:text-left space-y-6 max-w-2xl">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-          I’m crafting apps that users want to open again, again, and again...
-        </h1>
+    <section className="flex w-full px-[50px] h-fit justify-center items-center gap-[138px]">
+      {/* === Bagian Kiri === */}
+      <div className="flex flex-col items-start gap-12">
+        <div className="w-[646px]">
+          <h1
+            className="text-5xl font-normal text-black leading-14"
+            style={{
+              fontFamily: '"Bricolage Grotesque", sans-serif',
+            }}
+          >
+            I’m crafting apps that users want to open again, again, and again...
+          </h1>
+        </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row justify-center md:justify-start gap-4">
-          <button className="relative px-8 py-3 rounded-full font-semibold text-sm bg-gradient-to-r from-gray-900 to-black border border-gray-700 shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] transition-all overflow-hidden">
+        <div className="flex items-start gap-2">
+          <button className="flex  w-fit h-[56px] px-10 justify-center items-center rounded-full border-[1px] bg-black border-[#323232] text-white font-normal text-[16px]">
             Get in touch
-            <div className="absolute inset-0 rounded-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
           </button>
-
-          <button className="px-8 py-3 rounded-full bg-white text-black font-semibold text-sm border border-gray-300 hover:bg-gray-100 transition-all">
+          <button className="flex w-fit h-[56px] px-10 justify-center items-center rounded-full border-[1px] border-[#CAD3DC] bg-white text-black text-[16px] font-normal">
             See portfolio
           </button>
         </div>
