@@ -1,18 +1,19 @@
+// src/App.jsx
+
+import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import './index.css'
+import './index.css';
 
 function App() {
   return (
     <main className="bg-[#f5f5f5] min-h-screen">
       <div className="container mx-auto px-4">
-        {/* Header untuk membungkus dan memposisikan Navbar */}
         <header className="flex justify-center py-6">
           <Navbar />
         </header>
         
-        {/* Tampilkan Hero Section di bawahnya */}
-        <Hero />
+        {/* Konten halaman akan dirender di sini */}
+        <Outlet />
       </div>
     </main>
   );
