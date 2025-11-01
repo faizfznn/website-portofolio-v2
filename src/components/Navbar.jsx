@@ -33,7 +33,7 @@ function Navbar() {
       {/* === Navbar Links === */}
       <div
         className="
-          flex items-center justify-center gap-[28px]
+          flex items-center justify-center gap-7
           h-[60px]
           px-2
           rounded-[64px]
@@ -48,7 +48,7 @@ function Navbar() {
             to={link.path}
             className={({ isActive }) =>
               `
-              flex h-[44px] px-[18px] py-[12px] justify-center items-center gap-[10px]
+              flex h-11 px-[18px] py-3 justify-center items-center gap-2.5
               rounded-[49px] text-[16px] font-medium transition-all duration-300
               ${isActive ? "bg-[#F6F6F6] text-black" : "text-[#4B4B4B]"}
               hover:bg-[#F6F6F6]/60 hover:text-black

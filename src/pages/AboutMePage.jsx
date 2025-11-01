@@ -6,12 +6,36 @@ import aboutImage from "../assets/about.jpg"; // Your photo
 import { FiArrowDown, FiArrowRight } from "react-icons/fi"; // Arrow icons
 import { LuSparkle } from "react-icons/lu"; // Sparkle icon
 import ExperienceSection from "../components/ExperienceSection"; // <-- Import the new component
-import '../index.css';
+import { AlbumProvider } from "../components/AlbumContext";
+import Album from "../components/Album";
 
+import "../index.css";
 
 function AboutMePage() {
+  const recognitions = [
+    {
+      title: "UXplorer 2019, Silver Award",
+      description:
+        "Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.",
+    },
+    {
+      title: "UXplorer 2019, Silver Award",
+      description:
+        "Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.",
+    },
+    {
+      title: "UXplorer 2019, Silver Award",
+      description:
+        "Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.",
+    },
+    {
+      title: "UXplorer 2019, Silver Award",
+      description:
+        "Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.",
+    },
+  ];
   return (
-    <main className="w-full max-w-6xl mx-auto px-4">
+    <main className="w-full max-w-6xl mx-auto px-4 mt-[92px]">
       <div className="flex w-full px-[50px] justify-center items-center gap-[58px] py-10">
         {/* ============================ */}
         {/* === COLUMN 1: YOUR IMAGE === */}
@@ -32,7 +56,9 @@ function AboutMePage() {
             <div className="flex-col items-center gap-0.5 self-stretch">
               <h1 className="text-5xl font-bold">
                 {/* "Hello," is styled to be blue and italic to match the reference */}
-                <span className="nama-faiz text-blue-600 italic font-medium">Hello,</span>
+                <span className="font2 text-[#0057FF] italic font-medium">
+                  Hello,
+                </span>
                 {/* Your name remains bold and black */}
                 <span className="text-black"> I'm Faiz</span>
               </h1>
@@ -94,17 +120,106 @@ function AboutMePage() {
 
           {/* --- "Skip to the good part" Button --- */}
           {/* This button is a <Link> from react-router-dom, navigating to your portfolio page. */}
-          <Link
-            to="/portfolio"
-            className="flex h-12 items-center self-end gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-[14px] shadow-lg "
+          <a
+            href="#music-section"
+            className="flex h-12 items-center self-end gap-2 px-6 py-3 bg-[#0057FF] text-white font-semibold rounded-[14px] shadow-lg scroll-smooth"
           >
             Skip to the good part
             <FiArrowRight />
-          </Link>
+          </a>
         </div>
         {/* --- Experience Section (The new component) --- */}
       </div>
+      <div className="flex flex-col w-full items-start gap-8">
+        <div className="flex flex-col w-full items-start gap-8 self-stretch">
+          <div className="flex items-center gap-8 self-stretch">
+            <div className="flex w-[324px] p-4 flex-col items-start gap-6 rounded-3xl bg-[#FAFAFA]">
+              <div className="flex flex-col items-start leading-tight">
+                <span className="font2 text-[#0057FF] text-[32px] font-normal italic">
+                  Some
+                </span>
+                <span className="text-black text-[32px] font-normal">
+                  Recognition
+                </span>
+              </div>
+
+              <p className="self-stretch text-black text-[16px] font-normal">
+                Not many, but a few competitions I participated and won
+                recognition for my work.
+              </p>
+            </div>
+            <div className="flex h-full p-4 justify-center items-center gap-6 rounded-3xl bg-[#FAFAFA]">
+              {recognitions.map((rec, idx) => (
+                <div key={idx} className="rounded-2xl p-6 ">
+                  <h4 className="font-semibold text-lg text-black">
+                    {rec.title}
+                  </h4>
+                  <p className="mt-2 text-gray-700 text-sm leading-relaxed">
+                    {rec.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className=" flex h-16 p-4 justify-center items-center gap-6 self-stretch rounded-3xl bg-[#FAFAFA]">
+            <p className="text-black text-[16px] font-medium">And Many More</p>
+          </div>
+        </div>
+        <div className="flex h-[440px] items-center gap-6 self-stretch">
+          <div
+            className="flex flex-col items-center self-stretch rounded-3xl w-[416px] h-[439px] bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${aboutImage})`,
+            }}
+          ></div>
+          <div
+            className="flex flex-col justify-center items-center self-stretch rounded-3xl bg-cover bg-center w-[900px] h-[439px]"
+            style={{
+              backgroundImage: `url(${aboutImage})`,
+            }}
+          ></div>
+        </div>
+      </div>
+
       <ExperienceSection />
+
+      <section
+        id="music-section"
+        className="flex w-full items-center gap-8 mb-32"
+      >
+        <div className="flex w-[324px] h-48 p-4 flex-col items-start gap-6 rounded-3xl bg-[#FAFAFA]">
+          <div className="flex flex-row items-start leading-tight">
+            <span className="font2 text-[#0057FF] text-[32px] font-normal italic">
+              My Love
+            </span>
+            <span className="text-[#FAFAFA]">a</span>
+            <span className="text-black text-[32px] font-normal">
+              for Music
+            </span>
+          </div>
+
+          <p className="self-stretch text-black text-[16px] font-normal">
+            I think a good designer is a good observer. When I am free, I
+            explore the world, observe and document experiences.
+          </p>
+        </div>
+        <Album
+          albumCover={aboutImage}
+          albumTitle="Your Favorite Taylor Swift Song"
+          artist="Taylor Swift"
+          // Path MP3 Anda di folder public/audio
+          musicFile="/audio/taylor-swift.mp3"
+          size="md"
+        />
+        <Album
+          albumCover={aboutImage}
+          albumTitle="Your Favorite Taylor Swift Song"
+          artist="Taylor Swift"
+          // Path MP3 Anda di folder public/audio
+          musicFile="/audio/taylor-swift.mp3"
+          size="md"
+        />
+      </section>
     </main>
   );
 }

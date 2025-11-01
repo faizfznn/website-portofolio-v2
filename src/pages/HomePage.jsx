@@ -12,12 +12,13 @@ function HomePage() {
   };
 
   return (
-    <>
+    // Tambahkan margin top 92px untuk memberi jarak dari navbar
+    <div className="mt-[92px]">
       <Hero onGetInTouchClick={handleScrollToContact} />
       <div ref={contactRef}>
         <Contact />
       </div>
-    </>
+    </div>
   );
 }
 
