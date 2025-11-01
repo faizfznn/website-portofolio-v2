@@ -3,6 +3,7 @@
 // Import necessary components and assets
 import { Link } from "react-router-dom";
 import aboutImage from "../assets/about.jpg"; // Your photo
+import midnight from "../assets/midnight.png"; // Album cover
 import { FiArrowDown, FiArrowRight } from "react-icons/fi"; // Arrow icons
 import { LuSparkle } from "react-icons/lu"; // Sparkle icon
 import ExperienceSection from "../components/ExperienceSection"; // <-- Import the new component
@@ -204,19 +205,17 @@ function AboutMePage() {
           </p>
         </div>
         <Album
-          albumCover={aboutImage}
-          albumTitle="Your Favorite Taylor Swift Song"
+          albumCover={midnight}
+          albumTitle="Red (Taylor's Version)"
           artist="Taylor Swift"
-          // Path MP3 Anda di folder public/audio
           musicFile="/audio/taylor-swift.mp3"
           size="md"
         />
         <Album
-          albumCover={aboutImage}
-          albumTitle="Your Favorite Taylor Swift Song"
+          albumCover={midnight}
+          albumTitle="Black Hole Sun"
           artist="Taylor Swift"
-          // Path MP3 Anda di folder public/audio
-          musicFile="/audio/taylor-swift.mp3"
+          musicFile="/about-me/songs/maroon.mp3"
           size="md"
         />
       </section>
