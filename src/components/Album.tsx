@@ -1,24 +1,15 @@
-// src/components/Album.jsx
+// src/components/Album.tsx
 import React, { useEffect, useRef } from "react";
 import { useAlbumContext } from "./AlbumContext";
 
-/**
- * Komponen Album menampilkan piringan vinil berputar.
- * Klik untuk memulai/menghentikan lagu, dan hover untuk melihat judul & artis.
- *
- * Props:
- *  - albumCover: string path gambar cover
- *  - albumTitle: string judul lagu/album
- *  - artist: string nama artis
- *  - musicFile: string path ke file mp3
- *  - size: 'sm' | 'md' | 'lg' (opsional)
- */
+// Definisikan props
 interface AlbumProps {
   albumCover: string;
   albumTitle: string;
   artist: string;
   musicFile: string;
   size?: 'sm' | 'md' | 'lg';
+  startTime?: number; // <-- 1. Tambahkan prop startTime
 }
 
 export default function Album({
@@ -27,6 +18,7 @@ export default function Album({
   artist,
   musicFile,
   size = "md",
+  startTime = 0, // <-- 2. Terima prop dengan nilai default 0
 }: AlbumProps) {
   const {
     currentPlayingId,
@@ -36,20 +28,18 @@ export default function Album({
     volume,
     isSoundEnabled,
   } = useAlbumContext();
+  
 
-  // Membuat ID unik
   const albumId = `${albumTitle}-${artist}`.toLowerCase().replace(/\s+/g, "-");
   const isPlaying = currentPlayingId === albumId;
-
-  // Simpan elemen audio
   const audioRef = useRef(new Audio(musicFile));
 
-  // Atur volume setiap kali volume context berubah
+  // ... (useEffect untuk volume tetap sama) ...
   useEffect(() => {
     audioRef.current.volume = volume;
   }, [volume]);
 
-  // Register sound sebagai currentSound ketika dimainkan
+  // ... (useEffect untuk setCurrentSound tetap sama) ...
   useEffect(() => {
     if (isPlaying) {
       setCurrentSound({
@@ -62,7 +52,7 @@ export default function Album({
     }
   }, [isPlaying, setCurrentSound]);
 
-  // Handler saat lagu selesai
+  // ... (useEffect untuk handleEnded tetap sama) ...
   useEffect(() => {
     const handleEnded = () => {
       setCurrentPlayingId(null);
@@ -74,7 +64,8 @@ export default function Album({
     return () => audio.removeEventListener("ended", handleEnded);
   }, [setCurrentPlayingId, setCurrentTrack, setCurrentSound]);
 
-  // Sinkronisasi isPlaying dan isSoundEnabled
+  // --- 3. Perbarui useEffect ini ---
+  // Hapus currentTime = 0 dari 'else' agar tidak ter-reset
   useEffect(() => {
     if (!isSoundEnabled) {
       audioRef.current.pause();
@@ -84,19 +75,24 @@ export default function Album({
       audioRef.current.play().catch(() => {});
     } else {
       audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+      // JANGAN reset currentTime di sini
     }
   }, [isPlaying, isSoundEnabled]);
 
+  // --- 4. Perbarui fungsi togglePlay ---
   const togglePlay = () => {
     if (!isSoundEnabled) return;
     if (isPlaying) {
+      // Logika untuk BERHENTI (tetap sama)
       audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+      audioRef.current.currentTime = 0; // Reset ke 0 saat dihentikan
       setCurrentPlayingId(null);
       setCurrentTrack(null);
       setCurrentSound(null);
     } else {
+      // Logika untuk MULAI
+      audioRef.current.currentTime = startTime; // <-- Atur waktu mulai di sini
+      
       setCurrentPlayingId(albumId);
       setCurrentTrack({
         id: albumId,
@@ -117,6 +113,7 @@ export default function Album({
   const sizeClass = sizeClasses[size] || sizeClasses.md;
 
   return (
+    // ... (sisa JSX tidak berubah) ...
     <div className={`relative group ${sizeClass} cursor-pointer`} onClick={togglePlay}>
       {/* Piringan vinil */}
       <div

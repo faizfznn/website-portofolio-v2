@@ -7,8 +7,9 @@ import midnight from "../assets/midnight.png"; // Album cover
 import { FiArrowDown, FiArrowRight } from "react-icons/fi"; // Arrow icons
 import { LuSparkle } from "react-icons/lu"; // Sparkle icon
 import ExperienceSection from "../components/ExperienceSection"; // <-- Import the new component
-import { AlbumProvider } from "../components/AlbumContext";
+import { AlbumProvider, useAlbumContext } from "../components/AlbumContext";
 import Album from "../components/Album";
+
 
 import "../index.css";
 
@@ -204,6 +205,7 @@ function AboutMePage() {
             explore the world, observe and document experiences.
           </p>
         </div>
+        <div className="flex flex-row gap-35">
         <Album
           albumCover={midnight}
           albumTitle="Red (Taylor's Version)"
@@ -217,7 +219,9 @@ function AboutMePage() {
           artist="Taylor Swift"
           musicFile="/about-me/songs/maroon.mp3"
           size="md"
+          startTime={40} // <-- TAMBAHKAN INI
         />
+        </div>
       </section>
     </main>
   );
