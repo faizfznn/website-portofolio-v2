@@ -172,13 +172,7 @@ function AboutMePage() {
         </div>
         <div className="flex h-[440px] items-center gap-6 self-stretch">
           <div
-            className="flex flex-col items-center self-stretch rounded-3xl w-[416px] h-[439px] bg-cover bg-center"
-            style={{
-              backgroundImage: `url(${aboutImage})`,
-            }}
-          ></div>
-          <div
-            className="flex flex-col justify-center items-center self-stretch rounded-3xl bg-cover bg-center w-[900px] h-[439px]"
+            className="flex flex-col items-center self-stretch rounded-3xl w-full h-[439px] bg-cover bg-center"
             style={{
               backgroundImage: `url(${aboutImage})`,
             }}
