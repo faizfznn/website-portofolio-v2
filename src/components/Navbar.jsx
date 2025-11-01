@@ -1,7 +1,5 @@
 // src/components/Navbar.jsx
-
-import { useState, useRef, useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom"; // Import NavLink dan useLocation
+import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../assets/Logo.png";
 
 function Navbar() {
@@ -11,51 +9,57 @@ function Navbar() {
     { name: "About Me", path: "/about" },
   ];
 
-  const indicatorRef = useRef(null);
-  const itemsRef = useRef([]);
-  const location = useLocation(); // Dapatkan lokasi URL saat ini
-
-  useEffect(() => {
-    const activeIndex = navLinks.findIndex(link => link.path === location.pathname);
-    const activeItem = itemsRef.current[activeIndex];
-    
-    if (activeItem && indicatorRef.current) {
-      const itemRect = activeItem.getBoundingClientRect();
-      const parentRect = activeItem.parentElement.getBoundingClientRect();
-      const centerPosition =
-        itemRect.left - parentRect.left + itemRect.width / 2;
-
-      indicatorRef.current.style.transform = `translateX(${centerPosition}px) translateX(-50%)`;
-    }
-  }, [location, navLinks]); // Jalankan efek saat lokasi berubah
+  const location = useLocation();
 
   return (
-    <nav className="w-fit h-[59px] bg-black border border-[#2A2A2A] rounded-full flex items-center justify-center space-x-4 px-6">
-      <img src={Logo} alt="Logo" className="h-7" />
+        <nav
+      className="
+        fixed top-6 
+      "
+    >
+    <div className="flex items-center gap-3">
+      {/* === Logo === */}
+      <div
+        className="
+          flex h-[60px] w-[60px] items-center justify-center rounded-full
+          bg-white/80
+          shadow-[0_0.241px_1.207px_-1.25px_rgba(110,110,110,0.20),0_2px_10px_-2.5px_rgba(110,110,110,0.20)]
+          backdrop-blur-[1.25px]
+        "
+      >
+        <img src={Logo} alt="Logo" className="w-[29px] h-[21.3px]" />
+      </div>
 
-      <div className="relative flex items-center">
-        <span
-          ref={indicatorRef}
-          className="absolute bottom-[-2px] left-0 h-[6px] w-[6px] bg-white rounded-full transition-transform duration-300 ease-in-out"
-        />
-
-        {navLinks.map((link, index) => (
+      {/* === Navbar Links === */}
+      <div
+        className="
+          flex items-center justify-center gap-[28px]
+          h-[60px]
+          px-2
+          rounded-[64px]
+          bg-[rgba(255,255,255,0.8)]
+          shadow-[0_0.241px_1.207px_-1.25px_rgba(110,110,110,0.20),0_2px_10px_-2.5px_rgba(110,110,110,0.20)]
+          backdrop-blur-[1.25px]
+        "
+      >
+        {navLinks.map((link) => (
           <NavLink
             key={link.name}
-            ref={(el) => (itemsRef.current[index] = el)}
             to={link.path}
             className={({ isActive }) =>
-              `px-4 py-2 text-[16px] font-medium transition-colors duration-300 relative z-10 ${
-                isActive ? "text-white" : "text-[#939393] hover:text-white"
-              }`
+              `
+              flex h-[44px] px-[18px] py-[12px] justify-center items-center gap-[10px]
+              rounded-[49px] text-[16px] font-medium transition-all duration-300
+              ${isActive ? "bg-[#F6F6F6] text-black" : "text-[#4B4B4B]"}
+              hover:bg-[#F6F6F6]/60 hover:text-black
+              `
             }
           >
             {link.name}
           </NavLink>
         ))}
       </div>
-
-      <img src={Logo} alt="Logo" className="h-7" />
+    </div>
     </nav>
   );
 }

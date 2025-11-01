@@ -8,6 +8,15 @@
   font-family: "Lato", sans-serif;
 }
 
+body{
+  background-color: white;
+}
+
+.nama-faiz{
+  font-family: "PP Editorial New Italic";
+
+}
+
 @layer utilities {
   .animate-spin-slow {
     animation: spin 10s linear infinite;

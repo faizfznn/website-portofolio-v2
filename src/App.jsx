@@ -6,7 +6,7 @@ import './index.css';
 
 function App() {
   return (
-    <main className="bg-[#f5f5f5] min-h-screen">
+    <main className="bg-white min-h-screen">
       <div className="container mx-auto px-4">
         <header className="flex justify-center py-6">
           <Navbar />
