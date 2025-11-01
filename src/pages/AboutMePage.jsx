@@ -10,10 +10,13 @@ import ExperienceSection from "../components/ExperienceSection"; // <-- Import t
 import { AlbumProvider, useAlbumContext } from "../components/AlbumContext";
 import Album from "../components/Album";
 
-
 import "../index.css";
 
 function AboutMePage() {
+  const { currentPlayingId } = useAlbumContext();
+  const album1Id = "taylor-swift-red";
+  const album2Id = "taylor-swift-maroon";
+  const isFirstAlbumPlaying = currentPlayingId === album1Id;
   const recognitions = [
     {
       title: "UXplorer 2019, Silver Award",
@@ -23,7 +26,7 @@ function AboutMePage() {
     {
       title: "UXplorer 2019, Silver Award",
       description:
-        "Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.",
+        "Designed a fuel inflow meter with a digital interface aimed to curb malpracticedesi gas stations in India.",
     },
     {
       title: "UXplorer 2019, Silver Award",
@@ -190,6 +193,7 @@ function AboutMePage() {
         className="flex w-full items-center gap-8 mb-32"
       >
         <div className="flex w-[324px] h-48 p-4 flex-col items-start gap-6 rounded-3xl bg-[#FAFAFA]">
+          {/* ... (Teks "My Love for Music") ... */}
           <div className="flex flex-row items-start leading-tight">
             <span className="font2 text-[#0057FF] text-[32px] font-normal italic">
               My Love
@@ -199,28 +203,41 @@ function AboutMePage() {
               for Music
             </span>
           </div>
-
           <p className="self-stretch text-black text-[16px] font-normal">
             I think a good designer is a good observer. When I am free, I
             explore the world, observe and document experiences.
           </p>
         </div>
-        <div className="flex flex-row gap-35">
+
+        {/* Album 1 (Kiri) */}
         <Album
-          albumCover={midnight}
+          id={album1Id} // <-- 5. Berikan ID
+          albumCover={aboutImage}
           albumTitle="Red (Taylor's Version)"
           artist="Taylor Swift"
           musicFile="/audio/taylor-swift.mp3"
           size="md"
         />
-        <Album
-          albumCover={midnight}
-          albumTitle="Black Hole Sun"
-          artist="Taylor Swift"
-          musicFile="/about-me/songs/maroon.mp3"
-          size="md"
-          startTime={40} // <-- TAMBAHKAN INI
-        />
+
+        {/* 6. Bungkus Album 2 (Kanan) dengan <div> untuk animasi */}
+        <div
+          className="transition-transform duration-500 ease-in-out"
+          style={{
+            // Terapkan pergeseran HANYA jika album pertama sedang diputar
+            transform: isFirstAlbumPlaying
+              ? "translateX(40%)"
+              : "translateX(0)",
+          }}
+        >
+          <Album
+            id={album2Id} // <-- 5. Berikan ID
+            albumCover={midnight}
+            albumTitle="Maroon" // Judul diubah agar ID unik
+            artist="Taylor Swift"
+            musicFile="/about-me/songs/maroon.mp3"
+            size="md"
+            startTime={40} // Prop dari permintaan sebelumnya
+          />
         </div>
       </section>
     </main>

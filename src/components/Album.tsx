@@ -4,6 +4,7 @@ import { useAlbumContext } from "./AlbumContext";
 
 // Definisikan props
 interface AlbumProps {
+  id: string; // <-- 1. Tambahkan prop ID yang wajib diisi
   albumCover: string;
   albumTitle: string;
   artist: string;
@@ -13,6 +14,7 @@ interface AlbumProps {
 }
 
 export default function Album({
+  id, // <-- 2. Terima prop 'id'
   albumCover,
   albumTitle,
   artist,
@@ -28,11 +30,11 @@ export default function Album({
     volume,
     isSoundEnabled,
   } = useAlbumContext();
-  
 
-  const albumId = `${albumTitle}-${artist}`.toLowerCase().replace(/\s+/g, "-");
-  const isPlaying = currentPlayingId === albumId;
+  // 3. Gunakan 'id' dari prop untuk memeriksa apakah album ini sedang diputar
+  const isPlaying = currentPlayingId === id; 
   const audioRef = useRef(new Audio(musicFile));
+  
 
   // ... (useEffect untuk volume tetap sama) ...
   useEffect(() => {
@@ -92,10 +94,10 @@ export default function Album({
     } else {
       // Logika untuk MULAI
       audioRef.current.currentTime = startTime; // <-- Atur waktu mulai di sini
+      setCurrentPlayingId(id); // <-- Gunakan prop 'id'
       
-      setCurrentPlayingId(albumId);
       setCurrentTrack({
-        id: albumId,
+        id: id,
         albumTitle,
         artist,
         albumCover,
