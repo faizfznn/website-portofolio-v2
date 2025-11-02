@@ -35,7 +35,7 @@ function Footer() {
             className="
               relative z-10 
               w-12 h-12 rounded-xl
-              transform rotate-[13deg]
+              transform rotate-13
               transition-all duration-300
               group-hover:-translate-y-9 group-hover:rotate-0
             "
