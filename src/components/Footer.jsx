@@ -1,18 +1,23 @@
 import instagram from "../assets/instagram.jpg";
 import linked from "../assets/linked.png";
 import twitter from "../assets/twitter.jpg";
-import { LuSend } from "react-icons/lu"; // <-- 1. Import ikon untuk email
+import { LuSend } from "react-icons/lu";
 
 function Footer() {
   return (
     <footer className="mb-10 flex flex-col md:flex-row gap-12 md:gap-0 h-auto md:h-28 w-full px-8 py-6 justify-between items-center rounded-4xl bg-[#F2F2F2]">
-      {/* Email Section */}
-      <div className="flex items-center gap-3">
-        <LuSend className="w-7 h-7 text-black" /> {/* <-- 2. Ikon ditambahkan */}
+      
+      {/* --- Email Section (Diperbarui) --- */}
+      {/* 1. Mengubah <div> menjadi <a> */}
+      <a
+        href="mailto:faiz150605@gmail.com" // <-- 2. Menambahkan href mailto:
+        className="flex items-center gap-3 transition-opacity hover:opacity-75" // <-- 3. Menambahkan hover effect
+      >
+        <LuSend className="w-7 h-7 text-black" />
         <p className="text-black text-center text-2xl md:text-3xl font-medium">
           faiz150605@gmail.com
         </p>
-      </div>
+      </a>
 
       {/* Social Media Icons */}
       <div className="flex items-center gap-8">
@@ -22,14 +27,13 @@ function Footer() {
           href="https://www.instagram.com/faizfznn"
           target="_blank"
           rel="noopener noreferrer"
-          // --- 1. Container dibuat 'relative' dan diberi ukuran ---
           className="relative group w-16 h-16 md:w-20 md:h-20 flex justify-center items-center"
         >
           <img
             src={instagram}
             alt="Instagram"
             className="
-              relative z-10 // <-- 2. Gambar diberi z-index agar di atas
+              relative z-10 
               w-16 h-16 md:w-20 md:h-20 rounded-3xl
               transform rotate-[13deg]
               transition-all duration-300
