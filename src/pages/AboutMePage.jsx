@@ -7,6 +7,7 @@ import midnight from "../assets/midnight.png"; // Album cover
 import { FiArrowDown, FiArrowRight } from "react-icons/fi"; // Arrow icons
 import { LuSparkle } from "react-icons/lu"; // Sparkle icon
 import ExperienceSection from "../components/ExperienceSection"; // <-- Import the new component
+import EducationSection from "../components/EducationSection";
 import { AlbumProvider, useAlbumContext } from "../components/AlbumContext";
 import Album from "../components/Album";
 
@@ -181,6 +182,7 @@ function AboutMePage() {
       </div>
 
       <ExperienceSection />
+      <EducationSection />
 
       <section
         id="music-section"
