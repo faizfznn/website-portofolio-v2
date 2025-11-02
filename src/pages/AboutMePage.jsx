@@ -4,6 +4,7 @@
 import { Link } from "react-router-dom";
 import aboutImage from "../assets/about.jpg"; // Your photo
 import midnight from "../assets/midnight.png"; // Album cover
+import juara from "../assets/juara.png"; // Album cover
 import { FiArrowDown, FiArrowRight } from "react-icons/fi"; // Arrow icons
 import { LuSparkle } from "react-icons/lu"; // Sparkle icon
 import ExperienceSection from "../components/ExperienceSection"; // <-- Import the new component
@@ -175,7 +176,7 @@ function AboutMePage() {
           <div
             className="flex flex-col items-center self-stretch rounded-3xl w-full h-[439px] bg-cover bg-center"
             style={{
-              backgroundImage: `url(${aboutImage})`,
+              backgroundImage: `url(${juara})`,
             }}
           ></div>
         </div>

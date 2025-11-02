@@ -3,6 +3,7 @@
 import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import './index.css';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
         
         {/* Konten halaman akan dirender di sini */}
         <Outlet />
+        <footer>
+          <Footer />
+        </footer>
       </div>
     </main>
   );
