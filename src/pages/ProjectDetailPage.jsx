@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import projects from '../data/projects.js';
+import projects from '../data/projects';
 
 /**
  * Halaman detail proyek.
@@ -63,38 +63,58 @@ export default function ProjectDetailPage() {
 
   return (
     <main
-      className="max-w-7xl mx-auto p-6 md:p-12 grid grid-cols-1 lg:grid-cols-4 gap-8"
+      className="w-full max-w-6xl mx-auto px-4 mt-[92px]"
       style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
     >
       {/* Sidebar kiri */}
-      <aside className="lg:col-span-1 sticky top-24 self-start space-y-4">
-        <h1 className="text-3xl font-bold mb-4 text-[#0057FF]">
+      <aside
+        className="lg:col-span-1 lg:sticky lg:top-1/2 lg:-translate-y-1/2 self-start flex flex-col items-start gap-6"
+      >
+        {/* Judul proyek */}
+        <h1
+          className="text-2xl md:text-3xl font-bold"
+          style={{ color: '#0057FF' }}
+        >
           {project.title}
         </h1>
-        <nav className="space-y-2">
+        {/* Navigasi sections */}
+        <ul className="space-y-4">
           {[
             { label: 'Overview', key: 'overview' },
             { label: 'Visual Decision', key: 'visual' },
             { label: 'Logo', key: 'logo' },
             { label: 'Challenges', key: 'challenges' },
             { label: 'Prototype', key: 'prototype' },
-          ].map(({ label, key }) => (
-            <a
-              href={`#${key}`}
-              key={key}
-              className={`block px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                activeSection === key
-                  ? 'bg-[#0057FF] text-white'
-                  : 'text-gray-600 hover:bg-gray-100'
-              }`}
-            >
-              {label}
-            </a>
-          ))}
-        </nav>
+          ].map(({ label, key }) => {
+            const active = activeSection === key;
+            return (
+              <li key={key}>
+                <a
+                  href={`#${key}`}
+                  className="flex items-center gap-3 text-base font-medium"
+                >
+                  <span
+                    className={`h-3 w-3 rounded-full transition-colors ${
+                      active ? 'bg-[#0057FF]' : 'bg-gray-300'
+                    }`}
+                  ></span>
+                  <span
+                    className={`transition-colors ${
+                      active
+                        ? 'text-[#0057FF]'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    {label}
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
         <Link
           to="/portfolio"
-          className="mt-8 inline-block text-blue-600 underline"
+          className="mt-8 inline-block text-[#0057FF] underline"
         >
           &larr; Back to Portfolio
         </Link>

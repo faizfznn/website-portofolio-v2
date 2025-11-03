@@ -1,4 +1,3 @@
-// src/data/projects.js
 import aboutImage from '../assets/about.jpg';
 import midnight from '../assets/midnight.png';
 
@@ -18,16 +17,17 @@ const projects = [
     status: 'Live',
     tools: ['Figma', 'React'],
     image: aboutImage,
+    section: 'Web Design',
     overview:
-      'Whatsapp Wrapped is a playful tool that analyzes your conversations and visualizes your chatting habits.',
+      'Whatsapp Wrapped is a playful tool that analyzes your conversations and visualizes your chatting habits. It helps users discover their most frequent contacts, most used emojis, and response times to encourage healthier messaging behaviour.',
     visualDecision:
-      'The design uses a dark theme with pops of primary blue (#0057FF) and clear typography hierarchy.',
+      'The visual design embraces a sleek dark theme with pops of our brand blue #0057FF, reflecting modern messaging apps while maintaining legibility. We prioritized typography hierarchy using Bricolage Grotesque for headings and Inter for body text, and crafted custom charts for statistics.',
     logo:
-      'The logo intertwines a speech bubble and a circular graph, colored with the primary blue.',
+      'The logo features a minimalist speech bubble intertwined with a circular graph, symbolizing both conversation and data insights. It uses the primary blue as the main accent to align with the overall color palette.',
     challenges:
-      'Parsing and visualizing conversation data while maintaining privacy was the main challenge.',
+      'The main challenge was parsing and visualizing conversation data in a privacy‑conscious way. We implemented client‑side processing to avoid storing personal messages and designed charts that are both informative and delightful to explore.',
     prototype:
-      'See the Figma prototype to explore the flow from data import to sharing your chat summary.',
+      'You can explore the interactive prototype on Figma, which showcases the entire flow from data import to sharing your chat summary with friends.',
   },
   {
     id: 'mellow-break-reminder',
@@ -38,17 +38,40 @@ const projects = [
     status: 'Live',
     tools: ['Figma', 'Swift'],
     image: midnight,
+    section: 'Mobile Design',
     overview:
-      'Mellow helps users maintain a healthy relationship with their devices by gently reminding them to take breaks.',
+      'Mellow helps users maintain a healthy relationship with their devices by gently reminding them to take breaks. It runs unobtrusively in the menu bar and dims the screen when it’s time to rest your eyes.',
     visualDecision:
-      'Soft gradients and smooth animations create a calming feel; blue (#0057FF) acts as a motif.',
+      'The visual approach uses soft gradients and smooth animations to create a calming feel. We introduced the brand color blue #0057FF as a motif throughout the UI to reinforce brand recognition.',
     logo:
-      'A tranquil horizon with a rising sun represented by a blue half-circle above clouds.',
+      'The logo depicts a tranquil horizon with a rising sun, represented by a blue half circle rising above clouds — an analogy to stepping away from screens and enjoying daylight.',
     challenges:
-      'Ensuring reminders are noticeable but not annoying required careful iteration and user feedback.',
+      'Ensuring the app remains accessible without being annoying was key. We experimented with various notification patterns and window overlays, iterating based on user feedback until we achieved the right balance.',
     prototype:
-      'The prototype shows the onboarding flow and how the reminder overlay appears.',
+      'The prototype demonstrates the onboarding flow and how the reminder overlay appears. It includes micro‑interactions like hover states and motion to guide users naturally.',
   },
+  {
+    id: 'mellow-break-reminder',
+    title: 'Mellow — Screen Break Reminder',
+    description:
+      'Simple screen break reminder that blocks your screen at set intervals',
+    categories: ['macOS App'],
+    status: 'Live',
+    tools: ['Figma', 'Swift'],
+    image: midnight,
+    section: 'Mobile Design',
+    overview:
+      'Mellow helps users maintain a healthy relationship with their devices by gently reminding them to take breaks. It runs unobtrusively in the menu bar and dims the screen when it’s time to rest your eyes.',
+    visualDecision:
+      'The visual approach uses soft gradients and smooth animations to create a calming feel. We introduced the brand color blue #0057FF as a motif throughout the UI to reinforce brand recognition.',
+    logo:
+      'The logo depicts a tranquil horizon with a rising sun, represented by a blue half circle rising above clouds — an analogy to stepping away from screens and enjoying daylight.',
+    challenges:
+      'Ensuring the app remains accessible without being annoying was key. We experimented with various notification patterns and window overlays, iterating based on user feedback until we achieved the right balance.',
+    prototype:
+      'The prototype demonstrates the onboarding flow and how the reminder overlay appears. It includes micro‑interactions like hover states and motion to guide users naturally.',
+  },
+  
 ];
 
 export default projects;

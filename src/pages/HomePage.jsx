@@ -12,8 +12,7 @@ function HomePage() {
   };
 
   return (
-    // Tambahkan margin top 92px untuk memberi jarak dari navbar
-    <div className="mt-[92px]">
+    <div className="w-full max-w-6xl mx-auto px-4 mt-[92px]">
       <Hero onGetInTouchClick={handleScrollToContact} />
       <div ref={contactRef}>
         <Contact />
