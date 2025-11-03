@@ -15,20 +15,18 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <HomePage /> },
+      { path: 'about', element: <AboutMePage /> },
       {
         path: 'portfolio',
         element: <PortfolioPage />,
-        children: [
-          // ✅ Ini akan membuat halaman /portfolio dan /portfolio/:id berbagi layout
-          { index: true, element: <PortfolioPage /> },
-          { path: ':id', element: <ProjectDetailPage /> },
-        ],
       },
-      { path: 'about', element: <AboutMePage /> },
+      {
+        path: 'portfolio/:id',
+        element: <ProjectDetailPage />,
+      },
     ],
   },
 ]);
-
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AlbumProvider>

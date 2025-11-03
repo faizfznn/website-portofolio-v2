@@ -43,7 +43,7 @@ function AboutMePage() {
   ];
   return (
     <main className="w-full max-w-6xl mx-auto px-4 mt-[92px]">
-      <div className="flex w-full px-[50px] justify-center items-center gap-[58px] py-10">
+      <div className="flex w-full justify-between items-center py-10">
         {/* ============================ */}
         {/* === COLUMN 1: YOUR IMAGE === */}
         {/* ============================ */}
@@ -55,7 +55,7 @@ function AboutMePage() {
         {/* ==================================== */}
         {/* === COLUMN 2: TEXT AND BUTTONS === */}
         {/* ==================================== */}
-        <div className="flex w-[456px] flex-col justify-between items-end self-stretch">
+        <div className="flex w-[600px] flex-col justify-between items-end self-stretch">
           {/* --- Main Content Card --- */}
           {/* This card wraps the main text description. It has a white background, soft corners, and a subtle shadow. */}
           <div className="flex p-4 flex-col justify-center items-start gap-7 self-stretch rounded-3xl bg-[#FAFAFA]">

@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import projects from '../data/projects';
+import projects from '../data/projects.js';
 
 /**
  * Halaman detail proyek.

@@ -20,7 +20,7 @@ function Footer() {
       </a>
 
       {/* Social Media Icons */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-1">
         
         {/* Instagram */}
         <a
