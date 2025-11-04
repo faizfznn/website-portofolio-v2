@@ -1,30 +1,50 @@
 // src/components/Hero.jsx
-
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 import aboutImage from "../assets/about.jpg";
 import indoFlag from "../assets/bendera.png";
 import stars from "../assets/stars.png";
 
-// Terima prop onGetInTouchClick
 const Hero = ({ onGetInTouchClick }) => {
   return (
-    <section className="flex w-full px-[50px] h-fit justify-center items-center gap-[138px]">
-      {/* === Bagian Kiri === */}
-      <div className="flex flex-col items-start gap-12">
-        <div className="w-[646px]">
+    <section
+      className="
+        flex flex-col-reverse md:flex-row 
+        w-full px-6 md:px-[50px] 
+        justify-center items-center 
+        gap-12 md:gap-[138px]
+      "
+    >
+      {/* === Left Section === */}
+      <div className="flex flex-col items-start gap-8 md:gap-12 text-center md:text-left">
+        <div className="w-full md:w-[646px]">
           <h1
-            className="text-5xl font-normal text-black leading-14"
+            className="text-3xl md:text-5xl font-normal text-black leading-snug md:leading-[1.4]"
             style={{ fontFamily: '"Lato", sans-serif' }}
           >
-            Crafting seamless digital experiences, from pixel to code.{" "}
+            Crafting seamless digital experiences, from pixel to code.
           </h1>
         </div>
 
-        <div className="flex items-start gap-2">
-          {/* === Tombol Get in Touch (diarahkan ke fungsi scroll) === */}
+        {/* Buttons */}
+        <div
+          className="
+            flex flex-col sm:flex-row items-start 
+            gap-4 lg:gap-2 
+            w-full sm:w-auto
+          " // [RESPONSIVE] flex-col di mobile terkecil, gap, & width disesuaikan
+        >
+          {/* === Tombol Get in Touch === */}
           <button
-            onClick={onGetInTouchClick} // Tambahkan onClick di sini
-            className="relative group flex w-fit h-[56px] px-10 justify-center items-center rounded-[24px] overflow-hidden border border-[rgba(0,0,0,0.2)] text-white text-[16px] font-normal bg-gradient-to-b from-[#323232] to-[#000000] shadow-[inset_0_0_8px_0_#FFFFFF] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] hover:shadow-[inset_0_10px_29.1px_0_rgba(255,255,255,0.4)]"
+            onClick={onGetInTouchClick}
+            className="
+              relative group flex w-full sm:w-fit h-[56px] px-10 justify-center items-center 
+              rounded-[24px] overflow-hidden border border-[rgba(0,0,0,0.2)] 
+              text-white text-[16px] font-normal 
+              bg-gradient-to-b from-[#323232] to-[#000000] 
+              shadow-[inset_0_0_8px_0_#FFFFFF] 
+              transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] 
+              hover:shadow-[inset_0_10px_29.1px_0_rgba(255,255,255,0.4)]
+            " // [RESPONSIVE] w-full di mobile
           >
             <img
               src={stars}
@@ -34,10 +54,14 @@ const Hero = ({ onGetInTouchClick }) => {
             <span className="relative z-10">Get in touch</span>
           </button>
 
-          {/* === Tombol See Portfolio (diubah menjadi Link) === */}
+          {/* === Tombol See Portfolio === */}
           <Link
             to="/portfolio"
-            className="relative w-fit h-[56px] px-10 rounded-full border-[1px] border-[#CAD3DC] bg-white text-black text-[16px] font-normal group inline-flex items-center justify-center"
+            className="
+              relative w-full sm:w-fit h-[56px] px-10 rounded-[24px] 
+              border-[1px] border-[#CAD3DC] bg-white text-black 
+              text-[16px] font-normal group inline-flex items-center justify-center
+            " // [RESPONSIVE] w-full di mobile
           >
             <span className="relative inline-block overflow-hidden h-[1.2em]">
               <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
@@ -51,20 +75,25 @@ const Hero = ({ onGetInTouchClick }) => {
         </div>
       </div>
 
-      {/* === CARD KANAN (Tidak ada perubahan) === */}
+      {/* === Right Card === */}
       <div
-        className="inline-flex p-4 flex-col items-center gap-2 border border-white shadow-[0_0_40px_0_rgba(0,0,0,0.03)] transition-transform duration-500 ease-in-out hover:rotate-2 hover:translate-x-3 hover:scale-105 cursor-pointer"
-        style={{
-          borderRadius: "44px 44px 28px 28px",
-          background: "rgba(242, 244, 246, 0.5)",
-          transform: "rotate(3deg)",
-        }}
+        className="
+          inline-flex p-4 flex-col items-center gap-3
+          border border-white 
+          shadow-[0_0_40px_0_rgba(0,0,0,0.03)]
+          transition-transform duration-500 ease-in-out
+          hover:rotate-2 hover:translate-x-2 hover:scale-105 cursor-pointer
+          bg-[rgba(242,244,246,0.5)] rounded-[44px]
+          transform rotate-3
+          w-[240px] sm:w-[280px]
+        "
       >
         <div
-          className="w-[200px] h-[200px] rounded-[28px] bg-cover bg-center shadow-[0_2px_10px_rgba(0,0,0,0.1)]"
+          className="w-[180px] sm:w-[200px] h-[180px] sm:h-[200px] rounded-[28px] bg-cover bg-center shadow-[0_2px_10px_rgba(0,0,0,0.1)]"
           style={{ backgroundImage: `url(${aboutImage})` }}
         ></div>
-        <div className="h-12 flex p-4 gap-2 justify-center items-center bg-white rounded-full self-stretch">
+
+        <div className="flex p-3 gap-2 justify-center items-center bg-white rounded-full w-full">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#2A9F47]"></span>
@@ -73,7 +102,8 @@ const Hero = ({ onGetInTouchClick }) => {
             Available for freelance
           </span>
         </div>
-        <div className="h-12 flex p-4 gap-2 justify-center items-center bg-white rounded-full self-stretch">
+
+        <div className="flex p-3 gap-2 justify-center items-center bg-white rounded-full w-full">
           <img
             src={indoFlag}
             alt="Indonesian Flag"
