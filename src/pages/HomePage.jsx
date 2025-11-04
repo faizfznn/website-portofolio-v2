@@ -1,6 +1,6 @@
 // src/pages/HomePage.jsx
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Hero from "../components/Hero";
 import ProjectCard from "../components/ProjectCard.jsx";
 import works from "../data/workProjects.js";
@@ -18,8 +18,32 @@ import Reveal from "../components/Reveal";
 import "../index.css";
 
 import { SiJavascript, SiFigma, SiKotlin, SiReact } from "react-icons/si";
+const timeOptions = {
+  timeZone: "Asia/Jakarta",
+  hour: "numeric", // Menampilkan jam sebagai angka (misal: 4, bukan 04)
+  minute: "2-digit", // Menampilkan menit sebagai 2 digit (misal: 02)
+  second: "2-digit", // Menampilkan detik sebagai 2 digit (misal: 15)
+};
 
 function HomePage() {
+  // 2. Buat state untuk menyimpan waktu
+  const [currentTime, setCurrentTime] = useState(
+    // Gunakan 'en-GB' untuk mendapatkan format : (titik dua)
+    new Date().toLocaleTimeString("en-GB", timeOptions)
+  );
+
+  // 3. Gunakan useEffect untuk memperbarui waktu setiap detik
+  useEffect(() => {
+    const timer = setInterval(() => {
+      // Gunakan 'en-GB' untuk mendapatkan format : (titik dua)
+      setCurrentTime(new Date().toLocaleTimeString("en-GB", timeOptions));
+    }, 1000);
+
+    // Cleanup interval
+    return () => {
+      clearInterval(timer);
+    };
+  }, []); // Dependensi kosong
   const skills = [
     { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
     { name: "Figma", icon: <SiFigma className="text-pink-500" /> },
@@ -70,20 +94,22 @@ function HomePage() {
         </section>
       </Reveal>
 
-      <Reveal>
-        {/* Bagian Iam Faiz */}
-
-        <div>
+      {/* Bagian Iam Faiz */}
+      <div>
+        <Reveal>
           <h3
             className="text-3xl font-semibold mb-6"
             // style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
           >
             Hello, I&apos;m Faiz
           </h3>
-          {/* Introduction & Collaboration Section */}
-          <section className="mb-12 flex flex-row items-start gap-12">
-            {/* Left Side: Intro & Collage */}
-            <div className="w-full md:w-1/2 flex flex-col">
+        </Reveal>
+
+        {/* Introduction & Collaboration Section */}
+        <section className="mb-12 flex flex-row items-start gap-12">
+          {/* Left Side: Intro & Collage */}
+          <div className="w-full md:w-1/2 flex flex-col">
+            <Reveal>
               {/* Kolase Gambar */}
               <div className="relative flex space-x-2 md:space-x-4 mb-6">
                 <div className="flex w-fit justify-between items-center -space-x-10">
@@ -111,13 +137,16 @@ function HomePage() {
                   className="absolute -top-15 -right-15 w-2- h-2- rotate-10 animate-slide-slow"
                 />
               </div>
+            </Reveal>
 
+            <Reveal delay={0.1}>
               {/* Deskripsi */}
-              <div className="flex inline-flex justify-center p-4 items-center gap-6 rounded-3xl bg-[#FAFAFA] mb-4">
+
+              <div className="relative flex justify-center p-4 items-center gap-6 rounded-3xl bg-[#FAFAFA] mb-4">
                 <img
                   src={pinImg}
                   alt=""
-                  className="absolute top-700 left-10 w-20 h-20"
+                  className="absolute -top-52 -left-7 w-20 h-20"
                 />
                 <p className="text-black">
                   <span className="font-semibold">
@@ -130,10 +159,12 @@ function HomePage() {
                 <img
                   src={clipImg}
                   alt=""
-                  className="absolute -bottom-633 right-157 w-25 h-25"
+                  className="absolute -bottom-8 -right-6 w-25 h-25"
                 />
               </div>
+            </Reveal>
 
+            <Reveal delay={0.2}>
               <div className="flex w-[528px] items-start gap-4 justify-start">
                 {/* Lokasi & Waktu */}
                 <div className="flex h-fit flex-col justify-center p-4 h-[100px] rounded-3xl bg-[#FAFAFA]">
@@ -144,11 +175,7 @@ function HomePage() {
                         Malang, Indonesia
                       </span>
                     </div>
-                    <span className="text-sm ml-9">
-                      {new Date().toLocaleTimeString("id-ID", {
-                        timeZone: "Asia/Jakarta",
-                      })}
-                    </span>
+                    <span className="text-sm ml-9">{currentTime}</span>
                   </div>
                 </div>
 
@@ -165,10 +192,12 @@ function HomePage() {
                   ))}
                 </div>
               </div>
-            </div>
+            </Reveal>
+          </div>
 
-            {/* Right Side: Collaboration Card */}
-            <div className="w-full" ref={contactRef}>
+          {/* Right Side: Collaboration Card */}
+          <div className="w-full" ref={contactRef}>
+            <Reveal delay={0.3}>
               <div className="relative w-full h-[412px] rounded-[32px] p-10 bg-black text-white flex flex-col items-center text-center overflow-hidden">
                 {/* === Background Glow Layer === */}
                 <div className="absolute inset-0 flex justify-center items-center">
@@ -238,10 +267,10 @@ function HomePage() {
                   />
                 </div>
               </div>
-            </div>
-          </section>
-        </div>
-      </Reveal>
+            </Reveal>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

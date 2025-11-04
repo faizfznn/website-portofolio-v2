@@ -9,6 +9,7 @@ import AboutMePage from './pages/AboutMePage.jsx';
 import { AlbumProvider } from './components/AlbumContext';
 import './index.css';
 
+
 const router = createBrowserRouter([
   {
     path: '/',
