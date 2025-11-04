@@ -1,4 +1,5 @@
-import projects from "../data/projects.js";
+// Import only the minimal data needed for listing cards
+import projects from "../data/portfolioProjects.js";
 import ProjectCard from "../components/ProjectCard.jsx";
 
 /**
@@ -14,7 +15,7 @@ function PortfolioPage() {
   );
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 mt-[92px]">
+    <div className="min-h-screen *:mt-[92px]">
       <div className="mb-12 md:mb-16">
         <h1 className="text-2xl font-bold mb-4">
           {/* Bagian '/' dibuat lebih tipis dan abu-abu */}
@@ -31,11 +32,10 @@ function PortfolioPage() {
           design and everything.
         </p>
       </div>
-
       {sections.map((section) => (
         <div key={section} className="mb-12">
           <h2
-            className="text-3xl font-semibold mb-6"
+            className="text-2xl md:text-3xl font-semibold mb-6"
             style={{
               color: "#0C2340",
               fontFamily: '"Bricolage Grotesque", sans-serif',

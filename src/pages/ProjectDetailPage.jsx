@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import projects from '../data/projects';
+import portfolioProjects from '../data/portfolioProjects.js';
+import projectDetails from '../data/projectDetails.js';
 
 /**
  * Halaman detail proyek.
@@ -14,7 +15,9 @@ import projects from '../data/projects';
  */
 export default function ProjectDetailPage() {
   const { id } = useParams();
-  const project = projects.find((p) => p.id === id);
+  // Cari data project untuk tampilan umum dan detailnya
+  const portfolioProject = portfolioProjects.find((p) => p.id === id);
+  const detail = projectDetails[id];
 
   // Aktif section untuk sidebar
   const [activeSection, setActiveSection] = useState('overview');
@@ -50,7 +53,7 @@ export default function ProjectDetailPage() {
     return () => observer.disconnect();
   }, []);
 
-  if (!project) {
+  if (!portfolioProject || !detail) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center p-8 text-gray-600">
         <h2 className="text-3xl font-semibold mb-4">Project not found</h2>
@@ -63,7 +66,7 @@ export default function ProjectDetailPage() {
 
   return (
     <main
-      className="w-full max-w-6xl mx-auto px-4 mt-[92px]"
+      className="max-w-7xl mx-auto p-6 md:p-12 grid grid-cols-1 lg:grid-cols-4 gap-8"
       style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
     >
       {/* Sidebar kiri */}
@@ -75,10 +78,12 @@ export default function ProjectDetailPage() {
           className="text-2xl md:text-3xl font-bold"
           style={{ color: '#0057FF' }}
         >
-          {project.title}
+          {portfolioProject.appName || portfolioProject.title}
         </h1>
         {/* Navigasi sections */}
-        <ul className="space-y-4">
+        <ul className="relative space-y-6 mt-2">
+          {/* Garis vertikal untuk indikator daftar */}
+          <div className="absolute left-1.5 top-0 bottom-0 w-px bg-gray-300 dark:bg-gray-700" />
           {[
             { label: 'Overview', key: 'overview' },
             { label: 'Visual Decision', key: 'visual' },
@@ -88,21 +93,22 @@ export default function ProjectDetailPage() {
           ].map(({ label, key }) => {
             const active = activeSection === key;
             return (
-              <li key={key}>
+              <li key={key} className="relative pl-6">
                 <a
                   href={`#${key}`}
-                  className="flex items-center gap-3 text-base font-medium"
+                  className="flex items-center text-base font-medium"
                 >
+                  {/* Lingkaran indikator */}
                   <span
-                    className={`h-3 w-3 rounded-full transition-colors ${
-                      active ? 'bg-[#0057FF]' : 'bg-gray-300'
+                    className={`absolute left-0 top-1/2 -translate-y-1/2 h-3 w-3 rounded-full transition-colors ${
+                      active ? 'bg-[#0057FF]' : 'bg-gray-300 dark:bg-gray-600'
                     }`}
                   ></span>
                   <span
-                    className={`transition-colors ${
+                    className={`ml-3 transition-colors ${
                       active
                         ? 'text-[#0057FF]'
-                        : 'text-gray-500 hover:text-gray-700'
+                        : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                     }`}
                   >
                     {label}
@@ -125,8 +131,8 @@ export default function ProjectDetailPage() {
         {/* Gambar hero / hi-fi */}
         <div className="w-full h-72 md:h-96 overflow-hidden rounded-3xl">
           <img
-            src={project.image}
-            alt={project.title}
+            src={portfolioProject.image}
+            alt={portfolioProject.appName || portfolioProject.title}
             className="w-full h-full object-cover"
           />
         </div>
@@ -141,7 +147,7 @@ export default function ProjectDetailPage() {
             Overview
           </h2>
           <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-            {project.overview}
+            {detail.overview}
           </p>
         </article>
 
@@ -155,7 +161,7 @@ export default function ProjectDetailPage() {
             Visual Decision
           </h2>
           <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-            {project.visualDecision}
+            {detail.visualDecision}
           </p>
         </article>
 
@@ -169,7 +175,7 @@ export default function ProjectDetailPage() {
             Logo
           </h2>
           <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-            {project.logo}
+            {detail.logo}
           </p>
         </article>
 
@@ -183,7 +189,7 @@ export default function ProjectDetailPage() {
             Challenges
           </h2>
           <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-            {project.challenges}
+            {detail.challenges}
           </p>
         </article>
 
@@ -197,7 +203,7 @@ export default function ProjectDetailPage() {
             Prototype
           </h2>
           <p className="text-base md:text-lg text-gray-700 leading-relaxed">
-            {project.prototype}
+            {detail.prototype}
           </p>
         </article>
       </section>
