@@ -77,7 +77,7 @@ function HomePage() {
           Hello, I&apos;m Faiz
         </h3>
         {/* Introduction & Collaboration Section */}
-        <section className="mb-24 flex flex-row items-start gap-12">
+        <section className="mb-12 flex flex-row items-start gap-12">
           {/* Left Side: Intro & Collage */}
           <div className="w-full md:w-1/2 flex flex-col">
             {/* Kolase Gambar */}
