@@ -63,7 +63,7 @@ function AboutMePage() {
             <div className="flex-col items-center gap-0.5 self-stretch">
               <h1 className="text-5xl font-bold">
                 {/* "Hello," is styled to be blue and italic to match the reference */}
-                <span className="font2 text-[#0057FF] italic font-medium">
+                <span className="font2 text-black italic font-medium">
                   Hello,
                 </span>
                 {/* Your name remains bold and black */}
@@ -129,7 +129,7 @@ function AboutMePage() {
           {/* This button is a <Link> from react-router-dom, navigating to your portfolio page. */}
           <a
             href="#music-section"
-            className="flex h-12 items-center self-end gap-2 px-6 py-3 bg-[#0057FF] text-white font-semibold rounded-[14px] shadow-lg scroll-smooth"
+            className="flex h-12 items-center self-end gap-2 px-6 py-3 bg-black text-white font-semibold rounded-[14px] shadow-lg scroll-smooth"
           >
             Skip to the good part
             <FiArrowRight />
@@ -142,7 +142,7 @@ function AboutMePage() {
           <div className="flex items-center gap-8 self-stretch">
             <div className="flex w-[324px] p-4 flex-col items-start gap-6 rounded-3xl bg-[#FAFAFA]">
               <div className="flex flex-col items-start leading-tight">
-                <span className="font2 text-[#0057FF] text-[32px] font-normal italic">
+                <span className="font2 text-black text-[32px] font-normal italic">
                   Some
                 </span>
                 <span className="text-black text-[32px] font-normal">
@@ -192,7 +192,7 @@ function AboutMePage() {
         <div className="flex w-[324px] h-48 p-4 flex-col items-start gap-6 rounded-3xl bg-[#FAFAFA]">
           {/* ... (Teks "My Love for Music") ... */}
           <div className="flex flex-row items-start leading-tight">
-            <span className="font2 text-[#0057FF] text-[32px] font-normal italic">
+            <span className="font2 text-black text-[32px] font-normal italic">
               My Love
             </span>
             <span className="text-[#FAFAFA]">a</span>

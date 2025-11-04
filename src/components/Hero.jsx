@@ -22,51 +22,32 @@ const Hero = ({ onGetInTouchClick }) => {
 
         <div className="flex items-start gap-2">
           {/* === Tombol Get in Touch (diarahkan ke fungsi scroll) === */}
-          <Link
-            to="/portfolio"
-            className="
-    relative group flex w-fit h-14 px-10 justify-center items-center 
-    rounded-3xl overflow-hidden 
-    text-white text-[16px] font-normal 
-    
-    
-    bg-linear-to-b from-[#0057FF] to-[#003DAA] 
-
-    border border-white/20 
-
-    shadow-[inset_0_0_8px_0_rgba(255,255,255,0.5)] 
-    
-
-    transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] 
-    hover:shadow-[inset_0_10px_29.1px_0_rgba(255,255,255,0.4)]
-  "
+          <button
+            onClick={onGetInTouchClick} // Tambahkan onClick di sini
+            className="relative group flex w-fit h-[56px] px-10 justify-center items-center rounded-[24px] overflow-hidden border border-[rgba(0,0,0,0.2)] text-white text-[16px] font-normal bg-gradient-to-b from-[#323232] to-[#000000] shadow-[inset_0_0_8px_0_#FFFFFF] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] hover:shadow-[inset_0_10px_29.1px_0_rgba(255,255,255,0.4)]"
           >
             <img
               src={stars}
               alt="stars"
-              className="
-      absolute left-1/2 top-1/2 w-[600%] h-[600%] 
-      -translate-x-1/2 -translate-y-1/2 object-cover 
-      opacity-60 animate-[spin_7s_linear_infinite] 
-      group-hover:[animation-play-state:paused] pointer-events-none
-    "
+              className="absolute left-1/2 top-1/2 w-[600%] h-[600%] -translate-x-1/2 -translate-y-1/2 object-cover opacity-60 animate-[spin_7s_linear_infinite] group-hover:[animation-play-state:paused] pointer-events-none"
             />
-            <span className="relative z-10">See Portfolio</span>
-          </Link>
+            <span className="relative z-10">Get in touch</span>
+          </button>
 
-          <button
-            onClick={onGetInTouchClick}
-            className="relative w-fit h-14 px-10 rounded-full border border-[#CAD3DC] bg-white text-black text-[16px] font-normal group inline-flex items-center justify-center"
+          {/* === Tombol See Portfolio (diubah menjadi Link) === */}
+          <Link
+            to="/portfolio"
+            className="relative w-fit h-[56px] px-10 rounded-full border-[1px] border-[#CAD3DC] bg-white text-black text-[16px] font-normal group inline-flex items-center justify-center"
           >
             <span className="relative inline-block overflow-hidden h-[1.2em]">
               <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
-                Get in Touch
+                See portfolio
               </span>
               <span className="absolute left-0 top-0 inline-block translate-y-full transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
-                Get in Touch
+                See portfolio
               </span>
             </span>
-          </button>
+          </Link>
         </div>
       </div>
 

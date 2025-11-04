@@ -1,11 +1,12 @@
 import instagram from "../assets/instagram.jpg";
 import linked from "../assets/linked.png";
 import twitter from "../assets/twitter.jpg";
+import github from "../assets/github.png"
 import { LuSend } from "react-icons/lu";
 
 function Footer() {
   return (
-    <footer className="mb-10 flex flex-col md:flex-row gap-12 md:gap-0 h-auto md:h-20 w-full px-8 py-6 justify-between items-center rounded-3xl bg-[#F2F2F2]">
+    <footer className="mb-10 flex flex-col md:flex-row gap-12 md:gap-0 h-auto md:h-20 w-full px-8 py-6 justify-between items-center rounded-3xl bg-[#FAFAFA]">
       
       {/* --- Email Section (Diperbarui) --- */}
       {/* 1. Mengubah <div> menjadi <a> */}
@@ -21,6 +22,36 @@ function Footer() {
 
       {/* Social Media Icons */}
       <div className="flex items-center gap-1">
+
+                <a
+          href="https://github.com/faizfznn"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative group w-16 h-16 flex justify-center items-center"
+        >
+          <img
+            src={github}
+            alt="GitHub"
+            className="
+              relative z-10 
+              w-12 h-12 rounded-xl
+              transform -rotate-4
+              transition-all duration-300
+              group-hover:-translate-y-9 group-hover:rotate-10
+            "
+          />
+          <span
+            className="
+              absolute inset-8 flex items-center justify-center 
+              text-sm text-black font-medium
+              opacity-0 group-hover:opacity-100
+              transition-opacity duration-300
+              mt-4
+            "
+          >
+            GitHub
+          </span>
+        </a>
         
         {/* Instagram */}
         <a
