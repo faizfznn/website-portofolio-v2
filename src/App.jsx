@@ -19,7 +19,7 @@ function App() {
         <footer>
           <Footer />
         </footer>
-        <ScrollToTop /> ← Tambahkan di sini
+        <ScrollToTop />
       </div>
     </main>
   );
