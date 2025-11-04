@@ -24,7 +24,7 @@ export default function ProjectCard({ project }) {
         Menggunakan padding generoso untuk spasi, serta bayangan lembut yang
         meningkat ketika di‑hover untuk efek terangkat.
       */}
-      <div className="rounded-3xl bg-[#FAFAFA] h-[500px] pb-0 p-6 shadow-md dark:shadow-lg group-hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+      <div className="rounded-3xl bg-[#FAFAFA] h-[612px] pb-0 p-6 shadow-md dark:shadow-lg group-hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
         <div>
           {/* Nama aplikasi */}
           <h3 className="text-lg md:text-2xl font-bold text-black">

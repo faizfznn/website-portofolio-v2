@@ -39,7 +39,7 @@ function HomePage() {
             const isFirst = index === 0;
             const isLast = index === displayedProjects.length - 1;
             // Apply full-width span on medium+ screens for first and last items
-            const colSpanClass = isFirst || isLast ? "md:col-span-2" : "";
+            const colSpanClass = isFirst || isLast ? "h-[645px] md:col-span-2" : "";
             return (
               <div key={works.id} className={`${colSpanClass}`}>
                 <ProjectCard project={works} />
