@@ -23,7 +23,7 @@ export default function Reveal({ children, delay = 0 }) {
       animate={controls}
       // Transisi diatur di sini untuk durasi dan jeda
       transition={{ 
-        duration: 0.6, // Durasi animasi
+        duration: 0.4, // Durasi animasi
         delay: delay,  // Jeda individual
         ease: [0.25, 0.1, 0.25, 1.0] // Kurva easing yang lebih halus
       }}
