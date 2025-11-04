@@ -1,6 +1,7 @@
 // Import only the minimal data needed for listing cards
 import projects from "../data/portfolioProjects.js";
 import ProjectCard from "../components/ProjectCard.jsx";
+import Reveal from "../components/Reveal";
 
 /**
  * PortfolioPage menampilkan daftar proyek sebagai kartu grid
@@ -34,24 +35,26 @@ function PortfolioPage() {
           </p>
         </div>
         {sections.map((section) => (
-          <div key={section} className="mb-12">
-            <h2
-              className="text-3xl font-semibold mb-6"
-              style={{
-                color: "#0C2340",
-                fontFamily: '"Bricolage Grotesque", sans-serif',
-              }}
-            >
-              {section}
-            </h2>
-            <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
-              {projects
-                .filter((p) => p.section === section)
-                .map((project) => (
-                  <ProjectCard key={project.id} project={project} />
-                ))}
+          <Reveal>
+            <div key={section} className="mb-12">
+              <h2
+                className="text-3xl font-semibold mb-6"
+                style={{
+                  color: "#0C2340",
+                  fontFamily: '"Bricolage Grotesque", sans-serif',
+                }}
+              >
+                {section}
+              </h2>
+              <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
+                {projects
+                  .filter((p) => p.section === section)
+                  .map((project) => (
+                    <ProjectCard key={project.id} project={project} />
+                  ))}
+              </div>
             </div>
-          </div>
+          </Reveal>
         ))}
       </div>
     </div>
