@@ -155,7 +155,7 @@ function AboutMePage() {
           </div>
 
           {/* Gambar */}
-          <div className="flex h-[320px] md:h-[440px] items-center gap-6 self-stretch">
+          <div className="flex h-80 md:h-[440px] items-center gap-6 self-stretch">
             <div
               className="flex flex-col items-center self-stretch rounded-3xl w-full h-full bg-cover bg-center"
               style={{ backgroundImage: `url(${juara})` }}

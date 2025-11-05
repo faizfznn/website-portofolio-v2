@@ -128,7 +128,7 @@ const projectDetails = {
     ],
     bentoImages: [veloraImg, mitsaqImg, cerebellumImg],
     figmaLink:
-      'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2F... (Ganti dengan link Anda)',
+      'https://embed.figma.com/proto/iAoMTa6aw42i1HAJ5U0iQL/INSPACE_VELORA?page-id=1396%3A15723&node-id=1503-45930&p=f&viewport=-327%2C339%2C0.28&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1503%3A45880&show-proto-sidebar=1&embed-host=share"',
   },
 };
 
