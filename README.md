@@ -2,8 +2,6 @@
 
 Ini adalah repositori untuk website portofolio pribadi saya, yang dirancang dan dikembangkan untuk menampilkan proyek-proyek UI/UX dan keahlian *frontend development*. Website ini dibuat dari awal dengan fokus pada desain modern, interaksi mikro yang halus, dan arsitektur kode yang bersih.
 
-![Pratinjau Halaman Utama](https://via.placeholder.com/1200x600.png?text=Ganti+dengan+screenshot+website+Anda)
-*(Ganti gambar placeholder di atas dengan screenshot portofolio Anda)*
 
 ---
 
@@ -27,8 +25,6 @@ Proyek ini bukan sekadar portofolio statis. Ini adalah kumpulan komponen interak
 ---
 
 ## 🚀 Teknologi yang Digunakan
-
-Daftar ini diekstrak dari file `package.json`.
 
 ### Dependensi Utama
 * **React 19**
@@ -73,17 +69,3 @@ Untuk menjalankan proyek ini di mesin lokal Anda, ikuti langkah-langkah berikut:
 5.  Buka [http://localhost:5173](http://localhost:5173) (atau port lain yang ditampilkan) di browser Anda.
 
 ---
-
-## 🛠️ Perintah Lainnya
-
-* **Build untuk Produksi:**
-    ```sh
-    npm run build
-    ```
-    Perintah ini akan membuat folder `dist` dengan file statis yang siap untuk di-deploy.
-
-* **Menjalankan Lint:**
-    ```sh
-    npm run lint
-    ```
-    Perintah ini akan memeriksa masalah *linting* di dalam kode.
