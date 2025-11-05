@@ -31,7 +31,7 @@ const ProblemSolutionCard = ({
     className={`p-6 rounded-2xl h-full ${
       isDarkMode
         ? "bg-gray-900 text-white"
-        : "bg-white text-black shadow-md border border-gray-100"
+        : "bg-white text-black border-2 border-gray-100"
     }`}
   >
     <span
