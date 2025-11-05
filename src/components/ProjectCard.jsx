@@ -20,12 +20,11 @@ export default function ProjectCard({ project }) {
       style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
     >
       {/*
-        Kartu proyek: latar belakang terang (light grey) di light mode dan gelap di dark mode.
-        Menggunakan padding generoso untuk spasi, serta bayangan lembut yang
-        meningkat ketika di‑hover untuk efek terangkat.
+        PERUBAHAN: Menghapus 'h-[612px]' dan 'justify-between'
+        Ini akan membuat tinggi kartu dinamis sesuai kontennya.
       */}
-      <div className="rounded-3xl bg-[#FAFAFA] h-[612px] pb-0 p-6 shadow-md dark:shadow-lg group-hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
-        <div>
+      <div className="rounded-3xl bg-[#FAFAFA] shadow-md dark:shadow-lg group-hover:shadow-xl transition-shadow duration-300 flex flex-col">
+        <div className="pb-6 p-6">
           {/* Nama aplikasi */}
           <h3 className="text-lg md:text-2xl font-bold text-black">
             {project.appName}
@@ -54,12 +53,15 @@ export default function ProjectCard({ project }) {
             })}
           </div>
         </div>
-        {/* Gambar mockup */}
-        <div className="mt-6 w-full h-64 rounded-2xl overflow-hidden">
+
+        {/* PERUBAHAN: Mengganti 'h-64' (256px) menjadi 'h-96' (384px)
+          Ini membuat gambar Anda jauh lebih besar.
+        */}
+        <div className="mt-6 w-full h-96 overflow-hidden">
           <img
             src={project.image}
             alt={project.appName}
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover object-center"
           />
         </div>
       </div>

@@ -20,7 +20,7 @@ const portfolioProjects = [
       'Designed a learning platform bridging education and industry, empowering vocational students to reach their better future.',
     image: cerebellumImg,
     logo: cerebellumImg,
-    section: 'Mobile Design',
+    section: 'Web Design',
   },
   {
     id: 'mitsaq',

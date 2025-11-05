@@ -34,7 +34,7 @@ function Navbar() {
         <div
           className="
             flex h-[50px] w-[50px] md:h-[60px] md:w-[60px] items-center justify-center rounded-full
-            flex-shrink-0 /* Mencegah logo menyusut */
+            shrink-0 /* Mencegah logo menyusut */
             bg-white/70
             shadow-[0_0.241px_1.207px_-1.25px_rgba(110,110,110,0.20),0_2px_10px_-2.5px_rgba(110,110,110,0.20)]
             backdrop-blur-[2.5px] 
@@ -64,7 +64,7 @@ function Navbar() {
               to={link.path}
               className={({ isActive }) =>
                 `
-                flex h-10 px-4 py-2 /* [RESPONSIVE] px-3 diubah ke px-4 agar lebih longgar */
+                flex h-10 px-4 py-2 /* [RESPONSIVE] px-3 diubah ke agar lebih longgar */
                 md:h-11 md:px-[18px] md:py-3 
                 justify-center items-center gap-2.5
                 rounded-[49px] text-[14px] md:text-[16px] font-medium transition-all duration-300

@@ -212,7 +212,7 @@ function HomePage() {
 
             {/* === Right Side: Collaboration Card === */}
             <div className="w-full md:w-1/2 mt-8 md:mt-0" ref={contactRef}>
-              <div className="relative w-full h-[380px] md:h-[412px] rounded-[32px] p-6 sm:p-8 md:p-10 bg-black text-white flex flex-col items-center text-center overflow-hidden">
+              <div className="relative w-full h-[380px] md:h-[412px] rounded-4xl p-6 sm:p-8 md:p-10 bg-black text-white flex flex-col items-center text-center overflow-hidden">
                 {/* [RESPONSIVE] padding p-6 di mobile terkecil */}
                 {/* Background */}
                 <div className="absolute inset-0 flex justify-center items-center">
@@ -224,11 +224,11 @@ function HomePage() {
                   <img
                     src={bintang}
                     alt="bintang"
-                    className="absolute w-[240px] h-[240px] md:w-[300px] md:h-[300px] animate-[spin_7s_linear_infinite] pointer-events-none"
+                    className="absolute w-60 h-60 md:w-[300px] md:h-[300px] animate-[spin_7s_linear_infinite] pointer-events-none"
                   />
                 </div>
 
-                <h3 className="relative text-3xl md:text-4xl font-bold flex items-center gap-3 mb-3 z-10">
+                <h3 className="relative text-center text-3xl md:text-4xl font-bold flex items-center gap-3 mb-3 z-10">
                   Let&apos;s collaborate
                   <img
                     src={handshake}
@@ -237,7 +237,7 @@ function HomePage() {
                   />
                 </h3>
 
-                <p className="relative text-sm md:text-base text-gray-200 mb-6 md:mb-8 z-10">
+                <p className="relative text-center text-sm md:text-base text-gray-200 mb-6 md:mb-8 z-10">
                   Write me an email and I will respond within 1 business day
                 </p>
 
@@ -261,14 +261,14 @@ function HomePage() {
                         navigator.clipboard.writeText("faiz150605@gmail.com")
                       }
                       className="
-                relative group flex justify-center items-center rounded-[24px] overflow-hidden 
+                relative group flex justify-center items-center rounded-3xl overflow-hidden 
                 border border-[rgba(255,255,255,0.3)] text-white font-normal 
-                bg-gradient-to-b from-[#323232] to-[#000000] 
+                bg-linear-to-b from-[#323232] to-[#000000] 
                 shadow-[inset_0_0_8px_0_#FFFFFF] 
                 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] 
                 hover:shadow-[inset_0_10px_29.1px_0_rgba(255,255,255,0.4)]
                 w-full sm:w-fit 
-                h-[42px] md:h-[48px] px-6 md:px-8 
+                h-[42px] md:h-12 px-6 md:px-8 
                 text-[14px] md:text-[16px]
               " // [RESPONSIVE] w-full di mobile
                     >
@@ -292,7 +292,7 @@ function HomePage() {
                   <img
                     src={signImg}
                     alt=""
-                    className="absolute -bottom-8 right-5 w-8 h-8 md:w-10 md:h-10"
+                    className="absolute -bottom-8 right-5 md:-bottom-14 md:right-5 w-8 h-8 md:w-10 md:h-10"
                   />
                 </div>
               </div>
