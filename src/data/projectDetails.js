@@ -1,19 +1,44 @@
-// src/data/projectDetails.js
 
-// Impor semua gambar yang Anda perlukan
-import cerebellumImg from "../assets/cerebellum.png";
-import mitsaqImg from "../assets/mitsaq.png";
-import mentraImg from "../assets/mentra.png";
-import veloraImg from "../assets/velora.png";
+
+// // Cerebelum desain result
+import cerebellumImg1 from "../assets/cerebellum1.png";
+import cerebellumImg2 from "../assets/cerebellum2.png";
+import cerebellumImg3 from "../assets/cerebellum3.png";
+
+
+// // mitsaq desain result
+import mitsaqImg1 from "../assets/mitsaq1.png";
+import mitsaqImg2 from "../assets/mitsaq2.png";
+import mitsaqImg3 from "../assets/mitsaq3.png";
+
+// // velora desain result
+import veloraImg1 from "../assets/velora1.png";
+import veloraImg2 from "../assets/velora2.png";
+import veloraImg3 from "../assets/velora3.png";
+
+// // mentra desain result
+import mentraImg1 from "../assets/mentra1.png";
+import mentraImg2 from "../assets/mentra2.png";
+import mentraImg3 from "../assets/mentra3.png";
+
+
+// Design System Images
+import dsVelora from "../assets/dsVelora.png";
+import dsMitsaq from "../assets/dsMitsaq.png";
+import dsMentra from "../assets/dsMentra.png";
+import dsCerebelum from "../assets/dsCerebelum.png";
 
 // Logo Apps
 import logoMentra from "../assets/logoMentra.png";
+import logoVelora from "../assets/logoVelora.png";
+import logoMitsaq from "../assets/logoMitsaq.png";
+import logoCerebelum from "../assets/logoCerebelum.png";
 
-// Placeholder untuk foto tim dan gambar bento/design system
+// Rekan (Tim Saya)
 import akhdan from "../assets/akhdan.jpg";
 import rara from "../assets/rara.jpg";
 import ariq from "../assets/ariq.jpeg";
-import dsImage from "../assets/velora.png"; // Ganti dengan gambar design system Anda
+
 
 const projectDetails = {
   // --- Proyek CEREBELLUM ---
@@ -32,8 +57,8 @@ const projectDetails = {
         linkedin: "https://www.linkedin.com/in/firaiklila/",
       },
     ],
-    role: ["Solo Designer", "UX & UI Design", "Documentation"],
-    timeline: "Sep '23 – Jan '24 (4 months)",
+    role: ["UX & UI Design", "UX Research"],
+    timeline: "Sep '25 – Oct '25 (1 months)",
     // Bagian Problems & Solutions
     problems: [
       {
@@ -80,13 +105,11 @@ const projectDetails = {
       description:
         "Inter is used for high readability, making it perfect for both small text and UI elements.",
     },
-    designSystemImages: [dsImage, dsImage], // Tambahkan gambar-gambar design system di sini
+    designSystemImages: [dsCerebelum], // Tambahkan gambar-gambar design system di sini
     logoImages: [
-      { src: cerebellumImg, label: "Color" },
-      { src: cerebellumImg, label: "Monochrome (Light)" },
-      { src: cerebellumImg, label: "Monochrome (Dark)" },
+      { src: logoCerebelum, label: "Color" },
     ],
-    bentoImages: [cerebellumImg, mitsaqImg, veloraImg],
+    bentoImages: [cerebellumImg1, cerebellumImg2, cerebellumImg3],
     figmaLink:
       "https://embed.figma.com/proto/UdoWaLKHbYA8JYphlERo4g/CITEUP?page-id=11%3A2251&node-id=84-5888&viewport=2654%2C2398%2C0.92&scaling=cover&content-scaling=fixed&starting-point-node-id=84%3A5888&show-proto-sidebar=1&embed-host=share&hide-ui=1", // Ganti dengan link Anda
   },
@@ -151,15 +174,14 @@ const projectDetails = {
     typography: {
       fontFamily: "Poppins",
       description:
-        "Poppins",
+        "Poppins offers a friendly, geometric style, versatile enough for bold headlines and clean body text.",
     },
-    designSystemImages: [dsImage, dsImage],
+    designSystemImages: [dsMitsaq],
     logoImages: [
-      { src: mitsaqImg, label: "Color" },
-      { src: mitsaqImg, label: "Monochrome (Light)" },
-      { src: mitsaqImg, label: "Monochrome (Dark)" },
+      { src: logoMitsaq, label: "Color" },
+
     ],
-    bentoImages: [mitsaqImg, cerebellumImg, mentraImg],
+    bentoImages: [mitsaqImg1, mitsaqImg2, mitsaqImg3],
     figmaLink:
       "https://embed.figma.com/proto/VQrE9qzQWOKSXMUT4GSRfi/MTQ_Mitsaq?page-id=646%3A21721&node-id=671-105613&p=f&viewport=3006%2C-7690%2C0.52&scaling=cover&content-scaling=fixed&starting-point-node-id=671%3A107892&embed-host=share&hide-ui=1",
   },
@@ -219,14 +241,14 @@ const projectDetails = {
     typography: {
       fontFamily: "Sf Pro Text",
       description:
-        "Sf Pro.",
+        "SF Pro ensures modern legibility, ideal for crisp UI elements and clear, small text.",
     },
-    designSystemImages: [dsImage, dsImage],
+    designSystemImages: [dsMentra],
     logoImages: [
       { src: logoMentra, label: "Color" },
 
     ],
-    bentoImages: [mentraImg, veloraImg, mitsaqImg],
+    bentoImages: [mentraImg1, mentraImg2, mentraImg3],
     figmaLink:
       "https://embed.figma.com/proto/n750lg99vaSoKTwxRtRaTJ/HITC_MENTRA?page-id=1%3A8&node-id=963-15115&p=f&viewport=-2783%2C-788%2C0.23&scaling=cover&content-scaling=fixed&starting-point-node-id=156%3A1245&embed-host=share&hide-ui=1",
   },
@@ -248,7 +270,7 @@ const projectDetails = {
       },
     ],
     role: ["UI/UX Design", "UX Research", "Prototyping"],
-    timeline: "Jun '24 – Aug '24 (3 months)",
+    timeline: "Jun '25 – Jul '25 (1 month)",
     problems: [
       {
         title: "Complex Navigation",
@@ -293,13 +315,12 @@ const projectDetails = {
       description:
         "Inter is used for high readability, making it perfect for both small text and UI elements.",
     },
-    designSystemImages: [dsImage, dsImage, dsImage, dsImage], // Bisa 4 gambar
+    designSystemImages: [dsVelora], // Bisa 4 gambar
     logoImages: [
-      { src: veloraImg, label: "Color" },
-      { src: veloraImg, label: "Monochrome (Light)" },
-      { src: veloraImg, label: "Monochrome (Dark)" },
+      { src: logoVelora, label: "Color" },
+
     ],
-    bentoImages: [veloraImg, mitsaqImg, cerebellumImg],
+    bentoImages: [veloraImg1, veloraImg2, veloraImg3],
     // PERBAIKAN: Menghapus '&show-proto-sidebar=1'
     figmaLink:
       "https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FiAoMTa6aw42i1HAJ5U0iQL%2FINSPACE_VELORA%3Fpage-id%3D1396%253A15723%26node-id%3D1503-45930%26viewport%3D-327%252C339%252C0.28%26scaling%3Dcover%26content-scaling%3Dfixed%26starting-point-node-id%3D1503%253A45880%26hide-ui%3D1",

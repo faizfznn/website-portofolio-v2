@@ -256,12 +256,11 @@ export default function ProjectDetailPage() {
             </div>
 
             {/* === Frame Grid Tambahan (DIPERBARUI) === */}
-            <div className="mt-8 h-[300px] flex flex-col">
-              {" "}
-              {/* Tinggi 300px */}
+            {/* Wrapper tidak lagi memiliki h-[300px] */}
+            <div className="mt-8 flex flex-col">
               <h3 className="text-xl font-semibold mb-4">Components & Icons</h3>
-              {/* Menggunakan kelas grid dinamis */}
-              <div className={`grid ${designSystemGridClass} gap-4 flex-1`}>
+              {/* Grid tidak lagi memiliki flex-1 */}
+              <div className={`grid ${designSystemGridClass} gap-4`}>
                 {detail.designSystemImages.map((imgSrc, i) => (
                   <div
                     key={i}
@@ -270,7 +269,11 @@ export default function ProjectDetailPage() {
                     <img
                       src={imgSrc}
                       alt={`Design System ${i + 1}`}
-                      className="w-full h-full object-cover" // h-full mengisi
+                      /* DIGANTI: h-full -> h-auto 
+                        Ini akan membuat gambar mempertahankan rasio aspeknya,
+                        dan tingginya akan ditentukan oleh lebarnya (w-full).
+                      */
+                      className="w-full h-auto object-cover"
                     />
                   </div>
                 ))}
