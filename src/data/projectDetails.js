@@ -6,10 +6,13 @@ import mitsaqImg from "../assets/mitsaq.png";
 import mentraImg from "../assets/mentra.png";
 import veloraImg from "../assets/velora.png";
 
+// Logo Apps
+import logoMentra from "../assets/logoMentra.png";
+
 // Placeholder untuk foto tim dan gambar bento/design system
-import teamPhoto1 from "../assets/foto1.jpg";
-import teamPhoto2 from "../assets/foto2.jpg";
-import teamPhoto3 from "../assets/foto3.jpg";
+import akhdan from "../assets/akhdan.jpg";
+import rara from "../assets/rara.jpg";
+import ariq from "../assets/ariq.jpeg";
 import dsImage from "../assets/velora.png"; // Ganti dengan gambar design system Anda
 
 const projectDetails = {
@@ -19,12 +22,15 @@ const projectDetails = {
       "Cerebellum is a learning platform designed to bridge the gap between education and industry. It empowers vocational students to reach their better future through curated content and mentorship.",
     team: [
       {
-        name: "Faiz Fauzan",
-        image: teamPhoto1,
-        linkedin: "https://linkedin.com/in/muhammadfaizfauzan",
+        name: "Ariiq Tsany Zu",
+        image: ariq,
+        linkedin: "https://www.linkedin.com/in/tsanyzzu/",
       },
-      { name: "Rekan 1", image: teamPhoto2, linkedin: "https://linkedin.com" },
-      { name: "Rekan 2", image: teamPhoto3, linkedin: "https://linkedin.com" },
+      {
+        name: "Fira Zaha Iklila",
+        image: rara,
+        linkedin: "https://www.linkedin.com/in/firaiklila/",
+      },
     ],
     role: ["Solo Designer", "UX & UI Design", "Documentation"],
     timeline: "Sep '23 – Jan '24 (4 months)",
@@ -64,7 +70,8 @@ const projectDetails = {
       },
     ],
     colors: [
-      { hex: "#1C6EA4", name: "Primary Blue" },
+      { hex: "#1C6EA4", name: "Primary" },
+      { hex: "#E66923", name: "Secondary" },
       { hex: "#FFFFFF", name: "White" },
       { hex: "#000000", name: "Black" },
     ],
@@ -80,7 +87,8 @@ const projectDetails = {
       { src: cerebellumImg, label: "Monochrome (Dark)" },
     ],
     bentoImages: [cerebellumImg, mitsaqImg, veloraImg],
-    figmaLink: "httpsF://www.figma.com/embed?embed_host=share&url=...", // Ganti dengan link Anda
+    figmaLink:
+      "https://embed.figma.com/proto/UdoWaLKHbYA8JYphlERo4g/CITEUP?page-id=11%3A2251&node-id=84-5888&viewport=2654%2C2398%2C0.92&scaling=cover&content-scaling=fixed&starting-point-node-id=84%3A5888&show-proto-sidebar=1&embed-host=share&hide-ui=1", // Ganti dengan link Anda
   },
 
   // --- Proyek MITSAQ ---
@@ -89,9 +97,14 @@ const projectDetails = {
       "Mitsaq is a religious learning app aimed at building daily habits and providing educational resources for users.",
     team: [
       {
-        name: "Faiz Fauzan",
-        image: teamPhoto1,
-        linkedin: "https://linkedin.com/in/muhammadfaizfauzan",
+        name: "Ariiq Tsany Zu",
+        image: ariq,
+        linkedin: "https://www.linkedin.com/in/tsanyzzu/",
+      },
+      {
+        name: "Fira Zaha Iklila",
+        image: rara,
+        linkedin: "https://www.linkedin.com/in/firaiklila/",
       },
     ],
     role: ["Solo Designer", "UI/UX Research", "Branding"],
@@ -131,14 +144,14 @@ const projectDetails = {
       },
     ],
     colors: [
-      { hex: "#368743", name: "Primary Green" },
+      { hex: "#368743", name: "Primary" },
       { hex: "#FFFFFF", name: "White" },
       { hex: "#000000", name: "Black" },
     ],
     typography: {
-      fontFamily: "Inter",
+      fontFamily: "Poppins",
       description:
-        "Inter is used for high readability, making it perfect for both small text and UI elements.",
+        "Poppins",
     },
     designSystemImages: [dsImage, dsImage],
     logoImages: [
@@ -147,7 +160,8 @@ const projectDetails = {
       { src: mitsaqImg, label: "Monochrome (Dark)" },
     ],
     bentoImages: [mitsaqImg, cerebellumImg, mentraImg],
-    figmaLink: "https://www.figma.com/embed?embed_host=share&url=...",
+    figmaLink:
+      "https://embed.figma.com/proto/VQrE9qzQWOKSXMUT4GSRfi/MTQ_Mitsaq?page-id=646%3A21721&node-id=671-105613&p=f&viewport=3006%2C-7690%2C0.52&scaling=cover&content-scaling=fixed&starting-point-node-id=671%3A107892&embed-host=share&hide-ui=1",
   },
 
   // --- Proyek MENTRA ---
@@ -156,11 +170,10 @@ const projectDetails = {
       "Mentra is a mental health app that provides quick access to mindfulness tools, breathing exercises, and professional support.",
     team: [
       {
-        name: "Faiz Fauzan",
-        image: teamPhoto1,
-        linkedin: "https://linkedin.com/in/muhammadfaizfauzan",
+        name: "Ariiq Tsany Zu",
+        image: ariq,
+        linkedin: "https://www.linkedin.com/in/tsanyzzu/",
       },
-      { name: "Rekan 1", image: teamPhoto2, linkedin: "https://linkedin.com" },
     ],
     role: ["UI/UX Designer", "Prototyping"],
     timeline: "Apr '24 – May '24 (1 month)",
@@ -199,23 +212,23 @@ const projectDetails = {
       },
     ],
     colors: [
-      { hex: "#4CA8E0", name: "Primary Blue" },
+      { hex: "#4CA8E0", name: "Primary" },
       { hex: "#FFFFFF", name: "White" },
       { hex: "#000000", name: "Black" },
     ],
     typography: {
-      fontFamily: "Inter",
+      fontFamily: "Sf Pro Text",
       description:
-        "Inter is used for high readability, making it perfect for both small text and UI elements.",
+        "Sf Pro.",
     },
     designSystemImages: [dsImage, dsImage],
     logoImages: [
-      { src: mentraImg, label: "Color" },
-      { src: mentraImg, label: "Monochrome (Light)" },
-      { src: mentraImg, label: "Monochrome (Dark)" },
+      { src: logoMentra, label: "Color" },
+
     ],
     bentoImages: [mentraImg, veloraImg, mitsaqImg],
-    figmaLink: "https://www.figma.com/embed?embed_host=share&url=...",
+    figmaLink:
+      "https://embed.figma.com/proto/n750lg99vaSoKTwxRtRaTJ/HITC_MENTRA?page-id=1%3A8&node-id=963-15115&p=f&viewport=-2783%2C-788%2C0.23&scaling=cover&content-scaling=fixed&starting-point-node-id=156%3A1245&embed-host=share&hide-ui=1",
   },
 
   // --- Proyek VELORA ---
@@ -224,14 +237,17 @@ const projectDetails = {
       "Velora is a food delivery app that connects local producers with consumers seeking fresh, sustainable ingredients.",
     team: [
       {
-        name: "Faiz Fauzan",
-        image: teamPhoto1,
-        linkedin: "https://linkedin.com/in/muhammadfaizfauzan",
+        name: "Ariiq Tsany Zu",
+        image: ariq,
+        linkedin: "https://www.linkedin.com/in/tsanyzzu/",
       },
-      { name: "Rekan 1", image: teamPhoto2, linkedin: "https://linkedin.com" },
-      { name: "Rekan 2", image: teamPhoto3, linkedin: "https://linkedin.com" },
+      {
+        name: "Naufal Akhdan",
+        image: akhdan,
+        linkedin: "https://www.linkedin.com/in/naufal-akhdan-899918289/",
+      },
     ],
-    role: ["Lead Designer", "UI/UX Design", "Branding"],
+    role: ["UI/UX Design", "UX Research", "Prototyping"],
     timeline: "Jun '24 – Aug '24 (3 months)",
     problems: [
       {
@@ -268,7 +284,7 @@ const projectDetails = {
       },
     ],
     colors: [
-      { hex: "#91C752", name: "Primary Green" },
+      { hex: "#91C752", name: "Primary" },
       { hex: "#FFFFFF", name: "White" },
       { hex: "#000000", name: "Black" },
     ],
