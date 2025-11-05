@@ -7,8 +7,7 @@ import Reveal from "../components/Reveal";
 import Sidebar from "../components/Sidebar"; // Impor sidebar
 
 /**
- * Komponen baru untuk baris info di bagian Overview
- * (Sesuai referensi 'image_185122.png')
+ * Komponen InfoRow (Tidak berubah)
  */
 const InfoRow = ({ label, children }) => (
   <div className="flex flex-col md:flex-row border-b border-gray-200 py-4">
@@ -20,8 +19,7 @@ const InfoRow = ({ label, children }) => (
 );
 
 /**
- * Komponen baru untuk kartu Problems & Solutions
- * (Sesuai referensi 'image_194504.png')
+ * Komponen Problems/Solutions Card (Tidak berubah)
  */
 const ProblemSolutionCard = ({
   number,
@@ -30,10 +28,10 @@ const ProblemSolutionCard = ({
   isDarkMode = false,
 }) => (
   <div
-    className={`p-6 rounded-2xl ${
+    className={`p-6 rounded-2xl h-full ${
       isDarkMode
-        ? "bg-black text-white"
-        : "bg-white text-black  border-2 border-gray-100"
+        ? "bg-gray-900 text-white"
+        : "bg-white text-black shadow-md border border-gray-100"
     }`}
   >
     <span
@@ -72,6 +70,19 @@ export default function ProjectDetailPage() {
       </div>
     );
   }
+  // --- FUNGSI HELPER BARU UNTUK GRID DINAMIS ---
+  // Fungsi ini akan mengembalikan kelas grid yang benar berdasarkan jumlah item
+  const getGridColsClass = (count) => {
+    if (count === 1) return "grid-cols-1";
+    if (count === 2) return "grid-cols-2";
+    if (count === 3) return "grid-cols-3";
+    return "grid-cols-2 md:grid-cols-4"; // Default jika 4 atau lebih
+  };
+
+  const designSystemGridClass = getGridColsClass(
+    detail.designSystemImages.length
+  );
+  const logoGridClass = getGridColsClass(detail.logoImages.length);
 
   return (
     <main
@@ -139,10 +150,12 @@ export default function ProjectDetailPage() {
                       />
                       {/* Kartu Nama saat Hover */}
                       <span
-                        className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 
-                                   bg-black text-white text-xs font-medium rounded-md 
-                                   opacity-0 group-hover:opacity-100 transition-opacity 
-                                   pointer-events-none whitespace-nowrap"
+                        className="
+                          absolute w-max max-w-xs left-1/2 top-full mt-2 -translate-x-1/2 
+                          bg-white rounded-xl shadow-md p-3 
+                          opacity-0 transition-opacity duration-200 
+                          pointer-events-none group-hover:opacity-100
+                        "
                       >
                         {member.name}
                       </span>
@@ -166,10 +179,7 @@ export default function ProjectDetailPage() {
 
         {/* --- Bagian Problems (BARU) --- */}
         <Reveal>
-          <article
-            id="problems"
-            className=" text-black scroll-mt-24"
-          >
+          <article id="problems" className=" text-black scroll-mt-24">
             <h2 className="text-3xl font-semibold text-black mb-6">Problems</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {detail.problems.map((item, i) => (
@@ -187,10 +197,7 @@ export default function ProjectDetailPage() {
 
         {/* --- Bagian Solutions (BARU) --- */}
         <Reveal>
-          <article
-            id="solutions"
-            className="scroll-mt-24"
-          >
+          <article id="solutions" className="scroll-mt-24">
             <h2 className="text-3xl font-semibold text-black mb-6">
               Solutions
             </h2>
@@ -208,17 +215,14 @@ export default function ProjectDetailPage() {
           </article>
         </Reveal>
 
-        {/* --- Design System --- */}
+        {/* --- Design System (DIPERBARUI) --- */}
         <Reveal>
-          <article
-            id="design-system"
-            className="scroll-mt-24"
-          >
+          <article id="design-system" className="scroll-mt-24 flex flex-col">
             <h2 className="text-3xl font-semibold text-black mb-6">
               Design System
             </h2>
-            {/* Grid untuk Warna & Tipografi */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Color Palette */}
               <div>
                 <h3 className="text-xl font-semibold mb-3">Color Palette</h3>
                 <div className="flex flex-wrap gap-4">
@@ -233,6 +237,7 @@ export default function ProjectDetailPage() {
                   ))}
                 </div>
               </div>
+              {/* Typography */}
               <div>
                 <h3 className="text-xl font-semibold mb-3">Typography</h3>
                 <p
@@ -249,10 +254,14 @@ export default function ProjectDetailPage() {
                 </p>
               </div>
             </div>
-            {/* Frame Grid Tambahan (BARU) */}
-            <div className="mt-8">
+
+            {/* === Frame Grid Tambahan (DIPERBARUI) === */}
+            <div className="mt-8 h-[300px] flex flex-col">
+              {" "}
+              {/* Tinggi 300px */}
               <h3 className="text-xl font-semibold mb-4">Components & Icons</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {/* Menggunakan kelas grid dinamis */}
+              <div className={`grid ${designSystemGridClass} gap-4 flex-1`}>
                 {detail.designSystemImages.map((imgSrc, i) => (
                   <div
                     key={i}
@@ -261,7 +270,7 @@ export default function ProjectDetailPage() {
                     <img
                       src={imgSrc}
                       alt={`Design System ${i + 1}`}
-                      className="w-full h-32 object-cover"
+                      className="w-full h-full object-cover" // h-full mengisi
                     />
                   </div>
                 ))}
@@ -270,18 +279,20 @@ export default function ProjectDetailPage() {
           </article>
         </Reveal>
 
-        {/* --- Logo --- */}
+        {/* --- Logo (DIPERBARUI) --- */}
         <Reveal>
           <article
             id="logo"
-            className="scroll-mt-24"
+            className="scroll-mt-24 h-[300px] flex flex-col" // Tinggi 300px
           >
             <h2 className="text-3xl font-semibold text-black mb-6">Logo</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            {/* Menggunakan kelas grid dinamis */}
+            <div className={`grid ${logoGridClass} gap-6 flex-1`}>
               {detail.logoImages.map((logo) => (
                 <div key={logo.label} className="flex flex-col items-center">
                   <div
-                    className={`flex justify-center items-center w-full h-40 rounded-xl ${
+                    className={`flex justify-center items-center w-full h-full rounded-xl ${
                       logo.label.includes("Dark") ? "bg-black" : "bg-white"
                     }`}
                   >
