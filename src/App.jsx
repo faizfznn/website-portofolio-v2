@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import "./index.css";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop.jsx";
+import { Analytics } from "@vercel/analytics/next";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <div className="container mx-auto px-4">
         <header className="flex justify-center py-6">
           <Navbar />
+          <Analytics />
         </header>
         {/* Konten halaman akan dirender di sini */}
         <Outlet />
