@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar";
 import "./index.css";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop.jsx";
-import { Analytics } from "@vercel/analytics/next";
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (
