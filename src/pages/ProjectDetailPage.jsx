@@ -1,16 +1,14 @@
 // src/pages/ProjectDetailPage.jsx
 import { useParams, Link } from "react-router-dom";
-// 1. Hapus hook yang tidak perlu (sudah pindah ke Sidebar.jsx)
-// import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 import portfolioProjects from "../data/portfolioProjects.js";
 import projectDetails from "../data/projectDetails.js";
 import Reveal from "../components/Reveal";
-import Sidebar from "../components/Sidebar"; // <-- 2. Impor sidebar baru Anda
-
-// 3. Hapus const SECTIONS (sudah pindah ke Sidebar.jsx)
+import Sidebar from "../components/Sidebar"; // Impor sidebar
 
 /**
- * Komponen InfoRow (Tidak berubah)
+ * Komponen baru untuk baris info di bagian Overview
+ * (Sesuai referensi 'image_185122.png')
  */
 const InfoRow = ({ label, children }) => (
   <div className="flex flex-col md:flex-row border-b border-gray-200 py-4">
@@ -22,15 +20,47 @@ const InfoRow = ({ label, children }) => (
 );
 
 /**
+ * Komponen baru untuk kartu Problems & Solutions
+ * (Sesuai referensi 'image_194504.png')
+ */
+const ProblemSolutionCard = ({
+  number,
+  title,
+  description,
+  isDarkMode = false,
+}) => (
+  <div
+    className={`p-6 rounded-2xl ${
+      isDarkMode
+        ? "bg-black text-white"
+        : "bg-white text-black  border-2 border-gray-100"
+    }`}
+  >
+    <span
+      className={`block text-sm font-semibold ${
+        isDarkMode ? "text-gray-400" : "text-gray-500"
+      }`}
+    >
+      {number}
+    </span>
+    <h4 className="text-xl font-semibold mt-2 mb-3">{title}</h4>
+    <p
+      className={`text-sm leading-relaxed ${
+        isDarkMode ? "text-gray-300" : "text-gray-600"
+      }`}
+    >
+      {description}
+    </p>
+  </div>
+);
+
+/**
  * Halaman Detail Proyek
  */
 export default function ProjectDetailPage() {
   const { id } = useParams();
   const portfolioProject = portfolioProjects.find((p) => p.id === id);
   const detail = projectDetails[id];
-
-  // 4. Hapus semua logika state, ref, dan effect untuk sidebar
-  // (Sekarang ditangani di dalam Sidebar.jsx)
 
   if (!portfolioProject || !detail) {
     return (
@@ -46,22 +76,19 @@ export default function ProjectDetailPage() {
   return (
     <main
       className="w-full max-w-7xl mx-auto p-6 md:p-12 grid grid-cols-1 lg:grid-cols-4 gap-12 mt-[92px]"
-      style={{ fontFamily: '"Inter", sans-serif' }} // Sesuai permintaan style
+      style={{ fontFamily: '"Inter", sans-serif' }}
     >
-      {/* === Sidebar Kiri (Diperbarui) === */}
+      {/* === Sidebar Kiri === */}
       <aside
         className="
           lg:col-span-1 
           lg:sticky 
-          lg:top-1/2 /* 5. Posisikan 50% dari atas viewport */
-          lg:-translate-y-1/2 /* 6. Tarik ke atas 50% dari tingginya sendiri */
+          lg:top-1/2 /* Posisikan 50% dari atas viewport */
+          lg:-translate-y-1/2 /* Tarik ke atas 50% dari tingginya sendiri */
           self-start 
         "
       >
-
-        {/* 7. Render komponen sidebar baru (tanpa props 'sections') */}
         <Sidebar />
-
         <Link
           to="/portfolio"
           className="mt-8 inline-block text-[14px] text-gray-500 hover:text-black transition-colors"
@@ -71,8 +98,7 @@ export default function ProjectDetailPage() {
       </aside>
 
       {/* === Konten Kanan === */}
-      {/* 8. Pastikan setiap <article> memiliki 'id' dan 'scroll-mt' */}
-      <section className="lg:col-span-3 space-y-16">
+      <section className="lg:col-span-3 space-y-20">
         {/* Gambar Hero */}
         <Reveal>
           <div className="w-full h-auto md:h-[500px] overflow-hidden rounded-3xl bg-[#FAFAFA]">
@@ -95,15 +121,32 @@ export default function ProjectDetailPage() {
                 </p>
               </InfoRow>
               <InfoRow label="Team">
+                {/* --- TOMBOL TIM INTERAKTIF (BARU) --- */}
                 <div className="flex -space-x-2">
                   {detail.team.map((member, i) => (
-                    <img
+                    <a
                       key={i}
-                      src={member.image}
-                      alt={member.name}
-                      title={member.name}
-                      className="w-10 h-10 rounded-full border-2 border-white object-cover"
-                    />
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative group" // Tambahkan group
+                    >
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        title={member.name} // Tooltip bawaan browser
+                        className="w-10 h-10 rounded-full border-2 border-white object-cover transition-transform duration-300 group-hover:scale-110"
+                      />
+                      {/* Kartu Nama saat Hover */}
+                      <span
+                        className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 
+                                   bg-black text-white text-xs font-medium rounded-md 
+                                   opacity-0 group-hover:opacity-100 transition-opacity 
+                                   pointer-events-none whitespace-nowrap"
+                      >
+                        {member.name}
+                      </span>
+                    </a>
                   ))}
                 </div>
               </InfoRow>
@@ -121,6 +164,50 @@ export default function ProjectDetailPage() {
           </article>
         </Reveal>
 
+        {/* --- Bagian Problems (BARU) --- */}
+        <Reveal>
+          <article
+            id="problems"
+            className=" text-black scroll-mt-24"
+          >
+            <h2 className="text-3xl font-semibold text-black mb-6">Problems</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {detail.problems.map((item, i) => (
+                <ProblemSolutionCard
+                  key={i}
+                  number={`0${i + 1}`}
+                  title={item.title}
+                  description={item.description}
+                  isDarkMode={true}
+                />
+              ))}
+            </div>
+          </article>
+        </Reveal>
+
+        {/* --- Bagian Solutions (BARU) --- */}
+        <Reveal>
+          <article
+            id="solutions"
+            className="scroll-mt-24"
+          >
+            <h2 className="text-3xl font-semibold text-black mb-6">
+              Solutions
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {detail.solutions.map((item, i) => (
+                <ProblemSolutionCard
+                  key={i}
+                  number={`0${i + 1}`}
+                  title={item.title}
+                  description={item.description}
+                  isDarkMode={false}
+                />
+              ))}
+            </div>
+          </article>
+        </Reveal>
+
         {/* --- Design System --- */}
         <Reveal>
           <article
@@ -130,6 +217,7 @@ export default function ProjectDetailPage() {
             <h2 className="text-3xl font-semibold text-black mb-6">
               Design System
             </h2>
+            {/* Grid untuk Warna & Tipografi */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-xl font-semibold mb-3">Color Palette</h3>
@@ -161,6 +249,24 @@ export default function ProjectDetailPage() {
                 </p>
               </div>
             </div>
+            {/* Frame Grid Tambahan (BARU) */}
+            <div className="mt-8">
+              <h3 className="text-xl font-semibold mb-4">Components & Icons</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {detail.designSystemImages.map((imgSrc, i) => (
+                  <div
+                    key={i}
+                    className="rounded-lg overflow-hidden bg-white border border-gray-200"
+                  >
+                    <img
+                      src={imgSrc}
+                      alt={`Design System ${i + 1}`}
+                      className="w-full h-32 object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </article>
         </Reveal>
 
@@ -168,7 +274,7 @@ export default function ProjectDetailPage() {
         <Reveal>
           <article
             id="logo"
-            className="rounded-3xl scroll-mt-24"
+            className="scroll-mt-24"
           >
             <h2 className="text-3xl font-semibold text-black mb-6">Logo</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -199,43 +305,38 @@ export default function ProjectDetailPage() {
               Design Result
             </h2>
             <div className="grid grid-cols-2 grid-rows-2 gap-4 h-[600px]">
-              {detail.bentoImages[0] && (
-                <div className="col-span-2 row-span-1 rounded-2xl overflow-hidden group relative">
-                  <img
-                    src={detail.bentoImages[0]}
-                    alt="Design 1"
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-              )}
-              {detail.bentoImages[1] && (
-                <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden group relative">
-                  <img
-                    src={detail.bentoImages[1]}
-                    alt="Design 2"
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-              )}
-              {detail.bentoImages[2] && (
-                <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden group relative">
-                  <img
-                    src={detail.bentoImages[2]}
-                    alt="Design 3"
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-              )}
+              <div className="col-span-2 row-span-1 rounded-2xl overflow-hidden group relative">
+                <img
+                  src={detail.bentoImages[0]}
+                  alt="Design 1"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden group relative">
+                <img
+                  src={detail.bentoImages[1]}
+                  alt="Design 2"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden group relative">
+                <img
+                  src={detail.bentoImages[2]}
+                  alt="Design 3"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
             </div>
           </article>
         </Reveal>
 
-        {/* --- Prototype --- */}
+        {/* --- Prototype (DIPERBARUI) --- */}
         <Reveal>
           <article id="prototype" className="scroll-mt-24">
             <h2 className="text-3xl font-semibold text-black mb-6">
               Prototype
             </h2>
+            {/* Wrapper untuk membatasi lebar iframe agar terlihat seperti ponsel */}
             <div className="w-full overflow-hidden rounded-3xl border border-gray-200">
               <iframe
                 style={{ border: "1px solid" }}
@@ -251,4 +352,3 @@ export default function ProjectDetailPage() {
     </main>
   );
 }
-
