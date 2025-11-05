@@ -1,16 +1,89 @@
-# React + Vite
+# Website Portofolio Pribadi (v2) - Faiz Fauzan
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ini adalah repositori untuk website portofolio pribadi saya, yang dirancang dan dikembangkan untuk menampilkan proyek-proyek UI/UX dan keahlian *frontend development*. Website ini dibuat dari awal dengan fokus pada desain modern, interaksi mikro yang halus, dan arsitektur kode yang bersih.
 
-Currently, two official plugins are available:
+![Pratinjau Halaman Utama](https://via.placeholder.com/1200x600.png?text=Ganti+dengan+screenshot+website+Anda)
+*(Ganti gambar placeholder di atas dengan screenshot portofolio Anda)*
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Fitur Utama
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Proyek ini bukan sekadar portofolio statis. Ini adalah kumpulan komponen interaktif yang menunjukkan keahlian dalam desain dan pengembangan:
 
-## Expanding the ESLint configuration
+* **Glassmorphism Navbar:** Navbar *sticky* dengan efek kaca (`backdrop-blur`) dan kilau (`gradient`, `inset-shadow`) yang kompleks.
+* **Animasi Mikro Lanjutan:**
+    * Tombol interaktif dengan partikel bintang berputar (`animate-spin-slow`) dan efek *hover* yang canggih.
+    * Animasi teks *slide-up* ganda pada tombol "See Portfolio".
+    * Ikon sosial media di *footer* yang "melompat" saat di-*hover*.
+* **Animasi Scroll-Reveal:** Konten halaman muncul secara bertahap (fade-in & slide-up) saat di-*scroll* menggunakan `framer-motion` dan `react-intersection-observer`.
+* **Pemutar Musik Vinyl Interaktif:** Komponen `Album` kustom yang dapat memutar/menjeda musik, lengkap dengan animasi piringan vinil yang bergeser dan berputar, serta *state* global menggunakan React Context (`AlbumContext.tsx`).
+* **Routing & Layout Dinamis:**
+    * Menggunakan `react-router-dom` untuk navigasi multi-halaman (`Home`, `Portfolio`, `About Me`, `Project Detail`).
+    * Halaman detail proyek (`ProjectDetailPage.jsx`) yang dinamis dengan *sidebar* *scroll-spy* yang menyorot bagian aktif secara otomatis.
+* **Jam Real-time:** Menampilkan waktu lokal di Malang, Indonesia yang diperbarui setiap detik menggunakan *hook* `useState` dan `useEffect`.
+* **Desain Responsif:** Didesain untuk tampil baik di perangkat desktop maupun *mobile*.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Teknologi yang Digunakan
+
+Daftar ini diekstrak dari file `package.json`.
+
+### Dependensi Utama
+* **React 19**
+* **Vite** sebagai *build tool*
+* **Tailwind CSS** untuk *utility-first styling*
+* **React Router v7** untuk *client-side routing*
+* **Framer Motion** untuk animasi
+* **React Intersection Observer** untuk memicu animasi saat *scroll*
+* **React Icons** & **Lucide React** untuk ikonografi
+* **TypeScript** (digunakan pada komponen `Album.tsx` dan `AlbumContext.tsx`)
+
+### Dev Dependencies
+* ESLint
+* @vitejs/plugin-react
+
+---
+
+## 📦 Menjalankan Proyek Secara Lokal
+
+Untuk menjalankan proyek ini di mesin lokal Anda, ikuti langkah-langkah berikut:
+
+1.  **Clone repositori:**
+    ```sh
+    git clone [https://github.com/faizfznn/website-portofolio-v2.git](https://github.com/faizfznn/website-portofolio-v2.git)
+    ```
+
+2.  **Masuk ke direktori proyek:**
+    ```sh
+    cd website-portofolio-v2
+    ```
+
+3.  **Install dependensi:**
+    ```sh
+    npm install
+    ```
+
+4.  **Jalankan development server:**
+    ```sh
+    npm run dev
+    ```
+
+5.  Buka [http://localhost:5173](http://localhost:5173) (atau port lain yang ditampilkan) di browser Anda.
+
+---
+
+## 🛠️ Perintah Lainnya
+
+* **Build untuk Produksi:**
+    ```sh
+    npm run build
+    ```
+    Perintah ini akan membuat folder `dist` dengan file statis yang siap untuk di-deploy.
+
+* **Menjalankan Lint:**
+    ```sh
+    npm run lint
+    ```
+    Perintah ini akan memeriksa masalah *linting* di dalam kode.
