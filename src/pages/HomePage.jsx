@@ -1,5 +1,5 @@
 // src/pages/HomePage.jsx
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Hero from "../components/Hero";
 import ProjectCard from "../components/ProjectCard.jsx";
 import works from "../data/workProjects.js";
@@ -16,6 +16,12 @@ import "../index.css";
 
 import { SiJavascript, SiFigma, SiKotlin, SiReact } from "react-icons/si";
 import Reveal from "../components/Reveal";
+const timeOptions = {
+  timeZone: "Asia/Jakarta",
+  hour: "numeric", // Menampilkan jam sebagai angka (misal: 4, bukan 04)
+  minute: "2-digit", // Menampilkan menit sebagai 2 digit (misal: 02)
+  second: "2-digit", // Menampilkan detik sebagai 2 digit (misal: 15)
+};
 
 function HomePage() {
   const skills = [
@@ -30,6 +36,24 @@ function HomePage() {
   const handleScrollToContact = () => {
     contactRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  // 2. Buat state untuk menyimpan waktu
+  const [currentTime, setCurrentTime] = useState(
+    // Gunakan 'en-GB' untuk mendapatkan format : (titik dua)
+    new Date().toLocaleTimeString("en-GB", timeOptions)
+  );
+  // 3. Gunakan useEffect untuk memperbarui waktu setiap detik
+  useEffect(() => {
+    const timer = setInterval(() => {
+      // Gunakan 'en-GB' untuk mendapatkan format : (titik dua)
+      setCurrentTime(new Date().toLocaleTimeString("en-GB", timeOptions));
+    }, 1000);
+
+    // Cleanup interval
+    return () => {
+      clearInterval(timer);
+    };
+  }, []); // Dependensi kosong
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 mt-[92px]">
@@ -165,11 +189,7 @@ function HomePage() {
                         Malang, Indonesia
                       </span>
                     </div>
-                    <span className="text-sm ml-9">
-                      {new Date().toLocaleTimeString("id-ID", {
-                        timeZone: "Asia/Jakarta",
-                      })}
-                    </span>
+                    <span className="text-sm ml-9">{currentTime}</span>
                   </div>
                 </div>
 
