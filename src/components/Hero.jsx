@@ -1,6 +1,7 @@
 // src/components/Hero.jsx
 import { Link } from "react-router-dom";
 import aboutImage from "../assets/about.jpg";
+import fotoFaiz from "../assets/formal.png";
 import indoFlag from "../assets/bendera.png";
 import stars from "../assets/stars.png";
 
@@ -90,7 +91,7 @@ const Hero = ({ onGetInTouchClick }) => {
       >
         <div
           className="w-[180px] sm:w-[200px] h-[180px] sm:h-[200px] rounded-[28px] bg-cover bg-center shadow-[0_2px_10px_rgba(0,0,0,0.1)]"
-          style={{ backgroundImage: `url(${aboutImage})` }}
+          style={{ backgroundImage: `url(${fotoFaiz})` }}
         ></div>
 
         <div className="flex p-3 gap-2 justify-center items-center bg-white rounded-full w-full">

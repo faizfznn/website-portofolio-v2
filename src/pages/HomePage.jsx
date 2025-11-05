@@ -12,6 +12,11 @@ import signImg from "../assets/sign.png";
 import ungu from "../assets/gradient.png";
 import bintang from "../assets/bintang.png";
 import stars from "../assets/stars.png";
+import fotoFaiz from "../assets/formal.png";
+import foto1 from "../assets/foto1.jpg";
+import foto2 from "../assets/foto2.jpg";
+import foto3 from "../assets/foto3.jpg";
+
 import "../index.css";
 
 import { SiJavascript, SiFigma, SiKotlin, SiReact } from "react-icons/si";
@@ -111,21 +116,21 @@ function HomePage() {
               w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
               bg-cover bg-center rounded-3xl border-3 border-white rotate-4 shrink-0
             " // [RESPONSIVE] Ukuran gambar dikecilkan
-                    style={{ backgroundImage: `url(${aboutImg})` }}
+                    style={{ backgroundImage: `url(${foto1})` }}
                   />
                   <img
                     className="
               w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
               bg-cover bg-center rounded-3xl border-3 border-white -rotate-4 shrink-0
             " // [RESPONSIVE] Ukuran gambar dikecilkan
-                    style={{ backgroundImage: `url(${aboutImg})` }}
+                    style={{ backgroundImage: `url(${foto2})` }}
                   />
                   <img
                     className="
               w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
               bg-cover bg-center rounded-3xl border-3 border-white rotate-3 shrink-0
             " // [RESPONSIVE] Ukuran gambar dikecilkan
-                    style={{ backgroundImage: `url(${aboutImg})` }}
+                    style={{ backgroundImage: `url(${foto3})` }}
                   />
                   <img
                     className="
