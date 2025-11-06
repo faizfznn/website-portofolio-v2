@@ -40,8 +40,8 @@ export default function ProjectCard({ project }) {
               const isLive =
                 tag.toLowerCase() === "live" || tag.toLowerCase() === "figma";
               const tagClasses = isLive
-                ? "bg-green-500 text-white"
-                : "bg-[#D8D8DA] text-[##555556]";
+                ? "bg-[#2A9F47] text-white"
+                : "bg-[#f2efef] text-gray-600";
               return (
                 <span
                   key={tag}
