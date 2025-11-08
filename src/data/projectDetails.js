@@ -108,6 +108,7 @@ const projectDetails = {
     designSystemImages: [dsCerebelum], // Tambahkan gambar-gambar design system di sini
     logoImages: [
       { src: logoCerebelum, label: "Color" },
+      { src: logoCerebelum, label: "Color" },
     ],
     bentoImages: [cerebellumImg1, cerebellumImg2, cerebellumImg3],
     figmaLink:

@@ -1,43 +1,44 @@
 // src/pages/AboutMePage.jsx
-import { Link } from "react-router-dom";
-import aboutImage from "../assets/about.jpg";
-import midnight from "../assets/midnight.png";
-import juara from "../assets/juara.png";
-import { FiArrowDown, FiArrowRight } from "react-icons/fi";
-import { LuSparkle } from "react-icons/lu";
-import ExperienceSection from "../components/ExperienceSection";
-import EducationSection from "../components/EducationSection";
-import { useAlbumContext } from "../components/AlbumContext";
-import Album from "../components/Album";
-import Reveal from "../components/Reveal";
-import "../index.css";
+import { Link } from 'react-router-dom';
+import aboutImage from '../assets/about.jpg';
+import paintMyLove from '../assets/paint-my-love.jpeg';
+import somebody from '../assets/somebody.jpeg';
+import juara from '../assets/juara.png';
+import { FiArrowDown, FiArrowRight } from 'react-icons/fi';
+import { LuSparkle } from 'react-icons/lu';
+import ExperienceSection from '../components/ExperienceSection';
+import EducationSection from '../components/EducationSection';
+import { useAlbumContext } from '../components/AlbumContext';
+import Album from '../components/Album';
+import Reveal from '../components/Reveal';
+import '../index.css';
 
 function AboutMePage() {
   const { currentPlayingId } = useAlbumContext();
-  const album1Id = "taylor-swift-red";
-  const album2Id = "taylor-swift-maroon";
+  const album1Id = 'taylor-swift-red';
+  const album2Id = 'taylor-swift-maroon';
   const isFirstAlbumPlaying = currentPlayingId === album1Id;
 
   const recognitions = [
     {
-      title: "UXplorer 2019, Silver Award",
+      title: 'UXplorer 2019, Silver Award',
       description:
-        "Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.",
+        'Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.',
     },
     {
-      title: "UXplorer 2019, Silver Award",
+      title: 'UXplorer 2019, Silver Award',
       description:
-        "Designed a fuel inflow meter with a digital interface aimed to curb malpracticedesi gas stations in India.",
+        'Designed a fuel inflow meter with a digital interface aimed to curb malpracticedesi gas stations in India.',
     },
     {
-      title: "UXplorer 2019, Silver Award",
+      title: 'UXplorer 2019, Silver Award',
       description:
-        "Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.",
+        'Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.',
     },
     {
-      title: "UXplorer 2019, Silver Award",
+      title: 'UXplorer 2019, Silver Award',
       description:
-        "Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.",
+        'Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.',
     },
   ];
 
@@ -194,29 +195,30 @@ function AboutMePage() {
 
           <Album
             id={album1Id}
-            albumCover={aboutImage}
-            albumTitle="Red (Taylor's Version)"
-            artist="Taylor Swift"
-            musicFile="/audio/taylor-swift.mp3"
+            albumCover={paintMyLove}
+            albumTitle="Paint My Love"
+            artist="Michael Learns to Rock"
+            musicFile="/about-me/songs/paint-my-love.mp3"
             size="md"
+            startTime={58}
           />
 
           <div
             className="transition-transform duration-500 ease-in-out"
             style={{
               transform: isFirstAlbumPlaying
-                ? "translateX(40%)"
-                : "translateX(0)",
+                ? 'translateX(40%)'
+                : 'translateX(0)',
             }}
           >
             <Album
               id={album2Id}
-              albumCover={midnight}
-              albumTitle="Maroon"
-              artist="Taylor Swift"
-              musicFile="/about-me/songs/maroon.mp3"
+              albumCover={somebody}
+              albumTitle="Somebody Pleasure"
+              artist="Aziz Hedra"
+              musicFile="/about-me/songs/somebody.mp3"
               size="md"
-              startTime={40}
+              startTime={58}
             />
           </div>
         </section>
