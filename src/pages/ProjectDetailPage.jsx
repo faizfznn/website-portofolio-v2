@@ -74,12 +74,20 @@ export default function ProjectDetailPage() {
   // Fungsi ini akan mengembalikan kelas grid yang benar berdasarkan jumlah item
   const getGridColsClass = (count) => {
     if (count === 1) return "grid-cols-1";
-    if (count === 2) return "grid-cols-2";
-    if (count === 3) return "grid-cols-3";
-    return "grid-cols-2 md:grid-cols-4"; // Default jika 4 atau lebih
+    if (count === 2) return "grid-cols-1 sm:grid-cols-2";
+    if (count === 3) return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+    return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"; // Default jika 4 atau lebih
   };
 
-  const designSystemGridClass = getGridColsClass(
+  // Grid khusus untuk Components & Icons dengan lebih banyak kolom
+  const getComponentsGridClass = (count) => {
+    if (count === 1) return "grid-cols-1";
+    if (count === 2) return "grid-cols-1 sm:grid-cols-2";
+    if (count === 3) return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
+    return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"; // Default jika 4 atau lebih
+  };
+
+  const designSystemGridClass = getComponentsGridClass(
     detail.designSystemImages.length
   );
   const logoGridClass = getGridColsClass(detail.logoImages.length);
@@ -255,30 +263,24 @@ export default function ProjectDetailPage() {
               </div>
             </div>
 
-            {/* === Frame Grid Tambahan (DIPERBARUI) === */}
-            {/* Wrapper tidak lagi memiliki h-[300px] */}
-            <div className="mt-8 flex flex-col">
-              <h3 className="text-xl font-semibold mb-4">Components & Icons</h3>
-              {/* Grid tidak lagi memiliki flex-1 */}
-              <div className={`grid ${designSystemGridClass} gap-4`}>
-                {detail.designSystemImages.map((imgSrc, i) => (
-                  <div
-                    key={i}
-                    className="rounded-lg overflow-hidden bg-white border border-gray-200"
-                  >
-                    <img
-                      src={imgSrc}
-                      alt={`Design System ${i + 1}`}
-                      /* DIGANTI: h-full -> h-auto 
-                        Ini akan membuat gambar mempertahankan rasio aspeknya,
-                        dan tingginya akan ditentukan oleh lebarnya (w-full).
-                      */
-                      className="w-full h-auto object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
+             {/* === Frame Grid Tambahan (DIPERBARUI) === */}
+             <div className="mt-8 flex flex-col">
+               <h3 className="text-xl font-semibold mb-6">Components & Icons</h3>
+               <div className={`grid ${designSystemGridClass} gap-6`}>
+                 {detail.designSystemImages.map((imgSrc, i) => (
+                   <div
+                     key={i}
+                     className="group relative rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 aspect-[4/3]"
+                   >
+                     <img
+                       src={imgSrc}
+                       alt={`Design System ${i + 1}`}
+                       className="w-full h-full object-contain p-4"
+                     />
+                   </div>
+                 ))}
+               </div>
+             </div>
           </article>
         </Reveal>
 
@@ -286,26 +288,27 @@ export default function ProjectDetailPage() {
         <Reveal>
           <article
             id="logo"
-            className="scroll-mt-24 h-[300px] flex flex-col" // Tinggi 300px
+            className="scroll-mt-24 flex flex-col"
           >
             <h2 className="text-3xl font-semibold text-black mb-6">Logo</h2>
 
             {/* Menggunakan kelas grid dinamis */}
-            <div className={`grid ${logoGridClass} gap-6 flex-1`}>
+            <div className={`grid ${logoGridClass} gap-8`}>
               {detail.logoImages.map((logo) => (
-                <div key={logo.label} className="flex flex-col items-center">
+                <div key={logo.label} className="flex flex-col items-center group">
                   <div
-                    className={`flex justify-center items-center w-full h-full rounded-xl ${
-                      logo.label.includes("Dark") ? "bg-black" : "bg-white"
+                    className={`flex justify-center items-center w-full aspect-square rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 ${
+                      logo.label.includes("Dark") ? "bg-black" : "bg-white border border-gray-200"
                     }`}
+                    style={{ minHeight: "200px" }}
                   >
                     <img
                       src={logo.src}
                       alt={logo.label}
-                      className="w-20 h-20 object-contain"
+                      className="max-w-[80%] max-h-[80%] object-contain group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <p className="mt-2 text-sm text-gray-600">{logo.label}</p>
+                  <p className="mt-4 text-sm font-medium text-gray-700 text-center">{logo.label}</p>
                 </div>
               ))}
             </div>
@@ -323,21 +326,21 @@ export default function ProjectDetailPage() {
                 <img
                   src={detail.bentoImages[0]}
                   alt="Design 1"
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden group relative">
                 <img
                   src={detail.bentoImages[1]}
                   alt="Design 2"
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden group relative">
                 <img
                   src={detail.bentoImages[2]}
                   alt="Design 3"
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>

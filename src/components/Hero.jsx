@@ -1,22 +1,58 @@
 // src/components/Hero.jsx
-import { Link } from "react-router-dom";
-import aboutImage from "../assets/about.jpg";
-import fotoFaiz from "../assets/formal.png";
-import indoFlag from "../assets/bendera.png";
-import stars from "../assets/stars.png";
+import { Link } from 'react-router-dom';
+import aboutImage from '../assets/about.jpg';
+import fotoFaiz from '../assets/formal.png';
+import indoFlag from '../assets/bendera.png';
+import stars from '../assets/stars.png';
+import { useState, useEffect } from 'react';
 
 const Hero = ({ onGetInTouchClick }) => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
     <section
-      className="
-        flex flex-col-reverse md:flex-row 
+      className="        flex flex-col-reverse md:flex-row 
         w-full px-6 md:px-[50px] 
         justify-center items-center 
-        gap-12 md:gap-[138px]
-      "
+        gap-12 md:gap-[138px]"
     >
+      {/* Custom Cursor with Text (follows mouse) */}
+      {isHovering && (
+        <div
+          className="fixed pointer-events-none z-50 transition-all duration-200 ease-out"
+          style={{
+            left: `${mousePosition.x}px`,
+            top: `${mousePosition.y}px`,
+            transform: 'translate(-50%, -50%)',
+          }}
+        >
+          <div className="bg-white text-gray-800 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap border border-gray-200">
+            UI/UX Designer & Frontend Developer
+          </div>
+        </div>
+      )}
       {/* === Left Section === */}
       <div className="flex flex-col items-start gap-8 md:gap-12 text-center md:text-left">
+        {/* Static Designer Tag (doesn't follow cursor) */}
+        {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-gray-800 text-sm font-semibold shadow-lg border border-gray-200 animate-float">
+          <div className="flex gap-1">
+            <div className="w-2 h-2 rounded-full bg-[#EA4335]"></div>
+            <div className="w-2 h-2 rounded-full bg-[#4285F4]"></div>
+            <div className="w-2 h-2 rounded-full bg-[#FBBC05]"></div>
+            <div className="w-2 h-2 rounded-full bg-[#34A853]"></div>
+          </div>
+          <span>I'm a Designer</span>
+        </div> */}
         <div className="w-full md:w-[646px]">
           <h1
             className="text-3xl md:text-5xl font-normal text-black leading-snug md:leading-[1.4]"
@@ -94,7 +130,11 @@ const Hero = ({ onGetInTouchClick }) => {
           style={{ backgroundImage: `url(${fotoFaiz})` }}
         ></div>
 
-        <div className="flex p-3 gap-2 justify-center items-center bg-white rounded-full w-full">
+        <div
+          className="flex p-3 gap-2 justify-center items-center bg-white rounded-full w-full"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#2A9F47]"></span>
