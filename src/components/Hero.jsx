@@ -1,7 +1,6 @@
 // src/components/Hero.jsx
 import { Link } from 'react-router-dom';
-import aboutImage from '../assets/about.jpg';
-import fotoFaiz from '../assets/formal.png';
+import fotoFaiz from '../assets/formal.webp';
 import indoFlag from '../assets/bendera.png';
 import stars from '../assets/stars.png';
 import { useState, useEffect } from 'react';
