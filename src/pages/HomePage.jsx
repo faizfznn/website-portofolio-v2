@@ -12,9 +12,9 @@ import ungu from '../assets/gradient.png';
 import bintang from '../assets/bintang.png';
 import stars from '../assets/stars.png';
 import fotoFaiz from '../assets/formal.webp';
-import foto1 from '../assets/foto1.jpg';
-import foto2 from '../assets/foto2.jpg';
-import foto3 from '../assets/foto3.jpg';
+import foto1 from '../assets/foto1.webp';
+import foto2 from '../assets/foto2.webp';
+import foto3 from '../assets/foto3.webp';
 
 import '../index.css';
 
