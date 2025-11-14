@@ -1,57 +1,56 @@
 // src/pages/HomePage.jsx
-import { useRef, useState, useEffect } from "react";
-import Hero from "../components/Hero";
-import ProjectCard from "../components/ProjectCard.jsx";
-import works from "../data/workProjects.js";
-import aboutImg from "../assets/about.jpg";
-import pinImg from "../assets/pin.png";
-import handshake from "../assets/handshake.png";
-import clipImg from "../assets/clip.png";
-import powerImg from "../assets/power.png";
-import signImg from "../assets/sign.png";
-import ungu from "../assets/gradient.png";
-import bintang from "../assets/bintang.png";
-import stars from "../assets/stars.png";
-import fotoFaiz from "../assets/formal.png";
-import foto1 from "../assets/foto1.jpg";
-import foto2 from "../assets/foto2.jpg";
-import foto3 from "../assets/foto3.jpg";
+import { useRef, useState, useEffect } from 'react';
+import Hero from '../components/Hero';
+import ProjectCard from '../components/ProjectCard.jsx';
+import works from '../data/workProjects.js';
+import pinImg from '../assets/pin.png';
+import handshake from '../assets/handshake.webp';
+import clipImg from '../assets/clip.png';
+import powerImg from '../assets/power.png';
+import signImg from '../assets/sign.png';
+import ungu from '../assets/gradient.png';
+import bintang from '../assets/bintang.png';
+import stars from '../assets/stars.png';
+import fotoFaiz from '../assets/formal.webp';
+import foto1 from '../assets/foto1.jpg';
+import foto2 from '../assets/foto2.jpg';
+import foto3 from '../assets/foto3.jpg';
 
-import "../index.css";
+import '../index.css';
 
-import { SiJavascript, SiFigma, SiKotlin, SiReact } from "react-icons/si";
-import Reveal from "../components/Reveal";
+import { SiJavascript, SiFigma, SiKotlin, SiReact } from 'react-icons/si';
+import Reveal from '../components/Reveal';
 const timeOptions = {
-  timeZone: "Asia/Jakarta",
-  hour: "numeric", // Menampilkan jam sebagai angka (misal: 4, bukan 04)
-  minute: "2-digit", // Menampilkan menit sebagai 2 digit (misal: 02)
-  second: "2-digit", // Menampilkan detik sebagai 2 digit (misal: 15)
+  timeZone: 'Asia/Jakarta',
+  hour: 'numeric', // Menampilkan jam sebagai angka (misal: 4, bukan 04)
+  minute: '2-digit', // Menampilkan menit sebagai 2 digit (misal: 02)
+  second: '2-digit', // Menampilkan detik sebagai 2 digit (misal: 15)
 };
 
 function HomePage() {
   const skills = [
-    { name: "JavaScript", icon: <SiJavascript className="text-yellow-400" /> },
-    { name: "Figma", icon: <SiFigma className="text-pink-500" /> },
-    { name: "Kotlin", icon: <SiKotlin className="text-blue-500" /> },
-    { name: "React", icon: <SiReact className="text-cyan-400" /> },
+    { name: 'JavaScript', icon: <SiJavascript className="text-yellow-400" /> },
+    { name: 'Figma', icon: <SiFigma className="text-pink-500" /> },
+    { name: 'Kotlin', icon: <SiKotlin className="text-blue-500" /> },
+    { name: 'React', icon: <SiReact className="text-cyan-400" /> },
   ];
   const displayedProjects = works;
 
   const contactRef = useRef(null);
   const handleScrollToContact = () => {
-    contactRef.current?.scrollIntoView({ behavior: "smooth" });
+    contactRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   // 2. Buat state untuk menyimpan waktu
   const [currentTime, setCurrentTime] = useState(
     // Gunakan 'en-GB' untuk mendapatkan format : (titik dua)
-    new Date().toLocaleTimeString("en-GB", timeOptions)
+    new Date().toLocaleTimeString('en-GB', timeOptions)
   );
   // 3. Gunakan useEffect untuk memperbarui waktu setiap detik
   useEffect(() => {
     const timer = setInterval(() => {
       // Gunakan 'en-GB' untuk mendapatkan format : (titik dua)
-      setCurrentTime(new Date().toLocaleTimeString("en-GB", timeOptions));
+      setCurrentTime(new Date().toLocaleTimeString('en-GB', timeOptions));
     }, 1000);
 
     // Cleanup interval
@@ -71,7 +70,7 @@ function HomePage() {
             <h1>
               <span className="font-bold text-3xl md:text-4xl">/</span>
               <span className="text-2xl md:text-3xl font-bold">
-                {" "}
+                {' '}
                 Selected Work
               </span>
             </h1>
@@ -81,7 +80,7 @@ function HomePage() {
               const isFirst = index === 0;
               const isLast = index === displayedProjects.length - 1;
               const colSpanClass =
-                isFirst || isLast ? "h-[520px] md:h-[645px] md:col-span-2" : "";
+                isFirst || isLast ? 'h-[520px] md:h-[645px] md:col-span-2' : '';
               return (
                 <div key={works.id} className={colSpanClass}>
                   <ProjectCard project={works} />
@@ -95,9 +94,9 @@ function HomePage() {
       {/* Hello, I'm Faiz */}
       <Reveal delay={0.15}>
         <div className="md:mt-10">
-          <h3 className="text-2xl md:text-3xl font-semibold mb-6">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-6">
             Hello, I&apos;m Faiz
-          </h3>
+          </h2>
 
           <section className="mb-12 flex flex-col md:flex-row items-start gap-8 md:gap-12">
             {/* === Left Side === */}
@@ -111,39 +110,41 @@ function HomePage() {
             -space-x-8 sm:-space-x-10
           " // [RESPONSIVE] Mengurangi negative margin di mobile
                 >
-                  <img
+                  <div
                     className="
               w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
               bg-cover bg-center rounded-3xl border-3 border-white rotate-4 shrink-0
             " // [RESPONSIVE] Ukuran gambar dikecilkan
                     style={{ backgroundImage: `url(${foto1})` }}
                   />
-                  <img
+                  <div
                     className="
               w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
               bg-cover bg-center rounded-3xl border-3 border-white -rotate-4 shrink-0
             " // [RESPONSIVE] Ukuran gambar dikecilkan
                     style={{ backgroundImage: `url(${foto2})` }}
                   />
-                  <img
+                  <div
                     className="
               w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
               bg-cover bg-center rounded-3xl border-3 border-white rotate-3 shrink-0
             " // [RESPONSIVE] Ukuran gambar dikecilkan
                     style={{ backgroundImage: `url(${foto3})` }}
                   />
-                  <img
+                  <div
                     className="
               w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
               bg-cover bg-center rounded-3xl border-3 border-white shrink-0
             " // [RESPONSIVE] Ukuran gambar dikecilkan
-                    style={{ backgroundImage: `url(${aboutImg})` }}
+                    style={{ backgroundImage: `url(${fotoFaiz})` }}
                   />
                 </div>
                 <img
                   src={powerImg}
                   alt=""
                   className="absolute -top-6 -right-2 md:-top-17 md:-right-15 w-10 h-10 md:w-[99px] md:h-[95px] rotate-10 animate-slide-slow"
+                  width="99"
+                  height="95" // ✅ Tambahkan
                 />
               </div>
 
@@ -157,11 +158,13 @@ function HomePage() {
             -top-32 left-2 
             md:-top-52 md:-left-7
           " // [RESPONSIVE] Disesuaikan posisinya di mobile
+                  width="80"
+                  height="80" // ✅ Tambahkan
                 />
                 <p className="text-black text-sm md:text-base">
                   <span className="font-semibold">
                     I am a Product Designer based in Indonesia.
-                  </span>{" "}
+                  </span>{' '}
                   I design to uncomplicate things and create joy in experiences
                   that etch in one&apos;s memory. Most importantly, I design to
                   make things more human, in a way that empowers.
@@ -170,10 +173,13 @@ function HomePage() {
                   src={clipImg}
                   alt=""
                   className="
-            absolute w-8 h-8 md:w-25 md:h-25 
+            absolute w-8 h-8 md:w-25 md:h-25
             -bottom-2 -right-1
             md:-bottom-9 md:-right-8
+            
           " // [RESPONSIVE] Disesuaikan posisinya di mobile
+                  width="40"
+                  height="40" // ✅ Tambahkan
                 />
               </div>
 
@@ -185,7 +191,7 @@ function HomePage() {
               >
                 {/* Lokasi & Waktu */}
                 <div className="flex flex-col justify-center p-4 rounded-3xl bg-[#FAFAFA] w-full sm:w-auto">
-                  {" "}
+                  {' '}
                   {/* [RESPONSIVE] w-full di mobile */}
                   <div className="flex flex-col items-start space-y-1">
                     <div className="flex items-center space-x-2">
@@ -207,19 +213,19 @@ function HomePage() {
                 >
                   {[
                     {
-                      name: "JavaScript",
+                      name: 'JavaScript',
                       icon: <SiJavascript className="text-yellow-400" />,
                     },
                     {
-                      name: "Figma",
+                      name: 'Figma',
                       icon: <SiFigma className="text-pink-500" />,
                     },
                     {
-                      name: "Kotlin",
+                      name: 'Kotlin',
                       icon: <SiKotlin className="text-blue-500" />,
                     },
                     {
-                      name: "React",
+                      name: 'React',
                       icon: <SiReact className="text-cyan-400" />,
                     },
                   ].map((skill) => (
@@ -259,6 +265,8 @@ function HomePage() {
                     src={handshake}
                     alt="Handshake"
                     className="w-8 md:w-10 inline-block animate-bounce-slow"
+                    width="40"
+                    height="40" // ✅ Tambahkan
                   />
                 </h3>
 
@@ -283,7 +291,7 @@ function HomePage() {
                     </span>
                     <button
                       onClick={() =>
-                        navigator.clipboard.writeText("faiz150605@gmail.com")
+                        navigator.clipboard.writeText('faiz150605@gmail.com')
                       }
                       className="
                 relative group flex justify-center items-center rounded-3xl overflow-hidden 

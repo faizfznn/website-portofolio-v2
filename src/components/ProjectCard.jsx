@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 /**
  * Komponen kartu proyek untuk halaman portofolio.
@@ -38,10 +38,10 @@ export default function ProjectCard({ project }) {
             {project.tags.map((tag) => {
               // Tag 'Live' diberi warna hijau, tag lainnya berwarna abu muda
               const isLive =
-                tag.toLowerCase() === "live" || tag.toLowerCase() === "figma";
+                tag.toLowerCase() === 'live' || tag.toLowerCase() === 'figma';
               const tagClasses = isLive
-                ? "bg-[#2A9F47] text-white"
-                : "bg-[#f2efef] text-gray-600";
+                ? 'bg-[#2A9F47] text-white'
+                : 'bg-[#f2efef] text-gray-600';
               return (
                 <span
                   key={tag}
@@ -62,6 +62,8 @@ export default function ProjectCard({ project }) {
             src={project.image}
             alt={project.appName}
             className="w-full h-full object-cover object-center"
+            loading="lazy"
+            height="384" // Sesuai dengan kelas h-96
           />
         </div>
       </div>

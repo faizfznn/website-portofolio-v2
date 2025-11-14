@@ -4,10 +4,10 @@
 // Images are imported from the assets folder. If these files do not exist in
 // your project yet, make sure to add them accordingly.
 
-import cerebellumImg from '../assets/cerebellum.png';
+import cerebellumImg from '../assets/cerebellum.webp';
 import mitsaqImg from '../assets/mitsaq.png';
-import mentraImg from '../assets/mentra.png';
-import veloraImg from '../assets/velora.png';
+import mentraImg from '../assets/mentra.webp';
+import veloraImg from '../assets/velora.webp';
 
 const portfolioProjects = [
   {

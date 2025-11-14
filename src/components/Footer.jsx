@@ -1,10 +1,10 @@
 // src/components/Footer.jsx
 
-import instagram from "../assets/instagram.jpg";
-import linked from "../assets/linked.png";
-import twitter from "../assets/twitter.jpg";
-import github from "../assets/github.png";
-import { LuSend } from "react-icons/lu";
+import instagram from '../assets/instagram.jpg';
+import linked from '../assets/linked.png';
+import twitter from '../assets/twitter.jpg';
+import github from '../assets/github.png';
+import { LuSend } from 'react-icons/lu';
 
 function Footer() {
   return (
@@ -21,7 +21,7 @@ function Footer() {
         href="mailto:faiz150605@gmail.com"
         className="flex items-center gap-3 transition-opacity hover:opacity-75"
       >
-        <LuSend className="w-5 h-5 md:w-6 md:h-6 text-black" />{" "}
+        <LuSend className="w-5 h-5 md:w-6 md:h-6 text-black" />{' '}
         {/* [RESPONSIVE] Ikon dikecilkan sedikit */}
         <p
           className="
@@ -34,7 +34,7 @@ function Footer() {
 
       {/* Social Media Icons */}
       <div className="flex items-center gap-0">
-        {" "}
+        {' '}
         {/* [RESPONSIVE] Gap di-nol-kan agar pas */}
         {/* GitHub */}
         <a
@@ -69,7 +69,6 @@ function Footer() {
             GitHub
           </span>
         </a>
-
         {/* Instagram */}
         <a
           href="https://www.instagram.com/faizfznn"
@@ -100,7 +99,6 @@ function Footer() {
             Instagram
           </span>
         </a>
-
         {/* LinkedIn */}
         <a
           href="https://www.linkedin.com/in/muhammadfaizfauzan"
@@ -118,6 +116,8 @@ function Footer() {
               transition-all duration-300
               group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-12
             " // [RESPONSIVE]
+            width="48" // ✅ Tambahkan (dari md:w-12)
+            height="48" // ✅ Tambahkan (dari md:h-12)
           />
           <span
             className="
@@ -127,11 +127,12 @@ function Footer() {
               transition-opacity duration-300
               mt-4
             " // [RESPONSIVE]
+            width="48" // ✅ Tambahkan (dari md:w-12)
+            height="48" // ✅ Tambahkan (dari md:h-12)
           >
             LinkedIn
           </span>
         </a>
-
         {/* Twitter */}
         <a
           href="https://www.twitter.com/faizfznn"
@@ -149,6 +150,8 @@ function Footer() {
               transition-all duration-300
               group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-4
             " // [RESPONSIVE]
+            width="48" // ✅ Tambahkan (dari md:w-12)
+            height="48" // ✅ Tambahkan (dari md:h-12)
           />
           <span
             className="
@@ -158,6 +161,8 @@ function Footer() {
               transition-opacity duration-300
               mt-4
             " // [RESPONSIVE]
+            width="48" // ✅ Tambahkan (dari md:w-12)
+            height="48" // ✅ Tambahkan (dari md:h-12)
           >
             Twitter
           </span>

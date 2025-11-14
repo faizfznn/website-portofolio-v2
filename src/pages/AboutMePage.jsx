@@ -118,14 +118,14 @@ function AboutMePage() {
           <div className="flex flex-col md:flex-row w-full items-stretch gap-8 self-stretch">
             {/* Bagian kiri */}
             <div className="flex w-full md:w-[324px] p-4 flex-col items-start gap-6 rounded-3xl bg-[#FAFAFA]">
-              <div className="flex flex-col items-start leading-tight">
+              <h2 className="flex flex-col items-start leading-tight">
                 <span className="font2 text-black text-[28px] md:text-[32px] font-normal italic">
                   Some
                 </span>
                 <span className="text-black text-[28px] md:text-[32px] font-normal">
                   Recognition
                 </span>
-              </div>
+              </h2>
               <p className="self-stretch text-black text-[15px] md:text-[16px]">
                 Not many, but a few competitions I participated and won
                 recognition for my work.
@@ -139,9 +139,9 @@ function AboutMePage() {
                   key={idx}
                   className="flex flex-col p-6 w-full md:w-[45%] lg:w-[22%] rounded-2xl bg-white/40 backdrop-blur-sm"
                 >
-                  <h4 className="font-semibold text-lg text-black">
+                  <h3 className="font-semibold text-lg text-black">
                     {rec.title}
-                  </h4>
+                  </h3>
                   <p className="mt-2 text-gray-700 text-sm leading-relaxed">
                     {rec.description}
                   </p>
@@ -157,10 +157,12 @@ function AboutMePage() {
 
           {/* Gambar */}
           <div className="flex h-80 md:h-[440px] items-center gap-6 self-stretch">
-            <div
-              className="flex flex-col items-center self-stretch rounded-3xl w-full h-full bg-cover bg-center"
-              style={{ backgroundImage: `url(${juara})` }}
-            ></div>
+            <img
+              src={juara}
+              alt="Kolase sertifikat penghargaan Faiz Fauzan"
+              loading="lazy"
+              className="flex flex-col items-center self-stretch rounded-3xl w-full h-full object-cover"
+            />
           </div>
         </div>
       </Reveal>
@@ -178,7 +180,7 @@ function AboutMePage() {
           className="flex flex-col md:flex-row w/full items-center gap-8 mb-24 md:mb-32"
         >
           <div className="flex w-full md:w-[324px] h-48 p-4 flex-col items-start gap-6 rounded-3xl bg-[#FAFAFA]">
-            <div className="flex flex-row items-start leading-tight">
+            <h2 className="flex flex-row items-start leading-tight">
               <span className="font2 text-black text-[32px] font-normal italic">
                 My Love
               </span>
@@ -186,7 +188,7 @@ function AboutMePage() {
               <span className="text-black text-[32px] font-normal">
                 for Music
               </span>
-            </div>
+            </h2>
             <p className="self-stretch text-black text-[16px]">
               I think a good designer is a good observer. When I am free, I
               explore the world, observe and document experiences.

@@ -125,10 +125,15 @@ const Hero = ({ onGetInTouchClick }) => {
           w-[240px] sm:w-[280px]
         "
       >
-        <div
-          className="w-[180px] sm:w-[200px] h-[180px] sm:h-[200px] rounded-[28px] bg-cover bg-center shadow-[0_2px_10px_rgba(0,0,0,0.1)]"
-          style={{ backgroundImage: `url(${fotoFaiz})` }}
-        ></div>
+        <img
+          src={fotoFaiz}
+          alt="Faiz Fauzan formal photo"
+          width="200"
+          height="200"
+          loading="eager"
+          fetchpriority="high"
+          className="w-[180px] sm:w-[200px] h-[180px] sm:h-[200px] rounded-[28px] object-cover shadow-[0_2px_10px_rgba(0,0,0,0.1)]"
+        />
 
         <div
           className="flex p-3 gap-2 justify-center items-center bg-white rounded-full w-full"
@@ -137,9 +142,9 @@ const Hero = ({ onGetInTouchClick }) => {
         >
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#2A9F47]"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-600"></span>
           </span>
-          <span className="text-[14px] text-[#2A9F47] font-normal">
+          <span className="text-[14px] text-green-600 font-normal">
             Available for freelance
           </span>
         </div>
@@ -149,6 +154,8 @@ const Hero = ({ onGetInTouchClick }) => {
             src={indoFlag}
             alt="Indonesian Flag"
             className="w-5 h-5 rounded-sm object-cover"
+            width="20"
+            height="20"
           />
           <span className="text-[14px] text-black font-normal">
             Malang, Indonesia
