@@ -5,7 +5,7 @@
 // your project yet, make sure to add them accordingly.
 
 import cerebellumImg from '../assets/cerebellum.webp';
-import mitsaqImg from '../assets/mitsaq.png';
+import mitsaqImg from '../assets/mitsaq.webp';
 import mentraImg from '../assets/mentra.webp';
 import veloraImg from '../assets/velora.webp';
 

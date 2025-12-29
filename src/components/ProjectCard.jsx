@@ -28,13 +28,24 @@ export default function ProjectCard({ project, isFullWidth }) {
       <div className="rounded-3xl bg-[#FAFAFA] transition-shadow duration-300 flex flex-col">
         <div className="pb-6 p-6">
           {/* Header: Nama Projek di kiri, Tahun & Role di kanan banget */}
-          <div className="flex justify-between items-center mb-1">
-            <h3 className="text-lg md:text-2xl font-bold text-black">
+          {/* Bagian Header: Nama Projek di kiri, Tahun & Role di kanan */}
+          <div className="flex justify-between items-start mb-1">
+            <h3 className="text-lg md:text-2xl font-bold text-black leading-tight">
               {project.appName}
             </h3>
-            <span className="text-[12px] md:text-sm text-gray-500 font-medium whitespace-nowrap ml-4">
-              {project.year || '2025'} • {project.role || 'Product Design'}
-            </span>
+
+            {/* Container untuk Tahun dan Role agar tersusun rapi secara vertikal */}
+            <div className="flex flex-col items-end ml-4">
+              {/* Gaya untuk Tahun: Tetap tebal dan besar */}
+              <span className="text-lg md:text-xl text-black font-bold whitespace-nowrap">
+                {project.year || '2025'}
+              </span>
+
+              {/* Gaya untuk Role sesuai permintaan: Kecil, warna abu-abu, dan hanya tampil di desktop */}
+              <span className="text-xs md:text-sm text-gray-500 mt-1 hidden md:block whitespace-nowrap">
+                {project.role || 'Product Design'}
+              </span>
+            </div>
           </div>
           {/* Deskripsi singkat */}
           <p className="mt-1 md:mt-2 text-sm md:text-base text-gray-600  leading-relaxed">
