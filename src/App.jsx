@@ -1,11 +1,12 @@
 // src/App.jsx
 
-import { Outlet, ScrollRestoration } from "react-router-dom"; // 1. Impor
-import Navbar from "./components/Navbar";
-import "./index.css";
-import Footer from "./components/Footer";
-import ScrollToTop from "./components/ScrollToTop.jsx";
+import { Outlet, ScrollRestoration } from 'react-router-dom'; // 1. Impor
+import Navbar from './components/Navbar';
+import './index.css';
+import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop.jsx';
 import { Analytics } from '@vercel/analytics/react';
+import Reveal from './components/Reveal.jsx';
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
         {/* Konten halaman akan dirender di sini */}
         <Outlet />
         <footer>
-          <Footer />
+          <Reveal>
+            <Footer />
+          </Reveal>
         </footer>
         <ScrollToTop />
       </div>
