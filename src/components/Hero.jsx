@@ -122,6 +122,7 @@ const Hero = ({ onGetInTouchClick }) => {
           bg-[rgba(242,244,246,0.5)] rounded-[44px]
           transform rotate-3
           w-[240px] sm:w-[280px]
+          shadow-sm
         "
       >
         <img

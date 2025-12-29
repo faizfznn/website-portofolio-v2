@@ -13,7 +13,8 @@ function Footer() {
         mb-10 flex flex-col md:flex-row gap-10 md:gap-0 
         h-auto md:h-20 w-full px-6 md:px-8 py-6 
         justify-between items-center 
-        rounded-3xl bg-[#FAFAFA]
+        rounded-3xl bg-white/70
+        shadow-sm border border-gray-200/80
       " // [RESPONSIVE] Gap & padding (px) disesuaikan
     >
       {/* --- Email Section --- */}

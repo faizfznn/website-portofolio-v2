@@ -197,7 +197,7 @@ function HomePage() {
         " // [RESPONSIVE] Stacking di mobile (flex-col), side-by-side di sm+
               >
                 {/* Lokasi & Waktu */}
-                <div className="flex flex-col justify-center p-4 rounded-3xl bg-[#FAFAFA] w-full sm:w-auto">
+                <div className="flex flex-col justify-center p-4 rounded-3xl bg-[#FAFAFA] w-full sm:w-auto ">
                   {' '}
                   {/* [RESPONSIVE] w-full di mobile */}
                   <div className="flex flex-col items-start space-y-1">
@@ -238,7 +238,7 @@ function HomePage() {
                   ].map((skill) => (
                     <span
                       key={skill.name}
-                      className="flex items-center gap-2 px-3 py-2 text-sm rounded-2xl border border-[#E4E9ED] bg-white text-black"
+                      className="flex items-center gap-2 px-3 py-2 text-sm rounded-2xl border border-[#E4E9ED] bg-white text-black shadow-sm border border-gray-200/80"
                     >
                       {skill.icon}
                       {skill.name}

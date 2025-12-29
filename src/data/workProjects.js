@@ -8,6 +8,7 @@ import cerebellumImg from '../assets/cerebellum.webp';
 import mitsaqImg from '../assets/mitsaq.png';
 import mentraImg from '../assets/mentra.webp';
 import veloraImg from '../assets/velora.webp';
+import testVeloraImg from '../assets/test.png';
 
 const workProjects = [
   {

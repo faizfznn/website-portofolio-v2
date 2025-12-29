@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
  * Kartu menggunakan gradien berdasarkan warna utama project.
  * Pada hover, kartu terangkat sedikit dan bayangannya bertambah.
  */
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, isFullWidth }) {
   const location = useLocation();
   const fromPage = location.pathname === '/' ? 'home' : 'portfolio';
   /*
@@ -64,13 +64,23 @@ export default function ProjectCard({ project }) {
         {/* PERUBAHAN: Mengganti 'h-64' (256px) menjadi 'h-96' (384px)
           Ini membuat gambar Anda jauh lebih besar.
         */}
-        <div className="mt-6 w-full h-96 overflow-hidden">
+        <div
+          className={`mt-6 overflow-hidden mx-auto transition-all duration-500 ${
+            isFullWidth
+              ? 'w-full md:w-[840px] h-96' // Ukuran spesifik 840x384 (h-96 = 384px)
+              : 'w-full h-96' // Ukuran standar untuk card kecil
+          }`}
+        >
           <img
             src={project.image}
             alt={project.appName}
-            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+            className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
+              isFullWidth
+                ? 'object-contain object-center' // Agar gambar tidak ter-crop meski container lebar
+                : 'object-cover object-center' // Standard fill untuk card kecil
+            }`}
             loading="lazy"
-            height="384" // Sesuai dengan kelas h-96
+            height="384"
           />
         </div>
       </div>
