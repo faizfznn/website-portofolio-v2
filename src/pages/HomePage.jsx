@@ -68,7 +68,7 @@ function HomePage() {
         <section className="mt-24 md:mt-40 mb-40 md:mb-40">
           <div className="mb-4">
             <h1>
-              <span className="font-bold text-3xl md:text-4xl">/</span>
+              {/* <span className="font-bold text-3xl md:text-4xl">/</span> */}
               <span className="text-2xl md:text-3xl font-bold">
                 {' '}
                 Selected Work

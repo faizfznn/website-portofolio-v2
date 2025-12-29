@@ -20,27 +20,23 @@ function AboutMePage() {
   const isFirstAlbumPlaying = currentPlayingId === album1Id;
 
   const recognitions = [
-    {
-      title: 'UXplorer 2019, Silver Award',
-      description:
-        'Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.',
-    },
-    {
-      title: 'UXplorer 2019, Silver Award',
-      description:
-        'Designed a fuel inflow meter with a digital interface aimed to curb malpracticedesi gas stations in India.',
-    },
-    {
-      title: 'UXplorer 2019, Silver Award',
-      description:
-        'Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.',
-    },
-    {
-      title: 'UXplorer 2019, Silver Award',
-      description:
-        'Designed a fuel inflow meter with a digital interface aimed to curb malpractices at gas stations in India.',
-    },
-  ];
+  {
+    title: '2nd Place, UI/UX Competition',
+    description: 'Unipdu Jombang - Achievement 2025',
+  },
+  {
+    title: '1st Place, UI/UX Competition',
+    description: 'Majalengka University - Achievement 2025',
+  },
+  {
+    title: '1st Place, UI/UX Competition',
+    description: 'Muhammadiyah University Riau - Achievement 2025',
+  },
+  {
+    title: '2nd Place, UI/UX Competition',
+    description: 'Pertamina University Jakarta - Achievement 2025',
+  },
+];
 
   return (
     <main className="w-full max-w-6xl mx-auto px-4 mt-[92px]">

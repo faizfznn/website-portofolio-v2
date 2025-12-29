@@ -18,7 +18,7 @@ function PortfolioPage() {
       <Reveal>
         <div className="mb-10 md:mb-12">
           <h1 className="text-2xl md:text-3xl font-bold mb-2">
-            <span className="font-bold text-3xl md:text-4xl">/</span>
+            {/* <span className="font-bold text-3xl md:text-4xl">/</span> */}
             <span className="text-2xl md:text-3xl font-bold"> Portfolio</span>
           </h1>
 

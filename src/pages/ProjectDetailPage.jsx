@@ -134,7 +134,7 @@ export default function ProjectDetailPage() {
           <article id="overview" className="scroll-mt-24">
             <h2 className="text-3xl font-semibold text-black mb-4">Overview</h2>
             <div className="border-t border-gray-200">
-              <InfoRow label="Deskripsi">
+              <InfoRow label="Description">
                 <p className="text-base text-gray-700 leading-relaxed">
                   {detail.overview}
                 </p>

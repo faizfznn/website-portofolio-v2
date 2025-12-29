@@ -112,7 +112,8 @@ const projectDetails = {
     ],
     bentoImages: [cerebellumImg1, cerebellumImg2, cerebellumImg3],
     figmaLink:
-      "https://embed.figma.com/proto/UdoWaLKHbYA8JYphlERo4g/CITEUP?page-id=11%3A2251&node-id=84-5888&viewport=2654%2C2398%2C0.92&scaling=cover&content-scaling=fixed&starting-point-node-id=84%3A5888&show-proto-sidebar=1&embed-host=share&hide-ui=1", // Ganti dengan link Anda
+      "      https://embed.figma.com/proto/UdoWaLKHbYA8JYphlERo4g/CITEUP?page-id=11%3A2251&node-id=782-4584&viewport=285%2C268%2C0.04&scaling=scale-down&content-scaling=fixed&starting-point-node-id=782%3A4584&show-proto-sidebar=1&embed-host=share&hide-ui=1", // Ganti dengan link Anda
+
   },
 
   // --- Proyek MITSAQ ---
