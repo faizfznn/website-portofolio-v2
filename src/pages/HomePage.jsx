@@ -61,8 +61,9 @@ function HomePage() {
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 mt-[92px]">
-      <Hero onGetInTouchClick={handleScrollToContact} />
-
+      <Reveal>
+        <Hero onGetInTouchClick={handleScrollToContact} />
+      </Reveal>
       {/* Selected Work Section */}
       <Reveal>
         <section className="mt-24 md:mt-40 mb-40 md:mb-40">
@@ -99,12 +100,13 @@ function HomePage() {
       </Reveal>
 
       {/* Hello, I'm Faiz */}
-      <Reveal delay={0.15}>
-        <div className="md:mt-10">
+      <div className="md:mt-10">
+        <Reveal delay={0.15}>
           <h2 className="text-2xl md:text-3xl font-semibold mb-6">
             Hello, I&apos;m Faiz
           </h2>
-
+        </Reveal>
+        <Reveal delay={0.15}>
           <section className="mb-12 flex flex-col md:flex-row items-start gap-8 md:gap-12">
             {/* === Left Side === */}
             <div className="w-full md:w-1/2 flex flex-col">
@@ -338,8 +340,8 @@ function HomePage() {
               </div>
             </div>
           </section>
-        </div>
-      </Reveal>
+        </Reveal>
+      </div>
     </div>
   );
 }
