@@ -68,7 +68,7 @@ export default function ProjectCard({ project }) {
           <img
             src={project.image}
             alt={project.appName}
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
             loading="lazy"
             height="384" // Sesuai dengan kelas h-96
           />

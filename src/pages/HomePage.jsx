@@ -75,15 +75,22 @@ function HomePage() {
               </span>
             </h1>
           </div>
+          {/* src/pages/HomePage.jsx */}
           <div className="grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2">
-            {displayedProjects.map((works, index) => {
+            {displayedProjects.map((project, index) => {
+              // Mengubah 'works' menjadi 'project' agar lebih jelas
               const isFirst = index === 0;
               const isLast = index === displayedProjects.length - 1;
-              const colSpanClass =
-                isFirst || isLast ? 'h-[520px] md:h-[645px] md:col-span-2' : '';
+              const isFullWidth = isFirst || isLast;
+
+              const colSpanClass = isFullWidth ? 'md:col-span-2' : '';
+
               return (
-                <div key={works.id} className={colSpanClass}>
-                  <ProjectCard project={works} />
+                <div key={project.id} className={colSpanClass}>
+                  <ProjectCard
+                    project={project}
+                    isFullWidth={isFullWidth} // Kirim prop baru ini
+                  />
                 </div>
               );
             })}
