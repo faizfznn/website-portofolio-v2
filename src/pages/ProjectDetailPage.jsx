@@ -1,10 +1,11 @@
 // src/pages/ProjectDetailPage.jsx
-import { useParams, Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
-import portfolioProjects from "../data/portfolioProjects.js";
-import projectDetails from "../data/projectDetails.js";
-import Reveal from "../components/Reveal";
-import Sidebar from "../components/Sidebar"; // Impor sidebar
+import { useParams, Link, useLocation } from 'react-router-dom'; // Tambahkan useLocation
+import { useEffect, useRef, useState } from 'react';
+import { HiChevronLeft } from 'react-icons/hi'; // Import icon chevron
+import portfolioProjects from '../data/portfolioProjects.js';
+import projectDetails from '../data/projectDetails.js';
+import Reveal from '../components/Reveal';
+import Sidebar from '../components/Sidebar'; // Impor sidebar
 
 /**
  * Komponen InfoRow (Tidak berubah)
@@ -30,13 +31,13 @@ const ProblemSolutionCard = ({
   <div
     className={`p-6 rounded-2xl h-full ${
       isDarkMode
-        ? "bg-gray-900 text-white"
-        : "bg-white text-black border-2 border-gray-100"
+        ? 'bg-gray-900 text-white'
+        : 'bg-white text-black border-2 border-gray-100'
     }`}
   >
     <span
       className={`block text-sm font-semibold ${
-        isDarkMode ? "text-gray-400" : "text-gray-500"
+        isDarkMode ? 'text-gray-400' : 'text-gray-500'
       }`}
     >
       {number}
@@ -44,7 +45,7 @@ const ProblemSolutionCard = ({
     <h4 className="text-xl font-semibold mt-2 mb-3">{title}</h4>
     <p
       className={`text-sm leading-relaxed ${
-        isDarkMode ? "text-gray-300" : "text-gray-600"
+        isDarkMode ? 'text-gray-300' : 'text-gray-600'
       }`}
     >
       {description}
@@ -57,6 +58,10 @@ const ProblemSolutionCard = ({
  */
 export default function ProjectDetailPage() {
   const { id } = useParams();
+  const location = useLocation(); // Inisialisasi useLocation
+  const isFromHome = location.state?.from === 'home';
+  const backPath = isFromHome ? '/' : '/portfolio';
+  const backLabel = isFromHome ? 'Home' : 'Portfolio';
   const portfolioProject = portfolioProjects.find((p) => p.id === id);
   const detail = projectDetails[id];
 
@@ -64,8 +69,11 @@ export default function ProjectDetailPage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center p-8 text-gray-600 mt-[92px]">
         <h2 className="text-3xl font-semibold mb-4">Project not found</h2>
-        <Link to="/portfolio" className="text-black underline">
-          Back to Portfolio
+        <Link
+          to={backPath}
+          className="text-black underline flex items-center gap-1"
+        >
+          <HiChevronLeft /> Back to {backLabel}
         </Link>
       </div>
     );
@@ -73,18 +81,18 @@ export default function ProjectDetailPage() {
   // --- FUNGSI HELPER BARU UNTUK GRID DINAMIS ---
   // Fungsi ini akan mengembalikan kelas grid yang benar berdasarkan jumlah item
   const getGridColsClass = (count) => {
-    if (count === 1) return "grid-cols-1";
-    if (count === 2) return "grid-cols-1 sm:grid-cols-2";
-    if (count === 3) return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
-    return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"; // Default jika 4 atau lebih
+    if (count === 1) return 'grid-cols-1';
+    if (count === 2) return 'grid-cols-1 sm:grid-cols-2';
+    if (count === 3) return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
+    return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'; // Default jika 4 atau lebih
   };
 
   // Grid khusus untuk Components & Icons dengan lebih banyak kolom
   const getComponentsGridClass = (count) => {
-    if (count === 1) return "grid-cols-1";
-    if (count === 2) return "grid-cols-1 sm:grid-cols-2";
-    if (count === 3) return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3";
-    return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"; // Default jika 4 atau lebih
+    if (count === 1) return 'grid-cols-1';
+    if (count === 2) return 'grid-cols-1 sm:grid-cols-2';
+    if (count === 3) return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
+    return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'; // Default jika 4 atau lebih
   };
 
   const designSystemGridClass = getComponentsGridClass(
@@ -98,21 +106,15 @@ export default function ProjectDetailPage() {
       style={{ fontFamily: '"Inter", sans-serif' }}
     >
       {/* === Sidebar Kiri === */}
-      <aside
-        className="
-          lg:col-span-1 
-          lg:sticky 
-          lg:top-1/2 /* Posisikan 50% dari atas viewport */
-          lg:-translate-y-1/2 /* Tarik ke atas 50% dari tingginya sendiri */
-          self-start 
-        "
-      >
+      <aside className="lg:col-span-1 lg:sticky lg:top-1/2 lg:-translate-y-1/2 self-start">
         <Sidebar />
+        {/* Navigasi Dinamis dengan Icon Chevron */}
         <Link
-          to="/portfolio"
-          className="mt-8 inline-block text-[14px] text-gray-500 hover:text-black transition-colors"
+          to={backPath}
+          className="mt-8 flex items-center gap-1 text-[14px] text-gray-500 hover:text-black transition-colors"
         >
-          Back to Portfolio
+          <HiChevronLeft className="text-lg" />
+          <span>Back to {backLabel}</span>
         </Link>
       </aside>
 
@@ -263,44 +265,46 @@ export default function ProjectDetailPage() {
               </div>
             </div>
 
-             {/* === Frame Grid Tambahan (DIPERBARUI) === */}
-             <div className="mt-8 flex flex-col">
-               <h3 className="text-xl font-semibold mb-6">Components & Icons</h3>
-               <div className={`grid ${designSystemGridClass} gap-6`}>
-                 {detail.designSystemImages.map((imgSrc, i) => (
-                   <div
-                     key={i}
-                     className="group relative rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 aspect-[4/3]"
-                   >
-                     <img
-                       src={imgSrc}
-                       alt={`Design System ${i + 1}`}
-                       className="w-full h-full object-contain p-4"
-                     />
-                   </div>
-                 ))}
-               </div>
-             </div>
+            {/* === Frame Grid Tambahan (DIPERBARUI) === */}
+            <div className="mt-8 flex flex-col">
+              <h3 className="text-xl font-semibold mb-6">Components & Icons</h3>
+              <div className={`grid ${designSystemGridClass} gap-6`}>
+                {detail.designSystemImages.map((imgSrc, i) => (
+                  <div
+                    key={i}
+                    className="group relative rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 aspect-[4/3]"
+                  >
+                    <img
+                      src={imgSrc}
+                      alt={`Design System ${i + 1}`}
+                      className="w-full h-full object-contain p-4"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </article>
         </Reveal>
 
         {/* --- Logo (DIPERBARUI) --- */}
         <Reveal>
-          <article
-            id="logo"
-            className="scroll-mt-24 flex flex-col"
-          >
+          <article id="logo" className="scroll-mt-24 flex flex-col">
             <h2 className="text-3xl font-semibold text-black mb-6">Logo</h2>
 
             {/* Menggunakan kelas grid dinamis */}
             <div className={`grid ${logoGridClass} gap-8`}>
               {detail.logoImages.map((logo) => (
-                <div key={logo.label} className="flex flex-col items-center group">
+                <div
+                  key={logo.label}
+                  className="flex flex-col items-center group"
+                >
                   <div
                     className={`flex justify-center items-center w-full aspect-square rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 ${
-                      logo.label.includes("Dark") ? "bg-black" : "bg-white border border-gray-200"
+                      logo.label.includes('Dark')
+                        ? 'bg-black'
+                        : 'bg-white border border-gray-200'
                     }`}
-                    style={{ minHeight: "200px" }}
+                    style={{ minHeight: '200px' }}
                   >
                     <img
                       src={logo.src}
@@ -308,7 +312,9 @@ export default function ProjectDetailPage() {
                       className="max-w-[80%] max-h-[80%] object-contain group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <p className="mt-4 text-sm font-medium text-gray-700 text-center">{logo.label}</p>
+                  <p className="mt-4 text-sm font-medium text-gray-700 text-center">
+                    {logo.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -356,7 +362,7 @@ export default function ProjectDetailPage() {
             {/* Wrapper untuk membatasi lebar iframe agar terlihat seperti ponsel */}
             <div className="w-full overflow-hidden rounded-3xl border border-gray-200">
               <iframe
-                style={{ border: "1px solid" }}
+                style={{ border: '1px solid' }}
                 width="100%"
                 height="600"
                 src={detail.figmaLink}

@@ -13,6 +13,8 @@ const workProjects = [
   {
     id: 'cerebellum',
     appName: 'Cerebellum',
+    year: '2025', // Tambahkan ini
+    role: 'Product Design', // Tambahkan ini
     title: 'Cerebellum',
     primaryColor: '1C6EA4',
     tags: ['Research & Design', 'Learning Apps', 'Figma'],
@@ -25,6 +27,8 @@ const workProjects = [
   {
     id: 'mitsaq',
     appName: 'Mitsaq',
+    year: '2025', // Tambahkan ini
+    role: 'Product Design', // Tambahkan ini
     title: 'Mitsaq',
     primaryColor: '368743',
     tags: ['Research & Design', 'Mouslem Apps', 'Figma'],
@@ -37,6 +41,8 @@ const workProjects = [
   {
     id: 'mentra',
     appName: 'Mentra',
+    year: '2025', // Tambahkan ini
+    role: 'Product Design', // Tambahkan ini
     title: 'Mentra',
     primaryColor: '4CA8E0',
     tags: ['Research & Design', 'Mental Health Apps', 'Figma'],
@@ -49,6 +55,8 @@ const workProjects = [
   {
     id: 'velora',
     appName: 'Velora',
+    year: '2025', // Tambahkan ini
+    role: 'Product Design', // Tambahkan ini
     title: 'Velora',
     primaryColor: '91C752',
     tags: ['Research & Design', 'Foods Apps', 'Figma'],
@@ -61,4 +69,3 @@ const workProjects = [
 ];
 
 export default workProjects;
-
