@@ -1,12 +1,12 @@
 // src/components/Navbar.jsx
-import { NavLink, useLocation } from "react-router-dom";
-import Logo from "../assets/Logo.png";
+import { NavLink, useLocation } from 'react-router-dom';
+import Logo from '../assets/Logo.png';
 
 function Navbar() {
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Portfolio", path: "/portfolio" },
-    { name: "About Me", path: "/about" },
+    { name: 'Home', path: '/' },
+    { name: 'Portfolio', path: '/portfolio' },
+    { name: 'About Me', path: '/about' },
   ];
 
   const location = useLocation();
@@ -41,7 +41,13 @@ function Navbar() {
             border border-[rgba(148,148,148,0.17)]
           "
         >
-          <img src={Logo} alt="Logo" className="w-[29px] h-[21.3px]" />
+          <img
+            src={Logo}
+            alt="Logo"
+            width="29" // Tambahkan nilai dari w-[29px]
+            height="21" // Tambahkan nilai dari h-[21.3px]
+            className="w-[29px] h-[21.3px]"
+          />
         </div>
 
         {/* === Navbar Links === */}
@@ -68,7 +74,7 @@ function Navbar() {
                 md:h-11 md:px-[18px] md:py-3 
                 justify-center items-center gap-2.5
                 rounded-[49px] text-[14px] md:text-[16px] font-medium transition-all duration-300
-                ${isActive ? "bg-[#F6F6F6] text-black" : "text-[#4B4B4B]"}
+                ${isActive ? 'bg-[#F6F6F6] text-black' : 'text-[#4B4B4B]'}
                 hover:bg-[#F6F6F6]/60 hover:text-black
                 `
               }

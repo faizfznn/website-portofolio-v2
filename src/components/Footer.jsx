@@ -40,7 +40,7 @@ function Footer() {
         <a
           href="https://github.com/faizfznn"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className="
             relative group w-14 h-16 md:w-16 md:h-16 
             flex justify-center items-center
@@ -56,6 +56,8 @@ function Footer() {
               transition-all duration-300
               group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-10
             " // [RESPONSIVE] Ukuran ikon & translate-y disesuaikan
+            width="48" // ✅ Tambahkan (dari md:w-12)
+            height="48" // ✅ Tambahkan (dari md:h-12)
           />
           <span
             className="
@@ -73,7 +75,7 @@ function Footer() {
         <a
           href="https://www.instagram.com/faizfznn"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center" // [RESPONSIVE]
         >
           <img
@@ -86,6 +88,8 @@ function Footer() {
               transition-all duration-300
               group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-0
             " // [RESPONSIVE]
+            width="48" // ✅ Tambahkan (dari md:w-12)
+            height="48" // ✅ Tambahkan (dari md:h-12)
           />
           <span
             className="
@@ -103,7 +107,7 @@ function Footer() {
         <a
           href="https://www.linkedin.com/in/muhammadfaizfauzan"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center" // [RESPONSIVE]
         >
           <img
@@ -127,8 +131,6 @@ function Footer() {
               transition-opacity duration-300
               mt-4
             " // [RESPONSIVE]
-            width="48" // ✅ Tambahkan (dari md:w-12)
-            height="48" // ✅ Tambahkan (dari md:h-12)
           >
             LinkedIn
           </span>
