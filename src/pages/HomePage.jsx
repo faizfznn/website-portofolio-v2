@@ -181,14 +181,16 @@ function HomePage() {
                 <img
                   src={clipImg}
                   alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
                   className="
-            absolute w-8 h-8 md:w-25 md:h-25
-            -bottom-2 -right-1
-            md:-bottom-9 md:-right-8
-            
-          " // [RESPONSIVE] Disesuaikan posisinya di mobile
-                  width="40"
-                  height="40" // ✅ Tambahkan
+    absolute w-8 h-8 md:w-25 md:h-25
+    -bottom-2 -right-1
+    md:-bottom-9 md:-right-8
+  "
+                  width="100"
+                  height="100"
                 />
               </div>
 
@@ -331,11 +333,16 @@ function HomePage() {
                   <p className="font3 text-xs md:text-sm text-gray-300 mb-1">
                     in social media
                   </p>
-                  <img
-                    src={signImg}
-                    alt=""
-                    className="absolute -bottom-8 right-5 md:-bottom-14 md:right-5 w-8 h-8 md:w-10 md:h-10"
-                  />
+<img
+  src={signImg}
+  alt=""
+  aria-hidden="true"
+  loading="lazy"
+  decoding="async"
+  className="absolute -bottom-8 right-5 md:-bottom-14 md:right-5 w-8 h-8 md:w-10 md:h-10"
+  width="40"
+  height="40"
+/>
                 </div>
               </div>
             </div>
