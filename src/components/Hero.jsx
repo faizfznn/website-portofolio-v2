@@ -57,7 +57,7 @@ const Hero = ({ onGetInTouchClick }) => {
             className="text-3xl md:text-5xl font-normal text-black leading-snug md:leading-[1.4]"
             style={{ fontFamily: '"Lato", sans-serif' }}
           >
-            Crafting seamless digital experiences, from pixel to code.
+            Selected Work digital experiences, from pixel to code.
           </h1>
         </div>
 

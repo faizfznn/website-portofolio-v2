@@ -68,13 +68,13 @@ function HomePage() {
       <Reveal>
         <section className="mt-24 md:mt-40 mb-40 md:mb-40">
           <div className="mb-4">
-            <h1>
+            <h2>
               {/* <span className="font-bold text-3xl md:text-4xl">/</span> */}
               <span className="text-2xl md:text-3xl font-bold">
                 {' '}
                 Selected Work
               </span>
-            </h1>
+            </h2>
           </div>
           {/* src/pages/HomePage.jsx */}
           <div className="grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2">
