@@ -40,7 +40,7 @@ function Footer() {
         <a
           href="https://github.com/faizfznn"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noreferrer"
           className="
             relative group w-14 h-16 md:w-16 md:h-16 
             flex justify-center items-center
@@ -73,7 +73,7 @@ function Footer() {
         <a
           href="https://www.instagram.com/faizfznn"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noreferrer"
           className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center" // [RESPONSIVE]
         >
           <img
@@ -103,7 +103,7 @@ function Footer() {
         <a
           href="https://www.linkedin.com/in/muhammadfaizfauzan"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noreferrer"
           className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center" // [RESPONSIVE]
         >
           <img

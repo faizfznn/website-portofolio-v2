@@ -261,12 +261,12 @@ function HomePage() {
                   <img
                     src={ungu}
                     alt="gradient"
-                    className="absolute h-[340px] md:h-[400px] opacity-90 blur-3xl"
+                    className="object-contain absolute h-[340px] md:h-[400px] opacity-90 blur-3xl"
                   />
                   <img
                     src={bintang}
                     alt="bintang"
-                    className="absolute w-60 h-60 md:w-[300px] md:h-[300px] animate-[spin_7s_linear_infinite] pointer-events-none"
+                    className="object-contain absolute w-60 h-60 md:w-[300px] md:h-[300px] animate-[spin_7s_linear_infinite] pointer-events-none"
                   />
                 </div>
 
