@@ -18,6 +18,7 @@ export default function ProjectCard({ project, isFullWidth }) {
     <Link
       to={`/portfolio/${project.id}`}
       state={{ from: fromPage }} // Mengirim state "asal" halaman
+      data-cursor-project="true" // Atribut untuk trigger kursor custom
       className="block rounded-3xl overflow-hidden shadow-md dark:shadow-lg group-hover:shadow-xl group cursor-pointer transform transition-transform duration-300 hover:-translate-y-2"
       style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
     >
