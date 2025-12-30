@@ -352,6 +352,7 @@ export default function ProjectDetailPage() {
             </div>
           </article>
         </Reveal>
+        
 
         {/* --- Prototype (DIPERBARUI) --- */}
         <Reveal>

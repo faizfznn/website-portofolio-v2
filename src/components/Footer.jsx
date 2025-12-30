@@ -2,7 +2,6 @@
 
 import instagram from '../assets/instagram.jpg';
 import linked from '../assets/linked.png';
-import twitter from '../assets/twitter.jpg';
 import github from '../assets/github.png';
 import { LuSend } from 'react-icons/lu';
 
@@ -61,7 +60,7 @@ function Footer() {
           <span
             className="
               absolute inset-6 md:inset-8 flex items-center justify-center 
-              text-xs md:text-sm text-black font-medium
+              text-xs md:text-sm text-black font-bold
               opacity-0 group-hover:opacity-100
               transition-opacity duration-300
               mt-4
@@ -91,7 +90,7 @@ function Footer() {
           <span
             className="
               absolute inset-6 md:inset-8 flex items-center justify-center 
-              text-xs md:text-sm text-black font-medium
+              text-xs md:text-sm text-black font-bold
               opacity-0 group-hover:opacity-100
               transition-opacity duration-300
               mt-4
@@ -123,7 +122,7 @@ function Footer() {
           <span
             className="
               absolute inset-6 md:inset-8 flex items-center justify-center 
-              text-xs md:text-sm text-black font-medium
+              text-xs md:text-sm text-black font-bold
               opacity-0 group-hover:opacity-100
               transition-opacity duration-300
               mt-4
@@ -132,40 +131,6 @@ function Footer() {
             height="48" // ✅ Tambahkan (dari md:h-12)
           >
             LinkedIn
-          </span>
-        </a>
-        {/* Twitter */}
-        <a
-          href="https://www.twitter.com/faizfznn"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center" // [RESPONSIVE]
-        >
-          <img
-            src={twitter}
-            alt="Twitter"
-            className="
-              relative z-10
-              w-10 h-10 md:w-12 md:h-12 rounded-xl
-              transform -rotate-6
-              transition-all duration-300
-              group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-4
-            " // [RESPONSIVE]
-            width="48" // ✅ Tambahkan (dari md:w-12)
-            height="48" // ✅ Tambahkan (dari md:h-12)
-          />
-          <span
-            className="
-              absolute inset-6 md:inset-8 flex items-center justify-center 
-              text-xs md:text-sm text-black font-medium
-              opacity-0 group-hover:opacity-100
-              transition-opacity duration-300
-              mt-4
-            " // [RESPONSIVE]
-            width="48" // ✅ Tambahkan (dari md:w-12)
-            height="48" // ✅ Tambahkan (dari md:h-12)
-          >
-            Twitter
           </span>
         </a>
       </div>

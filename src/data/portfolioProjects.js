@@ -17,7 +17,7 @@ const portfolioProjects = [
     primaryColor: '1C6EA4',
     tags: ['Research & Design', 'Learning Apps', 'Figma'],
     description:
-      'Designed a learning platform bridging education and industry, empowering vocational students to reach their better future.',
+      'A digital platform serving as a career readiness accelerator for vocational high school students through structured learning paths and industry project simulations in the Industry 5.0 era.',
     image: cerebellumImg,
     logo: cerebellumImg,
     section: 'Web Design',
@@ -25,11 +25,11 @@ const portfolioProjects = [
   {
     id: 'mitsaq',
     appName: 'Mitsaq',
-    title: 'Mitsaq',
+    title: "Mitsaq - Sharia-Based Ta'aruf Platform",
     primaryColor: '368743',
-    tags: ['Research & Design', 'Mouslem Apps', 'Figma'],
+    tags: ['UI/UX Design', 'Islamic App', 'Design Thinking'],
     description:
-      'Designed a learning platform bridging education and industry, empowering vocational students to reach their better future.',
+      "A Sharia-compliant platform facilitating secure ta'aruf through structured matchmaking, pre-marital education",
     image: mitsaqImg,
     logo: mitsaqImg,
     section: 'Mobile Design',
@@ -39,9 +39,9 @@ const portfolioProjects = [
     appName: 'Mentra',
     title: 'Mentra',
     primaryColor: '4CA8E0',
-    tags: ['Research & Design', 'Mental Health Apps', 'Figma'],
+    tags: ['Mental Health', 'AI Technology', 'UI/UX Design', 'Figma'],
     description:
-      'Designed a learning platform bridging education and industry, empowering vocational students to reach their better future.',
+      'An AI-powered mobile app for adolescent mental health, featuring mood tracking, personalized self-care, and accessible support.',
     image: mentraImg,
     logo: mentraImg,
     section: 'Mobile Design',
@@ -51,9 +51,14 @@ const portfolioProjects = [
     appName: 'Velora',
     title: 'Velora',
     primaryColor: '91C752',
-    tags: ['Research & Design', 'Foods Apps', 'Figma'],
+    tags: [
+      'UI/UX Design',
+      'Sustainable Food Management',
+      'Food Waste',
+      'Figma',
+    ],
     description:
-      'Designed a learning platform bridging education and industry, empowering vocational students to reach their better future.',
+      'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
     image: veloraImg,
     logo: veloraImg,
     section: 'Mobile Design',

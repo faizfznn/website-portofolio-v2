@@ -6,13 +6,11 @@ const organizationalExperience = [
     date: "Feb 2025 - Present",
     company: "RAION Community",
     role: "Staff of UI/UX Designer Division",
-    isActive: true, // <-- Ditambahkan
   },
   {
     date: "Jan 2025 - Present",
     company: "BEM Faculty of Computer Science, Brawijaya University",
     role: "Staff of Internal Resources Development",
-    isActive: true, // <-- Ditambahkan
   },
   {
     date: "May 2024 - Sep 2024",
@@ -40,6 +38,11 @@ const achievements = [
   {
     date: "2025",
     company: "Unipdu Jombang",
+    role: "2nd Place Winner, UI/UX Competition",
+  },
+    {
+    date: "2025",
+    company: "Univeersitas Pertamina",
     role: "2nd Place Winner, UI/UX Competition",
   },
 ];
