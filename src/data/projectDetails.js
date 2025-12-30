@@ -176,7 +176,7 @@ const projectDetails = {
     logoImages: [{ src: logoMitsaq, label: 'Color' }],
     bentoImages: [mitsaqImg1, mitsaqImg2, mitsaqImg3],
     figmaLink:
-      'https://embed.figma.com/proto/VQrE9qzQWOKSXMUT4GSRfi/MTQ_Mitsaq?page-id=646%3A21721&node-id=671-105613&p=f&viewport=3006%2C-7690%2C0.52&scaling=cover&content-scaling=fixed&starting-point-node-id=671%3A107892&embed-host=share&hide-ui=1',
+      'https://embed.figma.com/proto/VQrE9qzQWOKSXMUT4GSRfi/MTQ_Mitsaq?page-id=38%3A36&node-id=41-56544&viewport=14%2C-278%2C0.52&scaling=scale-down&content-scaling=fixed&starting-point-node-id=41%3A56544&show-proto-sidebar=1&embed-host=share&hide-ui=1',
   },
 
   // --- Proyek MENTRA ---
@@ -240,7 +240,7 @@ const projectDetails = {
     logoImages: [{ src: logoMentra, label: 'Color' }],
     bentoImages: [mentraImg1, mentraImg2, mentraImg3],
     figmaLink:
-      'https://embed.figma.com/proto/n750lg99vaSoKTwxRtRaTJ/HITC_MENTRA?page-id=1%3A8&node-id=963-15115&p=f&viewport=-2783%2C-788%2C0.23&scaling=cover&content-scaling=fixed&starting-point-node-id=156%3A1245&embed-host=share&hide-ui=1',
+      'https://embed.figma.com/proto/n750lg99vaSoKTwxRtRaTJ/HITC_MENTRA?page-id=1%3A8&node-id=156-1245&viewport=-1595%2C983%2C0.56&scaling=scale-down&content-scaling=fixed&starting-point-node-id=156%3A1245&show-proto-sidebar=1&embed-host=share&hide-ui=1',
   },
 
   // --- Proyek VELORA ---
@@ -310,7 +310,7 @@ const projectDetails = {
     bentoImages: [veloraImg1, veloraImg2, veloraImg3],
     // PERBAIKAN: Menghapus '&show-proto-sidebar=1'
     figmaLink:
-      'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FiAoMTa6aw42i1HAJ5U0iQL%2FINSPACE_VELORA%3Fpage-id%3D1396%253A15723%26node-id%3D1503-45930%26viewport%3D-327%252C339%252C0.28%26scaling%3Dcover%26content-scaling%3Dfixed%26starting-point-node-id%3D1503%253A45880%26hide-ui%3D1',
+      'https://embed.figma.com/proto/iAoMTa6aw42i1HAJ5U0iQL/INSPACE_VELORA?page-id=1396%3A15723&node-id=1503-45880&viewport=-3592%2C-1523%2C0.68&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1503%3A45880&embed-host=share&hide-ui=1',
   },
 };
 
