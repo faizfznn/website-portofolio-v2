@@ -162,7 +162,7 @@ function HomePage() {
                 <img
                   src={pinImg}
                   alt=""
-                  className="
+                  className="object-contain
             absolute w-10 h-10 md:w-20 md:h-20 
             -top-32 left-2 
             md:-top-52 md:-left-7
@@ -184,7 +184,7 @@ function HomePage() {
                   aria-hidden="true"
                   loading="lazy"
                   decoding="async"
-                  className="
+                  className="object-contain
     absolute w-8 h-8 md:w-25 md:h-25
     -bottom-2 -right-1
     md:-bottom-9 md:-right-8
@@ -333,16 +333,16 @@ function HomePage() {
                   <p className="font3 text-xs md:text-sm text-gray-300 mb-1">
                     in social media
                   </p>
-<img
-  src={signImg}
-  alt=""
-  aria-hidden="true"
-  loading="lazy"
-  decoding="async"
-  className="absolute -bottom-8 right-5 md:-bottom-14 md:right-5 w-8 h-8 md:w-10 md:h-10"
-  width="40"
-  height="40"
-/>
+                  <img
+                    src={signImg}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                    className="object-contain absolute -bottom-8 right-5 md:-bottom-14 md:right-5 w-8 h-8 md:w-10 md:h-10"
+                    width="40"
+                    height="40"
+                  />
                 </div>
               </div>
             </div>
