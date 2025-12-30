@@ -184,7 +184,7 @@ function HomePage() {
                   className="
             absolute w-8 h-8 md:w-25 md:h-25
             -bottom-2 -right-1
-            md:-bottom-9 md:-right-8 object-contain
+            md:-bottom-9 md:-right-8
             
           " // [RESPONSIVE] Disesuaikan posisinya di mobile
                   width="40"
@@ -334,7 +334,7 @@ function HomePage() {
                   <img
                     src={signImg}
                     alt=""
-                    className="absolute -bottom-8 right-5 md:-bottom-14 md:right-5 object-contain w-8 h-8 md:w-10 md:h-10"
+                    className="absolute -bottom-8 right-5 md:-bottom-14 md:right-5 w-8 h-8 md:w-10 md:h-10"
                   />
                 </div>
               </div>
