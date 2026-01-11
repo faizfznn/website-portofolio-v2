@@ -1,4 +1,3 @@
-// src/components/AlbumContext.jsx
 import React, { createContext, useContext, useState, useRef, useEffect } from "react";
 
 export interface CurrentTrack {
@@ -33,7 +32,6 @@ export function AlbumProvider({ children }: { children: React.ReactNode }) {
   const [isSoundEnabled, setIsSoundEnabled] = useState<boolean>(true);
   const currentSoundRef = useRef<{ play: () => void; stop: () => void } | null>(null);
 
-  // Jika sound dinonaktifkan, hentikan musik
   useEffect(() => {
     if (!isSoundEnabled && currentSoundRef.current) {
       currentSoundRef.current.stop();
@@ -44,7 +42,6 @@ export function AlbumProvider({ children }: { children: React.ReactNode }) {
   }, [isSoundEnabled]);
 
   const playTrack = (track: CurrentTrack) => {
-    // Hentikan jika ada yang sedang bermain
     if (currentSoundRef.current) {
       currentSoundRef.current.stop();
     }

@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.jsx';
 import HomePage from './pages/HomePage.jsx';
 import PortfolioPage from './pages/PortfolioPage.jsx';
-import ProjectDetailPage from './pages/ProjectDetailPage.jsx'; // ✅ Tambahkan ini
+import ProjectDetailPage from './pages/ProjectDetailPage.jsx';
 import AboutMePage from './pages/AboutMePage.jsx';
 import { AlbumProvider } from './components/AlbumContext';
 import './index.css';

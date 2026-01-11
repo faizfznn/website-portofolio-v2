@@ -1,4 +1,3 @@
-// src/components/Hero.jsx
 import { Link } from 'react-router-dom';
 import fotoFaiz from '../assets/formal.webp';
 import indoFlag from '../assets/bendera.png';
@@ -25,7 +24,6 @@ const Hero = ({ onGetInTouchClick }) => {
         justify-center items-center 
         gap-12 md:gap-[138px]"
     >
-      {/* Custom Cursor with Text (follows mouse) */}
       {isHovering && (
         <div
           className="fixed pointer-events-none z-50 transition-all duration-200 ease-out"
@@ -40,18 +38,7 @@ const Hero = ({ onGetInTouchClick }) => {
           </div>
         </div>
       )}
-      {/* === Left Section === */}
       <div className="flex flex-col items-start gap-8 md:gap-12 text-center md:text-left">
-        {/* Static Designer Tag (doesn't follow cursor) */}
-        {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-gray-800 text-sm font-semibold shadow-lg border border-gray-200 animate-float">
-          <div className="flex gap-1">
-            <div className="w-2 h-2 rounded-full bg-[#EA4335]"></div>
-            <div className="w-2 h-2 rounded-full bg-[#4285F4]"></div>
-            <div className="w-2 h-2 rounded-full bg-[#FBBC05]"></div>
-            <div className="w-2 h-2 rounded-full bg-[#34A853]"></div>
-          </div>
-          <span>I'm a Designer</span>
-        </div> */}
         <div className="w-full md:w-[646px]">
           <h1
             className="text-3xl md:text-5xl font-normal text-black leading-snug md:leading-[1.4]"
@@ -67,9 +54,8 @@ const Hero = ({ onGetInTouchClick }) => {
             flex flex-col sm:flex-row items-start 
             gap-4 lg:gap-2 
             w-full sm:w-auto
-          " // [RESPONSIVE] flex-col di mobile terkecil, gap, & width disesuaikan
+          "
         >
-          {/* === Tombol Get in Touch === */}
           <button
             onClick={onGetInTouchClick}
             className="
@@ -80,7 +66,7 @@ const Hero = ({ onGetInTouchClick }) => {
               shadow-[inset_0_0_8px_0_#FFFFFF] 
               transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] 
               hover:shadow-[inset_0_10px_29.1px_0_rgba(255,255,255,0.4)]
-            " // [RESPONSIVE] w-full di mobile
+            " 
           >
             <img
               src={stars}
@@ -90,14 +76,13 @@ const Hero = ({ onGetInTouchClick }) => {
             <span className="relative z-10">Get in touch</span>
           </button>
 
-          {/* === Tombol See Portfolio === */}
           <Link
             to="/portfolio"
             className="
               relative w-full sm:w-fit h-[56px] px-10 rounded-[24px] 
               border-[1px] border-[#CAD3DC] bg-white text-black 
               text-[16px] font-normal group inline-flex items-center justify-center
-            " // [RESPONSIVE] w-full di mobile
+            "
           >
             <span className="relative inline-block overflow-hidden h-[1.2em]">
               <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
@@ -111,7 +96,6 @@ const Hero = ({ onGetInTouchClick }) => {
         </div>
       </div>
 
-      {/* === Right Card === */}
       <div
         className="
           inline-flex p-4 flex-col items-center gap-3

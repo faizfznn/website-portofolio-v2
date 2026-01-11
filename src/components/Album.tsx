@@ -1,26 +1,24 @@
-// src/components/Album.tsx
 import React, { useEffect, useRef } from "react";
 import { useAlbumContext } from "./AlbumContext";
 
-// Definisikan props
 interface AlbumProps {
-  id: string; // <-- 1. Tambahkan prop ID yang wajib diisi
+  id: string; 
   albumCover: string;
   albumTitle: string;
   artist: string;
   musicFile: string;
   size?: 'sm' | 'md' | 'lg';
-  startTime?: number; // <-- 1. Tambahkan prop startTime
+  startTime?: number; 
 }
 
 export default function Album({
-  id, // <-- 2. Terima prop 'id'
+  id, 
   albumCover,
   albumTitle,
   artist,
   musicFile,
   size = "md",
-  startTime = 0, // <-- 2. Terima prop dengan nilai default 0
+  startTime = 0, 
 }: AlbumProps) {
   const {
     currentPlayingId,
@@ -31,17 +29,14 @@ export default function Album({
     isSoundEnabled,
   } = useAlbumContext();
 
-  // 3. Gunakan 'id' dari prop untuk memeriksa apakah album ini sedang diputar
   const isPlaying = currentPlayingId === id; 
   const audioRef = useRef(new Audio(musicFile));
   
 
-  // ... (useEffect untuk volume tetap sama) ...
   useEffect(() => {
     audioRef.current.volume = volume;
   }, [volume]);
 
-  // ... (useEffect untuk setCurrentSound tetap sama) ...
   useEffect(() => {
     if (isPlaying) {
       setCurrentSound({
@@ -54,7 +49,6 @@ export default function Album({
     }
   }, [isPlaying, setCurrentSound]);
 
-  // ... (useEffect untuk handleEnded tetap sama) ...
   useEffect(() => {
     const handleEnded = () => {
       setCurrentPlayingId(null);
@@ -66,8 +60,6 @@ export default function Album({
     return () => audio.removeEventListener("ended", handleEnded);
   }, [setCurrentPlayingId, setCurrentTrack, setCurrentSound]);
 
-  // --- 3. Perbarui useEffect ini ---
-  // Hapus currentTime = 0 dari 'else' agar tidak ter-reset
   useEffect(() => {
     if (!isSoundEnabled) {
       audioRef.current.pause();
@@ -77,24 +69,20 @@ export default function Album({
       audioRef.current.play().catch(() => {});
     } else {
       audioRef.current.pause();
-      // JANGAN reset currentTime di sini
     }
   }, [isPlaying, isSoundEnabled]);
 
-  // --- 4. Perbarui fungsi togglePlay ---
   const togglePlay = () => {
     if (!isSoundEnabled) return;
     if (isPlaying) {
-      // Logika untuk BERHENTI (tetap sama)
       audioRef.current.pause();
-      audioRef.current.currentTime = 0; // Reset ke 0 saat dihentikan
+      audioRef.current.currentTime = 0; 
       setCurrentPlayingId(null);
       setCurrentTrack(null);
       setCurrentSound(null);
     } else {
-      // Logika untuk MULAI
-      audioRef.current.currentTime = startTime; // <-- Atur waktu mulai di sini
-      setCurrentPlayingId(id); // <-- Gunakan prop 'id'
+      audioRef.current.currentTime = startTime; 
+      setCurrentPlayingId(id);
       
       setCurrentTrack({
         id: id,
@@ -115,9 +103,7 @@ export default function Album({
   const sizeClass = sizeClasses[size] || sizeClasses.md;
 
   return (
-    // ... (sisa JSX tidak berubah) ...
     <div className={`relative group ${sizeClass} cursor-pointer`} onClick={togglePlay}>
-      {/* Piringan vinil */}
       <div
         className={`absolute inset-0 rounded-full bg-linear-to-br from-gray-900 via-gray-800 to-black shadow-2xl transition-transform duration-500 ease-linear ${
           isPlaying ? "animate-spin-slow" : ""
@@ -137,7 +123,6 @@ export default function Album({
         </div>
       </div>
 
-      {/* Cover album yang bergeser */}
       <div
         className={`absolute inset-0 rounded-lg overflow-hidden shadow-lg transform transition-transform duration-500 ease-in-out ${
           isPlaying ? "translate-x-2/5" : ""
@@ -155,7 +140,6 @@ export default function Album({
         ></div>
       </div>
 
-      {/* Hover card tampil di bawah */}
       <div className="absolute w-48 left-1/2 top-full mt-2 -translate-x-1/2 bg-white rounded-xl shadow-md p-3 opacity-0 transition-opacity duration-200 pointer-events-none group-hover:opacity-100">
         <p className="text-sm font-semibold text-black text-center">{albumTitle}</p>
         <p className="text-xs text-gray-600 text-center">{artist}</p>

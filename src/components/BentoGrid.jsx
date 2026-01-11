@@ -1,12 +1,6 @@
 import React from 'react';
 
-/**
- * BentoGrid component displays a grid of images with flexible row/column spans.
- * Each item can define optional `rowSpan` and `colSpan` properties to change its size.
- *
- * Props:
- * - items: Array of objects with fields `image` (string URL), `alt` (string), `rowSpan` (int), `colSpan` (int).
- */
+
 const BentoGrid = ({ items = [] }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

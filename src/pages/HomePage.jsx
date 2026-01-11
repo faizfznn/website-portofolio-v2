@@ -1,4 +1,3 @@
-// src/pages/HomePage.jsx
 import { useRef, useState, useEffect } from 'react';
 import Hero from '../components/Hero';
 import ProjectCard from '../components/ProjectCard.jsx';
@@ -22,9 +21,9 @@ import { SiJavascript, SiFigma, SiKotlin, SiReact } from 'react-icons/si';
 import Reveal from '../components/Reveal';
 const timeOptions = {
   timeZone: 'Asia/Jakarta',
-  hour: 'numeric', // Menampilkan jam sebagai angka (misal: 4, bukan 04)
-  minute: '2-digit', // Menampilkan menit sebagai 2 digit (misal: 02)
-  second: '2-digit', // Menampilkan detik sebagai 2 digit (misal: 15)
+  hour: 'numeric', 
+  minute: '2-digit', 
+  second: '2-digit', 
 };
 
 function HomePage() {
@@ -41,23 +40,18 @@ function HomePage() {
     contactRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // 2. Buat state untuk menyimpan waktu
   const [currentTime, setCurrentTime] = useState(
-    // Gunakan 'en-GB' untuk mendapatkan format : (titik dua)
     new Date().toLocaleTimeString('en-GB', timeOptions)
   );
-  // 3. Gunakan useEffect untuk memperbarui waktu setiap detik
   useEffect(() => {
     const timer = setInterval(() => {
-      // Gunakan 'en-GB' untuk mendapatkan format : (titik dua)
       setCurrentTime(new Date().toLocaleTimeString('en-GB', timeOptions));
     }, 1000);
 
-    // Cleanup interval
     return () => {
       clearInterval(timer);
     };
-  }, []); // Dependensi kosong
+  }, []); 
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 mt-[92px]">
@@ -69,17 +63,14 @@ function HomePage() {
         <section className="mt-24 md:mt-40 mb-40 md:mb-40">
           <div className="mb-4">
             <h2>
-              {/* <span className="font-bold text-3xl md:text-4xl">/</span> */}
               <span className="text-2xl md:text-3xl font-bold">
                 {' '}
                 Selected Work
               </span>
             </h2>
           </div>
-          {/* src/pages/HomePage.jsx */}
           <div className="grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2">
             {displayedProjects.map((project, index) => {
-              // Mengubah 'works' menjadi 'project' agar lebih jelas
               const isFirst = index === 0;
               const isLast = index === displayedProjects.length - 1;
               const isFullWidth = isFirst || isLast;
@@ -90,7 +81,7 @@ function HomePage() {
                 <div key={project.id} className={colSpanClass}>
                   <ProjectCard
                     project={project}
-                    isFullWidth={isFullWidth} // Kirim prop baru ini
+                    isFullWidth={isFullWidth} 
                   />
                 </div>
               );
@@ -112,39 +103,38 @@ function HomePage() {
             <div className="w-full md:w-1/2 flex flex-col">
               {/* Kolase Gambar */}
               <div className="relative flex mb-6 w-full justify-center md:justify-start">
-                {/* [RESPONSIVE] Dihapus space-x-2 md:space-x-4 yg tidak perlu, ditambah w-full justify-center */}
                 <div
                   className="
             flex w-fit items-center 
             -space-x-8 sm:-space-x-10
-          " // [RESPONSIVE] Mengurangi negative margin di mobile
+          " 
                 >
                   <div
                     className="
               w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
               bg-cover bg-center rounded-3xl border-3 border-white rotate-4 shrink-0
-            " // [RESPONSIVE] Ukuran gambar dikecilkan
+            " 
                     style={{ backgroundImage: `url(${foto1})` }}
                   />
                   <div
                     className="
               w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
               bg-cover bg-center rounded-3xl border-3 border-white -rotate-4 shrink-0
-            " // [RESPONSIVE] Ukuran gambar dikecilkan
+            " 
                     style={{ backgroundImage: `url(${foto2})` }}
                   />
                   <div
                     className="
               w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
               bg-cover bg-center rounded-3xl border-3 border-white rotate-3 shrink-0
-            " // [RESPONSIVE] Ukuran gambar dikecilkan
+            " 
                     style={{ backgroundImage: `url(${foto3})` }}
                   />
                   <div
                     className="
               w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
               bg-cover bg-center rounded-3xl border-3 border-white shrink-0
-            " // [RESPONSIVE] Ukuran gambar dikecilkan
+            " 
                     style={{ backgroundImage: `url(${fotoFaiz})` }}
                   />
                 </div>
@@ -153,7 +143,7 @@ function HomePage() {
                   alt=""
                   className="absolute -top-6 -right-2 md:-top-17 md:-right-15 w-10 h-10 md:w-[99px] md:h-[95px] rotate-10 animate-slide-slow"
                   width="99"
-                  height="95" // ✅ Tambahkan
+                  height="95" 
                 />
               </div>
 
@@ -166,9 +156,9 @@ function HomePage() {
             absolute w-10 h-10 md:w-20 md:h-20 
             -top-32 left-2 
             md:-top-52 md:-left-7
-          " // [RESPONSIVE] Disesuaikan posisinya di mobile
+          " 
                   width="80"
-                  height="80" // ✅ Tambahkan
+                  height="80" 
                 />
                 <p className="text-black text-sm md:text-base">
                   <span className="font-semibold">
@@ -198,12 +188,11 @@ function HomePage() {
                 className="
           flex w-full md:w-[528px] items-stretch md:items-start gap-4 justify-start 
           flex-col sm:flex-row
-        " // [RESPONSIVE] Stacking di mobile (flex-col), side-by-side di sm+
+        " 
               >
                 {/* Lokasi & Waktu */}
                 <div className="flex flex-col justify-center p-4 rounded-3xl bg-[#FAFAFA] w-full sm:w-auto ">
                   {' '}
-                  {/* [RESPONSIVE] w-full di mobile */}
                   <div className="flex flex-col items-start space-y-1">
                     <div className="flex items-center space-x-2">
                       <span className="text-xl">📍</span>
@@ -220,7 +209,7 @@ function HomePage() {
                   className="
             flex flex-wrap gap-2 w-full 
             sm:max-w-[300px]
-          " // [RESPONSIVE] w-full di mobile
+          " 
                 >
                   {[
                     {
@@ -255,8 +244,6 @@ function HomePage() {
             {/* === Right Side: Collaboration Card === */}
             <div className="w-full md:w-1/2 mt-8 md:mt-0" ref={contactRef}>
               <div className="relative w-full h-[380px] md:h-[412px] rounded-4xl p-6 sm:p-8 md:p-10 bg-black text-white flex flex-col items-center text-center overflow-hidden">
-                {/* [RESPONSIVE] padding p-6 di mobile terkecil */}
-                {/* Background */}
                 <div className="absolute inset-0 flex justify-center items-center">
                   <img
                     src={ungu}
@@ -277,7 +264,7 @@ function HomePage() {
                     alt="Handshake"
                     className="w-8 md:w-10 inline-block animate-bounce-slow"
                     width="40"
-                    height="40" // ✅ Tambahkan
+                    height="40" 
                   />
                 </h3>
 
@@ -290,13 +277,13 @@ function HomePage() {
                     className="
               flex rounded-3xl px-2 py-2 border border-[#FFFFFF]/30 bg-black/40 backdrop-blur-sm 
               flex-col sm:flex-row items-stretch sm:items-center sm:justify-between gap-3 sm:gap-2
-            " // [RESPONSIVE] flex-col, gap, dan items-stretch di mobile
+            " 
                   >
                     <span
                       className="
                 px-4 py-3 text-white text-sm md:text-base 
                 text-center sm:text-left
-              " // [RESPONSIVE] text-center di mobile
+              " 
                     >
                       faiz150605@gmail.com
                     </span>
@@ -314,7 +301,7 @@ function HomePage() {
                 w-full sm:w-fit 
                 h-[42px] md:h-12 px-6 md:px-8 
                 text-[14px] md:text-[16px]
-              " // [RESPONSIVE] w-full di mobile
+              " 
                     >
                       <img
                         src={stars}

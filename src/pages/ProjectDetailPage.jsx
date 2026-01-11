@@ -1,15 +1,11 @@
-// src/pages/ProjectDetailPage.jsx
-import { useParams, Link, useLocation } from 'react-router-dom'; // Tambahkan useLocation
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { HiChevronLeft } from 'react-icons/hi'; // Import icon chevron
+import { HiChevronLeft } from 'react-icons/hi';
 import portfolioProjects from '../data/portfolioProjects.js';
 import projectDetails from '../data/projectDetails.js';
 import Reveal from '../components/Reveal';
-import Sidebar from '../components/Sidebar'; // Impor sidebar
+import Sidebar from '../components/Sidebar';
 
-/**
- * Komponen InfoRow (Tidak berubah)
- */
 const InfoRow = ({ label, children }) => (
   <div className="flex flex-col md:flex-row border-b border-gray-200 py-4">
     <span className="w-full md:w-1/4 font-semibold text-gray-500 mb-2 md:mb-0">
@@ -19,9 +15,6 @@ const InfoRow = ({ label, children }) => (
   </div>
 );
 
-/**
- * Komponen Problems/Solutions Card (Tidak berubah)
- */
 const ProblemSolutionCard = ({
   number,
   title,
@@ -53,12 +46,9 @@ const ProblemSolutionCard = ({
   </div>
 );
 
-/**
- * Halaman Detail Proyek
- */
 export default function ProjectDetailPage() {
   const { id } = useParams();
-  const location = useLocation(); // Inisialisasi useLocation
+  const location = useLocation(); 
   const isFromHome = location.state?.from === 'home';
   const backPath = isFromHome ? '/' : '/portfolio';
   const backLabel = isFromHome ? 'Home' : 'Portfolio';
@@ -78,21 +68,18 @@ export default function ProjectDetailPage() {
       </div>
     );
   }
-  // --- FUNGSI HELPER BARU UNTUK GRID DINAMIS ---
-  // Fungsi ini akan mengembalikan kelas grid yang benar berdasarkan jumlah item
   const getGridColsClass = (count) => {
     if (count === 1) return 'grid-cols-1';
     if (count === 2) return 'grid-cols-1 sm:grid-cols-2';
     if (count === 3) return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
-    return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'; // Default jika 4 atau lebih
+    return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'; 
   };
 
-  // Grid khusus untuk Components & Icons dengan lebih banyak kolom
   const getComponentsGridClass = (count) => {
     if (count === 1) return 'grid-cols-1';
     if (count === 2) return 'grid-cols-1 sm:grid-cols-2';
     if (count === 3) return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
-    return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'; // Default jika 4 atau lebih
+    return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'; 
   };
 
   const designSystemGridClass = getComponentsGridClass(
@@ -108,7 +95,6 @@ export default function ProjectDetailPage() {
       {/* === Sidebar Kiri === */}
       <aside className="lg:col-span-1 lg:sticky lg:top-1/2 lg:-translate-y-1/2 self-start">
         <Sidebar />
-        {/* Navigasi Dinamis dengan Icon Chevron */}
         <Link
           to={backPath}
           className="mt-8 flex items-center gap-1 text-[14px] text-gray-500 hover:text-black transition-colors"
@@ -150,12 +136,12 @@ export default function ProjectDetailPage() {
                       href={member.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="relative group" // Tambahkan group
+                      className="relative group"
                     >
                       <img
                         src={member.image}
                         alt={member.name}
-                        title={member.name} // Tooltip bawaan browser
+                        title={member.name}
                         className="w-10 h-10 rounded-full border-2 border-white object-cover transition-transform duration-300 group-hover:scale-110"
                       />
                       {/* Kartu Nama saat Hover */}
@@ -360,7 +346,6 @@ export default function ProjectDetailPage() {
             <h2 className="text-3xl font-semibold text-black mb-6">
               Prototype
             </h2>
-            {/* Wrapper untuk membatasi lebar iframe agar terlihat seperti ponsel */}
             <div className="w-full overflow-hidden rounded-3xl border border-gray-200">
               <iframe
                 style={{ border: '1px solid' }}

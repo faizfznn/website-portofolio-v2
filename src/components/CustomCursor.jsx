@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import eyeIcon from '../assets/eye.webp'; // Memastikan path aset benar
+import eyeIcon from '../assets/eye.webp'; 
 
 export default function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -11,7 +11,6 @@ export default function CustomCursor() {
     };
 
     const handleHover = (e) => {
-      // Mencari elemen terdekat dengan atribut trigger
       if (e.target.closest('[data-cursor-project]')) {
         setIsHovering(true);
       } else {

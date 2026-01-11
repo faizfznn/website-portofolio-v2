@@ -1,4 +1,3 @@
-// src/pages/AboutMePage.jsx
 import { Link } from 'react-router-dom';
 import aboutImage from '../assets/about.jpg';
 import paintMyLove from '../assets/paint-my-love.jpeg';

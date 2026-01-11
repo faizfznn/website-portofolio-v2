@@ -1,8 +1,4 @@
-// Data for portfolio listing. Each object contains only the fields needed to
-// render the project card in the portfolio grid. Detailed content for each
-// project lives in `projectDetails.js`.
-// Images are imported from the assets folder. If these files do not exist in
-// your project yet, make sure to add them accordingly.
+
 
 import cerebellumImg from '../assets/cerebellum.webp';
 import mitsaqImg from '../assets/mitsaq.webp';

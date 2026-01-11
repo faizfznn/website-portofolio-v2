@@ -30,7 +30,7 @@ import logoVelora from '../assets/logoVelora.png';
 import logoMitsaq from '../assets/logoMitsaq.png';
 import logoCerebelum from '../assets/logoCerebelum.png';
 
-// Rekan (Tim Saya)
+// Tim Saya
 import akhdan from '../assets/akhdan.jpg';
 import rara from '../assets/rara.jpg';
 import ariq from '../assets/ariq.jpeg';

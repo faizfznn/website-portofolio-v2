@@ -1,4 +1,3 @@
-// src/components/Footer.jsx
 
 import instagram from '../assets/instagram.jpg';
 import linked from '../assets/linked.png';
@@ -14,29 +13,24 @@ function Footer() {
         justify-between items-center 
         rounded-3xl bg-white/70
         shadow-sm border border-gray-200/80
-      " // [RESPONSIVE] Gap & padding (px) disesuaikan
+      "
     >
-      {/* --- Email Section --- */}
       <a
         href="mailto:faiz150605@gmail.com"
         className="flex items-center gap-3 transition-opacity hover:opacity-75"
       >
         <LuSend className="w-5 h-5 md:w-6 md:h-6 text-black" />{' '}
-        {/* [RESPONSIVE] Ikon dikecilkan sedikit */}
         <p
           className="
             text-base md:text-lg font-semibold text-black
-          " // [RESPONSIVE] Font size disesuaikan
+          "
         >
           faiz150605@gmail.com
         </p>
       </a>
 
-      {/* Social Media Icons */}
       <div className="flex items-center gap-0">
         {' '}
-        {/* [RESPONSIVE] Gap di-nol-kan agar pas */}
-        {/* GitHub */}
         <a
           href="https://github.com/faizfznn"
           target="_blank"
@@ -44,7 +38,7 @@ function Footer() {
           className="
             relative group w-14 h-16 md:w-16 md:h-16 
             flex justify-center items-center
-          " // [RESPONSIVE] Width dikecilkan
+          "
         >
           <img
             src={github}
@@ -55,9 +49,9 @@ function Footer() {
               transform -rotate-4
               transition-all duration-300
               group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-10
-            " // [RESPONSIVE] Ukuran ikon & translate-y disesuaikan
-            width="48" // ✅ Tambahkan (dari md:w-12)
-            height="48" // ✅ Tambahkan (dari md:h-12)
+            " 
+            width="48" 
+            height="48" 
           />
           <span
             className="
@@ -66,7 +60,7 @@ function Footer() {
               opacity-0 group-hover:opacity-100
               transition-opacity duration-300
               mt-4
-            " // [RESPONSIVE] Font size & inset disesuaikan
+            " 
           >
             GitHub
           </span>
@@ -76,7 +70,7 @@ function Footer() {
           href="https://www.instagram.com/faizfznn"
           target="_blank"
           rel="noopener noreferrer"
-          className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center" // [RESPONSIVE]
+          className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center" 
         >
           <img
             src={instagram}
@@ -87,9 +81,9 @@ function Footer() {
               transform rotate-13
               transition-all duration-300
               group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-0
-            " // [RESPONSIVE]
-            width="48" // ✅ Tambahkan (dari md:w-12)
-            height="48" // ✅ Tambahkan (dari md:h-12)
+            " 
+            width="48" 
+            height="48" 
           />
           <span
             className="
@@ -98,7 +92,7 @@ function Footer() {
               opacity-0 group-hover:opacity-100
               transition-opacity duration-300
               mt-4
-            " // [RESPONSIVE]
+            " 
           >
             Instagram
           </span>
@@ -108,7 +102,7 @@ function Footer() {
           href="https://www.linkedin.com/in/muhammadfaizfauzan"
           target="_blank"
           rel="noopener noreferrer"
-          className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center" // [RESPONSIVE]
+          className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center" 
         >
           <img
             src={linked}
@@ -119,9 +113,9 @@ function Footer() {
               transform rotate-3
               transition-all duration-300
               group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-12
-            " // [RESPONSIVE]
-            width="48" // ✅ Tambahkan (dari md:w-12)
-            height="48" // ✅ Tambahkan (dari md:h-12)
+            " 
+            width="48" 
+            height="48" 
           />
           <span
             className="
@@ -130,7 +124,7 @@ function Footer() {
               opacity-0 group-hover:opacity-100
               transition-opacity duration-300
               mt-4
-            " // [RESPONSIVE]
+            " 
           >
             LinkedIn
           </span>
