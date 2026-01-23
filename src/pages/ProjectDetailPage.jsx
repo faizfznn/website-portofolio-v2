@@ -230,8 +230,7 @@ export default function ProjectDetailPage() {
         {/* --- Overview --- */}
         <Reveal>
           <article id="overview" className="scroll-mt-24">
-            {/* Header dengan Flexbox agar Judul dan Tombol sejajar */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 border-b border-gray-200 pb-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6">
               <h2 className="text-3xl font-semibold text-black">Overview</h2>
 
               {detail.websiteLink && (
@@ -282,8 +281,16 @@ export default function ProjectDetailPage() {
                         src={member.image}
                         alt={member.name}
                         title={member.name}
-                        className="w-10 h-10 rounded-full border-2 border-white object-cover transition-transform duration-300 group-hover:scale-110"
+                        className="w-12 h-12 rounded-full border-2 border-white object-cover transition-transform duration-300 group-hover:scale-110"
                       />
+                      <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 w-max whitespace-nowrap bg-white rounded-xl shadow-md p-3 opacity-0 transition-opacity duration-200 pointer-events-none group-hover:opacity-100 z-10">
+                        <p className="text-sm font-semibold text-black text-center">
+                          {member.name}
+                        </p>
+                        <p className="text-xs text-gray-600 text-center">
+                          {member.role}
+                        </p>
+                      </div>
                     </a>
                   ))}
                 </div>

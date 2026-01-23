@@ -46,11 +46,13 @@ const projectDetails = {
     team: [
       {
         name: 'Ariiq Tsany Zu',
+        role: 'UX Researcher', // TAMBAHKAN INI
         image: ariq,
         linkedin: 'https://www.linkedin.com/in/tsanyzzu/',
       },
       {
         name: 'Fira Zaha Iklila',
+        role: 'UI Designer', // TAMBAHKAN INI
         image: rara,
         linkedin: 'https://www.linkedin.com/in/firaiklila/',
       },
@@ -119,11 +121,13 @@ const projectDetails = {
     team: [
       {
         name: 'Ariiq Tsany Zu',
+        role: 'UX Researcher', // TAMBAHKAN INI
         image: ariq,
         linkedin: 'https://www.linkedin.com/in/tsanyzzu/',
       },
       {
         name: 'Fira Zaha Iklila',
+        role: 'UI Designer', // TAMBAHKAN INI
         image: rara,
         linkedin: 'https://www.linkedin.com/in/firaiklila/',
       },
@@ -188,6 +192,7 @@ const projectDetails = {
     team: [
       {
         name: 'Ariiq Tsany Zu',
+        role: 'UX Researcher', // TAMBAHKAN INI
         image: ariq,
         linkedin: 'https://www.linkedin.com/in/tsanyzzu/',
       },
@@ -252,11 +257,14 @@ const projectDetails = {
     team: [
       {
         name: 'Ariiq Tsany Zu',
+        role: 'UX Researcher', // TAMBAHKAN INI
         image: ariq,
         linkedin: 'https://www.linkedin.com/in/tsanyzzu/',
       },
       {
         name: 'Naufal Akhdan',
+        role: 'UI Designer', // TAMBAHKAN INI
+
         image: akhdan,
         linkedin: 'https://www.linkedin.com/in/naufal-akhdan-899918289/',
       },
@@ -322,16 +330,19 @@ const projectDetails = {
     team: [
       {
         name: 'Arif Athaya Harahap',
+        role: 'Backend Developer',
         image: arif,
         linkedin: 'https://www.linkedin.com/in/arifathaya/',
       },
       {
         name: 'Ariiq Tsany Zu',
+        role: 'System Analyst',
         image: ariq,
         linkedin: 'https://www.linkedin.com/in/tsanyzzu/',
       },
       {
         name: 'Nugrah Ramadhani',
+        role: 'UX Researcher',
         image: dani,
         linkedin: 'https://www.linkedin.com/in/nramadhan1/',
       },
@@ -381,6 +392,7 @@ const projectDetails = {
     team: [
       {
         name: 'Muhammad Faiz Fauzan',
+        role: 'Frontend Developer & Designer',
         image: fotoFaiz,
         linkedin: 'https://www.linkedin.com/in/faizfauzan/',
       },
@@ -393,9 +405,11 @@ const projectDetails = {
     overview:
       'Web Kartu Acak (Shuffle Card) is a dynamic web utility built to facilitate random selection processes for events, classrooms, or games. Unlike standard randomizers, this tool offers deep integration with external data sources like Google Sheets and Excel, allowing users to "bring their own deck" instantly without tedious manual entry.',
     websiteLink: 'https://flip-card-nine-kappa.vercel.app/',
-      team: [
+    team: [
       {
         name: 'Muhammad Faiz Fauzan',
+        role: 'Frontend Developer & Designer',
+
         image: fotoFaiz,
         linkedin: 'https://www.linkedin.com/in/faizfauzan/',
       },
@@ -407,9 +421,11 @@ const projectDetails = {
     overview:
       'My Quiz Appis a comprehensive React-based Online Quiz platform designed to simulate a real computer-based test environment. It features a complete user flow from secure authentication and material selection to a timed examination system with dynamic questions and automated scoring.',
     websiteLink: 'https://quiz-app-84cu.vercel.app/',
-      team: [
+    team: [
       {
         name: 'Muhammad Faiz Fauzan',
+        role: 'Frontend Developer & Designer',
+
         image: fotoFaiz, // Gunakan variabel foto profil Anda
         linkedin: 'https://www.linkedin.com/in/faizfauzan/',
       },
