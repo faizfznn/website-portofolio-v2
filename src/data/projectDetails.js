@@ -34,6 +34,8 @@ import logoCerebelum from '../assets/logoCerebelum.png';
 import akhdan from '../assets/akhdan.jpg';
 import rara from '../assets/rara.jpg';
 import ariq from '../assets/ariq.jpeg';
+import dani from '../assets/dani.webp';
+import arif from '../assets/arif.webp';
 
 const projectDetails = {
   // --- Proyek CEREBELLUM ---
@@ -314,72 +316,60 @@ const projectDetails = {
   // --- Proyek FilkomReserV ---
   filkomreserv: {
     overview:
-      'FILKOMreserV adalah sistem berbasis teknologi yang dirancang untuk mengotomatiskan proses peminjaman ruangan di Fakultas Ilmu Komputer, Universitas Brawijaya. Platform ini bertujuan menyederhanakan metode manual yang rawan kesalahan menjadi sistem terintegrasi yang menawarkan efisiensi waktu, transparansi data, dan kemudahan akses bagi mahasiswa serta staf administrasi.',
+      'FILKOMreserV is a technology-based system designed to automate the room reservation process at the Faculty of Computer Science, Brawijaya University. This platform aims to streamline error-prone manual methods into an integrated system that offers time efficiency, data transparency, and ease of access for students and administrative staff.',
     team: [
       {
         name: 'Arif Athaya Harahap',
-        image: null, // Placeholder agar tidak error, ganti dengan import gambar jika ada
-        linkedin: '',
+        image: arif,
+        linkedin: 'https://www.linkedin.com/in/arifathaya/',
       },
       {
         name: 'Ariiq Tsany Zu',
-        image: null,
-        linkedin: '',
+        image: ariq,
+        linkedin: 'https://www.linkedin.com/in/tsanyzzu/',
       },
       {
         name: 'Nugrah Ramadhani',
-        image: null,
-        linkedin: '',
-      },
-      {
-        name: 'Muhammad Faiz Fauzan',
-        image: null,
-        linkedin: '',
+        image: dani,
+        linkedin: 'https://www.linkedin.com/in/nramadhan1/',
       },
     ],
     role: ['System Analyst', 'UI/UX Design', 'Software Engineer'],
-    timeline: "Aug '24 – Dec '24",
+    timeline: "Aug '24 - Dec '24",
     problems: [
       {
         title: 'Fragmented Manual Process',
         description:
-          'Proses peminjaman saat ini tidak terintegrasi karena mengharuskan pengguna mengecek jadwal di spreadsheet, mengisi Google Form, dan melakukan konfirmasi manual lewat chat Line.',
+          'The current reservation process is fragmented, requiring users to check schedules on spreadsheets, fill out Google Forms, and perform manual confirmation via Line chat.',
       },
       {
         title: 'Data Inaccuracy & Loss',
         description:
-          'Metode manual sering menyebabkan ketidakakuratan informasi ketersediaan ruangan dan meningkatkan risiko kehilangan data peminjaman karena pencatatan yang tidak terpusat.',
+          'Manual methods often lead to inaccurate room availability information and increase the risk of reservation data loss due to decentralized recording.',
       },
       {
         title: 'Communication Bottlenecks',
         description:
-          'Pengguna sering mengalami keterlambatan konfirmasi dan miskomunikasi dengan pihak administrasi, serta kesulitan dalam melacak status pengajuan peminjaman.',
+          'Users frequently experience confirmation delays and miscommunication with the administration, as well as difficulty tracking the status of their applications.',
       },
     ],
     solutions: [
       {
         title: 'Real-Time Availability Check',
         description:
-          'Fitur pengecekan jadwal ruangan secara real-time yang memungkinkan pengguna melihat status ketersediaan ruangan di tanggal dan jam tertentu secara akurat.',
+          'A real-time room scheduling feature that allows users to accurately view room availability status for specific dates and times.',
       },
       {
         title: 'Integrated Reservation Flow',
         description:
-          'Platform satu pintu yang memfasilitasi seluruh alur reservasi, mulai dari pemilihan ruangan, pengisian data, hingga unggah dokumen persyaratan (KTM & Surat Peminjaman).',
+          'A one-stop platform facilitating the entire reservation flow, from room selection and data entry to uploading required documents (Student ID & Reservation Letter).',
       },
       {
         title: 'Automated Notifications',
         description:
-          'Sistem notifikasi dan email otomatis yang memberikan pembaruan status peminjaman (disetujui/ditolak) secara langsung kepada pengguna untuk mengurangi waktu tunggu.',
+          'An automated notification and email system that provides immediate status updates (approved/rejected) to users, reducing waiting times.',
       },
     ],
-    // --- TAMBAHAN DATA PENTING AGAR TIDAK CRASH ---
-    colors: [], 
-    typography: null, 
-    designSystemImages: [],
-    logoImages: [],
-    bentoImages: [],
-    figmaLink: null,
   },
 };
 

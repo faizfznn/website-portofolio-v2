@@ -44,11 +44,6 @@ export default function NotFoundPage() {
            </div>
         </div>
       </motion.div>
-
-      {/* Footer / Context */}
-      <div className="absolute bottom-12 left-0 right-0 text-center">
-         <p className="font-mono text-xs uppercase tracking-widest text-gray-600">Error: Page_Not_Found</p>
-      </div>
     </div>
   );
 }

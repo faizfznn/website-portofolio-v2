@@ -139,7 +139,7 @@ const PortfolioItem = ({ project, index }) => {
             </div>
           </div>
           <span className="font-mono text-sm text-gray-400 group-hover:text-black transition-colors">
-            {project.year || '2024'}
+            {project.year}
           </span>
         </div>
       </Wrapper>

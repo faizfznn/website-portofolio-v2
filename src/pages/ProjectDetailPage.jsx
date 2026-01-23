@@ -1,11 +1,12 @@
 import { useParams, Link, useLocation } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
 import { HiChevronLeft } from 'react-icons/hi';
 import portfolioProjects from '../data/portfolioProjects.js';
 import projectDetails from '../data/projectDetails.js';
 import Reveal from '../components/Reveal';
 import Sidebar from '../components/Sidebar';
+import NotFoundPage from './NotFoundPage.jsx';
 
+// --- Sub Components (InfoRow, Card) Tetap Sama ---
 const InfoRow = ({ label, children }) => (
   <div className="flex flex-col md:flex-row border-b border-gray-200 py-4">
     <span className="w-full md:w-1/4 font-semibold text-gray-500 mb-2 md:mb-0">
@@ -46,46 +47,155 @@ const ProblemSolutionCard = ({
   </div>
 );
 
+const RevealText = ({ children, delay = 0, className = '' }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-10%' }}
+    transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1], delay }}
+    className={className}
+  >
+    {children}
+  </motion.div>
+);
+
+const ParallaxImage = ({ src, alt, className = '' }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
+
+  return (
+    <div ref={ref} className={`overflow-hidden ${className}`}>
+      <motion.img
+        style={{ y, scale: 1.1 }}
+        src={src}
+        alt={alt}
+        className="w-full h-full object-cover"
+      />
+    </div>
+  );
+};
+
+const CopyColor = ({ hex, name }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(hex);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="group flex flex-col items-center gap-3 relative"
+    >
+      <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full shadow-xl transition-transform duration-500 group-hover:scale-105 group-hover:shadow-2xl overflow-hidden ring-1 ring-black/5">
+        <div
+          className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-90"
+          style={{ backgroundColor: hex }}
+        />
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {copied ? (
+            <FiCheck className="text-3xl text-white mix-blend-difference" />
+          ) : (
+            <FiCopy className="text-3xl text-white mix-blend-difference" />
+          )}
+        </div>
+      </div>
+      <div className="text-center">
+        <p className="font-mono text-xs text-gray-400 uppercase tracking-widest mb-1">
+          {name}
+        </p>
+        <p className="font-medium text-gray-900">{hex}</p>
+      </div>
+
+      <AnimatePresence>
+        {copied && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute -top-12 left-1/2 -translate-x-1/2 bg-black text-white text-xs py-2 px-3 rounded-lg shadow-lg whitespace-nowrap z-20 pointer-events-none"
+          >
+            Copied to clipboard
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </button>
+  );
+};
+
 export default function ProjectDetailPage() {
   const { id } = useParams();
-  const location = useLocation(); 
+  const location = useLocation();
   const isFromHome = location.state?.from === 'home';
   const backPath = isFromHome ? '/' : '/portfolio';
   const backLabel = isFromHome ? 'Home' : 'Portfolio';
+
   const portfolioProject = portfolioProjects.find((p) => p.id === id);
   const detail = projectDetails[id];
 
   if (!portfolioProject || !detail) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-center p-8 text-gray-600 mt-[92px]">
-        <h2 className="text-3xl font-semibold mb-4">Project not found</h2>
-        <Link
-          to={backPath}
-          className="text-black underline flex items-center gap-1"
-        >
-          <HiChevronLeft /> Back to {backLabel}
-        </Link>
+        <NotFoundPage />
       </div>
     );
   }
+
+  // --- LOGIKA PENGECEKAN DATA & PENGELOMPOKAN ---
+
+  // 1. Group: PROBLEMS & SOLUTIONS
+  const hasProblems = detail.problems && detail.problems.length > 0;
+  const hasSolutions = detail.solutions && detail.solutions.length > 0;
+  const showChallenge = hasProblems || hasSolutions; // Tampil jika salah satu ada
+
+  // 2. Group: DESIGN SYSTEM & LOGO
+  const isDummyColor = detail.colors?.[0]?.hex === '#2C3E50';
+  const hasColors = detail.colors && detail.colors.length > 0 && !isDummyColor;
+  const hasTypography = detail.typography && detail.typography.fontFamily;
+  const hasDesignImages =
+    detail.designSystemImages && detail.designSystemImages.length > 0;
+  const showDesignSystemContent = hasColors || hasTypography || hasDesignImages;
+
+  const showLogoContent = detail.logoImages && detail.logoImages.length > 0;
+  const showVisuals = showDesignSystemContent || showLogoContent; // Tampil jika salah satu ada
+
+  // 3. Other Sections
+  const showResult = detail.bentoImages && detail.bentoImages.length > 0;
+  const showPrototype = detail.figmaLink && detail.figmaLink !== '#';
+
+  // --- KONSTRUKSI SIDEBAR MENU (GABUNGAN) ---
+  const sidebarItems = [
+    { id: 'overview', label: 'Overview' },
+    // Menu "Problem & Solution" (Mengarah ke Wrapper ID 'challenge')
+    ...(showChallenge
+      ? [{ id: 'challenge', label: 'Problem & Solution' }]
+      : []),
+    // Menu "Design System" (Mengarah ke Wrapper ID 'visuals', mencakup Logo)
+    ...(showVisuals ? [{ id: 'visuals', label: 'Design System' }] : []),
+    // Menu lainnya
+    ...(showResult ? [{ id: 'design-result', label: 'Design Result' }] : []),
+    ...(showPrototype ? [{ id: 'prototype', label: 'Prototype' }] : []),
+  ];
+
+  // Grid Styles Helpers
   const getGridColsClass = (count) => {
     if (count === 1) return 'grid-cols-1';
     if (count === 2) return 'grid-cols-1 sm:grid-cols-2';
     if (count === 3) return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
-    return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'; 
+    return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
   };
-
-  const getComponentsGridClass = (count) => {
-    if (count === 1) return 'grid-cols-1';
-    if (count === 2) return 'grid-cols-1 sm:grid-cols-2';
-    if (count === 3) return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
-    return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'; 
-  };
-
-  const designSystemGridClass = getComponentsGridClass(
-    detail.designSystemImages.length
+  const designSystemGridClass = getGridColsClass(
+    detail.designSystemImages ? detail.designSystemImages.length : 0
   );
-  const logoGridClass = getGridColsClass(detail.logoImages.length);
+  const logoGridClass = getGridColsClass(
+    detail.logoImages ? detail.logoImages.length : 0
+  );
 
   return (
     <main
@@ -94,7 +204,7 @@ export default function ProjectDetailPage() {
     >
       {/* === Sidebar Kiri === */}
       <aside className="lg:col-span-1 lg:sticky lg:top-1/2 lg:-translate-y-1/2 self-start">
-        <Sidebar />
+        <Sidebar items={sidebarItems} />
         <Link
           to={backPath}
           className="mt-8 flex items-center gap-1 text-[14px] text-gray-500 hover:text-black transition-colors"
@@ -106,7 +216,7 @@ export default function ProjectDetailPage() {
 
       {/* === Konten Kanan === */}
       <section className="lg:col-span-3 space-y-20">
-        {/* Gambar Hero */}
+        {/* Hero Image */}
         <Reveal>
           <div className="w-full h-auto md:h-[500px] overflow-hidden rounded-3xl bg-[#FAFAFA]">
             <img
@@ -128,7 +238,6 @@ export default function ProjectDetailPage() {
                 </p>
               </InfoRow>
               <InfoRow label="Team">
-                {/* --- TOMBOL TIM INTERAKTIF (BARU) --- */}
                 <div className="flex -space-x-2">
                   {detail.team.map((member, i) => (
                     <a
@@ -144,17 +253,6 @@ export default function ProjectDetailPage() {
                         title={member.name}
                         className="w-10 h-10 rounded-full border-2 border-white object-cover transition-transform duration-300 group-hover:scale-110"
                       />
-                      {/* Kartu Nama saat Hover */}
-                      <span
-                        className="
-                          absolute w-max max-w-xs left-1/2 top-full mt-2 -translate-x-1/2 
-                          bg-white rounded-xl shadow-md p-3 
-                          opacity-0 transition-opacity duration-200 
-                          pointer-events-none group-hover:opacity-100
-                        "
-                      >
-                        {member.name}
-                      </span>
                     </a>
                   ))}
                 </div>
@@ -173,190 +271,232 @@ export default function ProjectDetailPage() {
           </article>
         </Reveal>
 
-        {/* --- Bagian Problems (BARU) --- */}
-        <Reveal>
-          <article id="problems" className=" text-black scroll-mt-24">
-            <h2 className="text-3xl font-semibold text-black mb-6">Problems</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {detail.problems.map((item, i) => (
-                <ProblemSolutionCard
-                  key={i}
-                  number={`0${i + 1}`}
-                  title={item.title}
-                  description={item.description}
-                  isDarkMode={true}
-                />
-              ))}
-            </div>
-          </article>
-        </Reveal>
 
-        {/* --- Bagian Solutions (BARU) --- */}
-        <Reveal>
-          <article id="solutions" className="scroll-mt-24">
-            <h2 className="text-3xl font-semibold text-black mb-6">
-              Solutions
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {detail.solutions.map((item, i) => (
-                <ProblemSolutionCard
-                  key={i}
-                  number={`0${i + 1}`}
-                  title={item.title}
-                  description={item.description}
-                  isDarkMode={false}
-                />
-              ))}
-            </div>
-          </article>
-        </Reveal>
-
-        {/* --- Design System (DIPERBARUI) --- */}
-        <Reveal>
-          <article id="design-system" className="scroll-mt-24 flex flex-col">
-            <h2 className="text-3xl font-semibold text-black mb-6">
-              Design System
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Color Palette */}
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Color Palette</h3>
-                <div className="flex flex-wrap gap-4">
-                  {detail.colors.map((color) => (
-                    <div key={color.hex}>
-                      <div
-                        className="w-16 h-16 rounded-lg border border-gray-200"
-                        style={{ backgroundColor: color.hex }}
+        {/* --- GROUP 1: PROBLEM & SOLUTION --- */}
+        {showChallenge && (
+          // Wrapper ini memiliki ID 'challenge' yang akan dideteksi oleh Sidebar
+          <div id="challenge" className="scroll-mt-24 space-y-20">
+            {/* Problems Section */}
+            {hasProblems && (
+              <Reveal>
+                <article>
+                  <h2 className="text-3xl font-semibold text-black mb-6">
+                    Problems
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {detail.problems.map((item, i) => (
+                      <ProblemSolutionCard
+                        key={i}
+                        number={`0${i + 1}`}
+                        title={item.title}
+                        description={item.description}
+                        isDarkMode={true}
                       />
-                      <p className="text-sm font-mono mt-1">{color.hex}</p>
+                    ))}
+                  </div>
+                </article>
+              </Reveal>
+            )}
+
+            {/* Solutions Section */}
+            {hasSolutions && (
+              <Reveal>
+                <article>
+                  <h2 className="text-3xl font-semibold text-black mb-6">
+                    Solutions
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {detail.solutions.map((item, i) => (
+                      <ProblemSolutionCard
+                        key={i}
+                        number={`0${i + 1}`}
+                        title={item.title}
+                        description={item.description}
+                        isDarkMode={false}
+                      />
+                    ))}
+                  </div>
+                </article>
+              </Reveal>
+            )}
+          </div>
+        )}
+
+        {/* --- GROUP 2: VISUAL IDENTITY (Design System + Logo) --- */}
+        {showVisuals && (
+          // Wrapper ini memiliki ID 'visuals' yang akan dideteksi oleh Sidebar
+          <div id="visuals" className="scroll-mt-24 space-y-20">
+            {/* Design System Content */}
+            {showDesignSystemContent && (
+              <Reveal>
+                <article className="flex flex-col">
+                  <h2 className="text-3xl font-semibold text-black mb-6">
+                    Design System
+                  </h2>
+
+                  {(hasColors || hasTypography) && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                      {hasColors && (
+                        <div>
+                          <h3 className="text-xl font-semibold mb-3">
+                            Color Palette
+                          </h3>
+                          <div className="flex flex-wrap gap-4">
+                            {detail.colors.map((color) => (
+                              <div key={color.hex}>
+                                <div
+                                  className="w-16 h-16 rounded-lg border border-gray-200"
+                                  style={{ backgroundColor: color.hex }}
+                                />
+                                <p className="text-sm font-mono mt-1">
+                                  {color.hex}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {hasTypography && (
+                        <div>
+                          <h3 className="text-xl font-semibold mb-3">
+                            Typography
+                          </h3>
+                          <p
+                            className="text-5xl font-bold mb-1"
+                            style={{ fontFamily: detail.typography.fontFamily }}
+                          >
+                            Aa
+                          </p>
+                          <p className="text-lg font-semibold mb-2">
+                            {detail.typography.fontFamily}
+                          </p>
+                          <p className="text-base text-gray-700">
+                            {detail.typography.description}
+                          </p>
+                        </div>
+                      )}
                     </div>
-                  ))}
-                </div>
-              </div>
-              {/* Typography */}
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Typography</h3>
-                <p
-                  className="text-5xl font-bold mb-1"
-                  style={{ fontFamily: detail.typography.fontFamily }}
-                >
-                  Aa
-                </p>
-                <p className="text-lg font-semibold mb-2">
-                  {detail.typography.fontFamily}
-                </p>
-                <p className="text-base text-gray-700">
-                  {detail.typography.description}
-                </p>
-              </div>
-            </div>
+                  )}
 
-            {/* === Frame Grid Tambahan (DIPERBARUI) === */}
-            <div className="mt-8 flex flex-col">
-              <h3 className="text-xl font-semibold mb-6">Components & Icons</h3>
-              <div className={`grid ${designSystemGridClass} gap-6`}>
-                {detail.designSystemImages.map((imgSrc, i) => (
-                  <div
-                    key={i}
-                    className="group relative rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 aspect-[4/3]"
-                  >
+                  {hasDesignImages && (
+                    <div className="mt-8 flex flex-col">
+                      <h3 className="text-xl font-semibold mb-6">
+                        Components & Icons
+                      </h3>
+                      <div className={`grid ${designSystemGridClass} gap-6`}>
+                        {detail.designSystemImages.map((imgSrc, i) => (
+                          <div
+                            key={i}
+                            className="group relative rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 aspect-[4/3]"
+                          >
+                            <img
+                              src={imgSrc}
+                              alt={`Design System ${i + 1}`}
+                              className="w-full h-full object-contain p-4"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </article>
+              </Reveal>
+            )}
+
+            {/* Logo Content */}
+            {showLogoContent && (
+              <Reveal>
+                <article className="flex flex-col">
+                  <h2 className="text-3xl font-semibold text-black mb-6">
+                    Logo
+                  </h2>
+                  <div className={`grid ${logoGridClass} gap-8`}>
+                    {detail.logoImages.map((logo) => (
+                      <div
+                        key={logo.label}
+                        className="flex flex-col items-center group"
+                      >
+                        <div
+                          className={`flex justify-center items-center w-full aspect-square rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 ${logo.label.includes('Dark') ? 'bg-black' : 'bg-white border border-gray-200'}`}
+                          style={{ minHeight: '200px' }}
+                        >
+                          <img
+                            src={logo.src}
+                            alt={logo.label}
+                            className="max-w-[80%] max-h-[80%] object-contain group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                        <p className="mt-4 text-sm font-medium text-gray-700 text-center">
+                          {logo.label}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+              </Reveal>
+            )}
+          </div>
+        )}
+
+        {/* --- Design Result (Bento) --- */}
+        {showResult && (
+          <Reveal>
+            <article id="design-result" className="scroll-mt-24">
+              <h2 className="text-3xl font-semibold text-black mb-6">
+                Design Result
+              </h2>
+              <div className="grid grid-cols-2 grid-rows-2 gap-4 h-[600px]">
+                {detail.bentoImages[0] && (
+                  <div className="col-span-2 row-span-1 rounded-2xl overflow-hidden group relative">
                     <img
-                      src={imgSrc}
-                      alt={`Design System ${i + 1}`}
-                      className="w-full h-full object-contain p-4"
+                      src={detail.bentoImages[0]}
+                      alt="Design 1"
+                      className="w-full h-full object-cover"
                     />
                   </div>
-                ))}
-              </div>
-            </div>
-          </article>
-        </Reveal>
-
-        {/* --- Logo (DIPERBARUI) --- */}
-        <Reveal>
-          <article id="logo" className="scroll-mt-24 flex flex-col">
-            <h2 className="text-3xl font-semibold text-black mb-6">Logo</h2>
-
-            {/* Menggunakan kelas grid dinamis */}
-            <div className={`grid ${logoGridClass} gap-8`}>
-              {detail.logoImages.map((logo) => (
-                <div
-                  key={logo.label}
-                  className="flex flex-col items-center group"
-                >
-                  <div
-                    className={`flex justify-center items-center w-full aspect-square rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 ${
-                      logo.label.includes('Dark')
-                        ? 'bg-black'
-                        : 'bg-white border border-gray-200'
-                    }`}
-                    style={{ minHeight: '200px' }}
-                  >
+                )}
+                {detail.bentoImages[1] && (
+                  <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden group relative">
                     <img
-                      src={logo.src}
-                      alt={logo.label}
-                      className="max-w-[80%] max-h-[80%] object-contain group-hover:scale-105 transition-transform duration-300"
+                      src={detail.bentoImages[1]}
+                      alt="Design 2"
+                      className="w-full h-full object-cover"
                     />
                   </div>
-                  <p className="mt-4 text-sm font-medium text-gray-700 text-center">
-                    {logo.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </article>
-        </Reveal>
+                )}
+                {detail.bentoImages[2] && (
+                  <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden group relative">
+                    <img
+                      src={detail.bentoImages[2]}
+                      alt="Design 3"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+              </div>
+            </article>
+          </Reveal>
+        )}
 
-        {/* --- Design Result (Bento Grid) --- */}
-        <Reveal>
-          <article id="design-result" className="scroll-mt-24">
-            <h2 className="text-3xl font-semibold text-black mb-6">
-              Design Result
-            </h2>
-            <div className="grid grid-cols-2 grid-rows-2 gap-4 h-[600px]">
-              <div className="col-span-2 row-span-1 rounded-2xl overflow-hidden group relative">
-                <img
-                  src={detail.bentoImages[0]}
-                  alt="Design 1"
-                  className="w-full h-full object-cover"
-                />
+        {/* --- Prototype --- */}
+        {showPrototype && (
+          <Reveal>
+            <article id="prototype" className="scroll-mt-24">
+              <h2 className="text-3xl font-semibold text-black mb-6">
+                Prototype
+              </h2>
+              <div className="w-full overflow-hidden rounded-3xl border border-gray-200">
+                <iframe
+                  style={{ border: '1px solid' }}
+                  width="100%"
+                  height="600"
+                  src={detail.figmaLink}
+                  allowFullScreen
+                ></iframe>
               </div>
-              <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden group relative">
-                <img
-                  src={detail.bentoImages[1]}
-                  alt="Design 2"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden group relative">
-                <img
-                  src={detail.bentoImages[2]}
-                  alt="Design 3"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </article>
-        </Reveal>
-        
-
-        {/* --- Prototype (DIPERBARUI) --- */}
-        <Reveal>
-          <article id="prototype" className="scroll-mt-24">
-            <h2 className="text-3xl font-semibold text-black mb-6">
-              Prototype
-            </h2>
-            <div className="w-full overflow-hidden rounded-3xl border border-gray-200">
-              <iframe
-                style={{ border: '1px solid' }}
-                width="100%"
-                height="600"
-                src={detail.figmaLink}
-                allowFullScreen
-              ></iframe>
-            </div>
-          </article>
-        </Reveal>
+            </article>
+          </Reveal>
+        )}
       </section>
     </main>
   );

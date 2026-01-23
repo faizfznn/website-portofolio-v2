@@ -2,14 +2,16 @@ import cerebellumImg from '../assets/cerebellum.webp';
 import mitsaqImg from '../assets/mitsaq.webp';
 import mentraImg from '../assets/mentra.webp';
 import veloraImg from '../assets/velora.webp';
+import filkomReservImg from '../assets/filkomreserv.png';
 
 const portfolioProjects = [
   {
     id: 'cerebellum',
     appName: 'Cerebellum',
+    year: '2025',
     title: 'Cerebellum',
     primaryColor: '1C6EA4',
-    tags: ['UI/UX Design','Research & Design', 'Learning Apps', 'Figma'],
+    tags: ['UI/UX Design', 'Research & Design', 'Learning Apps', 'Figma'],
     description:
       'A digital platform serving as a career readiness accelerator for vocational high school students through structured learning paths and industry project simulations in the Industry 5.0 era.',
     image: cerebellumImg,
@@ -19,6 +21,8 @@ const portfolioProjects = [
   {
     id: 'mitsaq',
     appName: 'Mitsaq',
+    year: '2025',
+
     title: "Mitsaq - Sharia-Based Ta'aruf Platform",
     primaryColor: '368743',
     tags: ['UI/UX Design', 'Islamic App', 'Design Thinking'],
@@ -31,6 +35,8 @@ const portfolioProjects = [
   {
     id: 'mentra',
     appName: 'Mentra',
+    year: '2025',
+
     title: 'Mentra',
     primaryColor: '4CA8E0',
     tags: ['UI/UX Design', 'Mental Health', 'AI Technology', 'Figma'],
@@ -43,6 +49,8 @@ const portfolioProjects = [
   {
     id: 'velora',
     appName: 'Velora',
+    year: '2025',
+
     title: 'Velora',
     primaryColor: '91C752',
     tags: [
@@ -60,6 +68,8 @@ const portfolioProjects = [
   {
     id: 'porto-website-v2',
     appName: 'Personal Wesbite V2',
+    year: '2025',
+
     title: 'Velora',
     primaryColor: '91C752',
     tags: [
@@ -74,43 +84,49 @@ const portfolioProjects = [
     logo: veloraImg,
     section: 'Website',
   },
-  {
-    id: 'porto-website-v1',
-    appName: 'Personal Wesbite V1',
-    title: 'Velora',
-    primaryColor: '91C752',
-    tags: [
-      'Frontend Development',
-      'Sustainable Food Management',
-      'Food Waste',
-      'Figma',
-    ],
-    description:
-      'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
-    image: veloraImg,
-    logo: veloraImg,
-    section: 'Website',
-  },
-  {
-    id: 'quiz-app',
-    appName: 'Quiz App',
-    title: 'Velora',
-    primaryColor: '91C752',
-    tags: [
-      'Frontend Development',
-      'Sustainable Food Management',
-      'Food Waste',
-      'Figma',
-    ],
-    description:
-      'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
-    image: veloraImg,
-    logo: veloraImg,
-    section: 'Website',
-  },
+  // {
+  //   id: 'porto-website-v1',
+  //   appName: 'Personal Wesbite V1',
+  //   year: '2025',
+
+  //   title: 'Velora',
+  //   primaryColor: '91C752',
+  //   tags: [
+  //     'Frontend Development',
+  //     'Sustainable Food Management',
+  //     'Food Waste',
+  //     'Figma',
+  //   ],
+  //   description:
+  //     'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
+  //   image: veloraImg,
+  //   logo: veloraImg,
+  //   section: 'Website',
+  // },
+  // {
+  //   id: 'quiz-app',
+  //   appName: 'Quiz App',
+  //   year: '2026',
+
+  //   title: 'Velora',
+  //   primaryColor: '91C752',
+  //   tags: [
+  //     'Frontend Development',
+  //     'Sustainable Food Management',
+  //     'Food Waste',
+  //     'Figma',
+  //   ],
+  //   description:
+  //     'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
+  //   image: veloraImg,
+  //   logo: veloraImg,
+  //   section: 'Website',
+  // },
   {
     id: 'shuffle-card',
     appName: 'Shuffle Card',
+    year: '2025',
+
     title: 'Velora',
     primaryColor: '91C752',
     tags: [
@@ -125,21 +141,16 @@ const portfolioProjects = [
     logo: veloraImg,
     section: 'Website',
   },
-    {
+  {
     id: 'filkomreserv',
-    appName: 'Filkom ReserV',
-    title: 'Filkom ReserV',
-    primaryColor: '91C752',
-    tags: [
-      'Frontend Development',
-      'Sustainable Food Management',
-      'Food Waste',
-      'Figma',
-    ],
+    appName: 'FILKOMreserV',
+    year: '2024',
+
+    title: 'FILKOMreserV',
+    tags: ['Web Development', 'Campus Administration', 'System Analysis'],
     description:
-      'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
-    image: veloraImg,
-    logo: veloraImg,
+      'A centralized web platform designed to streamline room reservations at FILKOM UB. It replaces manual spreadsheet processes with real-time scheduling, digital approval workflows, and transparent availability tracking.',
+    image: filkomReservImg,
     section: 'Website',
   },
 ];

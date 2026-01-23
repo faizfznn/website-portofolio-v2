@@ -1,19 +1,19 @@
-import React, { useEffect, useState, useRef } from 'react'; // 1. Tambahkan useRef
+import React, { useEffect, useState, useRef } from 'react';
 
-
-const Sidebar = () => {
-  const sections = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'design-system', label: 'Design System' },
-    { id: 'logo', label: 'Logo' },
-    { id: 'design-result', label: 'Design Result' },
-    { id: 'prototype', label: 'Prototype' },
-  ];
+// MENERIMA PROPS 'items' AGAR DINAMIS
+const Sidebar = ({ items }) => {
+  // Default menu jika items tidak tersedia
+  const defaultSections = [{ id: 'overview', label: 'Overview' }];
+  const sections = items && items.length > 0 ? items : defaultSections;
 
   const [activeId, setActiveId] = useState(sections[0]?.id);
-  
   const indicatorRef = useRef(null);
   const itemsRef = useRef([]);
+
+  // Reset refs saat sections berubah
+  useEffect(() => {
+    itemsRef.current = itemsRef.current.slice(0, sections.length);
+  }, [sections]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -25,7 +25,7 @@ const Sidebar = () => {
         });
       },
       {
-        rootMargin: '0px 0px -50% 0px', 
+        rootMargin: '0px 0px -50% 0px',
         threshold: 0.1,
       }
     );
@@ -34,13 +34,14 @@ const Sidebar = () => {
       const el = document.getElementById(section.id);
       if (el) observer.observe(el);
     });
+
     return () => {
       sections.forEach((section) => {
         const el = document.getElementById(section.id);
         if (el) observer.unobserve(el);
       });
     };
-  }, [sections]); 
+  }, [sections]);
 
   useEffect(() => {
     const activeItemIndex = sections.findIndex((sec) => sec.id === activeId);
@@ -50,7 +51,7 @@ const Sidebar = () => {
       const topPosition = activeItem.offsetTop;
       indicatorRef.current.style.transform = `translateY(${topPosition}px) translateY(6px)`;
     }
-  }, [activeId, sections]); 
+  }, [activeId, sections]);
 
   return (
     <nav className="relative">

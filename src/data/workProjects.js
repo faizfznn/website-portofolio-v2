@@ -1,3 +1,5 @@
+
+
 import cerebellumImg from '../assets/cerebellum.webp';
 import mitsaqImg from '../assets/mitsaq.webp';
 import mentraImg from '../assets/mentra.webp';
@@ -7,8 +9,8 @@ const workProjects = [
   {
     id: 'cerebellum',
     appName: 'Cerebellum',
-    year: '2025',
-    role: 'Product Design',
+    year: '2025', 
+    role: 'Product Design', 
     title: 'Cerebellum',
     primaryColor: '1C6EA4',
     tags: ['Research & Design', 'Learning Apps', 'Figma'],
@@ -51,8 +53,8 @@ const workProjects = [
   {
     id: 'velora',
     appName: 'Velora',
-    year: '2025',
-    role: 'Product Design',
+    year: '2025', 
+    role: 'Product Design', 
     title: 'Velora',
     primaryColor: '91C752',
     tags: [
@@ -67,7 +69,6 @@ const workProjects = [
     logo: veloraImg,
     section: 'UI/UX',
   },
-  
 ];
 
 export default workProjects;
