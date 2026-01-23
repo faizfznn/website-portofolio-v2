@@ -1,5 +1,5 @@
 import { useParams, Link, useLocation } from 'react-router-dom';
-import { HiChevronLeft } from 'react-icons/hi';
+import { HiChevronLeft, HiExternalLink } from 'react-icons/hi';
 import portfolioProjects from '../data/portfolioProjects.js';
 import projectDetails from '../data/projectDetails.js';
 import Reveal from '../components/Reveal';
@@ -230,7 +230,38 @@ export default function ProjectDetailPage() {
         {/* --- Overview --- */}
         <Reveal>
           <article id="overview" className="scroll-mt-24">
-            <h2 className="text-3xl font-semibold text-black mb-4">Overview</h2>
+            {/* Header dengan Flexbox agar Judul dan Tombol sejajar */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 border-b border-gray-200 pb-6">
+              <h2 className="text-3xl font-semibold text-black">Overview</h2>
+
+              {detail.websiteLink && (
+                <a
+                  href={detail.websiteLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    relative w-full sm:w-fit h-[56px] px-8 rounded-[24px] 
+                    border-[1px] border-[#CAD3DC] bg-white text-black 
+                    text-[16px] font-normal group inline-flex items-center justify-center
+                    overflow-hidden transition-colors duration-300 hover:border-black
+                  "
+                >
+                  <span className="relative inline-flex items-center overflow-hidden h-[1.5em]">
+                    {/* Teks Normal (Akan geser ke atas saat hover) */}
+                    <span className="inline-flex items-center gap-2 transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
+                      Visit Website
+                      <HiExternalLink className="text-lg" />
+                    </span>
+
+                    {/* Teks Hover (Akan masuk dari bawah saat hover) */}
+                    <span className="absolute left-0 top-0 w-full h-full inline-flex items-center justify-center gap-2 translate-y-full transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
+                      Visit Website
+                      <HiExternalLink className="text-lg" />
+                    </span>
+                  </span>
+                </a>
+              )}
+            </div>
             <div className="border-t border-gray-200">
               <InfoRow label="Description">
                 <p className="text-base text-gray-700 leading-relaxed">
@@ -270,7 +301,6 @@ export default function ProjectDetailPage() {
             </div>
           </article>
         </Reveal>
-
 
         {/* --- GROUP 1: PROBLEM & SOLUTION --- */}
         {showChallenge && (

@@ -19,23 +19,23 @@ function AboutMePage() {
   const isFirstAlbumPlaying = currentPlayingId === album1Id;
 
   const recognitions = [
-  {
-    title: '2nd Place, UI/UX Competition',
-    description: 'Unipdu Jombang - Achievement 2025',
-  },
-  {
-    title: '1st Place, UI/UX Competition',
-    description: 'Majalengka University - Achievement 2025',
-  },
-  {
-    title: '1st Place, UI/UX Competition',
-    description: 'Muhammadiyah University Riau - Achievement 2025',
-  },
-  {
-    title: '2nd Place, UI/UX Competition',
-    description: 'Pertamina University Jakarta - Achievement 2025',
-  },
-];
+    {
+      title: '2nd Place, UI/UX Competition',
+      description: 'Unipdu Jombang - Achievement 2025',
+    },
+    {
+      title: '1st Place, UI/UX Competition',
+      description: 'Majalengka University - Achievement 2025',
+    },
+    {
+      title: '1st Place, UI/UX Competition',
+      description: 'Muhammadiyah University Riau - Achievement 2025',
+    },
+    {
+      title: '2nd Place, UI/UX Competition',
+      description: 'Pertamina University Jakarta - Achievement 2025',
+    },
+  ];
 
   return (
     <main className="w-full max-w-6xl mx-auto px-4 mt-[92px]">
@@ -78,32 +78,73 @@ function AboutMePage() {
               </div>
             </div>
 
-            <div className="flex p-2.5 flex-col items-start self-stretch gap-2.5 rounded-3xl bg-[#FAFAFA] mt-4">
-              <a
-                href="https://docs.google.com/document/d/1MUVU7px2PdNLKCUQPGYkxkPEeKpSIObc74uD_KbiTvE/edit?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between w-full p-4 rounded-3xl border border-[#E9E9E9] transition-transform duration-300 ease-in-out hover:scale-[0.98]"
-              >
-                <div className="flex items-center gap-3">
-                  <LuSparkle className="text-xl text-pink-500" />
-                  <span className="font-medium text-[18px] text-black">
-                    Download Resume
-                  </span>
+            {/* --- Buttons Section (Updated Style) --- */}
+            <div className="w-full mt-4 space-y-4">
+              {/* Grid Container */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Button 1: Resume */}
+                <div className="flex p-2.5 flex-col items-start self-stretch gap-2.5 rounded-3xl bg-[#FAFAFA]">
+                  <a
+                    href="https://docs.google.com/document/d/1MUVU7px2PdNLKCUQPGYkxkPEeKpSIObc74uD_KbiTvE/edit?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between w-full p-4 rounded-3xl border border-[#E9E9E9] transition-transform duration-300 ease-in-out hover:scale-[0.98]"
+                  >
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center gap-2 text-pink-500 mb-1">
+                        <LuSparkle className="text-lg animate-pulse" />
+                        <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                          Document
+                        </span>
+                      </div>{' '}
+                      <span className="font-medium text-[18px] text-black">
+                        Resume
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-[#C9C9C9] transition-all duration-300 ease-in-out group-hover:bg-white group-hover:shadow-lg">
+                      {/* Note: text-4xl mungkin terlalu besar untuk lingkaran w-12 (48px), saya sesuaikan ke text-2xl agar pas di tengah */}
+                      <FiArrowDown className="text-[#969696] text-2xl" />
+                    </div>
+                  </a>
                 </div>
-                <div className="flex items-center justify-center p-4 w-12 h-12 rounded-full border-2 border-[#C9C9C9] transition-all duration-300 ease-in-out group-hover:bg-white group-hover:shadow-lg">
-                  <FiArrowDown className="text-[#969696] text-4xl" />
-                </div>
-              </a>
-            </div>
 
-            <a
-              href="#music-section"
-              className="flex h-12 items-center self-end gap-2 px-6 py-3 bg-black text-white font-semibold rounded-[14px] shadow-lg scroll-smooth mt-4"
-            >
-              Skip to the good part
-              <FiArrowRight />
-            </a>
+                {/* Button 2: Portfolio */}
+                <div className="flex p-2.5 flex-col items-start self-stretch gap-2.5 rounded-3xl bg-[#FAFAFA]">
+                  <a
+                    href="https://drive.google.com/file/d/1bRgDUBRHwtvK98inXkxxn4w6c4yPXFkm/view?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between w-full p-4 rounded-3xl border border-[#E9E9E9] transition-transform duration-300 ease-in-out hover:scale-[0.98]"
+                  >
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center gap-2 text-purple-500 mb-1">
+                        <LuSparkle className="text-lg animate-pulse" />
+                        <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                          Creative
+                        </span>
+                      </div>
+                      <span className="font-medium text-[18px] text-black">
+                        Portfolio
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-[#C9C9C9] transition-all duration-300 ease-in-out group-hover:bg-white group-hover:shadow-lg">
+                      <FiArrowDown className="text-[#969696] text-2xl" />
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+              {/* Skip Button */}
+              <div className="flex justify-end pt-2">
+                <a
+                  href="#music-section"
+                  className="flex h-12 items-center self-end gap-2 px-6 py-3 bg-black text-white font-semibold rounded-[14px] shadow-lg scroll-smooth mt-4"
+                >
+                  Skip to the good part
+                  <FiArrowRight />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </Reveal>

@@ -3,6 +3,9 @@ import mitsaqImg from '../assets/mitsaq.webp';
 import mentraImg from '../assets/mentra.webp';
 import veloraImg from '../assets/velora.webp';
 import filkomReservImg from '../assets/filkomreserv.png';
+import portoV1Img from '../assets/portoV1.png';
+import shuffleCardImg from '../assets/shufflecard.png';
+import quizAppImg from '../assets/quizapp.png';
 
 const portfolioProjects = [
   {
@@ -65,28 +68,9 @@ const portfolioProjects = [
     logo: veloraImg,
     section: 'UI/UX',
   },
-  {
-    id: 'porto-website-v2',
-    appName: 'Personal Wesbite V2',
-    year: '2025',
-
-    title: 'Velora',
-    primaryColor: '91C752',
-    tags: [
-      'Frontend Development',
-      'Sustainable Food Management',
-      'Food Waste',
-      'Figma',
-    ],
-    description:
-      'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
-    image: veloraImg,
-    logo: veloraImg,
-    section: 'Website',
-  },
   // {
-  //   id: 'porto-website-v1',
-  //   appName: 'Personal Wesbite V1',
+  //   id: 'porto-website-v2',
+  //   appName: 'Personal Wesbite V2',
   //   year: '2025',
 
   //   title: 'Velora',
@@ -103,50 +87,45 @@ const portfolioProjects = [
   //   logo: veloraImg,
   //   section: 'Website',
   // },
-  // {
-  //   id: 'quiz-app',
-  //   appName: 'Quiz App',
-  //   year: '2026',
-
-  //   title: 'Velora',
-  //   primaryColor: '91C752',
-  //   tags: [
-  //     'Frontend Development',
-  //     'Sustainable Food Management',
-  //     'Food Waste',
-  //     'Figma',
-  //   ],
-  //   description:
-  //     'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
-  //   image: veloraImg,
-  //   logo: veloraImg,
-  //   section: 'Website',
-  // },
+  {
+    id: 'porto-website-v1',
+    appName: 'Personal Website V1',
+    year: '2025',
+    tags: ['Frontend Development', 'UI/UX Design', 'Personal Branding'],
+    description:
+      'A personal portfolio website designed to showcase my journey as a Computer Science student at UB, featuring a dark-themed UI, organization experience, and project gallery.',
+    image: portoV1Img,
+    section: 'Website',
+  },
+  {
+    id: 'quiz-app',
+    appName: 'Quiz App',
+    year: '2026',
+    tags: ['Frontend Development', 'UI/UX Design', 'Local Storage'],
+    description:
+      'A dynamic React-based quiz platform featuring client-side authentication, real-time trivia from OpenTDB, countdown timers, and an auto-save mechanism to prevent data loss.',
+    image: quizAppImg,
+    section: 'Website',
+  },
   {
     id: 'shuffle-card',
     appName: 'Shuffle Card',
     year: '2025',
-
-    title: 'Velora',
-    primaryColor: '91C752',
     tags: [
-      'Frontend Development',
-      'Sustainable Food Management',
-      'Food Waste',
-      'Figma',
+      'Web Utility',
+      'Google Sheets Integration',
+      'Excel Support',
+      'Interactive Tool',
     ],
     description:
-      'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
-    image: veloraImg,
-    logo: veloraImg,
+      'A versatile web tool designed for gamification and random selection. It supports loading custom decks dynamically via Google Sheets API, Excel (.xlsx) uploads, or manual entry.',
+    image: shuffleCardImg,
     section: 'Website',
   },
   {
     id: 'filkomreserv',
     appName: 'FILKOMreserV',
     year: '2024',
-
-    title: 'FILKOMreserV',
     tags: ['Web Development', 'Campus Administration', 'System Analysis'],
     description:
       'A centralized web platform designed to streamline room reservations at FILKOM UB. It replaces manual spreadsheet processes with real-time scheduling, digital approval workflows, and transparent availability tracking.',

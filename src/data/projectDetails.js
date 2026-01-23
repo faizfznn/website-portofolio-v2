@@ -36,6 +36,7 @@ import rara from '../assets/rara.jpg';
 import ariq from '../assets/ariq.jpeg';
 import dani from '../assets/dani.webp';
 import arif from '../assets/arif.webp';
+import fotoFaiz from '../assets/formal.webp';
 
 const projectDetails = {
   // --- Proyek CEREBELLUM ---
@@ -317,6 +318,7 @@ const projectDetails = {
   filkomreserv: {
     overview:
       'FILKOMreserV is a technology-based system designed to automate the room reservation process at the Faculty of Computer Science, Brawijaya University. This platform aims to streamline error-prone manual methods into an integrated system that offers time efficiency, data transparency, and ease of access for students and administrative staff.',
+    websiteLink: 'https://feaps.vercel.app/',
     team: [
       {
         name: 'Arif Athaya Harahap',
@@ -368,6 +370,84 @@ const projectDetails = {
         title: 'Automated Notifications',
         description:
           'An automated notification and email system that provides immediate status updates (approved/rejected) to users, reducing waiting times.',
+      },
+    ],
+  },
+  // --- Proyek Portfolio Website V1 ---
+  'porto-website-v1': {
+    overview:
+      'This personal website serves as a digital identity for my undergraduate journey in Computer Science at UB. It is designed to showcase my interests in Software Engineering and UI/UX, focusing on creating seamless digital experiences while documenting my organizational roles and technical projects.',
+    websiteLink: 'https://faizfauzan.vercel.app/',
+    team: [
+      {
+        name: 'Muhammad Faiz Fauzan',
+        image: fotoFaiz,
+        linkedin: 'https://www.linkedin.com/in/faizfauzan/',
+      },
+    ],
+    role: ['Frontend Developer', 'UI/UX Designer'],
+    timeline: "Jan '25 - Present",
+  },
+  // --- Proyek Shuffle Card ---
+  'shuffle-card': {
+    overview:
+      'Web Kartu Acak (Shuffle Card) is a dynamic web utility built to facilitate random selection processes for events, classrooms, or games. Unlike standard randomizers, this tool offers deep integration with external data sources like Google Sheets and Excel, allowing users to "bring their own deck" instantly without tedious manual entry.',
+    websiteLink: 'https://flip-card-nine-kappa.vercel.app/',
+      team: [
+      {
+        name: 'Muhammad Faiz Fauzan',
+        image: fotoFaiz,
+        linkedin: 'https://www.linkedin.com/in/faizfauzan/',
+      },
+    ],
+    role: ['Frontend Developer', 'Logic Implementation'],
+    timeline: "Oct '24 - Nov '24",
+  },
+  'quiz-app': {
+    overview:
+      'My Quiz Appis a comprehensive React-based Online Quiz platform designed to simulate a real computer-based test environment. It features a complete user flow from secure authentication and material selection to a timed examination system with dynamic questions and automated scoring.',
+    websiteLink: 'https://quiz-app-84cu.vercel.app/',
+      team: [
+      {
+        name: 'Muhammad Faiz Fauzan',
+        image: fotoFaiz, // Gunakan variabel foto profil Anda
+        linkedin: 'https://www.linkedin.com/in/faizfauzan/',
+      },
+    ],
+    role: ['Frontend Developer', 'React Specialist'],
+    timeline: "Jan '26 - Present",
+    problems: [
+      {
+        title: 'Data Persistence Issues',
+        description:
+          'In standard web quizzes, accidental page refreshes or browser closures often result in total progress loss, forcing users to restart from scratch.',
+      },
+      {
+        title: 'Static Content Repetition',
+        description:
+          "Hardcoded questions make quizzes predictable and boring after the first attempt, reducing the application's replay value.",
+      },
+      {
+        title: 'Client-Side Security',
+        description:
+          'The need to restrict access to registered users and manage sessions without relying on a complex backend infrastructure.',
+      },
+    ],
+    solutions: [
+      {
+        title: 'Auto-Save & Resume Engine',
+        description:
+          'Implemented a robust state management system using LocalStorage that saves answers and timer status in real-time, allowing users to resume exactly where they left off.',
+      },
+      {
+        title: 'Dynamic OpenTDB Integration',
+        description:
+          'Integrated the Open Trivia Database (OpenTDB) API to fetch questions dynamically, ensuring a fresh and unique set of challenges for every session.',
+      },
+      {
+        title: 'Simulated Authentication',
+        description:
+          'Built a secure client-side auth system that handles Registration, Login validation, and Route Protection using browser storage to simulate a real database experience.',
       },
     ],
   },
