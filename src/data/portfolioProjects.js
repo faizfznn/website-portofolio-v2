@@ -9,7 +9,7 @@ const portfolioProjects = [
     appName: 'Cerebellum',
     title: 'Cerebellum',
     primaryColor: '1C6EA4',
-    tags: ['Research & Design', 'Learning Apps', 'Figma'],
+    tags: ['UI/UX Design','Research & Design', 'Learning Apps', 'Figma'],
     description:
       'A digital platform serving as a career readiness accelerator for vocational high school students through structured learning paths and industry project simulations in the Industry 5.0 era.',
     image: cerebellumImg,
@@ -33,7 +33,7 @@ const portfolioProjects = [
     appName: 'Mentra',
     title: 'Mentra',
     primaryColor: '4CA8E0',
-    tags: ['Mental Health', 'AI Technology', 'UI/UX Design', 'Figma'],
+    tags: ['UI/UX Design', 'Mental Health', 'AI Technology', 'Figma'],
     description:
       'An AI-powered mobile app for adolescent mental health, featuring mood tracking, personalized self-care, and accessible support.',
     image: mentraImg,
@@ -63,7 +63,7 @@ const portfolioProjects = [
     title: 'Velora',
     primaryColor: '91C752',
     tags: [
-      'UI/UX Design',
+      'Frontend Development',
       'Sustainable Food Management',
       'Food Waste',
       'Figma',
@@ -80,7 +80,7 @@ const portfolioProjects = [
     title: 'Velora',
     primaryColor: '91C752',
     tags: [
-      'UI/UX Design',
+      'Frontend Development',
       'Sustainable Food Management',
       'Food Waste',
       'Figma',
@@ -97,7 +97,7 @@ const portfolioProjects = [
     title: 'Velora',
     primaryColor: '91C752',
     tags: [
-      'UI/UX Design',
+      'Frontend Development',
       'Sustainable Food Management',
       'Food Waste',
       'Figma',
@@ -114,7 +114,24 @@ const portfolioProjects = [
     title: 'Velora',
     primaryColor: '91C752',
     tags: [
-      'UI/UX Design',
+      'Frontend Development',
+      'Sustainable Food Management',
+      'Food Waste',
+      'Figma',
+    ],
+    description:
+      'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
+    image: veloraImg,
+    logo: veloraImg,
+    section: 'Website',
+  },
+    {
+    id: 'filkom-reserv',
+    appName: 'Filkom ReserV',
+    title: 'Filkom ReserV',
+    primaryColor: '91C752',
+    tags: [
+      'Frontend Development',
       'Sustainable Food Management',
       'Food Waste',
       'Figma',
