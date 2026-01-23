@@ -54,39 +54,38 @@ const projectDetails = {
     ],
     role: ['UX & UI Design', 'UX Research'],
     timeline: "Sep '25 – Oct '25 (1 months)",
-    // Bagian Problems & Solutions
     problems: [
       {
-        title: 'Educational Mismatch', //
+        title: 'Educational Mismatch',
         description:
-          'Vocational curricula struggle to keep pace with rapid technological shifts, causing a significant gap between school lessons and industry requirements.', // [cite: 15, 17]
+          'Vocational curricula struggle to keep pace with rapid technological shifts, causing a significant gap between school lessons and industry requirements.',
       },
       {
-        title: 'Career Anxiety', // [cite: 21]
+        title: 'Career Anxiety',
         description:
-          'High levels of uncertainty regarding future career paths lead to anxiety among over 60% of students after graduation.', // [cite: 22, 33]
+          'High levels of uncertainty regarding future career paths lead to anxiety among over 60% of students after graduation.',
       },
       {
-        title: 'Lack of Industry Experience', //
+        title: 'Lack of Industry Experience',
         description:
-          'Students often lack experience in end-to-end projects and collaboration tools like Git, making their portfolios less convincing to recruiters.', // [cite: 60, 131, 132]
+          'Students often lack experience in end-to-end projects and collaboration tools like Git, making their portfolios less convincing to recruiters.',
       },
     ],
     solutions: [
       {
-        title: 'Structured Career Roadmaps', //
+        title: 'Structured Career Roadmaps',
         description:
-          "Providing 'Jejak Karir' as a personal navigator that offers clear learning paths for both vocational and academic goals.", // [cite: 205]
+          "Providing 'Jejak Karir' as a personal navigator that offers clear learning paths for both vocational and academic goals.",
       },
       {
-        title: 'Collaborative Project Hub', //
+        title: 'Collaborative Project Hub',
         description:
-          'A space for students to work on industry-standard projects, enabling them to build professional portfolios and practice remote collaboration.', // [cite: 208, 210]
+          'A space for students to work on industry-standard projects, enabling them to build professional portfolios and practice remote collaboration.',
       },
       {
-        title: 'AI Interview Simulation', //
+        title: 'AI Interview Simulation',
         description:
-          'Helping students prepare for the workforce by practicing technical and HR interviews tailored to their specific projects and skills.', // [cite: 219]
+          'Helping students prepare for the workforce by practicing technical and HR interviews tailored to their specific projects and skills.',
       },
     ],
     colors: [
@@ -100,14 +99,14 @@ const projectDetails = {
       description:
         'Inter is used for high readability, making it perfect for both small text and UI elements.',
     },
-    designSystemImages: [dsCerebelum], // Tambahkan gambar-gambar design system di sini
+    designSystemImages: [dsCerebelum],
     logoImages: [
       { src: logoCerebelum, label: 'Color' },
       { src: logoCerebelum, label: 'Color' },
     ],
     bentoImages: [cerebellumImg1, cerebellumImg2, cerebellumImg3],
     figmaLink:
-      'https://embed.figma.com/proto/UdoWaLKHbYA8JYphlERo4g/CITEUP?page-id=728%3A3022&node-id=728-9480&viewport=932%2C309%2C0.09&scaling=scale-down&content-scaling=fixed&starting-point-node-id=728%3A9480&embed-host=share&hide-ui=1', // Ganti dengan link Anda
+      'https://embed.figma.com/proto/UdoWaLKHbYA8JYphlERo4g/CITEUP?page-id=728%3A3022&node-id=728-9480&viewport=932%2C309%2C0.09&scaling=scale-down&content-scaling=fixed&starting-point-node-id=728%3A9480&embed-host=share&hide-ui=1',
   },
 
   // --- Proyek MITSAQ ---
@@ -262,39 +261,39 @@ const projectDetails = {
     role: ['UI/UX Design', 'UX Research', 'Prototyping'],
     timeline: "Jun '25 – Jul '25 (1 month)",
     problems: [
-    {
-      title: 'High Household Food Waste',
-      description:
-        'Indonesia produces 23-48 million tons of food waste annually, with 61% of it originating from household consumption',
-    },
-    {
-      title: 'Poor Food Management',
-      description:
-        'Issues arise from ineffective shopping planning, lack of food storage education, and a lack of awareness regarding food expiration',
-    },
-    {
-      title: 'Economic and Environmental Impact',
-      description:
-        'Excessive food waste leads to significant economic losses, food security crises, and negative impacts on the environment',
-    },
-  ],
-  solutions: [
-    {
-      title: 'AI Inventory Management',
-      description:
-        'Implementing AI Image Recognition to help users manage and track their food inventory more efficiently',
-    },
-    {
-      title: 'Smart Recipe Recommendations',
-      description:
-        'Providing intelligent recipe suggestions based on ingredients that are nearing their expiration date to ensure they are utilized',
-    },
-    {
-      title: 'Community Food Sharing',
-      description:
-        'Creating a digital space for individuals to distribute surplus food to those in need, fostering a responsible consumption culture',
-    },
-  ],
+      {
+        title: 'High Household Food Waste',
+        description:
+          'Indonesia produces 23-48 million tons of food waste annually, with 61% of it originating from household consumption',
+      },
+      {
+        title: 'Poor Food Management',
+        description:
+          'Issues arise from ineffective shopping planning, lack of food storage education, and a lack of awareness regarding food expiration',
+      },
+      {
+        title: 'Economic and Environmental Impact',
+        description:
+          'Excessive food waste leads to significant economic losses, food security crises, and negative impacts on the environment',
+      },
+    ],
+    solutions: [
+      {
+        title: 'AI Inventory Management',
+        description:
+          'Implementing AI Image Recognition to help users manage and track their food inventory more efficiently',
+      },
+      {
+        title: 'Smart Recipe Recommendations',
+        description:
+          'Providing intelligent recipe suggestions based on ingredients that are nearing their expiration date to ensure they are utilized',
+      },
+      {
+        title: 'Community Food Sharing',
+        description:
+          'Creating a digital space for individuals to distribute surplus food to those in need, fostering a responsible consumption culture',
+      },
+    ],
     colors: [
       { hex: '#91C752', name: 'Primary' },
       { hex: '#FFFFFF', name: 'White' },
@@ -305,12 +304,82 @@ const projectDetails = {
       description:
         'Inter is used for high readability, making it perfect for both small text and UI elements.',
     },
-    designSystemImages: [dsVelora], // Bisa 4 gambar
+    designSystemImages: [dsVelora],
     logoImages: [{ src: logoVelora, label: 'Color' }],
     bentoImages: [veloraImg1, veloraImg2, veloraImg3],
-    // PERBAIKAN: Menghapus '&show-proto-sidebar=1'
     figmaLink:
       'https://embed.figma.com/proto/iAoMTa6aw42i1HAJ5U0iQL/INSPACE_VELORA?page-id=1396%3A15723&node-id=1503-45880&viewport=-3592%2C-1523%2C0.68&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1503%3A45880&embed-host=share&hide-ui=1',
+  },
+
+  // --- Proyek FilkomReserV ---
+  filkomreserv: {
+    overview:
+      'FILKOMreserV adalah sistem berbasis teknologi yang dirancang untuk mengotomatiskan proses peminjaman ruangan di Fakultas Ilmu Komputer, Universitas Brawijaya. Platform ini bertujuan menyederhanakan metode manual yang rawan kesalahan menjadi sistem terintegrasi yang menawarkan efisiensi waktu, transparansi data, dan kemudahan akses bagi mahasiswa serta staf administrasi.',
+    team: [
+      {
+        name: 'Arif Athaya Harahap',
+        image: null, // Placeholder agar tidak error, ganti dengan import gambar jika ada
+        linkedin: '',
+      },
+      {
+        name: 'Ariiq Tsany Zu',
+        image: null,
+        linkedin: '',
+      },
+      {
+        name: 'Nugrah Ramadhani',
+        image: null,
+        linkedin: '',
+      },
+      {
+        name: 'Muhammad Faiz Fauzan',
+        image: null,
+        linkedin: '',
+      },
+    ],
+    role: ['System Analyst', 'UI/UX Design', 'Software Engineer'],
+    timeline: "Aug '24 – Dec '24",
+    problems: [
+      {
+        title: 'Fragmented Manual Process',
+        description:
+          'Proses peminjaman saat ini tidak terintegrasi karena mengharuskan pengguna mengecek jadwal di spreadsheet, mengisi Google Form, dan melakukan konfirmasi manual lewat chat Line.',
+      },
+      {
+        title: 'Data Inaccuracy & Loss',
+        description:
+          'Metode manual sering menyebabkan ketidakakuratan informasi ketersediaan ruangan dan meningkatkan risiko kehilangan data peminjaman karena pencatatan yang tidak terpusat.',
+      },
+      {
+        title: 'Communication Bottlenecks',
+        description:
+          'Pengguna sering mengalami keterlambatan konfirmasi dan miskomunikasi dengan pihak administrasi, serta kesulitan dalam melacak status pengajuan peminjaman.',
+      },
+    ],
+    solutions: [
+      {
+        title: 'Real-Time Availability Check',
+        description:
+          'Fitur pengecekan jadwal ruangan secara real-time yang memungkinkan pengguna melihat status ketersediaan ruangan di tanggal dan jam tertentu secara akurat.',
+      },
+      {
+        title: 'Integrated Reservation Flow',
+        description:
+          'Platform satu pintu yang memfasilitasi seluruh alur reservasi, mulai dari pemilihan ruangan, pengisian data, hingga unggah dokumen persyaratan (KTM & Surat Peminjaman).',
+      },
+      {
+        title: 'Automated Notifications',
+        description:
+          'Sistem notifikasi dan email otomatis yang memberikan pembaruan status peminjaman (disetujui/ditolak) secara langsung kepada pengguna untuk mengurangi waktu tunggu.',
+      },
+    ],
+    // --- TAMBAHAN DATA PENTING AGAR TIDAK CRASH ---
+    colors: [], 
+    typography: null, 
+    designSystemImages: [],
+    logoImages: [],
+    bentoImages: [],
+    figmaLink: null,
   },
 };
 

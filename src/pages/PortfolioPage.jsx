@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FiArrowUpRight, FiFilter } from 'react-icons/fi';
+import { FiArrowUpRight, FiFilter, FiLock } from 'react-icons/fi'; // Tambah icon Lock jika mau (opsional)
 import projects from '../data/portfolioProjects.js';
+import projectDetails from '../data/projectDetails.js'; // [IMPORT BARU] Import detail untuk pengecekan
 
 // --- Animations ---
 const fadeInUp = {
@@ -53,6 +54,17 @@ const FilterButton = ({ active, label, onClick }) => {
 };
 
 const PortfolioItem = ({ project, index }) => {
+  // [LOGIKA BARU] Cek apakah id project ada di dalam file projectDetails.js
+  const isDetailAvailable = !!projectDetails[project.id];
+
+  // Komponen pembungkus: Link jika ada detail, div biasa jika tidak ada
+  const Wrapper = isDetailAvailable ? Link : 'div';
+
+  // Props untuk pembungkus
+  const wrapperProps = isDetailAvailable
+    ? { to: `/portfolio/${project.id}`, state: { from: 'portfolio' } }
+    : { className: 'cursor-not-allowed' }; // Ubah kursor jadi tanda stop/default
+
   return (
     <motion.div
       layout
@@ -61,33 +73,58 @@ const PortfolioItem = ({ project, index }) => {
       whileInView="visible"
       viewport={{ once: true, margin: '-50px' }}
       custom={index}
-      className={`group relative mb-12 break-inside-avoid`}
+      className={`group relative`}
     >
-      <Link to={`/portfolio/${project.id}`} state={{ from: 'portfolio' }}>
-        <div className="relative overflow-hidden rounded-[2rem] bg-gray-100 transition-all duration-500 group-hover:shadow-xl">
-          {' '}
-          {/* Image Hover Effect */}
+      <Wrapper {...wrapperProps}>
+        {/* Container Image */}
+        <div
+          className={`relative overflow-hidden rounded-[2rem] bg-gray-100 transition-all duration-500 ${
+            isDetailAvailable ? 'group-hover:shadow-2xl' : ''
+          }`}
+        >
+          {/* Image */}
           <div className="overflow-hidden">
             <motion.img
-              whileHover={{ scale: 1.05 }}
+              whileHover={isDetailAvailable ? { scale: 1.05 } : { scale: 1 }} // Disable zoom effect jika coming soon
               transition={{ duration: 0.7, ease: [0.33, 1, 0.68, 1] }}
               src={project.image}
               alt={project.appName}
-              className="w-full h-auto object-cover aspect-[4/3] md:aspect-[16/10]" // Adjust aspect ratio as needed
+              className={`w-full h-auto object-cover aspect-[4/3] md:aspect-[16/10] ${
+                !isDetailAvailable ? 'opacity-80 grayscale-[0.5]' : ''
+              }`} // Sedikit redupkan gambar jika coming soon
             />
           </div>
-          {/* Overlay Button */}
-          <div className="absolute top-6 right-6 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-xl">
-              <FiArrowUpRight className="text-xl text-black" />
+
+          {/* OVERLAY: Logic Tampilan */}
+          {isDetailAvailable ? (
+            // JIKA ADA DETAIL: Tampilkan tombol panah saat hover
+            <div className="absolute top-6 right-6 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-xl">
+                <FiArrowUpRight className="text-xl text-black" />
+              </div>
             </div>
-          </div>
+          ) : (
+            // JIKA TIDAK ADA DETAIL: Tampilkan Badge "Coming Soon"
+            <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/10">
+              <div className="bg-white/90 backdrop-blur-sm border border-white/20 px-6 py-2 rounded-full shadow-lg">
+                <span className="text-sm font-bold text-gray-800 tracking-wide uppercase">
+                  Coming Soon
+                </span>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Content */}
+        {/* Content Description */}
         <div className="mt-6 flex items-start justify-between">
           <div>
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 leading-tight group-hover:underline decoration-2 underline-offset-4 decoration-gray-300">
+            <h3
+              className={`text-2xl md:text-3xl font-bold text-gray-900 mb-2 leading-tight ${
+                isDetailAvailable
+                  ? 'group-hover:underline decoration-2 underline-offset-4 decoration-gray-300'
+                  : 'text-gray-500' // Judul jadi abu-abu jika tidak aktif
+              }`}
+            >
               {project.appName}
             </h3>
             <div className="flex flex-wrap gap-2">
@@ -105,7 +142,7 @@ const PortfolioItem = ({ project, index }) => {
             {project.year || '2024'}
           </span>
         </div>
-      </Link>
+      </Wrapper>
     </motion.div>
   );
 };
@@ -114,20 +151,12 @@ const PortfolioItem = ({ project, index }) => {
 
 export default function PortfolioPage() {
   const [filter, setFilter] = useState('All');
-
-  // Extract unique categories (sections) + Add 'All'
   const categories = ['All', 'UI/UX', 'Website'];
 
-  // const filteredProjects =
-  //   filter === 'All' ? projects : projects.filter((p) => p.section === filter);
-
+  // Sorting Logic: UI/UX di atas, Website di bawah
   const sortedProjects = [...projects].sort((a, b) => {
-    if (a.section === 'UI/UX' && b.section !== 'UI/UX') {
-      return -1;
-    }
-    if (a.section !== 'UI/UX' && b.section === 'UI/UX') {
-      return 1;
-    }
+    if (a.section === 'UI/UX' && b.section !== 'UI/UX') return -1;
+    if (a.section !== 'UI/UX' && b.section === 'UI/UX') return 1;
     return 0;
   });
 
@@ -159,7 +188,6 @@ export default function PortfolioPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            // Style Container disamakan dengan Navbar
             className="
         flex items-center gap-1 sm:gap-2
         h-[50px] md:h-[60px]
@@ -182,7 +210,8 @@ export default function PortfolioPage() {
           </motion.div>
         </div>
       </div>
-      {/* 2. Masonry Grid */}
+
+      {/* Grid Layout */}
       <motion.div layout className="max-w-screen-2xl mx-auto">
         <AnimatePresence mode="popLayout">
           <motion.div
@@ -191,7 +220,7 @@ export default function PortfolioPage() {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="columns-1 md:columns-2 gap-12 space-y-12"
+            className="grid grid-cols-1 md:grid-cols-2 gap-12"
           >
             {filteredProjects.map((project, i) => (
               <PortfolioItem key={project.id} project={project} index={i} />
@@ -200,7 +229,7 @@ export default function PortfolioPage() {
         </AnimatePresence>
       </motion.div>
 
-      {/* 3. Empty State */}
+      {/* Empty State */}
       {filteredProjects.length === 0 && (
         <div className="text-center py-32">
           <p className="text-gray-400 text-xl">

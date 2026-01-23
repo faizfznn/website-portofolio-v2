@@ -126,7 +126,7 @@ const portfolioProjects = [
     section: 'Website',
   },
     {
-    id: 'filkom-reserv',
+    id: 'filkomreserv',
     appName: 'Filkom ReserV',
     title: 'Filkom ReserV',
     primaryColor: '91C752',
