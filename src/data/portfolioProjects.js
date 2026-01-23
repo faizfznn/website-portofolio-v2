@@ -1,5 +1,3 @@
-
-
 import cerebellumImg from '../assets/cerebellum.webp';
 import mitsaqImg from '../assets/mitsaq.webp';
 import mentraImg from '../assets/mentra.webp';
@@ -16,7 +14,7 @@ const portfolioProjects = [
       'A digital platform serving as a career readiness accelerator for vocational high school students through structured learning paths and industry project simulations in the Industry 5.0 era.',
     image: cerebellumImg,
     logo: cerebellumImg,
-    section: 'Web Design',
+    section: 'UI/UX',
   },
   {
     id: 'mitsaq',
@@ -28,7 +26,7 @@ const portfolioProjects = [
       "A Sharia-compliant platform facilitating secure ta'aruf through structured matchmaking, pre-marital education",
     image: mitsaqImg,
     logo: mitsaqImg,
-    section: 'Mobile Design',
+    section: 'UI/UX',
   },
   {
     id: 'mentra',
@@ -40,7 +38,7 @@ const portfolioProjects = [
       'An AI-powered mobile app for adolescent mental health, featuring mood tracking, personalized self-care, and accessible support.',
     image: mentraImg,
     logo: mentraImg,
-    section: 'Mobile Design',
+    section: 'UI/UX',
   },
   {
     id: 'velora',
@@ -57,7 +55,75 @@ const portfolioProjects = [
       'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
     image: veloraImg,
     logo: veloraImg,
-    section: 'Mobile Design',
+    section: 'UI/UX',
+  },
+  {
+    id: 'porto-website-v2',
+    appName: 'Personal Wesbite V2',
+    title: 'Velora',
+    primaryColor: '91C752',
+    tags: [
+      'UI/UX Design',
+      'Sustainable Food Management',
+      'Food Waste',
+      'Figma',
+    ],
+    description:
+      'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
+    image: veloraImg,
+    logo: veloraImg,
+    section: 'Website',
+  },
+  {
+    id: 'porto-website-v1',
+    appName: 'Personal Wesbite V1',
+    title: 'Velora',
+    primaryColor: '91C752',
+    tags: [
+      'UI/UX Design',
+      'Sustainable Food Management',
+      'Food Waste',
+      'Figma',
+    ],
+    description:
+      'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
+    image: veloraImg,
+    logo: veloraImg,
+    section: 'Website',
+  },
+  {
+    id: 'quiz-app',
+    appName: 'Quiz App',
+    title: 'Velora',
+    primaryColor: '91C752',
+    tags: [
+      'UI/UX Design',
+      'Sustainable Food Management',
+      'Food Waste',
+      'Figma',
+    ],
+    description:
+      'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
+    image: veloraImg,
+    logo: veloraImg,
+    section: 'Website',
+  },
+  {
+    id: 'shuffle-card',
+    appName: 'Shuffle Card',
+    title: 'Velora',
+    primaryColor: '91C752',
+    tags: [
+      'UI/UX Design',
+      'Sustainable Food Management',
+      'Food Waste',
+      'Figma',
+    ],
+    description:
+      'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
+    image: veloraImg,
+    logo: veloraImg,
+    section: 'Website',
   },
 ];
 

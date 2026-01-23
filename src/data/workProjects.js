@@ -18,7 +18,7 @@ const workProjects = [
       'A digital platform serving as a career readiness accelerator for vocational high school students through structured learning paths and industry project simulations in the Industry 5.0 era.',
     image: cerebellumImg,
     logo: cerebellumImg,
-    section: 'Mobile Design',
+    section: 'UI/UX',
   },
   {
     id: 'mitsaq',
@@ -32,7 +32,7 @@ const workProjects = [
       "A Sharia-compliant platform facilitating secure ta'aruf through structured matchmaking, pre-marital education",
     image: mitsaqImg,
     logo: mitsaqImg,
-    section: 'Mobile Design',
+    section: 'UI/UX',
   },
   {
     id: 'mentra',
@@ -47,7 +47,7 @@ const workProjects = [
       'An AI-powered mobile app for adolescent mental health, featuring mood tracking, personalized self-care, and accessible support.',
     image: mentraImg,
     logo: mentraImg,
-    section: 'Mobile Design',
+    section: 'UI/UX',
   },
 
   {
@@ -67,7 +67,7 @@ const workProjects = [
       'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
     image: veloraImg,
     logo: veloraImg,
-    section: 'Mobile Design',
+    section: 'UI/UX',
   },
 ];
 
