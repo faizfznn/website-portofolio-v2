@@ -327,6 +327,8 @@ const projectDetails = {
     overview:
       'FILKOMreserV is a technology-based system designed to automate the room reservation process at the Faculty of Computer Science, Brawijaya University. This platform aims to streamline error-prone manual methods into an integrated system that offers time efficiency, data transparency, and ease of access for students and administrative staff.',
     websiteLink: 'https://feaps.vercel.app/',
+    githubLink: 'https://github.com/Treamyracle/FilkomReserV_Frontend',
+
     team: [
       {
         name: 'Arif Athaya Harahap',
@@ -389,6 +391,8 @@ const projectDetails = {
     overview:
       'This personal website serves as a digital identity for my undergraduate journey in Computer Science at UB. It is designed to showcase my interests in Software Engineering and UI/UX, focusing on creating seamless digital experiences while documenting my organizational roles and technical projects.',
     websiteLink: 'https://faizfauzan.vercel.app/',
+    githubLink: 'https://github.com/faizfznn/website-portofolio',
+
     team: [
       {
         name: 'Muhammad Faiz Fauzan',
@@ -405,6 +409,8 @@ const projectDetails = {
     overview:
       'Web Kartu Acak (Shuffle Card) is a dynamic web utility built to facilitate random selection processes for events, classrooms, or games. Unlike standard randomizers, this tool offers deep integration with external data sources like Google Sheets and Excel, allowing users to "bring their own deck" instantly without tedious manual entry.',
     websiteLink: 'https://flip-card-nine-kappa.vercel.app/',
+    githubLink: 'https://github.com/faizfznn/flipcard-universal',
+
     team: [
       {
         name: 'Muhammad Faiz Fauzan',
@@ -421,6 +427,7 @@ const projectDetails = {
     overview:
       'My Quiz Appis a comprehensive React-based Online Quiz platform designed to simulate a real computer-based test environment. It features a complete user flow from secure authentication and material selection to a timed examination system with dynamic questions and automated scoring.',
     websiteLink: 'https://quiz-app-84cu.vercel.app/',
+    githubLink: 'https://github.com/faizfznn/quiz-app',
     team: [
       {
         name: 'Muhammad Faiz Fauzan',

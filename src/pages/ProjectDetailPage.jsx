@@ -260,6 +260,34 @@ export default function ProjectDetailPage() {
                   </span>
                 </a>
               )}
+
+              {detail.githubLink && (
+                <a
+                  href={detail.githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    relative w-full sm:w-fit h-[56px] px-8 rounded-[24px] 
+                    border-[1px] border-[#CAD3DC] bg-white text-black 
+                    text-[16px] font-normal group inline-flex items-center justify-center
+                    overflow-hidden transition-colors duration-300 hover:border-black
+                  "
+                >
+                  <span className="relative inline-flex items-center overflow-hidden h-[1.5em]">
+                    {/* Teks Normal (Akan geser ke atas saat hover) */}
+                    <span className="inline-flex items-center gap-2 transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
+                      Visit Github
+                      <HiExternalLink className="text-lg" />
+                    </span>
+
+                    {/* Teks Hover (Akan masuk dari bawah saat hover) */}
+                    <span className="absolute left-0 top-0 w-full h-full inline-flex items-center justify-center gap-2 translate-y-full transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
+                      Visit Github
+                      <HiExternalLink className="text-lg" />
+                    </span>
+                  </span>
+                </a>
+              )}
             </div>
             <div className="border-t border-gray-200">
               <InfoRow label="Description">
