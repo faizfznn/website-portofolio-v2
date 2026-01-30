@@ -199,30 +199,34 @@ export default function PortfolioPage() {
       : projects.filter((p) => p.section === filter);
 
   return (
-    <div className="bg-[#FDFCFB] min-h-screen w-full selection:bg-black selection:text-white pt-32 pb-24 px-4 md:px-12">
-      <div className="max-w-screen-2xl mx-auto mb-24 md:mb-32">
-        <h1 className="text-[12vw] md:text-[8vw] leading-[0.85] font-black tracking-tighter text-gray-900 mb-8">
-          Selected Works.
-        </h1>
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
+    <div className="min-h-screen w-full selection:bg-black selection:text-white pt-32 pb-24 px-4 md:px-12">
+      <div className="max-w-screen-2xl mx-auto mb-16 md:mb-20">
+        {/* Title Section */}
+        <div className="mb-8">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl leading-[0.95] font-bold tracking-tight text-gray-900 mb-6">
+            Selected Works.
+          </h1>
           <motion.div
             initial="hidden"
             animate="visible"
             variants={fadeInUp}
-            className="max-w-2xl"
+            className="max-w-xl"
           >
-            <p className="text-xl text-gray-600 max-w-lg leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
               A curated collection of digital experiences, crafted with
               precision and passion for the details.
             </p>
           </motion.div>
+        </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="flex items-center gap-1 sm:gap-2 h-[50px] md:h-[60px] px-2 rounded-full bg-white/70 shadow-[0_2px_10px_-2.5px_rgba(110,110,110,0.20)] backdrop-blur-[2.5px] border border-[rgba(148,148,148,0.17)]"
-          >
+        {/* Filter Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+          className="flex justify-start"
+        >
+          <div className="inline-flex items-center gap-1 sm:gap-2 h-[50px] md:h-[60px] px-2 rounded-full bg-white/90 shadow-lg backdrop-blur-sm border border-gray-200/50">
             {categories.map((cat) => (
               <FilterButton
                 key={cat}
@@ -231,8 +235,8 @@ export default function PortfolioPage() {
                 onClick={() => setFilter(cat)}
               />
             ))}
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
 
       <motion.div layout className="max-w-screen-2xl mx-auto">

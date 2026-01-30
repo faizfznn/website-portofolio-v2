@@ -16,7 +16,7 @@ const achievements = [
   },
     {
     date: "2025",
-    company: "Univeersitas Pertamina",
+    company: "Universitas Pertamina",
     role: "2nd Place Winner, UI/UX Competition",
   },
 ];

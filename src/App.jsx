@@ -12,7 +12,7 @@ import Celebrations from './components/Celebrations';
 
 function App() {
   return (
-    <main className="bg-white min-h-screen">
+    <main className="min-h-screen">
       <CustomCursor /> 
       {/* <Celebrations />  */}
       <div className="container mx-auto px-4">

@@ -1,4 +1,7 @@
 import { useParams, Link, useLocation } from 'react-router-dom';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { FiCopy, FiCheck } from 'react-icons/fi';
 import { HiChevronLeft, HiExternalLink } from 'react-icons/hi';
 import portfolioProjects from '../data/portfolioProjects.js';
 import projectDetails from '../data/projectDetails.js';
@@ -53,7 +56,11 @@ const ProblemSolutionCard = ({
   description,
   isDarkMode = false,
 }) => (
-  <div
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: '-50px' }}
+    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     className={`p-6 md:p-8 rounded-2xl h-full transition-transform duration-300 hover:-translate-y-1 ${
       isDarkMode
         ? 'bg-gray-900 text-white'
@@ -75,7 +82,7 @@ const ProblemSolutionCard = ({
     >
       {description}
     </p>
-  </div>
+  </motion.div>
 );
 
 const RevealText = ({ children, delay = 0, className = '' }) => (

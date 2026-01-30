@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import aboutImage from '../assets/about.jpg';
 import paintMyLove from '../assets/paint-my-love.jpeg';
 import somebody from '../assets/somebody.jpeg';
@@ -11,6 +12,31 @@ import { useAlbumContext } from '../components/AlbumContext';
 import Album from '../components/Album';
 import Reveal from '../components/Reveal';
 import '../index.css';
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 60, filter: 'blur(10px)' },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1],
+      delay: i * 0.1,
+    },
+  }),
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
 
 function AboutMePage() {
   const { currentPlayingId } = useAlbumContext();
@@ -155,35 +181,43 @@ function AboutMePage() {
             {/* Bagian kiri */}
             <div className="flex w-full md:w-[324px] p-4 flex-col items-start gap-6 rounded-3xl bg-[#FAFAFA]">
               <h2 className="flex flex-col items-start leading-tight">
-                <span className="font2 text-black text-[28px] md:text-[32px] font-normal italic">
+                <span className="font2 text-black text-3xl md:text-4xl font-normal italic">
                   Some
                 </span>
-                <span className="text-black text-[28px] md:text-[32px] font-normal">
+                <span className="text-black text-3xl md:text-4xl font-bold">
                   Recognition
                 </span>
               </h2>
-              <p className="self-stretch text-black text-[15px] md:text-[16px]">
+              <p className="self-stretch text-gray-700 text-base md:text-lg leading-relaxed">
                 Not many, but a few competitions I participated and won
                 recognition for my work.
               </p>
             </div>
 
             {/* Bagian kanan */}
-            <div className="flex flex-wrap justify-start items-start gap-6 rounded-3xl bg-[#FAFAFA] w-full p-4">
+            <motion.div 
+              className="flex flex-wrap justify-start items-start gap-6 rounded-3xl bg-[#FAFAFA] w-full p-4"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-50px' }}
+            >
               {recognitions.map((rec, idx) => (
-                <div
+                <motion.div
                   key={idx}
+                  variants={fadeInUp}
+                  custom={idx}
                   className="flex flex-col p-6 w-full md:w-[45%] lg:w-[22%] rounded-2xl bg-white/40 backdrop-blur-sm"
                 >
-                  <h3 className="font-semibold text-lg text-black">
+                  <h3 className="font-bold text-lg md:text-xl text-black mb-2">
                     {rec.title}
                   </h3>
-                  <p className="mt-2 text-gray-700 text-sm leading-relaxed">
+                  <p className="text-gray-700 text-sm md:text-base leading-relaxed">
                     {rec.description}
                   </p>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
           {/* And Many More */}
@@ -215,17 +249,16 @@ function AboutMePage() {
           id="music-section"
           className="flex flex-col md:flex-row w/full items-center gap-8 mb-24 md:mb-32"
         >
-          <div className="flex w-full md:w-[324px] h-48 p-4 flex-col items-start gap-6 rounded-3xl bg-[#FAFAFA]">
-            <h2 className="flex flex-row items-start leading-tight">
-              <span className="font2 text-black text-[32px] font-normal italic">
+          <div className="flex w-full md:w-[324px] h-auto md:h-48 p-4 flex-col items-start gap-6 rounded-3xl bg-[#FAFAFA]">
+            <h2 className="flex flex-row flex-wrap items-center leading-tight gap-2">
+              <span className="font2 text-black text-3xl md:text-4xl font-normal italic">
                 My Love
               </span>
-              <span className="text-[#FAFAFA]">a</span>
-              <span className="text-black text-[32px] font-normal">
+              <span className="text-black text-3xl md:text-4xl font-bold">
                 for Music
               </span>
             </h2>
-            <p className="self-stretch text-black text-[16px]">
+            <p className="self-stretch text-gray-700 text-base md:text-lg leading-relaxed">
               I think a good designer is a good observer. When I am free, I
               explore the world, observe and document experiences.
             </p>

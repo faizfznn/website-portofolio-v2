@@ -16,6 +16,7 @@ import fotoFaiz from '../assets/formal.webp';
 import foto1 from '../assets/foto1.webp';
 import foto2 from '../assets/foto2.webp';
 import foto3 from '../assets/foto3.webp';
+import { Skiper40 } from '@/components/skiper40';
 
 import '../index.css';
 
@@ -83,10 +84,9 @@ function HomePage() {
       {/* Selected Work Section */}
       <Reveal>
         <section className="mt-24 md:mt-40 mb-40 md:mb-40">
-          <div className="mb-4">
+          <div className="mb-8">
             <h2>
-              <span className="text-2xl md:text-3xl font-bold">
-                {' '}
+              <span className="text-3xl md:text-4xl font-bold text-black">
                 Selected Work
               </span>
             </h2>
@@ -112,7 +112,7 @@ function HomePage() {
       {/* Hello, I'm Faiz */}
       <div className="md:mt-10">
         <Reveal delay={0.15}>
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-black">
             Hello, I&apos;m Faiz
           </h2>
         </Reveal>
@@ -121,7 +121,13 @@ function HomePage() {
             {/* === Left Side === */}
             <div className="w-full md:w-1/2 flex flex-col">
               {/* Kolase Gambar dengan Animasi & Drag */}
-              <div className="relative flex mb-12 w-full justify-center md:justify-start pt-10">
+              <motion.div 
+                className="relative flex mb-12 w-full justify-center md:justify-start pt-10"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              >
                 <div className="flex w-fit items-center -space-x-8 sm:-space-x-10">
                   {[foto1, foto2, foto3, fotoFaiz].map((foto, index) => (
                     <motion.div
@@ -168,10 +174,10 @@ function HomePage() {
                   width="99"
                   height="95"
                 />
-              </div>
+              </motion.div>
 
               {/* Deskripsi */}
-              <div className="relative inline-flex justify-center p-4 items-center gap-6 rounded-3xl bg-[#FAFAFA] mb-4">
+              <div className="relative inline-flex justify-center p-6 items-center gap-6 rounded-3xl bg-[#FAFAFA] mb-6">
                 <img
                   src={pinImg}
                   alt=""
@@ -179,18 +185,18 @@ function HomePage() {
             absolute w-10 h-10 md:w-20 md:h-20 
             -top-32 left-2 
             md:-top-52 md:-left-7
-          "
+          " 
                   width="80"
-                  height="80"
+                  height="80" 
                 />
-                <p className="text-black text-sm md:text-base">
-                  <span className="font-semibold">
-                    I am a Product Designer based in Indonesia.
-                  </span>{' '}
-                  I design to uncomplicate things and create joy in experiences
-                  that etch in one&apos;s memory. Most importantly, I design to
-                  make things more human, in a way that empowers.
-                </p>
+              <p className="text-black text-base md:text-lg leading-relaxed">
+                <span className="font-bold text-lg md:text-xl">
+                  I am a Product Designer based in Indonesia.
+                </span>{' '}
+                I design to uncomplicate things and create joy in experiences
+                that etch in one&apos;s memory. Most importantly, I design to
+                make things more human, in a way that empowers.
+              </p>
                 <img
                   src={clipImg}
                   alt=""
@@ -254,7 +260,7 @@ function HomePage() {
                   ].map((skill) => (
                     <span
                       key={skill.name}
-                      className="flex items-center gap-2 px-3 py-2 text-sm rounded-2xl border border-[#E4E9ED] bg-white text-black shadow-sm border border-gray-200/80"
+                      className="flex items-center gap-2 px-3 py-2 text-sm rounded-2xl border border-gray-200/80 bg-white text-black shadow-sm"
                     >
                       {skill.icon}
                       {skill.name}

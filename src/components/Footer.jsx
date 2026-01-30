@@ -1,8 +1,8 @@
-
 import instagram from '../assets/instagram.jpg';
 import linked from '../assets/linked.png';
 import github from '../assets/github.png';
 import { LuSend } from 'react-icons/lu';
+import { Skiper40 } from './skiper40';
 
 function Footer() {
   return (
@@ -15,19 +15,8 @@ function Footer() {
         shadow-sm border border-gray-200/80
       "
     >
-      <a
-        href="mailto:faiz150605@gmail.com"
-        className="flex items-center gap-3 transition-opacity hover:opacity-75"
-      >
-        <LuSend className="w-5 h-5 md:w-6 md:h-6 text-black" />{' '}
-        <p
-          className="
-            text-base md:text-lg font-semibold text-black
-          "
-        >
-          faiz150605@gmail.com
-        </p>
-      </a>
+      
+      <Skiper40 />
 
       <div className="flex items-center gap-0">
         {' '}
@@ -49,9 +38,9 @@ function Footer() {
               transform -rotate-4
               transition-all duration-300
               group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-10
-            " 
-            width="48" 
-            height="48" 
+            "
+            width="48"
+            height="48"
           />
           <span
             className="
@@ -60,7 +49,7 @@ function Footer() {
               opacity-0 group-hover:opacity-100
               transition-opacity duration-300
               mt-4
-            " 
+            "
           >
             GitHub
           </span>
@@ -70,7 +59,7 @@ function Footer() {
           href="https://www.instagram.com/faizfznn"
           target="_blank"
           rel="noopener noreferrer"
-          className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center" 
+          className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center"
         >
           <img
             src={instagram}
@@ -81,9 +70,9 @@ function Footer() {
               transform rotate-13
               transition-all duration-300
               group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-0
-            " 
-            width="48" 
-            height="48" 
+            "
+            width="48"
+            height="48"
           />
           <span
             className="
@@ -92,7 +81,7 @@ function Footer() {
               opacity-0 group-hover:opacity-100
               transition-opacity duration-300
               mt-4
-            " 
+            "
           >
             Instagram
           </span>
@@ -102,7 +91,7 @@ function Footer() {
           href="https://www.linkedin.com/in/muhammadfaizfauzan"
           target="_blank"
           rel="noopener noreferrer"
-          className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center" 
+          className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center"
         >
           <img
             src={linked}
@@ -113,9 +102,9 @@ function Footer() {
               transform rotate-3
               transition-all duration-300
               group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-12
-            " 
-            width="48" 
-            height="48" 
+            "
+            width="48"
+            height="48"
           />
           <span
             className="
@@ -124,7 +113,7 @@ function Footer() {
               opacity-0 group-hover:opacity-100
               transition-opacity duration-300
               mt-4
-            " 
+            "
           >
             LinkedIn
           </span>
