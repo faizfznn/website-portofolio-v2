@@ -1,48 +1,5 @@
-const organizationalExperience = [
-  {
-    date: "Feb 2025 - Present",
-    company: "RAION Community",
-    role: "Staff of UI/UX Designer Division",
-  },
-  {
-    date: "Jan 2025 - Present",
-    company: "BEM Faculty of Computer Science, Brawijaya University",
-    role: "Staff of Internal Resources Development",
-  },
-  {
-    date: "May 2024 - Sep 2024",
-    company: "Scholarship Festival",
-    role: "Head of Public Relations Division",
-  },
-    {
-    date: "Aug 2024 - Sep 2024",
-    company: "Dewa Ngoding",
-    role: "Chief Executive",
-  },
-];
-
-const achievements = [
-  {
-    date: "2025",
-    company: "Universitas Majalengka",
-    role: "1st Place Winner, UI/UX Competition",
-  },
-  {
-    date: "2025",
-    company: "Universitas Muhammadiyah Riau",
-    role: "1st Place Winner, UI/UX Competition",
-  },
-  {
-    date: "2025",
-    company: "Unipdu Jombang",
-    role: "2nd Place Winner, UI/UX Competition",
-  },
-    {
-    date: "2025",
-    company: "Univeersitas Pertamina",
-    role: "2nd Place Winner, UI/UX Competition",
-  },
-];
+import organizationalExperience from "../data/organizationalExperience";
+import achievements from "../data/achievementsExperience";
 
 const TimelineItem = ({ date, company, role, isActive = false }) => (
   <div className="relative pl-8 group">

@@ -49,7 +49,7 @@ const Sidebar = ({ items }) => {
 
     if (activeItem && indicatorRef.current) {
       const topPosition = activeItem.offsetTop;
-      indicatorRef.current.style.transform = `translateY(${topPosition}px) translateY(6px)`;
+      indicatorRef.current.style.transform = `translateY(${topPosition}px) translateY(5px)`;
     }
   }, [activeId, sections]);
 
@@ -57,18 +57,18 @@ const Sidebar = ({ items }) => {
     <nav className="relative">
       <div
         ref={indicatorRef}
-        className="absolute left-2 top-1 w-1 h-1 bg-black rounded-full transition-transform duration-300 ease-in-out"
+        className="absolute left-6 top-1 w-1 h-1 bg-black rounded-full transition-transform duration-300 ease-in-out"
       />
-      
-      <ul className="space-y-3 pl-6"> 
+
+      <ul className="space-y-3 pl-6">
         {sections.map((section, index) => (
           <li key={section.id} ref={(el) => (itemsRef.current[index] = el)}>
             <a
               href={`#${section.id}`}
-              className={`block text-[14px] font-medium transition-colors ${ 
-                activeId === section.id 
-                  ? 'text-black font-bold' 
-                  : 'text-gray-400 hover:text-black' 
+              className={`block text-[14px] transition-all duration-300 ease-in-out ${
+                activeId === section.id
+                  ? 'text-black font-semibold pl-4'
+                  : 'text-gray-400 font-normal pl-0 hover:text-black'
               }`}
             >
               {section.label}

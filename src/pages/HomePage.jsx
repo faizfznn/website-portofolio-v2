@@ -1,4 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+
 import Hero from '../components/Hero';
 import ProjectCard from '../components/ProjectCard.jsx';
 import works from '../data/workProjects.js';
@@ -21,9 +23,9 @@ import { SiJavascript, SiFigma, SiKotlin, SiReact } from 'react-icons/si';
 import Reveal from '../components/Reveal';
 const timeOptions = {
   timeZone: 'Asia/Jakarta',
-  hour: 'numeric', 
-  minute: '2-digit', 
-  second: '2-digit', 
+  hour: 'numeric',
+  minute: '2-digit',
+  second: '2-digit',
 };
 
 function HomePage() {
@@ -51,7 +53,27 @@ function HomePage() {
     return () => {
       clearInterval(timer);
     };
-  }, []); 
+  }, []);
+
+  // Scattered Polaroid Photos Animation
+  const photoVariants = [
+    {
+      initial: { x: -200, y: -100, rotate: -45, opacity: 0 },
+      animate: { x: 0, y: 0, rotate: 4, opacity: 1 },
+    },
+    {
+      initial: { x: 200, y: -150, rotate: 45, opacity: 0 },
+      animate: { x: 0, y: 0, rotate: -4, opacity: 1 },
+    },
+    {
+      initial: { x: -150, y: 100, rotate: -30, opacity: 0 },
+      animate: { x: 0, y: 0, rotate: 3, opacity: 1 },
+    },
+    {
+      initial: { x: 150, y: 150, rotate: 30, opacity: 0 },
+      animate: { x: 0, y: 0, rotate: 0, opacity: 1 },
+    },
+  ];
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 mt-[92px]">
@@ -79,10 +101,7 @@ function HomePage() {
 
               return (
                 <div key={project.id} className={colSpanClass}>
-                  <ProjectCard
-                    project={project}
-                    isFullWidth={isFullWidth} 
-                  />
+                  <ProjectCard project={project} isFullWidth={isFullWidth} />
                 </div>
               );
             })}
@@ -101,49 +120,53 @@ function HomePage() {
           <section className="mb-12 flex flex-col md:flex-row items-start gap-8 md:gap-12">
             {/* === Left Side === */}
             <div className="w-full md:w-1/2 flex flex-col">
-              {/* Kolase Gambar */}
-              <div className="relative flex mb-6 w-full justify-center md:justify-start">
-                <div
-                  className="
-            flex w-fit items-center 
-            -space-x-8 sm:-space-x-10
-          " 
-                >
-                  <div
-                    className="
-              w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
-              bg-cover bg-center rounded-3xl border-3 border-white rotate-4 shrink-0
-            " 
-                    style={{ backgroundImage: `url(${foto1})` }}
-                  />
-                  <div
-                    className="
-              w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
-              bg-cover bg-center rounded-3xl border-3 border-white -rotate-4 shrink-0
-            " 
-                    style={{ backgroundImage: `url(${foto2})` }}
-                  />
-                  <div
-                    className="
-              w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
-              bg-cover bg-center rounded-3xl border-3 border-white rotate-3 shrink-0
-            " 
-                    style={{ backgroundImage: `url(${foto3})` }}
-                  />
-                  <div
-                    className="
-              w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 
-              bg-cover bg-center rounded-3xl border-3 border-white shrink-0
-            " 
-                    style={{ backgroundImage: `url(${fotoFaiz})` }}
-                  />
+              {/* Kolase Gambar dengan Animasi & Drag */}
+              <div className="relative flex mb-12 w-full justify-center md:justify-start pt-10">
+                <div className="flex w-fit items-center -space-x-8 sm:-space-x-10">
+                  {[foto1, foto2, foto3, fotoFaiz].map((foto, index) => (
+                    <motion.div
+                      key={index}
+                      drag
+                      dragConstraints={{
+                        left: -50,
+                        right: 50,
+                        top: -50,
+                        bottom: 50,
+                      }}
+                      dragElastic={0.1}
+                      initial={photoVariants[index].initial}
+                      whileInView={photoVariants[index].animate}
+                      viewport={{ once: true }}
+                      transition={{
+                        duration: 0.8,
+                        delay: index * 0.15,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                      whileHover={{
+                        scale: 1.1,
+                        rotate: 0,
+                        zIndex: 50,
+                        transition: { duration: 0.3 },
+                      }}
+                      className="
+            w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40
+            bg-cover bg-center rounded-3xl 
+            border-4 border-white 
+            shadow-xl cursor-grab active:cursor-grabbing
+            shrink-0
+          "
+                      style={{
+                        backgroundImage: `url(${foto})`,
+                      }}
+                    />
+                  ))}
                 </div>
                 <img
                   src={powerImg}
                   alt=""
                   className="absolute -top-6 -right-2 md:-top-17 md:-right-15 w-10 h-10 md:w-[99px] md:h-[95px] rotate-10 animate-slide-slow"
                   width="99"
-                  height="95" 
+                  height="95"
                 />
               </div>
 
@@ -156,9 +179,9 @@ function HomePage() {
             absolute w-10 h-10 md:w-20 md:h-20 
             -top-32 left-2 
             md:-top-52 md:-left-7
-          " 
+          "
                   width="80"
-                  height="80" 
+                  height="80"
                 />
                 <p className="text-black text-sm md:text-base">
                   <span className="font-semibold">
@@ -188,7 +211,7 @@ function HomePage() {
                 className="
           flex w-full md:w-[528px] items-stretch md:items-start gap-4 justify-start 
           flex-col sm:flex-row
-        " 
+        "
               >
                 {/* Lokasi & Waktu */}
                 <div className="flex flex-col justify-center p-4 rounded-3xl bg-[#FAFAFA] w-full sm:w-auto ">
@@ -209,7 +232,7 @@ function HomePage() {
                   className="
             flex flex-wrap gap-2 w-full 
             sm:max-w-[300px]
-          " 
+          "
                 >
                   {[
                     {
@@ -264,7 +287,7 @@ function HomePage() {
                     alt="Handshake"
                     className="w-8 md:w-10 inline-block animate-bounce-slow"
                     width="40"
-                    height="40" 
+                    height="40"
                   />
                 </h3>
 
@@ -277,13 +300,13 @@ function HomePage() {
                     className="
               flex rounded-3xl px-2 py-2 border border-[#FFFFFF]/30 bg-black/40 backdrop-blur-sm 
               flex-col sm:flex-row items-stretch sm:items-center sm:justify-between gap-3 sm:gap-2
-            " 
+            "
                   >
                     <span
                       className="
                 px-4 py-3 text-white text-sm md:text-base 
                 text-center sm:text-left
-              " 
+              "
                     >
                       faiz150605@gmail.com
                     </span>
@@ -301,7 +324,7 @@ function HomePage() {
                 w-full sm:w-fit 
                 h-[42px] md:h-12 px-6 md:px-8 
                 text-[14px] md:text-[16px]
-              " 
+              "
                     >
                       <img
                         src={stars}

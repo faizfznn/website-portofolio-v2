@@ -6,6 +6,37 @@ import Reveal from '../components/Reveal';
 import Sidebar from '../components/Sidebar';
 import NotFoundPage from './NotFoundPage.jsx';
 
+import { 
+  SiFigma, SiMiro, SiNotion, SiGoogleforms,
+  SiClickup, SiInkscape, SiReact, SiTailwindcss, 
+  SiTypescript, SiGo, SiPhp, SiLaravel, SiMaze, SiHtml5, SiCss3, SiJavascript
+} from 'react-icons/si';
+const toolIcons = {
+  // Design & Collaboration
+  "Figma": <SiFigma className="text-[#F24E1E]" />, // Asli: Kombinasi, tapi Orange-Red paling ikonik
+  "Miro": <SiMiro className="text-[#050038]" />,  // Warna teks/logo gelap Miro lebih akurat (bg biasanya kuning)
+  "Notion": <SiNotion className="text-[#000000]" />,
+  "Google Forms": <SiGoogleforms className="text-[#673AB7]" />, // Ungu khas Google Workspace
+  "Maze": <SiMaze className="text-[#101828]" />, // Maze sering menggunakan hitam pekat/dark navy
+
+  // Management & Illustration
+  "ClickUp": <SiClickup className="text-[#7B68EE]" />,
+  "Inkscape": <SiInkscape className="text-[#000000]" />,
+
+  // Frontend & Styling
+  "React.js": <SiReact className="text-[#61DAFB]" />,
+  "Tailwind": <SiTailwindcss className="text-[#06B6D4]" />,
+  "TypeScript": <SiTypescript className="text-[#3178C6]" />,
+  "HTML": <SiHtml5 className="text-[#E34F26]" />,
+  "CSS": <SiCss3 className="text-[#1572B6]" />,
+  "JavaScript": <SiJavascript className="text-[#F7DF1E]" />,
+
+  // Backend & Languages
+  "Golang": <SiGo className="text-[#00ADD8]" />,
+  "PHP": <SiPhp className="text-[#777BB4]" />,
+  "Laravel": <SiLaravel className="text-[#FF2D20]" />,
+};
+
 // --- Sub Components (InfoRow, Card) Tetap Sama ---
 const InfoRow = ({ label, children }) => (
   <div className="flex flex-col md:flex-row border-b border-gray-200 py-4">
@@ -23,22 +54,22 @@ const ProblemSolutionCard = ({
   isDarkMode = false,
 }) => (
   <div
-    className={`p-6 rounded-2xl h-full ${
+    className={`p-6 md:p-8 rounded-2xl h-full transition-transform duration-300 hover:-translate-y-1 ${
       isDarkMode
         ? 'bg-gray-900 text-white'
-        : 'bg-white text-black border-2 border-gray-100'
+        : 'bg-white text-black border border-gray-200 shadow-sm'
     }`}
   >
     <span
-      className={`block text-sm font-semibold ${
+      className={`block text-sm md:text-base font-bold mb-3 ${
         isDarkMode ? 'text-gray-400' : 'text-gray-500'
       }`}
     >
       {number}
     </span>
-    <h4 className="text-xl font-semibold mt-2 mb-3">{title}</h4>
+    <h4 className="text-xl md:text-2xl font-bold mb-4">{title}</h4>
     <p
-      className={`text-sm leading-relaxed ${
+      className={`text-sm md:text-base leading-relaxed ${
         isDarkMode ? 'text-gray-300' : 'text-gray-600'
       }`}
     >
@@ -229,10 +260,10 @@ export default function ProjectDetailPage() {
 
         {/* --- Overview --- */}
         <Reveal>
-          <article id="overview" className="scroll-mt-24">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6">
-              <h2 className="text-3xl font-semibold text-black">Overview</h2>
-              <div className='flex flex-row gap-4'>
+          <article id="overview" className="scroll-mt-32">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-gray-200">
+              <h2 className="text-3xl md:text-4xl font-bold text-black">Overview</h2>
+              <div className="flex flex-row gap-4">
                 {detail.websiteLink && (
                   <a
                     href={detail.websiteLink}
@@ -290,9 +321,9 @@ export default function ProjectDetailPage() {
                 )}
               </div>
             </div>
-            <div className="border-t border-gray-200">
+            <div className="pt-8">
               <InfoRow label="Description">
-                <p className="text-base text-gray-700 leading-relaxed">
+                <p className="text-base md:text-lg text-gray-700 leading-relaxed">
                   {detail.overview}
                 </p>
               </InfoRow>
@@ -334,6 +365,36 @@ export default function ProjectDetailPage() {
               <InfoRow label="Timeline">
                 <p>{detail.timeline}</p>
               </InfoRow>
+              <InfoRow label="Tools Used">
+                <div className="flex flex-wrap gap-4 items-center mt-1">
+                  {detail.tools.split(', ').map((tool) => {
+                    // Membersihkan string jika ada spasi berlebih
+                    const toolName = tool.trim();
+                    const icon = toolIcons[toolName];
+
+                    return (
+                      <div
+                        key={toolName}
+                        className="group relative flex flex-col items-center"
+                      >
+                        {/* Tampilan Ikon */}
+                        <div className="text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1">
+                          {icon || (
+                            <span className="text-[14px] font-medium text-gray-400">
+                              {toolName}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Tooltip Nama Tool (Muncul saat Hover) */}
+                        <span className="absolute -top-8 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-all duration-200 bg-black text-white text-[10px] px-2 py-1 rounded shadow-lg pointer-events-none whitespace-nowrap z-10">
+                          {toolName}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </InfoRow>
             </div>
           </article>
         </Reveal>
@@ -341,15 +402,15 @@ export default function ProjectDetailPage() {
         {/* --- GROUP 1: PROBLEM & SOLUTION --- */}
         {showChallenge && (
           // Wrapper ini memiliki ID 'challenge' yang akan dideteksi oleh Sidebar
-          <div id="challenge" className="scroll-mt-24 space-y-20">
+          <div id="challenge" className="scroll-mt-32 space-y-24">
             {/* Problems Section */}
             {hasProblems && (
               <Reveal>
                 <article>
-                  <h2 className="text-3xl font-semibold text-black mb-6">
+                  <h2 className="text-3xl md:text-4xl font-bold text-black mb-8">
                     Problems
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                     {detail.problems.map((item, i) => (
                       <ProblemSolutionCard
                         key={i}
@@ -368,10 +429,10 @@ export default function ProjectDetailPage() {
             {hasSolutions && (
               <Reveal>
                 <article>
-                  <h2 className="text-3xl font-semibold text-black mb-6">
+                  <h2 className="text-3xl md:text-4xl font-bold text-black mb-8">
                     Solutions
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                     {detail.solutions.map((item, i) => (
                       <ProblemSolutionCard
                         key={i}
@@ -391,12 +452,12 @@ export default function ProjectDetailPage() {
         {/* --- GROUP 2: VISUAL IDENTITY (Design System + Logo) --- */}
         {showVisuals && (
           // Wrapper ini memiliki ID 'visuals' yang akan dideteksi oleh Sidebar
-          <div id="visuals" className="scroll-mt-24 space-y-20">
+          <div id="visuals" className="scroll-mt-32 space-y-24">
             {/* Design System Content */}
             {showDesignSystemContent && (
               <Reveal>
                 <article className="flex flex-col">
-                  <h2 className="text-3xl font-semibold text-black mb-6">
+                  <h2 className="text-3xl md:text-4xl font-bold text-black mb-10">
                     Design System
                   </h2>
 

@@ -59,6 +59,7 @@ const projectDetails = {
     ],
     role: ['UX & UI Design', 'UX Research'],
     timeline: "Sep '25 – Oct '25 (1 months)",
+    tools: 'Figma, ClickUp, Maze, Google Forms, Inkscape',
     problems: [
       {
         title: 'Educational Mismatch',
@@ -134,6 +135,7 @@ const projectDetails = {
     ],
     role: ['Solo Designer', 'UI/UX Research', 'Branding'],
     timeline: "Feb '24 – Mar '24 (2 months)",
+    tools: 'Figma, ClickUp, Maze, Google Forms, Inkscape',
     problems: [
       {
         title: 'Lack of Sharia-Compliant Platforms',
@@ -199,6 +201,7 @@ const projectDetails = {
     ],
     role: ['UI/UX Designer', 'Prototyping'],
     timeline: "Apr '24 – May '24 (1 month)",
+    tools: 'Figma, ClickUp, Maze, Google Forms, Inkscape',
     problems: [
       {
         title: 'Difficulty in Self-Identification',
@@ -271,6 +274,7 @@ const projectDetails = {
     ],
     role: ['UI/UX Design', 'UX Research', 'Prototyping'],
     timeline: "Jun '25 – Jul '25 (1 month)",
+    tools: 'Figma, ClickUp, Maze, Google Forms, Inkscape',
     problems: [
       {
         title: 'High Household Food Waste',
@@ -320,8 +324,8 @@ const projectDetails = {
     bentoImages: [veloraImg1, veloraImg2, veloraImg3],
     figmaLink:
       'https://embed.figma.com/proto/iAoMTa6aw42i1HAJ5U0iQL/INSPACE_VELORA?page-id=1396%3A15723&node-id=1503-45880&viewport=-3592%2C-1523%2C0.68&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1503%3A45880&embed-host=share&hide-ui=1',
-  },
-
+    },
+    
   // --- Proyek FilkomReserV ---
   filkomreserv: {
     overview:
@@ -351,6 +355,7 @@ const projectDetails = {
     ],
     role: ['System Analyst', 'UI/UX Design', 'Software Engineer'],
     timeline: "Aug '24 - Dec '24",
+    tools: 'Figma, HTML, CSS, JavaScript, Golang',
     problems: [
       {
         title: 'Fragmented Manual Process',
@@ -382,14 +387,14 @@ const projectDetails = {
       {
         title: 'Automated Notifications',
         description:
-          'An automated notification and email system that provides immediate status updates (approved/rejected) to users, reducing waiting times.',
+        'An automated notification and email system that provides immediate status updates (approved/rejected) to users, reducing waiting times.',
       },
     ],
   },
   // --- Proyek Portfolio Website V1 ---
   'porto-website-v1': {
     overview:
-      'This personal website serves as a digital identity for my undergraduate journey in Computer Science at UB. It is designed to showcase my interests in Software Engineering and UI/UX, focusing on creating seamless digital experiences while documenting my organizational roles and technical projects.',
+    'This personal website serves as a digital identity for my undergraduate journey in Computer Science at UB. It is designed to showcase my interests in Software Engineering and UI/UX, focusing on creating seamless digital experiences while documenting my organizational roles and technical projects.',
     websiteLink: 'https://faizfauzan.vercel.app/',
     githubLink: 'https://github.com/faizfznn/website-portofolio',
 
@@ -403,6 +408,7 @@ const projectDetails = {
     ],
     role: ['Frontend Developer', 'UI/UX Designer'],
     timeline: "Jan '25 - Present",
+    tools: 'Figma, React.js, Tailwind',
   },
   // --- Proyek Shuffle Card ---
   'shuffle-card': {
@@ -422,6 +428,7 @@ const projectDetails = {
     ],
     role: ['Frontend Developer', 'Logic Implementation'],
     timeline: "Oct '24 - Nov '24",
+    tools: 'Figma, React.js, Tailwind',
   },
   'quiz-app': {
     overview:
@@ -439,6 +446,7 @@ const projectDetails = {
     ],
     role: ['Frontend Developer', 'React Specialist'],
     timeline: "Jan '26 - Present",
+    tools: 'Figma, React.js, Tailwind',
     problems: [
       {
         title: 'Data Persistence Issues',
@@ -453,7 +461,7 @@ const projectDetails = {
       {
         title: 'Client-Side Security',
         description:
-          'The need to restrict access to registered users and manage sessions without relying on a complex backend infrastructure.',
+        'The need to restrict access to registered users and manage sessions without relying on a complex backend infrastructure.',
       },
     ],
     solutions: [
@@ -465,7 +473,7 @@ const projectDetails = {
       {
         title: 'Dynamic OpenTDB Integration',
         description:
-          'Integrated the Open Trivia Database (OpenTDB) API to fetch questions dynamically, ensuring a fresh and unique set of challenges for every session.',
+        'Integrated the Open Trivia Database (OpenTDB) API to fetch questions dynamically, ensuring a fresh and unique set of challenges for every session.',
       },
       {
         title: 'Simulated Authentication',

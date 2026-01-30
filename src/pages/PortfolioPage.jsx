@@ -7,16 +7,32 @@ import projectDetails from '../data/projectDetails.js'; // [IMPORT BARU] Import 
 
 // --- Animations ---
 const fadeInUp = {
-  hidden: { opacity: 0, y: 60 },
+  hidden: {
+    opacity: 0,
+    y: 60,
+    scale: 0.95,
+    filter: 'blur(10px)',
+  },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
     transition: {
       duration: 0.8,
       ease: [0.22, 1, 0.36, 1],
-      delay: i * 0.1,
+      delay: i * 0.08,
     },
   }),
+  exit: {
+    opacity: 0,
+    scale: 0.95,
+    filter: 'blur(10px)',
+    transition: {
+      duration: 0.3,
+      ease: 'easeIn',
+    },
+  },
 };
 
 const staggerContainer = {
@@ -24,7 +40,14 @@ const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.05,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      staggerChildren: 0.05,
+      staggerDirection: -1,
     },
   },
 };
@@ -71,6 +94,7 @@ const PortfolioItem = ({ project, index }) => {
       variants={fadeInUp}
       initial="hidden"
       whileInView="visible"
+      exit="exit"
       viewport={{ once: true, margin: '-50px' }}
       custom={index}
       className={`group relative`}
@@ -79,27 +103,36 @@ const PortfolioItem = ({ project, index }) => {
         {/* Container Image */}
         <div
           className={`relative overflow-hidden rounded-[2rem] bg-gray-100 transition-all duration-500 ${
-            isDetailAvailable ? 'group-hover:shadow-2xl' : ''
+            isDetailAvailable
+              ? 'group-hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)]'
+              : ''
           }`}
         >
+          {/* Gradient Overlay on Hover */}
+          <div
+            className="absolute inset-0 z-[1] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.4) 100%)',
+            }}
+          />
+
           {/* Image */}
           <div className="overflow-hidden">
-            <motion.img
-              whileHover={isDetailAvailable ? { scale: 1.05 } : { scale: 1 }} // Disable zoom effect jika coming soon
-              transition={{ duration: 0.7, ease: [0.33, 1, 0.68, 1] }}
+            <img
               src={project.image}
               alt={project.appName}
-              className={`w-full h-auto object-cover aspect-[4/3] md:aspect-[16/10] ${
+              className={`w-full h-auto object-cover aspect-[4/3] md:aspect-[16/10] transition-all duration-300 ${
                 !isDetailAvailable ? 'opacity-80 grayscale-[0.5]' : ''
-              }`} // Sedikit redupkan gambar jika coming soon
+              }`}
             />
           </div>
 
           {/* OVERLAY: Logic Tampilan */}
           {isDetailAvailable ? (
             // JIKA ADA DETAIL: Tampilkan tombol panah saat hover
-            <div className="absolute top-6 right-6 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-xl">
+            <div className="absolute top-6 right-6 z-[2] opacity-0 group-hover:opacity-100 transition-all duration-500">
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-shadow duration-300">
                 <FiArrowUpRight className="text-xl text-black" />
               </div>
             </div>
@@ -119,10 +152,10 @@ const PortfolioItem = ({ project, index }) => {
         <div className="mt-6 flex items-start justify-between">
           <div>
             <h3
-              className={`text-2xl md:text-3xl font-bold text-gray-900 mb-2 leading-tight ${
+              className={`text-2xl md:text-3xl font-bold mb-2 leading-tight transition-colors duration-300 ${
                 isDetailAvailable
-                  ? 'group-hover:underline decoration-2 underline-offset-4 decoration-gray-300'
-                  : 'text-gray-500' // Judul jadi abu-abu jika tidak aktif
+                  ? 'text-gray-900 group-hover:text-black'
+                  : 'text-gray-500'
               }`}
             >
               {project.appName}
@@ -188,16 +221,7 @@ export default function PortfolioPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="
-        flex items-center gap-1 sm:gap-2
-        h-[50px] md:h-[60px]
-        px-2
-        rounded-full 
-        bg-white/70
-        shadow-[0_0.241px_1.207px_-1.25px_rgba(110,110,110,0.20),0_2px_10px_-2.5px_rgba(110,110,110,0.20)]
-        backdrop-blur-[2.5px]
-        border border-[rgba(148,148,148,0.17)]
-      "
+            className="flex items-center gap-1 sm:gap-2 h-[50px] md:h-[60px] px-2 rounded-full bg-white/70 shadow-[0_2px_10px_-2.5px_rgba(110,110,110,0.20)] backdrop-blur-[2.5px] border border-[rgba(148,148,148,0.17)]"
           >
             {categories.map((cat) => (
               <FilterButton
@@ -211,15 +235,15 @@ export default function PortfolioPage() {
         </div>
       </div>
 
-      {/* Grid Layout */}
       <motion.div layout className="max-w-screen-2xl mx-auto">
         <AnimatePresence mode="popLayout">
           <motion.div
             layout
+            key={filter}
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            exit="hidden"
+            exit="exit"
             className="grid grid-cols-1 md:grid-cols-2 gap-12"
           >
             {filteredProjects.map((project, i) => (

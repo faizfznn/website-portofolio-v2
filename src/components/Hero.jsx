@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { motion, px } from 'framer-motion';
 import fotoFaiz from '../assets/formal.webp';
 import indoFlag from '../assets/bendera.png';
 import stars from '../assets/stars.png';
-import { useState, useEffect } from 'react';
 
 const Hero = ({ onGetInTouchClick }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -17,56 +18,81 @@ const Hero = ({ onGetInTouchClick }) => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Split text into characters for animation
+  const headline = 'Selected Work digital experiences, from pixel to code.';
+  const words = headline.split(' ');
+
   return (
-    <section
-      className="        flex flex-col-reverse md:flex-row 
-        w-full px-6 md:px-[50px] 
-        justify-center items-center 
-        gap-12 md:gap-[138px]"
-    >
+    <section className="flex flex-col-reverse md:flex-row w-full px-6 md:px-[50px] justify-center items-center gap-12 md:gap-[138px]">
       {isHovering && (
-        <div
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
           className="fixed pointer-events-none z-50 transition-all duration-200 ease-out"
           style={{
-            left: `${mousePosition.x}px`,
-            top: `${mousePosition.y}px`,
+            left: `${mousePosition.x - 100}px`,
+            top: `${mousePosition.y - 25}px`,
             transform: 'translate(-50%, -50%)',
           }}
         >
           <div className="bg-white text-gray-800 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap border border-gray-200">
             UI/UX Designer & Frontend Developer
           </div>
-        </div>
+        </motion.div>
       )}
+
+      {/* Left Content */}
       <div className="flex flex-col items-start gap-8 md:gap-12 text-center md:text-left">
         <div className="w-full md:w-[646px]">
+          {/* Char-by-char Text Reveal */}
           <h1
-            className="text-3xl md:text-5xl font-normal text-black leading-snug md:leading-[1.4]"
-            style={{ fontFamily: '"Lato", sans-serif' }}
+            className="text-3xl md:text-5xl font-medium text-black leading-snug md:leading-[1.4]"
+            style={{
+              fontFamily: '"Inter", sans-serif',
+              letterSpacing: '-0.02em',
+            }}
           >
-            Selected Work digital experiences, from pixel to code.
+            {words.map((word, wordIndex) => (
+              <span key={wordIndex} className="inline-block mr-[0.3em]">
+                {word.split('').map((char, charIndex) => (
+                  <motion.span
+                    key={charIndex}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: wordIndex * 0.1 + charIndex * 0.03,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="inline-block"
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
+            ))}
           </h1>
         </div>
 
-        {/* Buttons */}
-        <div
-          className="
-            flex flex-col sm:flex-row items-start 
-            gap-4 lg:gap-2 
-            w-full sm:w-auto
-          "
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.5 }}
+          className="flex flex-col sm:flex-row items-start gap-4 lg:gap-2 w-full sm:w-auto"
         >
           <button
             onClick={onGetInTouchClick}
             className="
-              relative group flex w-full sm:w-fit h-[56px] px-10 justify-center items-center 
-              rounded-[24px] overflow-hidden border border-[rgba(0,0,0,0.2)] 
-              text-white text-[16px] font-normal 
-              bg-gradient-to-b from-[#323232] to-[#000000] 
-              shadow-[inset_0_0_8px_0_#FFFFFF] 
-              transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] 
-              hover:shadow-[inset_0_10px_29.1px_0_rgba(255,255,255,0.4)]
-            " 
+                relative group flex w-full sm:w-fit h-14 px-10 justify-center items-center 
+                rounded-full overflow-hidden border border-[rgba(0,0,0,0.2)] 
+                text-white text-base font-medium 
+                bg-linear-to-b from-[#323232] to-[#000000] 
+                shadow-[inset_0_0_8px_0_#FFFFFF] 
+                transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] 
+                hover:shadow-[inset_0_10px_29.1px_0_rgba(255,255,255,0.4)]
+                hover:scale-105
+              "
           >
             <img
               src={stars}
@@ -79,10 +105,11 @@ const Hero = ({ onGetInTouchClick }) => {
           <Link
             to="/portfolio"
             className="
-              relative w-full sm:w-fit h-[56px] px-10 rounded-[24px] 
-              border-[1px] border-[#CAD3DC] bg-white text-black 
-              text-[16px] font-normal group inline-flex items-center justify-center
-            "
+                relative w-full sm:w-fit h-14 px-10 rounded-full 
+                border-[1px] border-[#CAD3DC] bg-white text-black 
+                text-base font-medium group inline-flex items-center justify-center
+                hover:border-black hover:shadow-lg transition-all duration-300
+              "
           >
             <span className="relative inline-block overflow-hidden h-[1.2em]">
               <span className="inline-block transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
@@ -93,7 +120,7 @@ const Hero = ({ onGetInTouchClick }) => {
               </span>
             </span>
           </Link>
-        </div>
+        </motion.div>
       </div>
 
       <div
