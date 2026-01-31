@@ -16,6 +16,7 @@ import fotoFaiz from '../assets/formal.webp';
 import foto1 from '../assets/foto1.webp';
 import foto2 from '../assets/foto2.webp';
 import foto3 from '../assets/foto3.webp';
+import foto4 from '../assets/fotoDengod.JPG'
 import { Skiper40 } from '@/components/skiper40';
 
 import '../index.css';
@@ -129,7 +130,7 @@ function HomePage() {
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               >
                 <div className="flex w-fit items-center -space-x-8 sm:-space-x-10">
-                  {[foto1, foto2, foto3, fotoFaiz].map((foto, index) => (
+                  {[foto1, foto4, foto2, fotoFaiz].map((foto, index) => (
                     <motion.div
                       key={index}
                       drag
