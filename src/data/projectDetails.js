@@ -1,12 +1,12 @@
 // // Cerebelum desain result
-import cerebellumImg1 from '../assets/cerebellum1.png';
+import cerebellumImg1 from '../assets/cerebellum1.webp';
 import cerebellumImg2 from '../assets/cerebellum2.png';
 import cerebellumImg3 from '../assets/cerebellum3.png';
 
 // // mitsaq desain result
-import mitsaqImg1 from '../assets/mitsaq1.png';
+import mitsaqImg1 from '../assets/mitsaq1.webp';
 import mitsaqImg2 from '../assets/mitsaq2.png';
-import mitsaqImg3 from '../assets/mitsaq3.png';
+import mitsaqImg3 from '../assets/mitsaq3.webp';
 
 // // velora desain result
 import veloraImg1 from '../assets/velora1.png';
@@ -19,16 +19,16 @@ import mentraImg2 from '../assets/mentra2.png';
 import mentraImg3 from '../assets/mentra3.png';
 
 // Design System Images
-import dsVelora from '../assets/dsVelora.png';
+import dsVelora from '../assets/dsVelora.webp';
 import dsMitsaq from '../assets/dsMitsaq.png';
 import dsMentra from '../assets/dsMentra.png';
-import dsCerebelum from '../assets/dsCerebelum.png';
+import dsCerebelum from '../assets/dsCerebelum.webp';
 
 // Logo Apps
 import logoMentra from '../assets/logoMentra.png';
 import logoVelora from '../assets/logoVelora.png';
 import logoMitsaq from '../assets/logoMitsaq.png';
-import logoCerebelum from '../assets/logoCerebelum.png';
+import logoCerebelum from '../assets/logoCerebelum.webp';
 
 // Tim Saya
 import akhdan from '../assets/akhdan.jpg';

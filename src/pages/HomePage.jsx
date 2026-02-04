@@ -9,14 +9,12 @@ import handshake from '../assets/handshake.webp';
 import clipImg from '../assets/clip.webp';
 import powerImg from '../assets/power.webp';
 import signImg from '../assets/sign.webp';
-import ungu from '../assets/gradient.webp';
 import bintang from '../assets/bintang.png';
-import stars from '../assets/stars.png';
 import fotoFaiz from '../assets/formal.webp';
 import foto1 from '../assets/foto1.webp';
 import foto2 from '../assets/foto2.webp';
 import foto3 from '../assets/foto3.webp';
-import foto4 from '../assets/fotoDengod.JPG'
+import foto4 from '../assets/fotoDengod.webp'
 import { Skiper40 } from '@/components/skiper40';
 
 import '../index.css';
@@ -273,17 +271,19 @@ function HomePage() {
 
             {/* === Right Side: Collaboration Card === */}
             <div className="w-full md:w-1/2 mt-8 md:mt-0" ref={contactRef}>
-              <div className="relative w-full h-[380px] md:h-[412px] rounded-4xl p-6 sm:p-8 md:p-10 bg-black text-white flex flex-col items-center text-center overflow-hidden">
+              <div className="relative w-full h-[380px] md:h-[412px] rounded-4xl p-6 sm:p-8 md:p-10 bg-gradient-to-br from-black via-gray-900 to-black text-white flex flex-col items-center text-center overflow-hidden border border-white/10 shadow-2xl">
                 <div className="absolute inset-0 flex justify-center items-center">
-                  <img
-                    src={ungu}
-                    alt="gradient"
-                    className="object-contain absolute h-[340px] md:h-[400px] opacity-90 blur-3xl"
+                  <div
+                    className="absolute w-[300px] h-[300px] md:w-[500px] md:h-[500px] opacity-90 blur-[120px] rounded-full"
+                    style={{
+                      background:
+                        'radial-gradient(circle, #6E04C0 8%, rgba(110, 4, 192, 0) 60%)',
+                    }}
                   />
                   <img
                     src={bintang}
                     alt="bintang"
-                    className="object-contain absolute w-60 h-60 md:w-[300px] md:h-[300px] animate-[spin_7s_linear_infinite] pointer-events-none"
+                    className="object-contain absolute w-60 h-60 md:w-[300px] md:h-[300px] animate-[spin_7s_linear_infinite] pointer-events-none opacity-80"
                   />
                 </div>
 
@@ -305,8 +305,9 @@ function HomePage() {
                 <div className="relative w-full max-w-md mb-3 mt-2 md:mt-4 z-10">
                   <div
                     className="
-              flex rounded-3xl px-2 py-2 border border-[#FFFFFF]/30 bg-black/40 backdrop-blur-sm 
+              flex rounded-3xl px-2 py-2 border border-white/30 bg-white/10 backdrop-blur-xl 
               flex-col sm:flex-row items-stretch sm:items-center sm:justify-between gap-3 sm:gap-2
+              shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]
             "
                   >
                     <span
@@ -323,21 +324,23 @@ function HomePage() {
                       }
                       className="
                 relative group flex justify-center items-center rounded-3xl overflow-hidden 
-                border border-[rgba(255,255,255,0.3)] text-white font-normal 
-                bg-linear-to-b from-[#323232] to-[#000000] 
-                shadow-[inset_0_0_8px_0_#FFFFFF] 
+                border border-white/40 text-white font-medium 
+                bg-gradient-to-b from-white/20 to-white/5 
+                shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] 
                 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] 
-                hover:shadow-[inset_0_10px_29.1px_0_rgba(255,255,255,0.4)]
+                hover:bg-gradient-to-b hover:from-white/30 hover:to-white/10
+                hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_8px_16px_-4px_rgba(255,255,255,0.2)]
+                backdrop-blur-sm
                 w-full sm:w-fit 
                 h-[42px] md:h-12 px-6 md:px-8 
                 text-[14px] md:text-[16px]
               "
                     >
-                      <img
+                      {/* <img
                         src={stars}
                         alt="stars"
                         className="absolute left-1/2 top-1/2 w-[600%] h-[600%] -translate-x-1/2 -translate-y-1/2 object-cover opacity-60 animate-[spin_7s_linear_infinite] pointer-events-none"
-                      />
+                      /> */}
                       <span className="relative z-10">Copy</span>
                     </button>
                   </div>

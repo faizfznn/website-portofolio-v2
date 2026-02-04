@@ -12,6 +12,7 @@ import { useAlbumContext } from '../components/AlbumContext';
 import Album from '../components/Album';
 import Reveal from '../components/Reveal';
 import '../index.css';
+import WorkSection from '../components/WorkSection';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 60, filter: 'blur(10px)' },
@@ -195,7 +196,7 @@ function AboutMePage() {
             </div>
 
             {/* Bagian kanan */}
-            <motion.div 
+            <motion.div
               className="flex flex-wrap justify-start items-start gap-6 rounded-3xl bg-[#FAFAFA] w-full p-4"
               variants={staggerContainer}
               initial="hidden"
@@ -241,7 +242,14 @@ function AboutMePage() {
         <ExperienceSection />
       </Reveal>
       <Reveal delay={0.45}>
-        <EducationSection />
+        <div className="flex flex-col md:flex-row items-start gap-20">
+          <div className="w-full md:w-1/2">
+            <EducationSection />
+          </div>
+          <div className="w-full md:w-1/2">
+            <WorkSection />
+          </div>
+        </div>
       </Reveal>
 
       <Reveal delay={0.6}>

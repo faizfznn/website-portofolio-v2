@@ -1,5 +1,5 @@
-import organizationalExperience from "../data/organizationalExperience";
-import achievements from "../data/achievementsExperience";
+import organizationalExperience from '../data/organizationalExperience';
+import achievements from '../data/achievementsExperience';
 
 const TimelineItem = ({ date, company, role, isActive = false }) => (
   <div className="relative pl-8 group">
@@ -27,12 +27,15 @@ const TimelineItem = ({ date, company, role, isActive = false }) => (
 function ExperienceSection() {
   return (
     <section id="experience" className="py-20 w-full scroll-mt-24">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-black">Experience</h2>
+      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-black">
+        Experience
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-        
         {/* Kolom Kiri: Organizational */}
         <div className="relative border-l-2 border-gray-200 pl-4">
-          <h3 className="text-xl md:text-2xl font-bold text-gray-500 mb-8">Organizational</h3>
+          <h3 className="text-xl md:text-2xl font-bold text-gray-500 mb-8">
+            Organizational
+          </h3>
           <div className="space-y-10">
             {organizationalExperience.map((exp, index) => (
               <TimelineItem key={index} {...exp} />
@@ -42,14 +45,21 @@ function ExperienceSection() {
 
         {/* Kolom Kanan: Achievements */}
         <div className="relative border-l-2 border-gray-200 pl-4">
-          <h3 className="text-xl md:text-2xl font-bold text-gray-500 mb-8">Achievements</h3>
+          <div className="flex items-center gap-3 mb-8">
+            <h3 className="text-xl md:text-2xl font-bold text-gray-500">
+              Achievements
+            </h3>
+            <span className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded">
+              <span className="inline-block h-2 w-2 rounded-full bg-[#2A9F47] mr-1.5"></span>
+              Still Active / LFT
+            </span>
+          </div>
           <div className="space-y-10">
             {achievements.map((exp, index) => (
               <TimelineItem key={index} {...exp} />
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );
