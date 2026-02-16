@@ -14,13 +14,15 @@ import fotoFaiz from '../assets/formal.webp';
 import foto1 from '../assets/foto1.webp';
 import foto2 from '../assets/foto2.webp';
 import foto3 from '../assets/foto3.webp';
-import foto4 from '../assets/fotoDengod.webp'
+import foto4 from '../assets/fotoDengod.webp';
 import { Skiper40 } from '@/components/skiper40';
 
 import '../index.css';
 
 import { SiJavascript, SiFigma, SiKotlin, SiReact } from 'react-icons/si';
 import Reveal from '../components/Reveal';
+import TechStack from '../components/TechStack';
+import techStack from '../data/techStack';
 const timeOptions = {
   timeZone: 'Asia/Jakarta',
   hour: 'numeric',
@@ -80,6 +82,7 @@ function HomePage() {
       <Reveal>
         <Hero onGetInTouchClick={handleScrollToContact} />
       </Reveal>
+      {/* Tech Stack moved to bottom as a styled panel */}
       {/* Selected Work Section */}
       <Reveal>
         <section className="mt-24 md:mt-40 mb-40 md:mb-40">
@@ -108,6 +111,11 @@ function HomePage() {
         </section>
       </Reveal>
 
+      {/* Bottom Tech Stack Section */}
+      <div className="mb-24 md:mb-32">
+        <TechStack items={techStack} variant="panel" title="Tech Stack" />
+      </div>
+
       {/* Hello, I'm Faiz */}
       <div className="md:mt-10">
         <Reveal delay={0.15}>
@@ -120,7 +128,7 @@ function HomePage() {
             {/* === Left Side === */}
             <div className="w-full md:w-1/2 flex flex-col">
               {/* Kolase Gambar dengan Animasi & Drag */}
-              <motion.div 
+              <motion.div
                 className="relative flex mb-12 w-full justify-center md:justify-start pt-10"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -184,18 +192,18 @@ function HomePage() {
             absolute w-10 h-10 md:w-20 md:h-20 
             -top-32 left-2 
             md:-top-52 md:-left-7
-          " 
+          "
                   width="80"
-                  height="80" 
+                  height="80"
                 />
-              <p className="text-black text-base md:text-lg leading-relaxed">
-                <span className="font-bold text-lg md:text-xl">
-                  I am a Product Designer based in Indonesia.
-                </span>{' '}
-                I design to uncomplicate things and create joy in experiences
-                that etch in one&apos;s memory. Most importantly, I design to
-                make things more human, in a way that empowers.
-              </p>
+                <p className="text-black text-base md:text-lg leading-relaxed">
+                  <span className="font-bold text-lg md:text-xl">
+                    I am a Product Designer based in Indonesia.
+                  </span>{' '}
+                  I design to uncomplicate things and create joy in experiences
+                  that etch in one&apos;s memory. Most importantly, I design to
+                  make things more human, in a way that empowers.
+                </p>
                 <img
                   src={clipImg}
                   alt=""

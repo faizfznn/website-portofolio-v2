@@ -13,6 +13,8 @@ import Album from '../components/Album';
 import Reveal from '../components/Reveal';
 import '../index.css';
 import WorkSection from '../components/WorkSection';
+import TechStack from '../components/TechStack';
+import techStack from '../data/techStack';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 60, filter: 'blur(10px)' },
@@ -175,6 +177,9 @@ function AboutMePage() {
           </div>
         </div>
       </Reveal>
+
+      {/* Tech Stack grid */}
+      <TechStack className='' items={techStack} variant="grid" title="Tech Stack" />
 
       <Reveal delay={0.15}>
         <div className="flex flex-col w-full items-start gap-8">
