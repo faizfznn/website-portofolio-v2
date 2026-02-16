@@ -82,10 +82,15 @@ function HomePage() {
       <Reveal>
         <Hero onGetInTouchClick={handleScrollToContact} />
       </Reveal>
-      {/* Tech Stack moved to bottom as a styled panel */}
+
+      {/* Tech Stack Carousel */}
+      <div className="mt-20 md:mt-20 mb-24">
+        <TechStack items={techStack} variant="carousel" title="Tech Stack" />
+      </div>
+
       {/* Selected Work Section */}
       <Reveal>
-        <section className="mt-24 md:mt-40 mb-40 md:mb-40">
+        <section className="mt-24/mt-40 mb-40">
           <div className="mb-8">
             <h2>
               <span className="text-3xl md:text-4xl font-bold text-black">
@@ -112,12 +117,14 @@ function HomePage() {
       </Reveal>
 
       {/* Bottom Tech Stack Section */}
+      {/* 
       <div className="mb-24 md:mb-32">
         <TechStack items={techStack} variant="panel" title="Tech Stack" />
-      </div>
+      </div> 
+      */}
 
       {/* Hello, I'm Faiz */}
-      <div className="md:mt-10">
+      <div>
         <Reveal delay={0.15}>
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-black">
             Hello, I&apos;m Faiz
@@ -129,7 +136,7 @@ function HomePage() {
             <div className="w-full md:w-1/2 flex flex-col">
               {/* Kolase Gambar dengan Animasi & Drag */}
               <motion.div
-                className="relative flex mb-12 w-full justify-center md:justify-start pt-10"
+                className="relative flex mb-8 w-full justify-center md:justify-start pt-6"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -344,11 +351,6 @@ function HomePage() {
                 text-[14px] md:text-[16px]
               "
                     >
-                      {/* <img
-                        src={stars}
-                        alt="stars"
-                        className="absolute left-1/2 top-1/2 w-[600%] h-[600%] -translate-x-1/2 -translate-y-1/2 object-cover opacity-60 animate-[spin_7s_linear_infinite] pointer-events-none"
-                      /> */}
                       <span className="relative z-10">Copy</span>
                     </button>
                   </div>

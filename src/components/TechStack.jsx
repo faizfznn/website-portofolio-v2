@@ -1,4 +1,5 @@
 import Reveal from './Reveal';
+import Marquee from 'react-fast-marquee';
 
 function TechIcon({ name, Icon, size = 'md', theme = 'light' }) {
   const dims =
@@ -6,24 +7,40 @@ function TechIcon({ name, Icon, size = 'md', theme = 'light' }) {
       ? 'w-9 h-9 md:w-10 md:h-10'
       : 'w-12 h-12';
   const iconSizeClass = size === 'sm' ? 'text-2xl' : 'text-3xl';
-  // Always render dark icon color when using react-icons fallback
-  const iconColorBase = 'text-black/80 group-hover:text-black';
+  const iconColorBase = theme === 'dark' ? 'text-white' : 'text-black/80 group-hover:text-black';
 
   return (
     <span
-      className={`group relative shrink-0 flex items-center justify-center ${dims} rounded-2xl bg-white border border-gray-200`}
+      className={`group relative shrink-0 flex items-center justify-center ${dims} rounded-2xl ${theme === 'dark' ? 'bg-white/10 border-white/10' : 'bg-white border-gray-200'} border transition-all duration-300 hover:border-gray-400`}
       title={name}
       aria-label={name}
       tabIndex={0}
     >
       <Icon className={`${iconColorBase} transition-colors duration-200 ${iconSizeClass}`} />
-      <span
-        className="absolute -top-8 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-all duration-200 bg-black text-white text-[10px] px-2 py-1 rounded shadow-lg pointer-events-none whitespace-nowrap z-10"
-        role="tooltip"
-      >
+      {theme !== 'dark' && (
+        <span
+          className="absolute -top-8 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-all duration-200 bg-black text-white text-[10px] px-2 py-1 rounded shadow-lg pointer-events-none whitespace-nowrap z-10"
+          role="tooltip"
+        >
+          {name}
+        </span>
+      )}
+    </span>
+  );
+}
+
+function CarouselIcon({ name, Icon }) {
+  return (
+    <div className="group/icon flex flex-col items-center mx-4 md:mx-5 cursor-default select-none">
+      {/* Icon container */}
+      <div className="relative w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-2xl bg-white border border-gray-200/60 shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-all duration-300 group-hover/icon:shadow-lg group-hover/icon:-translate-y-1.5 group-hover/icon:border-gray-300">
+        <Icon className="text-2xl md:text-3xl text-gray-600 transition-all duration-300 group-hover/icon:text-black group-hover/icon:scale-110" />
+      </div>
+      {/* Label */}
+      <span className="mt-2.5 text-[11px] md:text-xs font-medium text-gray-500 transition-colors duration-300 group-hover/icon:text-black whitespace-nowrap">
         {name}
       </span>
-    </span>
+    </div>
   );
 }
 
@@ -32,6 +49,45 @@ function TechStack({ items = [], title = 'Tech Stack', variant = 'strip' }) {
     'rounded-3xl bg-[#FAFAFA] border border-gray-200/80 shadow-sm mb-10';
 
   if (!items || items.length === 0) return null;
+
+  if (variant === 'carousel') {
+    return (
+      <section className="w-full pt-12 md:pt-16 overflow-hidden relative">
+        {/* Thin separator line */}
+        <div className="max-w-6xl mx-auto px-4 mb-8">
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+        </div>
+
+        {/* Heading row – left-aligned label + right description */}
+        <div className="max-w-6xl mx-auto px-4 mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+          <h3 className="text-sm font-semibold text-gray-600 tracking-[0.15em] uppercase">
+            {title}
+          </h3>
+          <p className="text-sm text-gray-500">
+            Tools I use day-to-day
+          </p>
+        </div>
+
+        {/* Marquee */}
+        <div className="w-full relative">
+          {/* Edge fade masks */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-r from-[#fafafa] to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-l from-[#fafafa] to-transparent z-20 pointer-events-none" />
+
+          <Marquee gradient={false} speed={30} autoFill pauseOnHover className="py-2">
+            {items.map(({ name, Icon }) => (
+              <CarouselIcon key={name} name={name} Icon={Icon} />
+            ))}
+          </Marquee>
+        </div>
+
+        {/* Bottom separator line */}
+        <div className="max-w-6xl mx-auto px-4 mt-8">
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <div className="w-full mt-8">
