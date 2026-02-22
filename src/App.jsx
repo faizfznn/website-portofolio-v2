@@ -14,7 +14,6 @@ function App() {
   return (
     <main className="min-h-screen">
       <CustomCursor /> 
-      {/* <Celebrations />  */}
       <div className="container mx-auto px-4">
         <header className="flex justify-center py-6">
           <Navbar />
@@ -28,6 +27,7 @@ function App() {
         </footer>
         <ScrollToTop />
       </div>
+      {/* <Celebrations />  */}
     </main>
   );
 }

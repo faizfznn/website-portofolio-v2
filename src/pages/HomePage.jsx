@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import Hero from '../components/Hero';
 import ProjectCard from '../components/ProjectCard.jsx';
@@ -47,6 +47,17 @@ function HomePage() {
   const [currentTime, setCurrentTime] = useState(
     new Date().toLocaleTimeString('en-GB', timeOptions)
   );
+
+  const [showToast, setShowToast] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText('faiz150605@gmail.com');
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2000);
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date().toLocaleTimeString('en-GB', timeOptions));
@@ -334,9 +345,7 @@ function HomePage() {
                       faiz150605@gmail.com
                     </span>
                     <button
-                      onClick={() =>
-                        navigator.clipboard.writeText('faiz150605@gmail.com')
-                      }
+                      onClick={handleCopyEmail}
                       className="
                 relative group flex justify-center items-center rounded-3xl overflow-hidden 
                 border border-white/40 text-white font-medium 
@@ -379,6 +388,20 @@ function HomePage() {
           </section>
         </Reveal>
       </div>
+
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 px-6 py-3 bg-gray-900 text-white rounded-full shadow-lg flex items-center gap-2 border border-white/10 backdrop-blur-md"
+          >
+            <span>✅</span>
+            <span className="font-medium text-sm">Email copied successfully!</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
