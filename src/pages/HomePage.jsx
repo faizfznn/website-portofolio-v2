@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { goeyToast, GoeyToaster } from '@/components/ui/goey-toaster';
+
 
 import Hero from '../components/Hero';
 import ProjectCard from '../components/ProjectCard.jsx';
@@ -52,10 +54,9 @@ function HomePage() {
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('faiz150605@gmail.com');
-    setShowToast(true);
-    setTimeout(() => {
-      setShowToast(false);
-    }, 2000);
+    goeyToast.info('Email copied successfully!', {
+      description: 'You can now paste it anywhere.',
+    });
   };
 
   useEffect(() => {
@@ -90,6 +91,8 @@ function HomePage() {
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 mt-[92px]">
+      <GoeyToaster position="bottom-center" />
+
       <Reveal>
         <Hero onGetInTouchClick={handleScrollToContact} />
       </Reveal>
@@ -398,7 +401,9 @@ function HomePage() {
             className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 px-6 py-3 bg-gray-900 text-white rounded-full shadow-lg flex items-center gap-2 border border-white/10 backdrop-blur-md"
           >
             <span>✅</span>
-            <span className="font-medium text-sm">Email copied successfully!</span>
+            <span className="font-medium text-sm">
+              Email copied successfully!
+            </span>
           </motion.div>
         )}
       </AnimatePresence>

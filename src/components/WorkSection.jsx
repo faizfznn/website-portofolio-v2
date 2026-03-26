@@ -1,9 +1,14 @@
-
 const workData = [
   {
-    date: "Feb 2026 - May 2026",
-    institution: "Sequrra",
-    posisiton: "Frontend Developer Intern",
+    date: 'Feb 2026 - May 2026',
+    institution: 'Sequrra',
+    posisiton: 'Frontend Developer Intern',
+    isActive: true,
+  },
+  {
+    date: 'May 2025 - Aug 2025',
+    institution: 'Bakti BCA - Community Empowerment Program',
+    posisiton: 'Community Empowerment Project Member',
     isActive: true,
   },
 ];
@@ -41,8 +46,6 @@ function WorkSection() {
         </div>
       </div>
     </section>
-
-    
   );
 }
 
