@@ -1,5 +1,6 @@
 import { useParams, Link, useLocation } from 'react-router-dom';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+// eslint-disable-next-line no-unused-vars
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useRef } from 'react';
 import { FiCopy, FiCheck } from 'react-icons/fi';
 import { HiChevronLeft, HiExternalLink } from 'react-icons/hi';
@@ -9,35 +10,48 @@ import Reveal from '../components/Reveal';
 import Sidebar from '../components/Sidebar';
 import NotFoundPage from './NotFoundPage.jsx';
 
-import { 
-  SiFigma, SiMiro, SiNotion, SiGoogleforms,
-  SiClickup, SiInkscape, SiReact, SiTailwindcss, 
-  SiTypescript, SiGo, SiPhp, SiLaravel, SiMaze, SiHtml5, SiCss3, SiJavascript
+import {
+  SiFigma,
+  SiMiro,
+  SiNotion,
+  SiGoogleforms,
+  SiClickup,
+  SiInkscape,
+  SiReact,
+  SiTailwindcss,
+  SiTypescript,
+  SiGo,
+  SiPhp,
+  SiLaravel,
+  SiMaze,
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
 } from 'react-icons/si';
 const toolIcons = {
   // Design & Collaboration
-  "Figma": <SiFigma className="text-[#F24E1E]" />, // Asli: Kombinasi, tapi Orange-Red paling ikonik
-  "Miro": <SiMiro className="text-[#050038]" />,  // Warna teks/logo gelap Miro lebih akurat (bg biasanya kuning)
-  "Notion": <SiNotion className="text-[#000000]" />,
-  "Google Forms": <SiGoogleforms className="text-[#673AB7]" />, // Ungu khas Google Workspace
-  "Maze": <SiMaze className="text-[#101828]" />, // Maze sering menggunakan hitam pekat/dark navy
+  Figma: <SiFigma className="text-[#F24E1E]" />, // Asli: Kombinasi, tapi Orange-Red paling ikonik
+  Miro: <SiMiro className="text-[#050038]" />, // Warna teks/logo gelap Miro lebih akurat (bg biasanya kuning)
+  Notion: <SiNotion className="text-[#000000]" />,
+  'Google Forms': <SiGoogleforms className="text-[#673AB7]" />, // Ungu khas Google Workspace
+  Maze: <SiMaze className="text-[#101828]" />, // Maze sering menggunakan hitam pekat/dark navy
 
   // Management & Illustration
-  "ClickUp": <SiClickup className="text-[#7B68EE]" />,
-  "Inkscape": <SiInkscape className="text-[#000000]" />,
+  ClickUp: <SiClickup className="text-[#7B68EE]" />,
+  Inkscape: <SiInkscape className="text-[#000000]" />,
 
   // Frontend & Styling
-  "React.js": <SiReact className="text-[#61DAFB]" />,
-  "Tailwind": <SiTailwindcss className="text-[#06B6D4]" />,
-  "TypeScript": <SiTypescript className="text-[#3178C6]" />,
-  "HTML": <SiHtml5 className="text-[#E34F26]" />,
-  "CSS": <SiCss3 className="text-[#1572B6]" />,
-  "JavaScript": <SiJavascript className="text-[#F7DF1E]" />,
+  'React.js': <SiReact className="text-[#61DAFB]" />,
+  Tailwind: <SiTailwindcss className="text-[#06B6D4]" />,
+  TypeScript: <SiTypescript className="text-[#3178C6]" />,
+  HTML: <SiHtml5 className="text-[#E34F26]" />,
+  CSS: <SiCss3 className="text-[#1572B6]" />,
+  JavaScript: <SiJavascript className="text-[#F7DF1E]" />,
 
   // Backend & Languages
-  "Golang": <SiGo className="text-[#00ADD8]" />,
-  "PHP": <SiPhp className="text-[#777BB4]" />,
-  "Laravel": <SiLaravel className="text-[#FF2D20]" />,
+  Golang: <SiGo className="text-[#00ADD8]" />,
+  PHP: <SiPhp className="text-[#777BB4]" />,
+  Laravel: <SiLaravel className="text-[#FF2D20]" />,
 };
 
 // --- Sub Components (InfoRow, Card) Tetap Sama ---
@@ -117,53 +131,70 @@ const ParallaxImage = ({ src, alt, className = '' }) => {
   );
 };
 
-const CopyColor = ({ hex, name }) => {
-  const [copied, setCopied] = useState(false);
+const ColorPalette = ({ colors }) => {
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [copiedHex, setCopiedHex] = useState('');
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(hex);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async (hex) => {
+    try {
+      await navigator.clipboard.writeText(hex);
+      setCopiedHex(hex);
+      setTimeout(() => setCopiedHex(''), 1500);
+    } catch {
+      // Clipboard may fail on some browsers/devices without permission.
+    }
   };
 
   return (
-    <button
-      onClick={handleCopy}
-      className="group flex flex-col items-center gap-3 relative"
+    <div
+      className="w-full overflow-hidden rounded-2xl"
+      onMouseLeave={() => setActiveIndex(null)}
     >
-      <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full shadow-xl transition-transform duration-500 group-hover:scale-105 group-hover:shadow-2xl overflow-hidden ring-1 ring-black/5">
-        <div
-          className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-90"
-          style={{ backgroundColor: hex }}
-        />
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          {copied ? (
-            <FiCheck className="text-3xl text-white mix-blend-difference" />
-          ) : (
-            <FiCopy className="text-3xl text-white mix-blend-difference" />
-          )}
-        </div>
-      </div>
-      <div className="text-center">
-        <p className="font-mono text-xs text-gray-400 uppercase tracking-widest mb-1">
-          {name}
-        </p>
-        <p className="font-medium text-gray-900">{hex}</p>
-      </div>
+      <div className="flex h-[300px] overflow-hidden rounded-2xl">
+        {colors.map((color, index) => {
+          const isActive = activeIndex === index;
+          const isLightColor = color.hex.toLowerCase() === '#ffffff';
+          const wasCopied = copiedHex === color.hex;
 
-      <AnimatePresence>
-        {copied && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="absolute -top-12 left-1/2 -translate-x-1/2 bg-black text-white text-xs py-2 px-3 rounded-lg shadow-lg whitespace-nowrap z-20 pointer-events-none"
-          >
-            Copied to clipboard
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </button>
+          return (
+            <button
+              key={`${color.hex}-${index}`}
+              type="button"
+              onMouseEnter={() => setActiveIndex(index)}
+              onFocus={() => setActiveIndex(index)}
+              onClick={() => handleCopy(color.hex)}
+              className="group relative flex h-full flex-1 p-5 md:p-7 text-left transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] focus:outline-none"
+              style={{
+                backgroundColor: color.hex,
+                color: isLightColor ? '#212121' : '#ffffff',
+                flexGrow: isActive ? 3 : 1,
+              }}
+            >
+              <div className="relative z-10 flex h-full w-full flex-col justify-between">
+                <h4 className="text-[12px] md:text-[18px] font-semibold leading-none tracking-tight">
+                  {color.name}
+                </h4>
+
+                <p className="text-[8px] md:text-[12px] font-semibold">
+                  {color.hex}
+                </p>
+              </div>
+
+              {isActive && (
+                <span className="absolute left-1/2 top-1/2 z-20 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-[#2B2B2B] shadow-lg backdrop-blur transition-transform duration-200 group-hover:scale-95">
+                  {wasCopied ? (
+                    <FiCheck className="text-base" />
+                  ) : (
+                    <FiCopy className="text-base" />
+                  )}
+                  {wasCopied ? 'Copied' : 'Copy'}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 };
 
@@ -269,7 +300,9 @@ export default function ProjectDetailPage() {
         <Reveal>
           <article id="overview" className="scroll-mt-32">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-gray-200">
-              <h2 className="text-3xl md:text-4xl font-bold text-black">Overview</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-black">
+                Overview
+              </h2>
               <div className="flex flex-row gap-4">
                 {detail.websiteLink && (
                   <a
@@ -277,8 +310,8 @@ export default function ProjectDetailPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="
-                    relative w-full sm:w-fit h-[56px] px-8 rounded-[24px] 
-                    border-[1px] border-[#CAD3DC] bg-white text-black 
+                    relative w-full sm:w-fit h-14 px-8 rounded-[24px] 
+                    border border-[#CAD3DC] bg-white text-black 
                     text-[16px] font-normal group inline-flex items-center justify-center
                     overflow-hidden transition-colors duration-300 hover:border-black
                   "
@@ -305,8 +338,8 @@ export default function ProjectDetailPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="
-                    relative w-full sm:w-fit h-[56px] px-8 rounded-[24px] 
-                    border-[1px] border-[#CAD3DC] bg-white text-black 
+                    relative w-full sm:w-fit h-14 px-8 rounded-[24px] 
+                    border border-[#CAD3DC] bg-white text-black 
                     text-[16px] font-normal group inline-flex items-center justify-center
                     overflow-hidden transition-colors duration-300 hover:border-black
                   "
@@ -475,19 +508,7 @@ export default function ProjectDetailPage() {
                           <h3 className="text-xl font-semibold mb-3">
                             Color Palette
                           </h3>
-                          <div className="flex flex-wrap gap-4">
-                            {detail.colors.map((color) => (
-                              <div key={color.hex}>
-                                <div
-                                  className="w-16 h-16 rounded-lg border border-gray-200"
-                                  style={{ backgroundColor: color.hex }}
-                                />
-                                <p className="text-sm font-mono mt-1">
-                                  {color.hex}
-                                </p>
-                              </div>
-                            ))}
-                          </div>
+                          <ColorPalette colors={detail.colors} />
                         </div>
                       )}
                       {hasTypography && (
@@ -521,7 +542,7 @@ export default function ProjectDetailPage() {
                         {detail.designSystemImages.map((imgSrc, i) => (
                           <div
                             key={i}
-                            className="group relative rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 aspect-[4/3]"
+                            className="group relative rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 aspect-4/3"
                           >
                             <img
                               src={imgSrc}
@@ -619,18 +640,46 @@ export default function ProjectDetailPage() {
               <h2 className="text-3xl font-semibold text-black mb-6">
                 Prototype
               </h2>
-              <div className="w-full overflow-hidden rounded-3xl border border-gray-200">
+              <div className="bg-gray-100 rounded-2xl overflow-hidden">
                 <iframe
-                  style={{ border: '1px solid' }}
+                  style={{ border: 'none' }}
                   width="100%"
                   height="600"
                   src={detail.figmaLink}
                   allowFullScreen
+                  loading="lazy"
+                  title="Figma Prototype"
                 ></iframe>
               </div>
             </article>
           </Reveal>
         )}
+
+        {/* --- Footer Navigation --- */}
+        <Reveal>
+          <section className="border-t border-gray-200 pt-8 mt-12">
+            <h3 className="text-lg font-medium text-gray-500 mb-2">
+              Next Project
+            </h3>
+            {(() => {
+              const currentIndex = portfolioProjects.findIndex(
+                (p) => p.id === id
+              );
+              const nextIndex = (currentIndex + 1) % portfolioProjects.length;
+              const nextProject = portfolioProjects[nextIndex];
+              return (
+                <Link
+                  to={`/portfolio/${nextProject.id}`}
+                  className="group block"
+                >
+                  <h2 className="text-3xl font-semibold text-black group-hover:underline">
+                    {nextProject.appName}
+                  </h2>
+                </Link>
+              );
+            })()}
+          </section>
+        </Reveal>
       </section>
     </main>
   );

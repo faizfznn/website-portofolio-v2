@@ -9,7 +9,7 @@ const workData = [
     date: 'May 2025 - Aug 2025',
     institution: 'Bakti BCA - Community Empowerment Program',
     posisiton: 'Community Empowerment Project Member',
-    isActive: true,
+    isActive: false,
   },
 ];
 
