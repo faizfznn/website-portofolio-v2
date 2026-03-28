@@ -134,6 +134,15 @@ const ParallaxImage = ({ src, alt, className = '' }) => {
 const ColorPalette = ({ colors }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [copiedHex, setCopiedHex] = useState('');
+  const hasManyColors = colors.length > 3;
+  const activeGrow = hasManyColors ? 1.6 : 3;
+  const panelPaddingClass = hasManyColors ? 'p-4 md:p-4' : 'p-5 md:p-7';
+  const titleTextClass = hasManyColors
+    ? 'text-[11px] md:text-[16px]'
+    : 'text-[12px] md:text-[18px]';
+  const hexTextClass = hasManyColors
+    ? 'text-[9px] md:text-[11px]'
+    : 'text-[8px] md:text-[12px]';
 
   const handleCopy = async (hex) => {
     try {
@@ -163,21 +172,21 @@ const ColorPalette = ({ colors }) => {
               onMouseEnter={() => setActiveIndex(index)}
               onFocus={() => setActiveIndex(index)}
               onClick={() => handleCopy(color.hex)}
-              className="group relative flex h-full flex-1 p-5 md:p-7 text-left transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] focus:outline-none"
+              className={`group relative flex h-full min-w-0 flex-1 ${panelPaddingClass} text-left transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] focus:outline-none`}
               style={{
                 backgroundColor: color.hex,
                 color: isLightColor ? '#212121' : '#ffffff',
-                flexGrow: isActive ? 3 : 1,
+                flexGrow: isActive ? activeGrow : 1,
               }}
             >
               <div className="relative z-10 flex h-full w-full flex-col justify-between">
-                <h4 className="text-[12px] md:text-[18px] font-semibold leading-none tracking-tight">
+                <h4
+                  className={`${titleTextClass} pr-1 font-semibold leading-tight tracking-tight`}
+                >
                   {color.name}
                 </h4>
 
-                <p className="text-[8px] md:text-[12px] font-semibold">
-                  {color.hex}
-                </p>
+                <p className={`${hexTextClass} font-semibold`}>{color.hex}</p>
               </div>
 
               {isActive && (
