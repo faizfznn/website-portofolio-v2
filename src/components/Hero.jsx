@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { motion, px } from 'framer-motion';
+import { motion } from 'framer-motion';
 import fotoFaiz from '../assets/formal.webp';
 import indoFlag from '../assets/bendera.png';
 import stars from '../assets/stars.png';
@@ -23,7 +23,7 @@ const Hero = ({ onGetInTouchClick }) => {
   const words = headline.split(' ');
 
   return (
-    <section className="flex flex-col-reverse md:flex-row w-full px-6 md:px-[50px] justify-center items-center gap-12 md:gap-[138px]">
+    <section className="flex flex-col-reverse lg:flex-row w-full px-0 sm:px-2 lg:px-6 justify-between items-center gap-12 lg:gap-16 xl:gap-24">
       {isHovering && (
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
@@ -43,11 +43,11 @@ const Hero = ({ onGetInTouchClick }) => {
       )}
 
       {/* Left Content */}
-      <div className="flex flex-col items-start gap-8 md:gap-12 text-center md:text-left">
-        <div className="w-full md:w-[646px]">
+      <div className="flex flex-col items-start gap-8 lg:gap-12 text-left w-full lg:max-w-[620px]">
+        <div className="w-full">
           {/* Char-by-char Text Reveal */}
           <h1
-            className="text-3xl md:text-5xl font-medium text-black leading-snug md:leading-[1.4]"
+            className="text-[clamp(2.2rem,5.4vw,4rem)] font-medium text-black leading-[1.2] md:leading-tight"
             style={{
               fontFamily: '"Inter", sans-serif',
               letterSpacing: '-0.02em',
@@ -79,7 +79,7 @@ const Hero = ({ onGetInTouchClick }) => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="flex flex-col sm:flex-row items-start gap-4 lg:gap-2 w-full sm:w-auto"
+          className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 lg:gap-2 w-full"
         >
           <button
             onClick={onGetInTouchClick}
@@ -97,7 +97,7 @@ const Hero = ({ onGetInTouchClick }) => {
             <img
               src={stars}
               alt="stars"
-              className="absolute left-1/2 top-1/2 w-[600%] h-[600%] -translate-x-1/2 -translate-y-1/2 object-cover opacity-60 animate-[spin_7s_linear_infinite] group-hover:[animation-play-state:paused] pointer-events-none"
+              className="absolute left-1/2 top-1/2 w-[600%] h-[600%] -translate-x-1/2 -translate-y-1/2 object-cover opacity-60 animate-[spin_7s_linear_infinite] group-hover:paused pointer-events-none"
             />
             <span className="relative z-10">Get in touch</span>
           </button>
@@ -106,7 +106,7 @@ const Hero = ({ onGetInTouchClick }) => {
             to="/portfolio"
             className="
                 relative w-full sm:w-fit h-14 px-10 rounded-full 
-                border-[1px] border-[#CAD3DC] bg-white text-black 
+                border border-[#CAD3DC] bg-white text-black 
                 text-base font-medium group inline-flex items-center justify-center
                 hover:border-black hover:shadow-lg transition-all duration-300
               "
@@ -132,8 +132,7 @@ const Hero = ({ onGetInTouchClick }) => {
           hover:rotate-2 hover:translate-x-2 hover:scale-105 cursor-pointer
           bg-[rgba(242,244,246,0.5)] rounded-[44px]
           transform rotate-3
-          w-[240px] sm:w-[280px]
-          shadow-sm
+          w-60 sm:w-[280px] lg:w-[300px]
         "
       >
         <img

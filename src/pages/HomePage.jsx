@@ -2,7 +2,6 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { goeyToast, GoeyToaster } from '@/components/ui/goey-toaster';
 
-
 import Hero from '../components/Hero';
 import ProjectCard from '../components/ProjectCard.jsx';
 import works from '../data/workProjects.js';
@@ -104,7 +103,7 @@ function HomePage() {
 
       {/* Selected Work Section */}
       <Reveal>
-        <section className="mt-24/mt-40 mb-40">
+        <section className="mt-24 md:mt-40 mb-40">
           <div className="mb-8">
             <h2>
               <span className="text-3xl md:text-4xl font-bold text-black">
@@ -145,9 +144,9 @@ function HomePage() {
           </h2>
         </Reveal>
         <Reveal delay={0.15}>
-          <section className="mb-12 flex flex-col md:flex-row items-start gap-8 md:gap-12">
+          <section className="mb-12 flex flex-col xl:flex-row items-start gap-8 xl:gap-12">
             {/* === Left Side === */}
-            <div className="w-full md:w-1/2 flex flex-col">
+            <div className="w-full xl:w-1/2 flex flex-col">
               {/* Kolase Gambar dengan Animasi & Drag */}
               <motion.div
                 className="relative flex mb-8 w-full justify-center md:justify-start pt-6"
@@ -198,7 +197,7 @@ function HomePage() {
                 <img
                   src={powerImg}
                   alt=""
-                  className="absolute -top-6 -right-2 md:-top-17 md:-right-15 w-10 h-10 md:w-[99px] md:h-[95px] rotate-10 animate-slide-slow"
+                  className="absolute -top-6 right-1 w-10 h-10 sm:w-12 sm:h-12 md:-top-8 md:right-40 md:w-14 md:h-14 xl:-top-17 xl:-right-15 xl:w-[99px] xl:h-[95px] rotate-10 animate-slide-slow"
                   width="99"
                   height="95"
                 />
@@ -299,8 +298,8 @@ function HomePage() {
             </div>
 
             {/* === Right Side: Collaboration Card === */}
-            <div className="w-full md:w-1/2 mt-8 md:mt-0" ref={contactRef}>
-              <div className="relative w-full h-[380px] md:h-[412px] rounded-4xl p-6 sm:p-8 md:p-10 bg-gradient-to-br from-black via-gray-900 to-black text-white flex flex-col items-center text-center overflow-hidden border border-white/10 shadow-2xl">
+            <div className="w-full xl:w-1/2 mt-8 xl:mt-0" ref={contactRef}>
+              <div className="relative w-full max-w-[760px] xl:max-w-none mx-auto h-[380px] md:h-[412px] rounded-4xl p-6 sm:p-8 md:p-10 bg-linear-to-br from-black via-gray-900 to-black text-white flex flex-col items-center text-center overflow-hidden border border-white/10 shadow-2xl">
                 <div className="absolute inset-0 flex justify-center items-center">
                   <div
                     className="absolute w-[300px] h-[300px] md:w-[500px] md:h-[500px] opacity-90 blur-[120px] rounded-full"
@@ -352,10 +351,10 @@ function HomePage() {
                       className="
                 relative group flex justify-center items-center rounded-3xl overflow-hidden 
                 border border-white/40 text-white font-medium 
-                bg-gradient-to-b from-white/20 to-white/5 
+                bg-linear-to-b from-white/20 to-white/5 
                 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] 
                 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] 
-                hover:bg-gradient-to-b hover:from-white/30 hover:to-white/10
+                hover:bg-linear-to-b hover:from-white/30 hover:to-white/10
                 hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_8px_16px_-4px_rgba(255,255,255,0.2)]
                 backdrop-blur-sm
                 w-full sm:w-fit 

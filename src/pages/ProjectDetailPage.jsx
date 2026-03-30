@@ -281,7 +281,7 @@ export default function ProjectDetailPage() {
       style={{ fontFamily: '"Inter", sans-serif' }}
     >
       {/* === Sidebar Kiri === */}
-      <aside className="lg:col-span-1 lg:sticky lg:top-1/2 lg:-translate-y-1/2 self-start">
+      <aside className="hidden lg:block lg:col-span-1 lg:sticky lg:top-1/2 lg:-translate-y-1/2 self-start">
         <Sidebar items={sidebarItems} />
         <Link
           to={backPath}

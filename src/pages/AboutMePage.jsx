@@ -69,15 +69,15 @@ function AboutMePage() {
   return (
     <main className="w-full max-w-6xl mx-auto px-4 mt-[92px]">
       <Reveal>
-        <div className="flex flex-col md:flex-row w-full justify-between items-center gap-8 py-10">
+        <div className="flex flex-col xl:flex-row w-full justify-between items-start gap-8 xl:gap-10 py-10">
           {/* Image */}
           <div
-            className="w-full md:w-[485px] h-[360px] md:h-[559px] rounded-3xl bg-cover bg-center shadow-lg shrink-0"
+            className="w-full xl:w-[485px] h-[360px] md:h-[520px] xl:h-[559px] rounded-3xl bg-cover bg-center shadow-lg shrink-0"
             style={{ backgroundImage: `url(${aboutImage})` }}
           ></div>
 
           {/* Text */}
-          <div className="flex w-full md:w-[600px] flex-col justify-between items-end self-stretch mt-8 md:mt-0">
+          <div className="flex w-full xl:max-w-[620px] flex-col justify-between items-end self-stretch mt-2 xl:mt-0">
             <div className="flex p-4 flex-col justify-center items-start gap-7 self-stretch rounded-3xl bg-[#FAFAFA]">
               <div className="flex-col items-center gap-0.5 self-stretch">
                 <h1 className="text-4xl md:text-5xl font-bold">
@@ -179,7 +179,12 @@ function AboutMePage() {
       </Reveal>
 
       {/* Tech Stack grid */}
-      <TechStack className='' items={techStack} variant="grid" title="Tech Stack" />
+      <TechStack
+        className=""
+        items={techStack}
+        variant="grid"
+        title="Tech Stack"
+      />
 
       <Reveal delay={0.15}>
         <div className="flex flex-col w-full items-start gap-8">
@@ -260,7 +265,7 @@ function AboutMePage() {
       <Reveal delay={0.6}>
         <section
           id="music-section"
-          className="flex flex-col md:flex-row w/full items-center gap-8 mb-24 md:mb-32"
+          className="flex flex-col md:flex-row w-full items-center gap-8 mb-24 md:mb-32"
         >
           <div className="flex w-full md:w-[324px] h-auto md:h-48 p-4 flex-col items-start gap-6 rounded-3xl bg-[#FAFAFA]">
             <h2 className="flex flex-row flex-wrap items-center leading-tight gap-2">
