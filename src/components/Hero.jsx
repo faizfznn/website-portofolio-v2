@@ -132,7 +132,7 @@ const Hero = ({ onGetInTouchClick }) => {
           hover:rotate-2 hover:translate-x-2 hover:scale-105 cursor-pointer
           bg-[rgba(242,244,246,0.5)] rounded-[44px]
           transform rotate-3
-          w-60 sm:w-[280px] lg:w-[300px]
+          w-fit max-w-full
         "
       >
         <img
@@ -145,31 +145,33 @@ const Hero = ({ onGetInTouchClick }) => {
           className="w-[180px] sm:w-[200px] h-[180px] sm:h-[200px] rounded-[28px] object-cover"
         />
 
-        <div
-          className="flex p-3 gap-2 justify-center items-center bg-white rounded-full w-full"
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-        >
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-700"></span>
-          </span>
-          <span className="text-[14px] text-green-700 font-normal">
-            Available for freelance
-          </span>
-        </div>
+        <div className="flex flex-col items-center gap-3 min-w-max max-w-full">
+          <div
+            className="inline-flex p-3 gap-2 justify-center items-center bg-white rounded-full w-full"
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-700"></span>
+            </span>
+            <span className="text-[14px] text-green-700 font-normal whitespace-nowrap">
+              Available for opportunity
+            </span>
+          </div>
 
-        <div className="flex p-3 gap-2 justify-center items-center bg-white rounded-full w-full">
-          <img
-            src={indoFlag}
-            alt="Indonesian Flag"
-            className="w-5 h-5 rounded-sm object-cover"
-            width="20"
-            height="20"
-          />
-          <span className="text-[14px] text-black font-normal">
-            Malang, Indonesia
-          </span>
+          <div className="inline-flex p-3 gap-2 justify-center items-center bg-white rounded-full w-full">
+            <img
+              src={indoFlag}
+              alt="Indonesian Flag"
+              className="w-5 h-5 rounded-sm object-cover"
+              width="20"
+              height="20"
+            />
+            <span className="text-[14px] text-black font-normal whitespace-nowrap">
+              Malang, Indonesia
+            </span>
+          </div>
         </div>
       </div>
     </section>
