@@ -15,7 +15,6 @@ function Footer() {
         shadow-sm border border-gray-200/80
       "
     >
-      
       <Skiper40 />
 
       <div className="flex items-center gap-0">
@@ -88,7 +87,7 @@ function Footer() {
         </a>
         {/* LinkedIn */}
         <a
-          href="https://www.linkedin.com/in/muhammadfaizfauzan"
+          href="https://www.linkedin.com/in/mfaizfauzan/"
           target="_blank"
           rel="noopener noreferrer"
           className="relative group w-14 h-16 md:w-16 md:h-16 flex justify-center items-center"
