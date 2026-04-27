@@ -7,15 +7,13 @@ export default function ProjectCard({ project, isFullWidth }) {
   return (
     <Link
       to={`/portfolio/${project.id}`}
-      state={{ from: fromPage }} 
-      data-cursor-project="true" 
+      state={{ from: fromPage }}
+      data-cursor-project="true"
       className="block rounded-3xl overflow-hidden shadow-md dark:shadow-lg group-hover:shadow-xl group cursor-pointer transform transition-transform duration-300 hover:-translate-y-2"
       style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
     >
-
       <div className="rounded-3xl bg-[#FAFAFA] transition-shadow duration-300 flex flex-col">
         <div className="pb-6 p-6">
-
           <div className="flex justify-between items-start mb-1">
             <h3 className="text-lg md:text-2xl font-bold text-black leading-tight">
               {project.appName}
@@ -53,12 +51,10 @@ export default function ProjectCard({ project, isFullWidth }) {
           </div>
         </div>
 
-
+        {/* Image container with proper aspect ratio */}
         <div
           className={`mt-6 overflow-hidden mx-auto transition-all duration-500 ${
-            isFullWidth
-              ? 'w-full md:w-[840px] h-96' 
-              : 'w-full h-96' 
+            isFullWidth ? 'w-full md:w-[840px] h-96' : 'w-full h-96'
           }`}
         >
           <img
@@ -71,6 +67,8 @@ export default function ProjectCard({ project, isFullWidth }) {
             }`}
             loading="lazy"
             height="384"
+            width="840"
+            decoding="async"
           />
         </div>
       </div>

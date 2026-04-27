@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const BentoGrid = ({ items = [] }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -16,6 +15,10 @@ const BentoGrid = ({ items = [] }) => {
               src={item.image}
               alt={item.alt || ''}
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+              width={item.width || 400}
+              height={item.height || 400}
             />
           </div>
         );

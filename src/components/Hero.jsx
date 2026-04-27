@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import fotoFaiz from '../assets/formal.webp';
 import indoFlag from '../assets/bendera.png';
@@ -8,14 +8,25 @@ import stars from '../assets/stars.png';
 const Hero = ({ onGetInTouchClick }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const rafRef = useRef(null);
+  const lastPosRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      lastPosRef.current = { x: e.clientX, y: e.clientY };
+
+      // Use RAF to batch updates and prevent forced reflows
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        setMousePosition({ x: lastPosRef.current.x, y: lastPosRef.current.y });
+      });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   // Split text into characters for animation
@@ -34,6 +45,7 @@ const Hero = ({ onGetInTouchClick }) => {
             left: `${mousePosition.x - 100}px`,
             top: `${mousePosition.y - 25}px`,
             transform: 'translate(-50%, -50%)',
+            willChange: 'transform',
           }}
         >
           <div className="bg-white text-gray-800 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap border border-gray-200">
