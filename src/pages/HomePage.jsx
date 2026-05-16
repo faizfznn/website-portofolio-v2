@@ -14,7 +14,6 @@ import bintang from '../assets/bintang.png';
 import fotoFaiz from '../assets/formal.webp';
 import foto1 from '../assets/foto1.webp';
 import foto2 from '../assets/foto2.webp';
-import foto3 from '../assets/foto3.webp';
 import foto4 from '../assets/fotoDengod.webp';
 import { Skiper40 } from '@/components/skiper40';
 

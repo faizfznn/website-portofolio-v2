@@ -3,6 +3,8 @@ import linked from '../assets/linked.png';
 import github from '../assets/github.png';
 import { LuSend } from 'react-icons/lu';
 import { Skiper40 } from './skiper40';
+import fiverr from '../assets/fiverr.png';
+import behance from '../assets/behance.jpg';
 
 function Footer() {
   return (
@@ -18,7 +20,74 @@ function Footer() {
       <Skiper40 />
 
       <div className="flex items-center gap-0">
-        {' '}
+        <a
+          href="https://www.behance.net/gallery/248675319/Creative-Portfolio-UIUX-Design-Frontend-Development"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="
+            relative group w-14 h-16 md:w-16 md:h-16 
+            flex justify-center items-center
+          "
+        >
+          <img
+            src={behance}
+            alt="Behance"
+            className="
+              relative z-10 
+              w-10 h-10 md:w-12 md:h-12 rounded-xl
+              transform -rotate-9
+              transition-all duration-300
+              group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-15
+            "
+            width="48"
+            height="48"
+          />
+          <span
+            className="
+              absolute inset-6 md:inset-8 flex items-center justify-center 
+              text-xs md:text-sm text-black font-bold
+              opacity-0 group-hover:opacity-100
+              transition-opacity duration-300
+              mt-4
+            "
+          >
+            Behance
+          </span>
+        </a>
+        <a
+          href="https://www.fiverr.com/s/bdRoa0P"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="
+            relative group w-14 h-16 md:w-16 md:h-16 
+            flex justify-center items-center
+          "
+        >
+          <img
+            src={fiverr}
+            alt="Fiverr"
+            className="
+              relative z-10 
+              w-10 h-10 md:w-12 md:h-12 rounded-xl
+              transform -rotate-4
+              transition-all duration-300
+              group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-10
+            "
+            width="48"
+            height="48"
+          />
+          <span
+            className="
+              absolute inset-6 md:inset-8 flex items-center justify-center 
+              text-xs md:text-sm text-black font-bold
+              opacity-0 group-hover:opacity-100
+              transition-opacity duration-300
+              mt-4
+            "
+          >
+            Fiverr
+          </span>
+        </a>{' '}
         <a
           href="https://github.com/faizfznn"
           target="_blank"
