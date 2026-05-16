@@ -5,6 +5,7 @@ import { LuSend } from 'react-icons/lu';
 import { Skiper40 } from './skiper40';
 import fiverr from '../assets/fiverr.png';
 import behance from '../assets/behance.jpg';
+import twitter from '../assets/twitter.avif';
 
 function Footer() {
   return (
@@ -184,6 +185,40 @@ function Footer() {
             "
           >
             LinkedIn
+          </span>
+        </a>
+        <a
+          href="https://x.com/itsfaizf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="
+            relative group w-14 h-16 md:w-16 md:h-16 
+            flex justify-center items-center
+          "
+        >
+          <img
+            src={twitter}
+            alt="Twitter"
+            className="
+              relative z-10 
+              w-10 h-10 md:w-12 md:h-12 rounded-xl
+              transform rotate-13
+              transition-all duration-300
+              group-hover:-translate-y-8 md:group-hover:-translate-y-9 group-hover:rotate-0
+            "
+            width="48"
+            height="48"
+          />
+          <span
+            className="
+              absolute inset-6 md:inset-8 flex items-center justify-center 
+              text-xs md:text-sm text-black font-bold
+              opacity-0 group-hover:opacity-100
+              transition-opacity duration-300
+              mt-4
+            "
+          >
+            Twitter
           </span>
         </a>
       </div>
