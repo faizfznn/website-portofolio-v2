@@ -55,7 +55,7 @@ function Footer() {
             Behance
           </span>
         </a>
-        <a
+        {/* <a
           href="https://www.fiverr.com/s/bdRoa0P"
           target="_blank"
           rel="noopener noreferrer"
@@ -88,7 +88,7 @@ function Footer() {
           >
             Fiverr
           </span>
-        </a>{' '}
+        </a>{' '} */}
         <a
           href="https://github.com/faizfznn"
           target="_blank"
