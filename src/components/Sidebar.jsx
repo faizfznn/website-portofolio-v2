@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useLenis } from 'lenis/react';
 
 // MENERIMA PROPS 'items' AGAR DINAMIS
 const Sidebar = ({ items }) => {
+  const lenis = useLenis();
   // Default menu jika items tidak tersedia
   const defaultSections = [{ id: 'overview', label: 'Overview' }];
   const sections = items && items.length > 0 ? items : defaultSections;
@@ -65,6 +67,19 @@ const Sidebar = ({ items }) => {
           <li key={section.id} ref={(el) => (itemsRef.current[index] = el)}>
             <a
               href={`#${section.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                if (lenis) {
+                  lenis.scrollTo(`#${section.id}`, {
+                    offset: 100,
+                  });
+                } else {
+                  const element = document.getElementById(section.id);
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }
+              }}
               className={`block text-[14px] transition-all duration-300 ease-in-out ${
                 activeId === section.id
                   ? 'text-black font-semibold pl-4'

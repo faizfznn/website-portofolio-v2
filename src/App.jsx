@@ -1,5 +1,7 @@
 // src/App.jsx
 
+import { ReactLenis } from 'lenis/react';
+import 'lenis/dist/lenis.css';
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import './index.css';
@@ -12,23 +14,25 @@ import Celebrations from './components/Celebrations';
 
 function App() {
   return (
-    <main className="min-h-screen">
-      <CustomCursor />
-      <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-        <header className="flex justify-center py-6">
-          <Navbar />
-          <Analytics />
-        </header>
-        <Outlet />
-        <footer>
-          <Reveal>
-            <Footer />
-          </Reveal>
-        </footer>
-        <ScrollToTop />
-      </div>
-      {/* <Celebrations />  */}
-    </main>
+    <ReactLenis root>
+      <main className="min-h-screen">
+        <CustomCursor />
+        <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+          <header className="flex justify-center py-6">
+            <Navbar />
+            <Analytics />
+          </header>
+          <Outlet />
+          <footer>
+            <Reveal>
+              <Footer />
+            </Reveal>
+          </footer>
+          <ScrollToTop />
+        </div>
+        {/* <Celebrations />  */}
+      </main>
+    </ReactLenis>
   );
 }
 
