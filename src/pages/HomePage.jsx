@@ -5,6 +5,7 @@ import { goeyToast, GoeyToaster } from '@/components/ui/goey-toaster';
 import Hero from '../components/Hero';
 import ProjectCard from '../components/ProjectCard.jsx';
 import works from '../data/workProjects.js';
+import { supabase } from '../lib/supabaseClient';
 import pinImg from '../assets/pin.webp';
 import handshake from '../assets/handshake.webp';
 import clipImg from '../assets/clip.webp';
@@ -37,7 +38,40 @@ function HomePage() {
     { name: 'Kotlin', icon: <SiKotlin className="text-blue-500" /> },
     { name: 'React', icon: <SiReact className="text-cyan-400" /> },
   ];
-  const displayedProjects = works;
+
+  const [displayedProjects, setDisplayedProjects] = useState(works);
+
+  useEffect(() => {
+    async function loadDynamicWorks() {
+      try {
+        const { data, error } = await supabase
+          .from('projects')
+          .select('*')
+          .eq('is_work', true)
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        if (data && data.length > 0) {
+          const mapped = data.map(item => ({
+            id: item.id,
+            appName: item.app_name,
+            year: item.year,
+            title: item.title,
+            primaryColor: item.primary_color,
+            tags: item.tags || [],
+            description: item.description,
+            image: item.image_url,
+            logo: item.logo_url,
+            section: item.section
+          }));
+          setDisplayedProjects(mapped);
+        }
+      } catch (err) {
+        console.warn('Could not load dynamic works from Supabase, using local works static array.', err);
+      }
+    }
+    loadDynamicWorks();
+  }, []);
 
   const contactRef = useRef(null);
   const handleScrollToContact = () => {

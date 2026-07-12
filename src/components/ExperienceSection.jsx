@@ -1,5 +1,7 @@
+import React, { useState, useEffect } from 'react';
 import organizationalExperience from '../data/organizationalExperience';
 import achievements from '../data/achievementsExperience';
+import { supabase } from '../lib/supabaseClient';
 
 const TimelineItem = ({ date, company, role, isActive = false }) => (
   <div className="relative pl-8 group">
@@ -25,6 +27,53 @@ const TimelineItem = ({ date, company, role, isActive = false }) => (
 
 // --- Komponen Utama Experience ---
 function ExperienceSection() {
+  const [dbExperiences, setDbExperiences] = useState(organizationalExperience);
+  const [dbAchievements, setDbAchievements] = useState(achievements);
+
+  useEffect(() => {
+    async function loadDynamicExpAndAch() {
+      try {
+        const { data: expData, error: expErr } = await supabase
+          .from('experiences')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (expErr) throw expErr;
+
+        if (expData && expData.length > 0) {
+          const mappedExp = expData.map(item => ({
+            date: item.date,
+            company: item.company,
+            role: item.role,
+            isActive: item.is_active
+          }));
+          setDbExperiences(mappedExp);
+        }
+      } catch (err) {
+        console.warn('Could not load dynamic organizational experiences from Supabase. Falling back to local static array.', err);
+      }
+
+      try {
+        const { data: achData, error: achErr } = await supabase
+          .from('achievements')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (achErr) throw achErr;
+
+        if (achData && achData.length > 0) {
+          const mappedAch = achData.map(item => ({
+            date: item.date,
+            company: item.company,
+            role: item.role
+          }));
+          setDbAchievements(mappedAch);
+        }
+      } catch (err) {
+        console.warn('Could not load dynamic achievements from Supabase. Falling back to local static array.', err);
+      }
+    }
+    loadDynamicExpAndAch();
+  }, []);
+
   return (
     <section id="experience" className="py-20 w-full scroll-mt-24">
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-black">
@@ -37,7 +86,7 @@ function ExperienceSection() {
             Organizational
           </h3>
           <div className="space-y-10">
-            {organizationalExperience.map((exp, index) => (
+            {dbExperiences.map((exp, index) => (
               <TimelineItem key={index} {...exp} />
             ))}
           </div>
@@ -55,7 +104,7 @@ function ExperienceSection() {
             </span>
           </div>
           <div className="space-y-10">
-            {achievements.map((exp, index) => (
+            {dbAchievements.map((exp, index) => (
               <TimelineItem key={index} {...exp} />
             ))}
           </div>

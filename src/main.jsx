@@ -7,6 +7,7 @@ import PortfolioPage from './pages/PortfolioPage.jsx';
 import ProjectDetailPage from './pages/ProjectDetailPage.jsx';
 import AboutMePage from './pages/AboutMePage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
+import AdminPage from './pages/AdminPage.jsx';
 import { AlbumProvider } from './components/AlbumContext';
 import './index.css';
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: 'portfolio/:id',
         element: <ProjectDetailPage />,
+      },
+      {
+        path: 'admin',
+        element: <AdminPage />,
       },
       {
         path: '*',

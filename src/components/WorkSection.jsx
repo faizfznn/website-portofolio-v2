@@ -1,19 +1,8 @@
-const workData = [
-  {
-    date: 'Feb 2026 - May 2026',
-    institution: 'Sequrra',
-    posisiton: 'Frontend Developer Intern',
-    isActive: true,
-  },
-  {
-    date: 'May 2025 - Aug 2025',
-    institution: 'Bakti BCA - Community Empowerment Program',
-    posisiton: 'Community Empowerment Project Member',
-    isActive: false,
-  },
-];
+import React, { useState, useEffect } from 'react';
+import workData from '../data/workData';
+import { supabase } from '../lib/supabaseClient';
 
-const TimelineItem = ({ date, institution, posisiton, isActive = false }) => (
+const TimelineItem = ({ date, institution, position, isActive = false }) => (
   <div className="relative pl-8 group">
     <div className="absolute left-0 top-2">
       {isActive ? (
@@ -29,18 +18,45 @@ const TimelineItem = ({ date, institution, posisiton, isActive = false }) => (
     <div className="transition-opacity duration-300 group-hover:opacity-70">
       <p className="text-sm md:text-base text-gray-500">{date}</p>
       <h3 className="text-lg md:text-xl font-bold text-black">{institution}</h3>
-      <p className="text-base md:text-lg text-gray-600">{posisiton}</p>
+      <p className="text-base md:text-lg text-gray-600">{position}</p>
     </div>
   </div>
 );
 
 function WorkSection() {
+  const [dbWork, setDbWork] = useState(workData);
+
+  useEffect(() => {
+    async function loadDynamicWork() {
+      try {
+        const { data, error } = await supabase
+          .from('work')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (error) throw error;
+
+        if (data && data.length > 0) {
+          const mappedWork = data.map(item => ({
+            date: item.date,
+            institution: item.institution,
+            position: item.position,
+            isActive: item.is_active
+          }));
+          setDbWork(mappedWork);
+        }
+      } catch (err) {
+        console.warn('Could not load dynamic work from Supabase. Falling back to local static array.', err);
+      }
+    }
+    loadDynamicWork();
+  }, []);
+
   return (
     <section id="education" className="py-20 w-full scroll-mt-24">
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-black">Work</h2>
       <div className="relative border-l-2 border-gray-200 pl-4">
         <div className="space-y-10">
-          {workData.map((edu, index) => (
+          {dbWork.map((edu, index) => (
             <TimelineItem key={index} {...edu} />
           ))}
         </div>

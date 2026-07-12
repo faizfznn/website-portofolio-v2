@@ -108,7 +108,6 @@ const projectDetails = {
     designSystemImages: [dsCerebelum],
     logoImages: [
       { src: logoCerebelum, label: 'Color' },
-      { src: logoCerebelum, label: 'Color' },
     ],
     bentoImages: [cerebellumImg1, cerebellumImg2, cerebellumImg3],
     figmaLink:
@@ -324,8 +323,8 @@ const projectDetails = {
     bentoImages: [veloraImg1, veloraImg2, veloraImg3],
     figmaLink:
       'https://embed.figma.com/proto/iAoMTa6aw42i1HAJ5U0iQL/INSPACE_VELORA?page-id=1396%3A15723&node-id=1503-45880&viewport=-3592%2C-1523%2C0.68&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1503%3A45880&embed-host=share&hide-ui=1',
-    },
-    
+  },
+
   // --- Proyek FilkomReserV ---
   filkomreserv: {
     overview:
@@ -387,14 +386,14 @@ const projectDetails = {
       {
         title: 'Automated Notifications',
         description:
-        'An automated notification and email system that provides immediate status updates (approved/rejected) to users, reducing waiting times.',
+          'An automated notification and email system that provides immediate status updates (approved/rejected) to users, reducing waiting times.',
       },
     ],
   },
   // --- Proyek Portfolio Website V1 ---
   'porto-website-v1': {
     overview:
-    'This personal website serves as a digital identity for my undergraduate journey in Computer Science at UB. It is designed to showcase my interests in Software Engineering and UI/UX, focusing on creating seamless digital experiences while documenting my organizational roles and technical projects.',
+      'This personal website serves as a digital identity for my undergraduate journey in Computer Science at UB. It is designed to showcase my interests in Software Engineering and UI/UX, focusing on creating seamless digital experiences while documenting my organizational roles and technical projects.',
     websiteLink: 'https://faizfauzan.vercel.app/',
     githubLink: 'https://github.com/faizfznn/website-portofolio',
 
@@ -461,7 +460,7 @@ const projectDetails = {
       {
         title: 'Client-Side Security',
         description:
-        'The need to restrict access to registered users and manage sessions without relying on a complex backend infrastructure.',
+          'The need to restrict access to registered users and manage sessions without relying on a complex backend infrastructure.',
       },
     ],
     solutions: [
@@ -473,7 +472,7 @@ const projectDetails = {
       {
         title: 'Dynamic OpenTDB Integration',
         description:
-        'Integrated the Open Trivia Database (OpenTDB) API to fetch questions dynamically, ensuring a fresh and unique set of challenges for every session.',
+          'Integrated the Open Trivia Database (OpenTDB) API to fetch questions dynamically, ensuring a fresh and unique set of challenges for every session.',
       },
       {
         title: 'Simulated Authentication',

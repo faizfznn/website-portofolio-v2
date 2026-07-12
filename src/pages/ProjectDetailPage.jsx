@@ -1,7 +1,7 @@
 import { useParams, Link, useLocation } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { FiCopy, FiCheck } from 'react-icons/fi';
 import { HiChevronLeft, HiExternalLink } from 'react-icons/hi';
 import portfolioProjects from '../data/portfolioProjects.js';
@@ -9,6 +9,7 @@ import projectDetails from '../data/projectDetails.js';
 import Reveal from '../components/Reveal';
 import Sidebar from '../components/Sidebar';
 import NotFoundPage from './NotFoundPage.jsx';
+import { supabase } from '../lib/supabaseClient';
 
 import {
   SiFigma,
@@ -214,8 +215,95 @@ export default function ProjectDetailPage() {
   const backPath = isFromHome ? '/' : '/portfolio';
   const backLabel = isFromHome ? 'Home' : 'Portfolio';
 
-  const portfolioProject = portfolioProjects.find((p) => p.id === id);
-  const detail = projectDetails[id];
+  const [projectState, setProjectState] = useState(null);
+  const [detailState, setDetailState] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadDynamicDetail() {
+      setIsLoading(true);
+      try {
+        const { data: projData, error: projErr } = await supabase
+          .from('projects')
+          .select('*')
+          .eq('id', id)
+          .single();
+
+        if (projErr) throw projErr;
+
+        const { data: detData, error: detErr } = await supabase
+          .from('project_details')
+          .select('*')
+          .eq('project_id', id)
+          .single();
+
+        if (detErr) throw detErr;
+
+        if (projData) {
+          setProjectState({
+            id: projData.id,
+            appName: projData.app_name,
+            year: projData.year,
+            title: projData.title,
+            primaryColor: projData.primary_color,
+            tags: projData.tags || [],
+            description: projData.description,
+            image: projData.image_url,
+            logo: projData.logo_url,
+            section: projData.section
+          });
+        }
+
+        if (detData) {
+          setDetailState({
+            overview: detData.overview,
+            team: detData.team || [],
+            role: detData.role_list || [],
+            timeline: detData.timeline,
+            tools: detData.tools,
+            problems: detData.problems || [],
+            solutions: detData.solutions || [],
+            colors: detData.colors || [],
+            typography: detData.typography || { fontFamily: 'Inter', description: '' },
+            designSystemImages: detData.design_system_images || [],
+            logoImages: detData.logo_images || [],
+            bentoImages: detData.bento_images || [],
+            figmaLink: detData.figma_link
+          });
+        }
+      } catch (err) {
+        console.warn('Could not load dynamic project details from Supabase. Falling back to local static data.', err);
+        const staticProj = portfolioProjects.find((p) => p.id === id);
+        const staticDetail = projectDetails[id];
+        if (staticProj) {
+          setProjectState(staticProj);
+        }
+        if (staticDetail) {
+          setDetailState({
+            ...staticDetail,
+            role: staticDetail.role || []
+          });
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadDynamicDetail();
+  }, [id]);
+
+  const portfolioProject = projectState;
+  const detail = detailState;
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA]">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 border-4 border-gray-200 border-t-black rounded-full animate-spin"></div>
+          <p className="text-gray-500 font-medium">Loading details...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!portfolioProject || !detail) {
     return (
@@ -240,7 +328,7 @@ export default function ProjectDetailPage() {
     detail.designSystemImages && detail.designSystemImages.length > 0;
   const showDesignSystemContent = hasColors || hasTypography || hasDesignImages;
 
-  const showLogoContent = detail.logoImages && detail.logoImages.length > 0;
+  const showLogoContent = (detail.logoImages && detail.logoImages.length > 0) || portfolioProject.logo;
   const showVisuals = showDesignSystemContent || showLogoContent; // Tampil jika salah satu ada
 
   // 3. Other Sections
@@ -271,9 +359,11 @@ export default function ProjectDetailPage() {
   const designSystemGridClass = getGridColsClass(
     detail.designSystemImages ? detail.designSystemImages.length : 0
   );
-  const logoGridClass = getGridColsClass(
-    detail.logoImages ? detail.logoImages.length : 0
-  );
+  const logoImagesToRender = (detail.logoImages && detail.logoImages.length > 0)
+    ? detail.logoImages.map(item => ({ ...item, src: portfolioProject.logo || item.src }))
+    : (portfolioProject.logo ? [{ src: portfolioProject.logo, label: 'Logo' }] : []);
+
+  const logoGridClass = getGridColsClass(logoImagesToRender.length);
 
   return (
     <main
@@ -575,9 +665,9 @@ export default function ProjectDetailPage() {
                     Logo
                   </h2>
                   <div className={`grid ${logoGridClass} gap-8`}>
-                    {detail.logoImages.map((logo) => (
+                    {logoImagesToRender.map((logo, idx) => (
                       <div
-                        key={logo.label}
+                        key={logo.label + '-' + idx}
                         className="flex flex-col items-center group"
                       >
                         <div

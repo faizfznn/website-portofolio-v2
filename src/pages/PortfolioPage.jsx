@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FiArrowUpRight, FiFilter, FiLock } from 'react-icons/fi'; // Tambah icon Lock jika mau (opsional)
+import { FiArrowUpRight, FiFilter, FiLock } from 'react-icons/fi';
 import projects from '../data/portfolioProjects.js';
-import projectDetails from '../data/projectDetails.js'; // [IMPORT BARU] Import detail untuk pengecekan
+import projectDetails from '../data/projectDetails.js';
+import { supabase } from '../lib/supabaseClient';
 
 // --- Animations ---
 const fadeInUp = {
@@ -76,10 +77,7 @@ const FilterButton = ({ active, label, onClick }) => {
   );
 };
 
-const PortfolioItem = ({ project, index }) => {
-  // [LOGIKA BARU] Cek apakah id project ada di dalam file projectDetails.js
-  const isDetailAvailable = !!projectDetails[project.id];
-
+const PortfolioItem = ({ project, index, isDetailAvailable }) => {
   // Komponen pembungkus: Link jika ada detail, div biasa jika tidak ada
   const Wrapper = isDetailAvailable ? Link : 'div';
 
@@ -186,8 +184,50 @@ export default function PortfolioPage() {
   const [filter, setFilter] = useState('All');
   const categories = ['All', 'UI/UX', 'Website'];
 
+  const [dbProjects, setDbProjects] = useState(projects);
+  const [availableDetailIds, setAvailableDetailIds] = useState(Object.keys(projectDetails));
+
+  useEffect(() => {
+    async function loadDynamicPortfolio() {
+      try {
+        const { data: projData, error: projErr } = await supabase
+          .from('projects')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (projErr) throw projErr;
+
+        const { data: detData, error: detErr } = await supabase
+          .from('project_details')
+          .select('project_id');
+        if (detErr) throw detErr;
+
+        if (projData && projData.length > 0) {
+          const mapped = projData.map(item => ({
+            id: item.id,
+            appName: item.app_name,
+            year: item.year,
+            title: item.title,
+            primaryColor: item.primary_color,
+            tags: item.tags || [],
+            description: item.description,
+            image: item.image_url,
+            logo: item.logo_url,
+            section: item.section
+          }));
+          setDbProjects(mapped);
+
+          const detailIds = detData.map(d => d.project_id);
+          setAvailableDetailIds(detailIds);
+        }
+      } catch (err) {
+        console.warn('Could not load dynamic portfolio from Supabase. Using local projects fallback.', err);
+      }
+    }
+    loadDynamicPortfolio();
+  }, []);
+
   // Sorting Logic: UI/UX di atas, Website di bawah
-  const sortedProjects = [...projects].sort((a, b) => {
+  const sortedProjects = [...dbProjects].sort((a, b) => {
     if (a.section === 'UI/UX' && b.section !== 'UI/UX') return -1;
     if (a.section !== 'UI/UX' && b.section === 'UI/UX') return 1;
     return 0;
@@ -196,7 +236,7 @@ export default function PortfolioPage() {
   const filteredProjects =
     filter === 'All'
       ? sortedProjects
-      : projects.filter((p) => p.section === filter);
+      : dbProjects.filter((p) => p.section === filter);
 
   return (
     <div className="min-h-screen w-full selection:bg-black selection:text-white pt-32 pb-24 px-4 md:px-12">
@@ -251,7 +291,12 @@ export default function PortfolioPage() {
             className="grid grid-cols-1 md:grid-cols-2 gap-12"
           >
             {filteredProjects.map((project, i) => (
-              <PortfolioItem key={project.id} project={project} index={i} />
+              <PortfolioItem 
+                key={project.id} 
+                project={project} 
+                index={i} 
+                isDetailAvailable={availableDetailIds.includes(project.id)}
+              />
             ))}
           </motion.div>
         </AnimatePresence>

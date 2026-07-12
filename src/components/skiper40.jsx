@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Link } from 'react-router-dom'; // Ubah dari next/link ke react-router-dom
+import { Link } from 'react-router-dom';
 
 import { cn } from '@/lib/utils';
 import { LuSend } from 'react-icons/lu';
