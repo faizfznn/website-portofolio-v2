@@ -217,6 +217,7 @@ export default function ProjectDetailPage() {
 
   const [projectState, setProjectState] = useState(null);
   const [detailState, setDetailState] = useState(null);
+  const [allProjects, setAllProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -271,6 +272,20 @@ export default function ProjectDetailPage() {
             figmaLink: detData.figma_link
           });
         }
+
+        // Fetch all projects to build navigation
+        const { data: allProjData } = await supabase
+          .from('projects')
+          .select('id, app_name, section');
+
+        if (allProjData) {
+          const sorted = [...allProjData].sort((a, b) => {
+            if (a.section === 'UI/UX' && b.section !== 'UI/UX') return -1;
+            if (a.section !== 'UI/UX' && b.section === 'UI/UX') return 1;
+            return 0;
+          });
+          setAllProjects(sorted.map(p => ({ id: p.id, appName: p.app_name })));
+        }
       } catch (err) {
         console.warn('Could not load dynamic project details from Supabase. Falling back to local static data.', err);
         const staticProj = portfolioProjects.find((p) => p.id === id);
@@ -284,6 +299,7 @@ export default function ProjectDetailPage() {
             role: staticDetail.role || []
           });
         }
+        setAllProjects(portfolioProjects);
       } finally {
         setIsLoading(false);
       }
@@ -755,30 +771,34 @@ export default function ProjectDetailPage() {
         )}
 
         {/* --- Footer Navigation --- */}
-        <Reveal>
-          <section className="border-t border-gray-200 pt-8 mt-12">
-            <h3 className="text-lg font-medium text-gray-500 mb-2">
-              Next Project
-            </h3>
-            {(() => {
-              const currentIndex = portfolioProjects.findIndex(
-                (p) => p.id === id
-              );
-              const nextIndex = (currentIndex + 1) % portfolioProjects.length;
-              const nextProject = portfolioProjects[nextIndex];
-              return (
-                <Link
-                  to={`/portfolio/${nextProject.id}`}
-                  className="group block"
-                >
-                  <h2 className="text-3xl font-semibold text-black group-hover:underline">
-                    {nextProject.appName}
-                  </h2>
-                </Link>
-              );
-            })()}
-          </section>
-        </Reveal>
+        {allProjects.length > 0 && (
+          <Reveal>
+            <section className="border-t border-gray-200 pt-8 mt-12">
+              <h3 className="text-lg font-medium text-gray-500 mb-2">
+                Next Project
+              </h3>
+              {(() => {
+                const currentIndex = allProjects.findIndex(
+                  (p) => p.id === id
+                );
+                if (currentIndex === -1) return null;
+                const nextIndex = (currentIndex + 1) % allProjects.length;
+                const nextProject = allProjects[nextIndex];
+                if (!nextProject) return null;
+                return (
+                  <Link
+                    to={`/portfolio/${nextProject.id}`}
+                    className="group block"
+                  >
+                    <h2 className="text-3xl font-semibold text-black group-hover:underline">
+                      {nextProject.appName}
+                    </h2>
+                  </Link>
+                );
+              })()}
+            </section>
+          </Reveal>
+        )}
       </section>
     </main>
   );
