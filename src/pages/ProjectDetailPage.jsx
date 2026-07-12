@@ -269,7 +269,9 @@ export default function ProjectDetailPage() {
             designSystemImages: detData.design_system_images || [],
             logoImages: detData.logo_images || [],
             bentoImages: detData.bento_images || [],
-            figmaLink: detData.figma_link
+            figmaLink: detData.figma_link,
+            websiteLink: detData.website_link,
+            githubLink: detData.github_link
           });
         }
 

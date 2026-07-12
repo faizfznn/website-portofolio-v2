@@ -49,7 +49,9 @@ export default function AdminPage() {
     design_system_images: [], // Array of URLs
     logo_images: [], // Array of {src, label}
     bento_images: [], // Array of URLs
-    figma_link: ''
+    figma_link: '',
+    website_link: '',
+    github_link: ''
   });
 
   // Achievements State
@@ -311,7 +313,9 @@ export default function AdminPage() {
         design_system_images: details.design_system_images || [],
         logo_images: details.logo_images || [],
         bento_images: details.bento_images || [],
-        figma_link: details.figma_link || ''
+        figma_link: details.figma_link || '',
+        website_link: details.website_link || '',
+        github_link: details.github_link || ''
       };
     });
 
@@ -435,7 +439,9 @@ export default function AdminPage() {
       design_system_images: [],
       logo_images: [],
       bento_images: [],
-      figma_link: ''
+      figma_link: '',
+      website_link: '',
+      github_link: ''
     });
   };
 
@@ -467,7 +473,9 @@ export default function AdminPage() {
       design_system_images: p.design_system_images || [],
       logo_images: p.logo_images || [],
       bento_images: p.bento_images || [],
-      figma_link: p.figma_link || ''
+      figma_link: p.figma_link || '',
+      website_link: p.website_link || '',
+      github_link: p.github_link || ''
     });
   };
 
@@ -516,7 +524,9 @@ export default function AdminPage() {
         design_system_images: projectForm.design_system_images,
         logo_images: projectForm.logo_images,
         bento_images: projectForm.bento_images,
-        figma_link: projectForm.figma_link
+        figma_link: projectForm.figma_link,
+        website_link: projectForm.website_link,
+        github_link: projectForm.github_link
       };
 
       if (editingProject) {
@@ -1418,6 +1428,33 @@ export default function AdminPage() {
                             onChange={(e) => setProjectForm({ ...projectForm, figma_link: e.target.value })}
                             className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-black font-mono text-xs"
                           />
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
+                              Website Link
+                            </label>
+                            <input
+                              type="text"
+                              placeholder="https://example.com"
+                              value={projectForm.website_link}
+                              onChange={(e) => setProjectForm({ ...projectForm, website_link: e.target.value })}
+                              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-black font-mono text-xs"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
+                              GitHub Link
+                            </label>
+                            <input
+                              type="text"
+                              placeholder="https://github.com/username/repo"
+                              value={projectForm.github_link}
+                              onChange={(e) => setProjectForm({ ...projectForm, github_link: e.target.value })}
+                              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-black font-mono text-xs"
+                            />
+                          </div>
                         </div>
 
                         {/* Team Section */}
