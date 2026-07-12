@@ -33,14 +33,22 @@ function ExperienceSection() {
   useEffect(() => {
     async function loadDynamicExpAndAch() {
       try {
-        const { data: expData, error: expErr } = await supabase
-          .from('experiences')
-          .select('*')
-          .order('created_at', { ascending: false });
-        if (expErr) throw expErr;
+        const [expRes, achRes] = await Promise.all([
+          supabase
+            .from('experiences')
+            .select('*')
+            .order('created_at', { ascending: false }),
+          supabase
+            .from('achievements')
+            .select('*')
+            .order('created_at', { ascending: false })
+        ]);
 
-        if (expData && expData.length > 0) {
-          const mappedExp = expData.map(item => ({
+        if (expRes.error) throw expRes.error;
+        if (achRes.error) throw achRes.error;
+
+        if (expRes.data && expRes.data.length > 0) {
+          const mappedExp = expRes.data.map(item => ({
             date: item.date,
             company: item.company,
             role: item.role,
@@ -48,19 +56,9 @@ function ExperienceSection() {
           }));
           setDbExperiences(mappedExp);
         }
-      } catch (err) {
-        console.warn('Could not load dynamic organizational experiences from Supabase. Falling back to local static array.', err);
-      }
 
-      try {
-        const { data: achData, error: achErr } = await supabase
-          .from('achievements')
-          .select('*')
-          .order('created_at', { ascending: false });
-        if (achErr) throw achErr;
-
-        if (achData && achData.length > 0) {
-          const mappedAch = achData.map(item => ({
+        if (achRes.data && achRes.data.length > 0) {
+          const mappedAch = achRes.data.map(item => ({
             date: item.date,
             company: item.company,
             role: item.role
@@ -68,7 +66,7 @@ function ExperienceSection() {
           setDbAchievements(mappedAch);
         }
       } catch (err) {
-        console.warn('Could not load dynamic achievements from Supabase. Falling back to local static array.', err);
+        console.warn('Could not load dynamic organizational experiences or achievements from Supabase.', err);
       }
     }
     loadDynamicExpAndAch();

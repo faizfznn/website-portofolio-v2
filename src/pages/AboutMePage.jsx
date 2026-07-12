@@ -71,10 +71,14 @@ function AboutMePage() {
       <Reveal>
         <div className="flex flex-col xl:flex-row w-full justify-between items-start gap-8 xl:gap-10 py-10">
           {/* Image */}
-          <div
-            className="w-full xl:w-[485px] h-[360px] md:h-[520px] xl:h-[559px] rounded-3xl bg-cover bg-center shadow-lg shrink-0"
-            style={{ backgroundImage: `url(${aboutImage})` }}
-          ></div>
+          <div className="w-full xl:w-[485px] h-[360px] md:h-[520px] xl:h-[559px] rounded-3xl overflow-hidden shadow-lg shrink-0">
+            <img
+              src={aboutImage}
+              alt="Faiz"
+              className="w-full h-full object-cover"
+              fetchpriority="high"
+            />
+          </div>
 
           {/* Text */}
           <div className="flex w-full xl:max-w-[620px] flex-col justify-between items-end self-stretch mt-2 xl:mt-0">
