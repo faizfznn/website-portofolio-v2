@@ -1,5 +1,3 @@
-
-
 // import cerebellumImg from '../assets/cerebellum.webp';
 // import mitsaqImg from '../assets/mitsaq.webp';
 // import mentraImg from '../assets/mentra.webp';
@@ -71,4 +69,5 @@
 //   },
 // ];
 
-// export default workProjects;
+const workProjects = [];
+export default workProjects;

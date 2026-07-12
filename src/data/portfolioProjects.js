@@ -68,25 +68,6 @@
 //     logo: veloraImg,
 //     section: 'UI/UX',
 //   },
-//   // {
-//   //   id: 'porto-website-v2',
-//   //   appName: 'Personal Wesbite V2',
-//   //   year: '2025',
-
-//   //   title: 'Velora',
-//   //   primaryColor: '91C752',
-//   //   tags: [
-//   //     'Frontend Development',
-//   //     'Sustainable Food Management',
-//   //     'Food Waste',
-//   //     'Figma',
-//   //   ],
-//   //   description:
-//   //     'An AI-powered digital ecosystem  designed to reduce household food waste  through smart inventory management, recipe recommendations, and surplus food sharing.',
-//   //   image: veloraImg,
-//   //   logo: veloraImg,
-//   //   section: 'Website',
-//   // },
 //   {
 //     id: 'porto-website-v1',
 //     appName: 'Personal Website V1',
@@ -134,4 +115,5 @@
 //   },
 // ];
 
-// export default portfolioProjects;
+const portfolioProjects = [];
+export default portfolioProjects;

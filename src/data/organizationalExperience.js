@@ -22,4 +22,5 @@
 //   },
 // ];
 
-// export default organizationalExperience;
+const organizationalExperience = [];
+export default organizationalExperience;

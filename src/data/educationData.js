@@ -12,4 +12,5 @@
 //     },
 // ];
 
-// export default educationData;
+const educationData = [];
+export default educationData;
