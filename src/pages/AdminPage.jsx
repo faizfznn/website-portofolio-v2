@@ -1188,18 +1188,6 @@ export default function AdminPage() {
                       </div>
                       <div>
                         <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
-                          Primary Color Theme (Hex code without #)
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="e.g. 1C6EA4"
-                          value={projectForm.primary_color}
-                          onChange={(e) => setProjectForm({ ...projectForm, primary_color: e.target.value })}
-                          className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-black font-mono"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
                           Section
                         </label>
                         <select
@@ -2241,7 +2229,7 @@ export default function AdminPage() {
                       className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-black"
                     />
                   </div>
-                  
+
                   {/* Still Active Toggle */}
                   <div className="flex items-center justify-between pt-2">
                     <div className="flex flex-col">
@@ -2251,14 +2239,12 @@ export default function AdminPage() {
                     <button
                       type="button"
                       onClick={() => setEducationForm(prev => ({ ...prev, is_active: !prev.is_active }))}
-                      className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-300 ease-in-out focus:outline-none shadow-sm ${
-                        educationForm.is_active ? 'bg-black' : 'bg-gray-200'
-                      }`}
+                      className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-300 ease-in-out focus:outline-none shadow-sm ${educationForm.is_active ? 'bg-black' : 'bg-gray-200'
+                        }`}
                     >
                       <span
-                        className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-300 ease-in-out ${
-                          educationForm.is_active ? 'translate-x-5' : 'translate-x-0'
-                        }`}
+                        className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-300 ease-in-out ${educationForm.is_active ? 'translate-x-5' : 'translate-x-0'
+                          }`}
                       />
                     </button>
                   </div>
@@ -2363,7 +2349,7 @@ export default function AdminPage() {
                 <form onSubmit={handleSaveWork} className="space-y-4">
                   <div>
                     <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Date Period</label>
-                    
+
                     {/* Start Date */}
                     <div className="grid grid-cols-2 gap-2 mb-3">
                       <div>
@@ -2459,14 +2445,12 @@ export default function AdminPage() {
                     <button
                       type="button"
                       onClick={() => setWorkForm(prev => ({ ...prev, is_active: !prev.is_active }))}
-                      className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-300 ease-in-out focus:outline-none shadow-sm ${
-                        workForm.is_active ? 'bg-black' : 'bg-gray-200'
-                      }`}
+                      className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-300 ease-in-out focus:outline-none shadow-sm ${workForm.is_active ? 'bg-black' : 'bg-gray-200'
+                        }`}
                     >
                       <span
-                        className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-300 ease-in-out ${
-                          workForm.is_active ? 'translate-x-5' : 'translate-x-0'
-                        }`}
+                        className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-300 ease-in-out ${workForm.is_active ? 'translate-x-5' : 'translate-x-0'
+                          }`}
                       />
                     </button>
                   </div>
