@@ -5,53 +5,37 @@ import fotoFaiz from '../assets/formal.webp';
 import indoFlag from '../assets/bendera.png';
 import stars from '../assets/stars.png';
 
+const HEADLINE_WORDS = 'Selected Work digital experiences, from pixel to code.'.split(' ');
+
 const Hero = ({ onGetInTouchClick }) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const rafRef = useRef(null);
-  const lastPosRef = useRef({ x: 0, y: 0 });
+  const tooltipRef = useRef(null);
 
   useEffect(() => {
+    if (!isHovering) return;
     const handleMouseMove = (e) => {
-      lastPosRef.current = { x: e.clientX, y: e.clientY };
-
-      // Use RAF to batch updates and prevent forced reflows
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => {
-        setMousePosition({ x: lastPosRef.current.x, y: lastPosRef.current.y });
-      });
+      if (tooltipRef.current) {
+        tooltipRef.current.style.transform = `translate3d(${e.clientX - 100}px, ${e.clientY - 25}px, 0) translate(-50%, -50%)`;
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, []);
-
-  // Split text into characters for animation
-  const headline = 'Selected Work digital experiences, from pixel to code.';
-  const words = headline.split(' ');
+  }, [isHovering]);
 
   return (
     <section className="flex flex-col-reverse lg:flex-row w-full px-0 sm:px-2 lg:px-6 justify-between items-center gap-12 lg:gap-16 xl:gap-24">
       {isHovering && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
-          className="fixed pointer-events-none z-50 transition-all duration-200 ease-out"
-          style={{
-            left: `${mousePosition.x - 100}px`,
-            top: `${mousePosition.y - 25}px`,
-            transform: 'translate(-50%, -50%)',
-            willChange: 'transform',
-          }}
+        <div
+          ref={tooltipRef}
+          className="fixed top-0 left-0 pointer-events-none z-50 transition-opacity duration-200 ease-out will-change-transform"
         >
-          <div className="bg-white text-gray-800 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap border border-gray-200">
+          <div className="bg-white text-gray-800 px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap border border-gray-200 animate-in fade-in zoom-in-95 duration-150">
             UI/UX Designer & Frontend Developer
           </div>
-        </motion.div>
+        </div>
       )}
 
       {/* Left Content */}
@@ -65,7 +49,7 @@ const Hero = ({ onGetInTouchClick }) => {
               letterSpacing: '-0.02em',
             }}
           >
-            {words.map((word, wordIndex) => (
+            {HEADLINE_WORDS.map((word, wordIndex) => (
               <span key={wordIndex} className="inline-block mr-[0.3em]">
                 {word.split('').map((char, charIndex) => (
                   <motion.span

@@ -140,7 +140,7 @@ export default function Album({
         ></div>
       </div>
 
-      <div className="absolute w-48 left-1/2 top-full mt-2 -translate-x-1/2 bg-white rounded-xl shadow-md p-3 opacity-0 transition-opacity duration-200 pointer-events-none group-hover:opacity-100">
+      <div className="absolute w-48 left-1/2 top-full mt-2 -translate-x-1/2 bg-white rounded-xl shadow-md p-3 scale-0 group-hover:scale-100 transition-all duration-200 pointer-events-none z-10">
         <p className="text-sm font-semibold text-black text-center">{albumTitle}</p>
         <p className="text-xs text-gray-600 text-center">{artist}</p>
       </div>

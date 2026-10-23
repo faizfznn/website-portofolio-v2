@@ -21,6 +21,7 @@ import { Skiper40 } from '@/components/skiper40';
 import '../index.css';
 
 import { SiJavascript, SiFigma, SiKotlin, SiReact } from 'react-icons/si';
+import { FiCopy, FiCheck } from 'react-icons/fi';
 import Reveal from '../components/Reveal';
 import TechStack from '../components/TechStack';
 import techStack from '../data/techStack';
@@ -31,14 +32,44 @@ const timeOptions = {
   second: '2-digit',
 };
 
-function HomePage() {
-  const skills = [
-    { name: 'JavaScript', icon: <SiJavascript className="text-yellow-400" /> },
-    { name: 'Figma', icon: <SiFigma className="text-pink-500" /> },
-    { name: 'Kotlin', icon: <SiKotlin className="text-blue-500" /> },
-    { name: 'React', icon: <SiReact className="text-cyan-400" /> },
-  ];
+// Isolated clock component so only the text updates every second instead of re-rendering the whole HomePage
+function LocalClock() {
+  const [time, setTime] = useState(() =>
+    new Date().toLocaleTimeString('en-GB', timeOptions)
+  );
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date().toLocaleTimeString('en-GB', timeOptions));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return <span className="text-sm ml-9 tabular-nums">{time}</span>;
+}
+
+// Scattered Polaroid Photos Animation
+const photoVariants = [
+  {
+    initial: { x: -200, y: -100, rotate: -45, opacity: 0 },
+    animate: { x: 0, y: 0, rotate: 4, opacity: 1 },
+  },
+  {
+    initial: { x: 200, y: -150, rotate: 45, opacity: 0 },
+    animate: { x: 0, y: 0, rotate: -4, opacity: 1 },
+  },
+  {
+    initial: { x: -150, y: 100, rotate: -30, opacity: 0 },
+    animate: { x: 0, y: 0, rotate: 3, opacity: 1 },
+  },
+  {
+    initial: { x: 150, y: 150, rotate: 30, opacity: 0 },
+    animate: { x: 0, y: 0, rotate: 0, opacity: 1 },
+  },
+];
+
+function HomePage() {
   const [displayedProjects, setDisplayedProjects] = useState(works);
 
   useEffect(() => {
@@ -78,48 +109,16 @@ function HomePage() {
     contactRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const [currentTime, setCurrentTime] = useState(
-    new Date().toLocaleTimeString('en-GB', timeOptions)
-  );
-
-  const [showToast, setShowToast] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('faiz150605@gmail.com');
-    goeyToast.info('Email copied successfully!', {
-      description: 'You can now paste it anywhere.',
-    });
+    setCopiedEmail(true);
+    goeyToast.success('Email copied successfully!');
+    setTimeout(() => {
+      setCopiedEmail(false);
+    }, 2000);
   };
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date().toLocaleTimeString('en-GB', timeOptions));
-    }, 1000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
-  // Scattered Polaroid Photos Animation
-  const photoVariants = [
-    {
-      initial: { x: -200, y: -100, rotate: -45, opacity: 0 },
-      animate: { x: 0, y: 0, rotate: 4, opacity: 1 },
-    },
-    {
-      initial: { x: 200, y: -150, rotate: 45, opacity: 0 },
-      animate: { x: 0, y: 0, rotate: -4, opacity: 1 },
-    },
-    {
-      initial: { x: -150, y: 100, rotate: -30, opacity: 0 },
-      animate: { x: 0, y: 0, rotate: 3, opacity: 1 },
-    },
-    {
-      initial: { x: 150, y: 150, rotate: 30, opacity: 0 },
-      animate: { x: 0, y: 0, rotate: 0, opacity: 1 },
-    },
-  ];
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 mt-[92px]">
@@ -219,7 +218,7 @@ function HomePage() {
             bg-cover bg-center rounded-3xl 
             border-4 border-white 
             shadow-xl cursor-grab active:cursor-grabbing
-            shrink-0
+            shrink-0 transform-gpu will-change-transform
           "
                       style={{
                         backgroundImage: `url(${foto})`,
@@ -230,7 +229,10 @@ function HomePage() {
                 <img
                   src={powerImg}
                   alt=""
-                  className="absolute -top-6 right-1 w-10 h-10 sm:w-12 sm:h-12 md:-top-8 md:right-40 md:w-14 md:h-14 xl:-top-17 xl:-right-15 xl:w-[99px] xl:h-[95px] rotate-10 animate-slide-slow"
+                  aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute -top-6 right-1 w-10 h-10 sm:w-12 sm:h-12 md:-top-8 md:right-40 md:w-14 md:h-14 xl:-top-17 xl:-right-15 xl:w-[99px] xl:h-[95px] rotate-10 animate-slide-slow transform-gpu pointer-events-none"
                   width="99"
                   height="95"
                 />
@@ -289,7 +291,7 @@ function HomePage() {
                         Malang, Indonesia
                       </span>
                     </div>
-                    <span className="text-sm ml-9">{currentTime}</span>
+                    <LocalClock />
                   </div>
                 </div>
 
@@ -332,19 +334,23 @@ function HomePage() {
 
             {/* === Right Side: Collaboration Card === */}
             <div className="w-full xl:w-1/2 mt-8 xl:mt-0" ref={contactRef}>
-              <div className="relative w-full max-w-[760px] xl:max-w-none mx-auto h-[380px] md:h-[412px] rounded-4xl p-6 sm:p-8 md:p-10 bg-linear-to-br from-black via-gray-900 to-black text-white flex flex-col items-center text-center overflow-hidden border border-white/10 shadow-2xl">
-                <div className="absolute inset-0 flex justify-center items-center">
+              <div className="relative w-full max-w-[760px] xl:max-w-none mx-auto h-[380px] md:h-[412px] rounded-4xl p-6 sm:p-8 md:p-10 bg-linear-to-br from-black via-gray-900 to-black text-white flex flex-col items-center text-center overflow-hidden border border-white/10 shadow-2xl isolate transform-gpu">
+                <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
                   <div
-                    className="absolute w-[300px] h-[300px] md:w-[500px] md:h-[500px] opacity-90 blur-[120px] rounded-full"
+                    className="absolute w-[300px] h-[300px] md:w-[460px] md:h-[460px] opacity-80 blur-3xl rounded-full transform-gpu pointer-events-none"
                     style={{
                       background:
-                        'radial-gradient(circle, #6E04C0 8%, rgba(110, 4, 192, 0) 60%)',
+                        'radial-gradient(circle, #6E04C0 15%, rgba(110, 4, 192, 0) 70%)',
                     }}
                   />
                   <img
                     src={bintang}
-                    alt="bintang"
-                    className="object-contain absolute w-60 h-60 md:w-[300px] md:h-[300px] animate-[spin_7s_linear_infinite] pointer-events-none opacity-80"
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                    className="object-contain absolute w-60 h-60 md:w-[280px] md:h-[280px] animate-[spin_10s_linear_infinite] pointer-events-none opacity-80 transform-gpu"
+                    style={{ willChange: 'transform' }}
                   />
                 </div>
 
@@ -380,22 +386,36 @@ function HomePage() {
                       faiz150605@gmail.com
                     </span>
                     <button
+                      type="button"
                       onClick={handleCopyEmail}
                       className="
-                relative group flex justify-center items-center rounded-3xl overflow-hidden 
+                relative group flex justify-center items-center gap-2 rounded-3xl overflow-hidden 
                 border border-white/40 text-white font-medium 
                 bg-linear-to-b from-white/20 to-white/5 
                 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.3)] 
-                transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] 
+                transition-all duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] 
                 hover:bg-linear-to-b hover:from-white/30 hover:to-white/10
                 hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),0_8px_16px_-4px_rgba(255,255,255,0.2)]
+                active:scale-95
                 backdrop-blur-sm
                 w-full sm:w-fit 
                 h-[42px] md:h-12 px-6 md:px-8 
                 text-[14px] md:text-[16px]
               "
                     >
-                      <span className="relative z-10">Copy</span>
+                      {copiedEmail ? (
+                        <>
+                          <FiCheck className="text-base text-white/90 animate-in fade-in zoom-in-75 duration-200" />
+                          <span className="relative z-10 text-white/90 font-semibold">
+                            Copied
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <FiCopy className="text-base text-white/90 group-hover:scale-110 transition-transform duration-200" />
+                          <span className="relative z-10">Copy</span>
+                        </>
+                      )}
                     </button>
                   </div>
                 </div>
@@ -423,22 +443,6 @@ function HomePage() {
           </section>
         </Reveal>
       </div>
-
-      <AnimatePresence>
-        {showToast && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 px-6 py-3 bg-gray-900 text-white rounded-full shadow-lg flex items-center gap-2 border border-white/10 backdrop-blur-md"
-          >
-            <span>✅</span>
-            <span className="font-medium text-sm">
-              Email copied successfully!
-            </span>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

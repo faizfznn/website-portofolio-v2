@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import organizationalExperience from '../data/organizationalExperience';
 import achievements from '../data/achievementsExperience';
 import { supabase } from '../lib/supabaseClient';
+import { sortTimelineItems } from '../lib/dateUtils';
 
 const TimelineItem = ({ date, company, role, isActive = false }) => (
   <div className="relative pl-8 group">
@@ -27,8 +28,8 @@ const TimelineItem = ({ date, company, role, isActive = false }) => (
 
 // --- Komponen Utama Experience ---
 function ExperienceSection() {
-  const [dbExperiences, setDbExperiences] = useState(organizationalExperience);
-  const [dbAchievements, setDbAchievements] = useState(achievements);
+  const [dbExperiences, setDbExperiences] = useState(() => sortTimelineItems(organizationalExperience));
+  const [dbAchievements, setDbAchievements] = useState(() => sortTimelineItems(achievements));
 
   useEffect(() => {
     async function loadDynamicExpAndAch() {
@@ -52,18 +53,23 @@ function ExperienceSection() {
             date: item.date,
             company: item.company,
             role: item.role,
-            isActive: item.is_active
+            isActive: item.is_active,
+            created_at: item.created_at,
+            id: item.id
           }));
-          setDbExperiences(mappedExp);
+          setDbExperiences(sortTimelineItems(mappedExp));
         }
 
         if (achRes.data && achRes.data.length > 0) {
           const mappedAch = achRes.data.map(item => ({
             date: item.date,
             company: item.company,
-            role: item.role
+            role: item.role,
+            isActive: Boolean(item.is_active || (typeof item.date === 'string' && /present|saat ini|sekarang|aktif/i.test(item.date))),
+            created_at: item.created_at,
+            id: item.id
           }));
-          setDbAchievements(mappedAch);
+          setDbAchievements(sortTimelineItems(mappedAch));
         }
       } catch (err) {
         console.warn('Could not load dynamic organizational experiences or achievements from Supabase.', err);

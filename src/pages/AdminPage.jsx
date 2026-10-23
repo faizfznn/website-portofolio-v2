@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
+import { sortTimelineItems } from '../lib/dateUtils';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Plus, Trash2, Edit2, LogOut, Upload, Check, Loader2, Sparkles,
@@ -264,7 +265,7 @@ export default function AdminPage() {
         .select('*')
         .order('created_at', { ascending: false });
       if (error) throw error;
-      setEducation(data);
+      setEducation(sortTimelineItems(data));
     } catch (err) {
       console.error(err);
     }
@@ -277,7 +278,7 @@ export default function AdminPage() {
         .select('*')
         .order('created_at', { ascending: false });
       if (error) throw error;
-      setWork(data);
+      setWork(sortTimelineItems(data));
     } catch (err) {
       console.error(err);
     }
@@ -328,7 +329,7 @@ export default function AdminPage() {
       .select('*')
       .order('created_at', { ascending: false });
     if (error) throw error;
-    setAchievements(data);
+    setAchievements(sortTimelineItems(data));
   };
 
   const fetchExperiences = async () => {
@@ -337,7 +338,7 @@ export default function AdminPage() {
       .select('*')
       .order('created_at', { ascending: false });
     if (error) throw error;
-    setExperiences(data);
+    setExperiences(sortTimelineItems(data));
   };
 
   // --- Auth Handlers ---

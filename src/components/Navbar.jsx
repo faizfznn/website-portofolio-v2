@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import Logo from '../assets/Logo.png';
 
 function Navbar() {
@@ -9,79 +9,95 @@ function Navbar() {
   ];
 
   return (
-    <nav
-      className="
-        fixed z-50 flex justify-center
-        
-        /* === Mobile: Full-width dengan padding === */
-        top-4 left-0 right-0 w-full px-4
-        
-        /* === Desktop: Kembali ke center & auto-width === */
-        lg:top-6
-      "
-    >
+    <>
+      {/* === Ambient Top Blur Layer (blurs any content scrolling beneath the top navbar area) === */}
       <div
+        aria-hidden="true"
         className="
-          flex items-center gap-2 lg:gap-3 
-          w-fit max-w-full
-          justify-center
+          fixed top-0 left-0 right-0 
+          h-20 sm:h-24 lg:h-28 
+          pointer-events-none z-40
+          backdrop-blur-md
+          bg-gradient-to-b from-[#fafafa]/85 via-[#fafafa]/45 to-transparent
+          [mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]
+          [-webkit-mask-image:linear-gradient(to_bottom,black_40%,transparent_100%)]
+        "
+      />
+
+      {/* === Floating Slender Navbar === */}
+      <nav
+        className="
+          fixed z-50 flex justify-center
+          top-3 sm:top-4 lg:top-5 left-0 right-0 w-full px-4
         "
       >
-        {/* === Logo === */}
         <div
           className="
-            flex h-[50px] w-[50px] lg:h-[60px] lg:w-[60px] items-center justify-center rounded-full
-            shrink-0 /* Mencegah logo menyusut */
-            bg-white/70
-            shadow-[0_0.241px_1.207px_-1.25px_rgba(110,110,110,0.20),0_2px_10px_-2.5px_rgba(110,110,110,0.20)]
-            backdrop-blur-[2.5px] 
-            border border-[rgba(148,148,148,0.17)]
+            flex items-center gap-2 sm:gap-2.5 lg:gap-3 
+            w-fit max-w-full
+            justify-center
           "
         >
-          <img
-            src={Logo}
-            alt="Logo"
-            width="29"
-            height="21"
-            className="w-[29px] h-[21.3px]"
-          />
-        </div>
+          {/* === Logo (Slender & Proportional) === */}
+          <Link
+            to="/"
+            className="
+              flex h-[42px] w-[42px] lg:h-[46px] lg:w-[46px] 
+              items-center justify-center rounded-full
+              shrink-0
+              bg-white/75 hover:bg-white/95
+              shadow-[0_2px_12px_-2px_rgba(0,0,0,0.08),0_1px_3px_rgba(0,0,0,0.04)]
+              backdrop-blur-xl
+              border border-black/[0.08]
+              transition-all duration-300 hover:scale-105 active:scale-95
+            "
+          >
+            <img
+              src={Logo}
+              alt="Logo"
+              width="24"
+              height="18"
+              className="w-[22px] h-[16px] lg:w-[24px] lg:h-[17.5px] object-contain"
+            />
+          </Link>
 
-        {/* === Navbar Links === */}
-        <div
-          className="
-            flex items-center justify-center 
-            gap-1 sm:gap-2 lg:gap-7
-            h-[50px] lg:h-[60px]
-            px-2
-            rounded-full 
-            bg-white/70
-            shadow-[0_0.241px_1.207px_-1.25px_rgba(110,110,110,0.20),0_2px_10px_-2.5px_rgba(110,110,110,0.20)]
-            backdrop-blur-[2.5px]
-            border border-[rgba(148,148,148,0.17)]
-          "
-        >
-          {navLinks.map((link) => (
-            <NavLink
-              key={link.name}
-              to={link.path}
-              className={({ isActive }) =>
-                `
-                flex h-10 px-4 py-2
-                lg:h-11 lg:px-[18px] lg:py-3 
-                justify-center items-center gap-2.5
-                rounded-[49px] text-[14px] lg:text-[16px] font-medium transition-all duration-300
-                ${isActive ? 'bg-[#F6F6F6] text-black' : 'text-[#4B4B4B]'}
-                hover:bg-[#F6F6F6]/60 hover:text-black
-                `
-              }
-            >
-              {link.name}
-            </NavLink>
-          ))}
+          {/* === Navbar Links (Slender & Sleek) === */}
+          <div
+            className="
+              flex items-center justify-center 
+              gap-1
+              p-1
+              rounded-full 
+              bg-white/75
+              shadow-[0_2px_12px_-2px_rgba(0,0,0,0.08),0_1px_3px_rgba(0,0,0,0.04)]
+              backdrop-blur-xl
+              border border-black/[0.08]
+            "
+          >
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.name}
+                to={link.path}
+                className={({ isActive }) =>
+                  `
+                  flex h-[32px] lg:h-[36px] px-3.5 sm:px-4 lg:px-5
+                  justify-center items-center
+                  rounded-full text-[13px] lg:text-[14px] font-medium transition-all duration-300
+                  ${
+                    isActive
+                      ? 'bg-black/[0.06] text-black font-semibold shadow-xs'
+                      : 'text-[#4B4B4B] hover:text-black hover:bg-black/[0.03]'
+                  }
+                  `
+                }
+              >
+                {link.name}
+              </NavLink>
+            ))}
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }
 

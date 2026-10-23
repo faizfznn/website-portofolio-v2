@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import educationData from '../data/educationData';
 import { supabase } from '../lib/supabaseClient';
+import { sortTimelineItems } from '../lib/dateUtils';
 
 const TimelineItem = ({ date, institution, degree, isActive = false }) => (
   <div className="relative pl-8 group">
@@ -24,7 +25,7 @@ const TimelineItem = ({ date, institution, degree, isActive = false }) => (
 );
 
 function EducationSection() {
-  const [dbEducation, setDbEducation] = useState(educationData);
+  const [dbEducation, setDbEducation] = useState(() => sortTimelineItems(educationData));
 
   useEffect(() => {
     async function loadDynamicEducation() {
@@ -40,9 +41,11 @@ function EducationSection() {
             date: item.date,
             institution: item.institution,
             degree: item.degree,
-            isActive: item.is_active
+            isActive: item.is_active,
+            created_at: item.created_at,
+            id: item.id
           }));
-          setDbEducation(mappedEdu);
+          setDbEducation(sortTimelineItems(mappedEdu));
         }
       } catch (err) {
         console.warn('Could not load dynamic education from Supabase. Falling back to local static array.', err);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import workData from '../data/workData';
 import { supabase } from '../lib/supabaseClient';
+import { sortTimelineItems } from '../lib/dateUtils';
 
 const TimelineItem = ({ date, institution, position, isActive = false }) => (
   <div className="relative pl-8 group">
@@ -24,7 +25,7 @@ const TimelineItem = ({ date, institution, position, isActive = false }) => (
 );
 
 function WorkSection() {
-  const [dbWork, setDbWork] = useState(workData);
+  const [dbWork, setDbWork] = useState(() => sortTimelineItems(workData));
 
   useEffect(() => {
     async function loadDynamicWork() {
@@ -40,9 +41,11 @@ function WorkSection() {
             date: item.date,
             institution: item.institution,
             position: item.position,
-            isActive: item.is_active
+            isActive: item.is_active,
+            created_at: item.created_at,
+            id: item.id
           }));
-          setDbWork(mappedWork);
+          setDbWork(sortTimelineItems(mappedWork));
         }
       } catch (err) {
         console.warn('Could not load dynamic work from Supabase. Falling back to local static array.', err);
@@ -52,7 +55,7 @@ function WorkSection() {
   }, []);
 
   return (
-    <section id="education" className="py-20 w-full scroll-mt-24">
+    <section id="work" className="py-20 w-full scroll-mt-24">
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-black">Work</h2>
       <div className="relative border-l-2 border-gray-200 pl-4">
         <div className="space-y-10">
