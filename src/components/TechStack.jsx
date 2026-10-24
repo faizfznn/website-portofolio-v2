@@ -60,7 +60,7 @@ function TechStack({ items = [], title = 'Tech Stack', variant = 'strip' }) {
 
         {/* Heading row – left-aligned label + right description */}
         <div className="max-w-6xl mx-auto px-4 mb-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
-          <h3 className="text-sm font-semibold text-gray-600 tracking-[0.15em] uppercase">
+          <h3 className="text-sm font-semibold text-gray-600 tracking-[0.15em]">
             {title}
           </h3>
           <p className="text-sm text-gray-500">
