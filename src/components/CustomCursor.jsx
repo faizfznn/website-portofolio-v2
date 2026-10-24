@@ -28,19 +28,24 @@ export default function CustomCursor() {
       }
     };
 
+    let scrollRafId = null;
     const handleScroll = () => {
-      if (posRef.current.x < 0 || posRef.current.y < 0) return;
-      const el = document.elementFromPoint(posRef.current.x, posRef.current.y);
-      if (el) {
-        const target = el.closest('[data-cursor-project]');
-        if (target) {
-          const nextLabel = target.getAttribute('data-cursor-text') || 'View';
-          setCursorLabel(nextLabel);
-          setIsHovering(true);
-          return;
+      if (scrollRafId) return;
+      scrollRafId = requestAnimationFrame(() => {
+        scrollRafId = null;
+        if (posRef.current.x < 0 || posRef.current.y < 0) return;
+        const el = document.elementFromPoint(posRef.current.x, posRef.current.y);
+        if (el) {
+          const target = el.closest('[data-cursor-project]');
+          if (target) {
+            const nextLabel = target.getAttribute('data-cursor-text') || 'View';
+            setCursorLabel(nextLabel);
+            setIsHovering(true);
+            return;
+          }
         }
-      }
-      setIsHovering(false);
+        setIsHovering(false);
+      });
     };
 
     window.addEventListener('mousemove', moveCursor, { passive: true });
@@ -48,6 +53,7 @@ export default function CustomCursor() {
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
+      if (scrollRafId) cancelAnimationFrame(scrollRafId);
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handleHover);
       window.removeEventListener('scroll', handleScroll);

@@ -1,8 +1,9 @@
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useState, useEffect, useRef } from 'react';
-import { FiCopy, FiCheck } from 'react-icons/fi';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useLenis } from 'lenis/react';
+import { FiCopy, FiCheck, FiArrowUp } from 'react-icons/fi';
 import { HiChevronLeft, HiExternalLink } from 'react-icons/hi';
 import portfolioProjects from '../data/portfolioProjects.js';
 import projectDetails from '../data/projectDetails.js';
@@ -29,33 +30,27 @@ import {
   SiCss3,
   SiJavascript,
 } from 'react-icons/si';
-const toolIcons = {
-  // Design & Collaboration
-  Figma: <SiFigma className="text-[#F24E1E]" />, // Asli: Kombinasi, tapi Orange-Red paling ikonik
-  Miro: <SiMiro className="text-[#050038]" />, // Warna teks/logo gelap Miro lebih akurat (bg biasanya kuning)
-  Notion: <SiNotion className="text-[#000000]" />,
-  'Google Forms': <SiGoogleforms className="text-[#673AB7]" />, // Ungu khas Google Workspace
-  Maze: <SiMaze className="text-[#101828]" />, // Maze sering menggunakan hitam pekat/dark navy
 
-  // Management & Illustration
+const toolIcons = {
+  Figma: <SiFigma className="text-[#F24E1E]" />,
+  Miro: <SiMiro className="text-[#050038]" />,
+  Notion: <SiNotion className="text-[#000000]" />,
+  'Google Forms': <SiGoogleforms className="text-[#673AB7]" />,
+  Maze: <SiMaze className="text-[#101828]" />,
   ClickUp: <SiClickup className="text-[#7B68EE]" />,
   Inkscape: <SiInkscape className="text-[#000000]" />,
-
-  // Frontend & Styling
   'React.js': <SiReact className="text-[#61DAFB]" />,
   Tailwind: <SiTailwindcss className="text-[#06B6D4]" />,
   TypeScript: <SiTypescript className="text-[#3178C6]" />,
   HTML: <SiHtml5 className="text-[#E34F26]" />,
   CSS: <SiCss3 className="text-[#1572B6]" />,
   JavaScript: <SiJavascript className="text-[#F7DF1E]" />,
-
-  // Backend & Languages
   Golang: <SiGo className="text-[#00ADD8]" />,
   PHP: <SiPhp className="text-[#777BB4]" />,
   Laravel: <SiLaravel className="text-[#FF2D20]" />,
 };
 
-// --- Sub Components (InfoRow, Card) Tetap Sama ---
+// --- Sub Component: InfoRow (Original) ---
 const InfoRow = ({ label, children }) => (
   <div className="flex flex-col md:flex-row border-b border-gray-200 py-4">
     <span className="w-full md:w-1/4 font-semibold text-gray-500 mb-2 md:mb-0">
@@ -65,70 +60,117 @@ const InfoRow = ({ label, children }) => (
   </div>
 );
 
-const ProblemSolutionCard = ({
-  number,
-  title,
-  description,
-  isDarkMode = false,
-}) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: '-50px' }}
-    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-    className={`p-6 md:p-8 rounded-2xl h-full transition-transform duration-300 hover:-translate-y-1 ${isDarkMode
-      ? 'bg-gray-900 text-white'
-      : 'bg-white text-black border border-gray-200 shadow-sm'
-      }`}
-  >
-    <span
-      className={`block text-sm md:text-base font-bold mb-3 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'
-        }`}
-    >
-      {number}
-    </span>
-    <h4 className="text-xl md:text-2xl font-bold mb-4">{title}</h4>
-    <p
-      className={`text-sm md:text-base leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'
-        }`}
-    >
-      {description}
-    </p>
-  </motion.div>
-);
+// --- Sub Component 1: Circular Progressive Scroll to Top ---
+const ScrollToTopProgress = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const circleRef = useRef(null);
+  const isVisibleRef = useRef(false);
 
-const RevealText = ({ children, delay = 0, className = '' }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: '-10%' }}
-    transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1], delay }}
-    className={className}
-  >
-    {children}
-  </motion.div>
-);
+  const size = 48;
+  const strokeWidth = 3;
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
 
-const ParallaxImage = ({ src, alt, className = '' }) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
+  const updateProgress = useCallback((progressPercent, currentScroll) => {
+    const p = Math.min(Math.max(progressPercent, 0), 100);
+    const offset = circumference - (p / 100) * circumference;
+    if (circleRef.current) {
+      circleRef.current.style.strokeDashoffset = `${offset}px`;
+    }
+
+    const shouldShow = currentScroll > 120;
+    if (shouldShow !== isVisibleRef.current) {
+      isVisibleRef.current = shouldShow;
+      setIsVisible(shouldShow);
+    }
+  }, [circumference]);
+
+  // Synchronize directly with Lenis smooth scroll engine without React re-render overhead
+  const lenis = useLenis((instance) => {
+    if (instance) {
+      updateProgress((instance.progress || 0) * 100, instance.scroll || 0);
+    }
   });
-  const y = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
+
+  // Fallback for native scroll when Lenis is not active
+  useEffect(() => {
+    if (lenis) return;
+    const handleNativeScroll = () => {
+      const totalScroll = window.scrollY || document.documentElement.scrollTop;
+      const windowHeight =
+        document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = windowHeight > 0 ? (totalScroll / windowHeight) * 100 : 0;
+      updateProgress(progress, totalScroll);
+    };
+
+    window.addEventListener('scroll', handleNativeScroll, { passive: true });
+    handleNativeScroll();
+    return () => window.removeEventListener('scroll', handleNativeScroll);
+  }, [lenis, updateProgress]);
+
+  const scrollToTop = () => {
+    if (lenis) {
+      lenis.scrollTo(0, {
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   return (
-    <div ref={ref} className={`overflow-hidden ${className}`}>
-      <motion.img
-        style={{ y, scale: 1.1 }}
-        src={src}
-        alt={alt}
-        className="w-full h-full object-cover"
-      />
-    </div>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8, y: 16 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.8, y: 16 }}
+          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 flex items-center justify-center w-12 h-12 rounded-full shadow-lg bg-transparent hover:scale-105 active:scale-95 transition-transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 group cursor-pointer"
+          aria-label="Back to top"
+        >
+          <svg
+            width={size}
+            height={size}
+            viewBox={`0 0 ${size} ${size}`}
+            className="absolute inset-0 -rotate-90 pointer-events-none"
+          >
+            {/* Background disc + light track */}
+            <circle
+              cx={size / 2}
+              cy={size / 2}
+              r={radius}
+              stroke="#E4E4E7"
+              strokeWidth={strokeWidth}
+              fill="#FFFFFF"
+            />
+            {/* Real-time progressive stroke updated via direct DOM ref */}
+            <circle
+              ref={circleRef}
+              cx={size / 2}
+              cy={size / 2}
+              r={radius}
+              stroke="#18181B"
+              strokeWidth={strokeWidth}
+              fill="transparent"
+              strokeDasharray={circumference}
+              strokeDashoffset={circumference}
+              strokeLinecap="round"
+            />
+          </svg>
+          <FiArrowUp className="relative z-10 w-4 h-4 text-zinc-800 group-hover:text-black group-hover:-translate-y-0.5 transition-transform duration-200" />
+        </motion.button>
+      )}
+    </AnimatePresence>
   );
 };
 
+// --- Sub Component: ColorPalette (Original Accordion Ribbon) ---
 const ColorPalette = ({ colors }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [copiedHex, setCopiedHex] = useState('');
@@ -148,7 +190,7 @@ const ColorPalette = ({ colors }) => {
       setCopiedHex(hex);
       setTimeout(() => setCopiedHex(''), 1500);
     } catch {
-      // Clipboard may fail on some browsers/devices without permission.
+      // ignore
     }
   };
 
@@ -218,6 +260,7 @@ export default function ProjectDetailPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
     async function loadDynamicDetail() {
       setIsLoading(true);
       try {
@@ -248,7 +291,7 @@ export default function ProjectDetailPage() {
             description: projData.description,
             image: projData.image_url,
             logo: projData.logo_url,
-            section: projData.section
+            section: projData.section,
           });
         }
 
@@ -268,14 +311,13 @@ export default function ProjectDetailPage() {
             bentoImages: detData.bento_images || [],
             figmaLink: detData.figma_link,
             websiteLink: detData.website_link,
-            githubLink: detData.github_link
+            githubLink: detData.github_link,
           });
         }
 
-        // Fetch all projects to build navigation
         const { data: allProjData } = await supabase
           .from('projects')
-          .select('id, app_name, section');
+          .select('id, app_name, section, primary_color, logo_url');
 
         if (allProjData) {
           const sorted = [...allProjData].sort((a, b) => {
@@ -283,10 +325,20 @@ export default function ProjectDetailPage() {
             if (a.section !== 'UI/UX' && b.section === 'UI/UX') return 1;
             return 0;
           });
-          setAllProjects(sorted.map(p => ({ id: p.id, appName: p.app_name })));
+          setAllProjects(
+            sorted.map((p) => ({
+              id: p.id,
+              appName: p.app_name,
+              primaryColor: p.primary_color,
+              logo: p.logo_url,
+            }))
+          );
         }
       } catch (err) {
-        console.warn('Could not load dynamic project details from Supabase. Falling back to local static data.', err);
+        console.warn(
+          'Could not load dynamic project details from Supabase. Falling back to local static data.',
+          err
+        );
         const staticProj = portfolioProjects.find((p) => p.id === id);
         const staticDetail = projectDetails[id];
         if (staticProj) {
@@ -295,10 +347,17 @@ export default function ProjectDetailPage() {
         if (staticDetail) {
           setDetailState({
             ...staticDetail,
-            role: staticDetail.role || []
+            role: staticDetail.role || [],
           });
         }
-        setAllProjects(portfolioProjects);
+        setAllProjects(
+          portfolioProjects.map((p) => ({
+            id: p.id,
+            appName: p.appName,
+            primaryColor: p.primaryColor,
+            logo: p.logo,
+          }))
+        );
       } finally {
         setIsLoading(false);
       }
@@ -313,7 +372,7 @@ export default function ProjectDetailPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA]">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 border-4 border-gray-200 border-t-black rounded-full animate-spin"></div>
+          <div className="w-10 h-10 border-4 border-gray-200 border-t-black rounded-full animate-spin" />
           <p className="text-gray-500 font-medium">Loading details...</p>
         </div>
       </div>
@@ -328,64 +387,57 @@ export default function ProjectDetailPage() {
     );
   }
 
-  // --- LOGIKA PENGECEKAN DATA & PENGELOMPOKAN ---
-
-  // 1. Group: PROBLEMS & SOLUTIONS
+  // --- Condition Checks & Section Visibility ---
   const hasProblems = detail.problems && detail.problems.length > 0;
   const hasSolutions = detail.solutions && detail.solutions.length > 0;
-  const showChallenge = hasProblems || hasSolutions; // Tampil jika salah satu ada
+  const showChallenge = hasProblems || hasSolutions;
 
-  // 2. Group: DESIGN SYSTEM & LOGO
   const isDummyColor = detail.colors?.[0]?.hex === '#2C3E50';
   const hasColors = detail.colors && detail.colors.length > 0 && !isDummyColor;
   const hasTypography = detail.typography && detail.typography.fontFamily;
-  const hasDesignImages =
-    detail.designSystemImages && detail.designSystemImages.length > 0;
+  const hasDesignImages = detail.designSystemImages && detail.designSystemImages.length > 0;
   const showDesignSystemContent = hasColors || hasTypography || hasDesignImages;
 
-  const showLogoContent = (detail.logoImages && detail.logoImages.length > 0) || portfolioProject.logo;
-  const showVisuals = showDesignSystemContent || showLogoContent; // Tampil jika salah satu ada
+  const showLogoContent =
+    (detail.logoImages && detail.logoImages.length > 0) || portfolioProject.logo;
+  const showVisuals = showDesignSystemContent || showLogoContent;
 
-  // 3. Other Sections
   const showResult = detail.bentoImages && detail.bentoImages.length > 0;
   const showPrototype = detail.figmaLink && detail.figmaLink !== '#';
 
-  // --- KONSTRUKSI SIDEBAR MENU (GABUNGAN) ---
+  // --- Sidebar Items Construction ---
   const sidebarItems = [
     { id: 'overview', label: 'Overview' },
-    // Menu "Problem & Solution" (Mengarah ke Wrapper ID 'challenge')
-    ...(showChallenge
-      ? [{ id: 'challenge', label: 'Problem & Solution' }]
-      : []),
-    // Menu "Design System" (Mengarah ke Wrapper ID 'visuals', mencakup Logo)
+    ...(showChallenge ? [{ id: 'challenge', label: 'Problem & Solution' }] : []),
     ...(showVisuals ? [{ id: 'visuals', label: 'Design System' }] : []),
-    // Menu lainnya
     ...(showResult ? [{ id: 'design-result', label: 'Design Result' }] : []),
     ...(showPrototype ? [{ id: 'prototype', label: 'Prototype' }] : []),
   ];
 
-  // Grid Styles Helpers
   const getGridColsClass = (count) => {
     if (count === 1) return 'grid-cols-1';
     if (count === 2) return 'grid-cols-1 sm:grid-cols-2';
     if (count === 3) return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
     return 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
   };
+
   const designSystemGridClass = getGridColsClass(
     detail.designSystemImages ? detail.designSystemImages.length : 0
   );
-  const logoImagesToRender = (detail.logoImages && detail.logoImages.length > 0)
-    ? detail.logoImages.map(item => ({ ...item, src: portfolioProject.logo || item.src }))
-    : (portfolioProject.logo ? [{ src: portfolioProject.logo, label: 'Logo' }] : []);
 
-  const logoGridClass = getGridColsClass(logoImagesToRender.length);
+  const logoImagesToRender =
+    detail.logoImages && detail.logoImages.length > 0
+      ? detail.logoImages.map((item) => ({ ...item, src: portfolioProject.logo || item.src }))
+      : portfolioProject.logo
+        ? [{ src: portfolioProject.logo, label: 'Primary Brandmark' }]
+        : [];
 
   return (
     <main
       className="w-full max-w-7xl mx-auto p-6 md:p-12 grid grid-cols-1 lg:grid-cols-4 gap-12 mt-[92px]"
       style={{ fontFamily: '"Inter", sans-serif' }}
     >
-      {/* === Sidebar Kiri === */}
+      {/* === Left Sticky Sidebar Navigation === */}
       <aside className="hidden lg:block lg:col-span-1 lg:sticky lg:top-1/2 lg:-translate-y-1/2 self-start">
         <Sidebar items={sidebarItems} />
         <Link
@@ -397,20 +449,22 @@ export default function ProjectDetailPage() {
         </Link>
       </aside>
 
-      {/* === Konten Kanan === */}
+      {/* === Right Content === */}
       <section className="lg:col-span-3 space-y-20">
-        {/* Hero Image */}
+        {/* --- Hero Image (Original) --- */}
         <Reveal>
           <div className="w-full h-auto md:h-[500px] overflow-hidden rounded-3xl bg-[#FAFAFA]">
             <img
               src={portfolioProject.image}
               alt={portfolioProject.appName}
               className="w-full h-full object-cover"
+              decoding="async"
+              loading="eager"
             />
           </div>
         </Reveal>
 
-        {/* --- Overview --- */}
+        {/* --- Overview Section (Original Layout & InfoRows) --- */}
         <Reveal>
           <article id="overview" className="scroll-mt-32">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-gray-200">
@@ -424,20 +478,17 @@ export default function ProjectDetailPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="
-                    relative w-full sm:w-fit h-14 px-8 rounded-[24px] 
-                    border border-[#CAD3DC] bg-white text-black 
-                    text-[16px] font-normal group inline-flex items-center justify-center
-                    overflow-hidden transition-colors duration-300 hover:border-black
-                  "
+                      relative w-full sm:w-fit h-14 px-8 rounded-[24px] 
+                      border border-[#CAD3DC] bg-white text-black 
+                      text-[16px] font-normal group inline-flex items-center justify-center
+                      overflow-hidden transition-colors duration-300 hover:border-black
+                    "
                   >
                     <span className="relative inline-flex items-center overflow-hidden h-[1.5em]">
-                      {/* Teks Normal (Akan geser ke atas saat hover) */}
                       <span className="inline-flex items-center gap-2 transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
                         Visit Website
                         <HiExternalLink className="text-lg" />
                       </span>
-
-                      {/* Teks Hover (Akan masuk dari bawah saat hover) */}
                       <span className="absolute left-0 top-0 w-full h-full inline-flex items-center justify-center gap-2 translate-y-full transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
                         Visit Website
                         <HiExternalLink className="text-lg" />
@@ -452,20 +503,17 @@ export default function ProjectDetailPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="
-                    relative w-full sm:w-fit h-14 px-8 rounded-[24px] 
-                    border border-[#CAD3DC] bg-white text-black 
-                    text-[16px] font-normal group inline-flex items-center justify-center
-                    overflow-hidden transition-colors duration-300 hover:border-black
-                  "
+                      relative w-full sm:w-fit h-14 px-8 rounded-[24px] 
+                      border border-[#CAD3DC] bg-white text-black 
+                      text-[16px] font-normal group inline-flex items-center justify-center
+                      overflow-hidden transition-colors duration-300 hover:border-black
+                    "
                   >
                     <span className="relative inline-flex items-center overflow-hidden h-[1.5em]">
-                      {/* Teks Normal (Akan geser ke atas saat hover) */}
                       <span className="inline-flex items-center gap-2 transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
                         Visit Github
                         <HiExternalLink className="text-lg" />
                       </span>
-
-                      {/* Teks Hover (Akan masuk dari bawah saat hover) */}
                       <span className="absolute left-0 top-0 w-full h-full inline-flex items-center justify-center gap-2 translate-y-full transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:translate-y-0">
                         Visit Github
                         <HiExternalLink className="text-lg" />
@@ -475,12 +523,14 @@ export default function ProjectDetailPage() {
                 )}
               </div>
             </div>
+
             <div className="pt-8">
               <InfoRow label="Description">
                 <p className="text-base md:text-lg text-gray-700 leading-relaxed">
                   {detail.overview}
                 </p>
               </InfoRow>
+
               <InfoRow label="Team">
                 <div className="flex -space-x-2">
                   {detail.team.map((member, i) => (
@@ -509,6 +559,7 @@ export default function ProjectDetailPage() {
                   ))}
                 </div>
               </InfoRow>
+
               <InfoRow label="My Role">
                 <ul className="list-disc pl-5 space-y-1">
                   {detail.role.map((r, i) => (
@@ -516,13 +567,14 @@ export default function ProjectDetailPage() {
                   ))}
                 </ul>
               </InfoRow>
+
               <InfoRow label="Timeline">
                 <p>{detail.timeline}</p>
               </InfoRow>
+
               <InfoRow label="Tools Used">
                 <div className="flex flex-wrap gap-4 items-center mt-1">
                   {detail.tools.split(', ').map((tool) => {
-                    // Membersihkan string jika ada spasi berlebih
                     const toolName = tool.trim();
                     const icon = toolIcons[toolName];
 
@@ -531,7 +583,6 @@ export default function ProjectDetailPage() {
                         key={toolName}
                         className="group relative flex flex-col items-center"
                       >
-                        {/* Tampilan Ikon */}
                         <div className="text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1">
                           {icon || (
                             <span className="text-[14px] font-medium text-gray-400">
@@ -539,8 +590,6 @@ export default function ProjectDetailPage() {
                             </span>
                           )}
                         </div>
-
-                        {/* Tooltip Nama Tool (Muncul saat Hover) */}
                         <span className="absolute -top-8 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-all duration-200 bg-black text-white text-[10px] px-2 py-1 rounded shadow-lg pointer-events-none whitespace-nowrap z-10">
                           {toolName}
                         </span>
@@ -553,61 +602,101 @@ export default function ProjectDetailPage() {
           </article>
         </Reveal>
 
-        {/* --- GROUP 1: PROBLEM & SOLUTION --- */}
+        {/* --- 2. PROBLEMS & SOLUTION CARD (Kept & Clean, tanpa "02 / Strategic Alignment") --- */}
         {showChallenge && (
-          // Wrapper ini memiliki ID 'challenge' yang akan dideteksi oleh Sidebar
-          <div id="challenge" className="scroll-mt-32 space-y-24">
-            {/* Problems Section */}
-            {hasProblems && (
-              <Reveal>
-                <article>
-                  <h2 className="text-3xl md:text-4xl font-bold text-black mb-8">
-                    Problems
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                    {detail.problems.map((item, i) => (
-                      <ProblemSolutionCard
-                        key={i}
-                        number={`0${i + 1}`}
-                        title={item.title}
-                        description={item.description}
-                        isDarkMode={true}
-                      />
-                    ))}
-                  </div>
-                </article>
-              </Reveal>
-            )}
+          <Reveal>
+            <article id="challenge" className="scroll-mt-32 space-y-8">
+              <div className="flex flex-col gap-2 pb-6 border-b border-zinc-200/80">
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-zinc-950">
+                  Problem & Solution
+                </h2>
+                <p className="text-base text-zinc-600 max-w-2xl mt-1">
+                  Identifying structural friction within the user journey and implementing deliberate, scalable design interventions.
+                </p>
+              </div>
 
-            {/* Solutions Section */}
-            {hasSolutions && (
-              <Reveal>
-                <article>
-                  <h2 className="text-3xl md:text-4xl font-bold text-black mb-8">
-                    Solutions
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                    {detail.solutions.map((item, i) => (
-                      <ProblemSolutionCard
-                        key={i}
-                        number={`0${i + 1}`}
-                        title={item.title}
-                        description={item.description}
-                        isDarkMode={false}
-                      />
-                    ))}
+              {/* Comparative Dual Columns */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+                {/* Friction Points (Problems) */}
+                {hasProblems && (
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between pb-2 border-b border-zinc-200/60">
+                      <span className="text-xs font-semibold text-zinc-800 font-mono">
+                        Identified Friction Points
+                      </span>
+                      <span className="font-mono text-xs text-zinc-400 tabular-nums">
+                        0{detail.problems.length} Items
+                      </span>
+                    </div>
+
+                    <div className="space-y-4">
+                      {detail.problems.map((item, i) => (
+                        <div
+                          key={i}
+                          className="group relative rounded-2xl p-6 bg-zinc-50/70 border border-zinc-200/80 shadow-2xs transition-all duration-300 hover:bg-white hover:shadow-md hover:border-zinc-300"
+                        >
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-mono text-xs font-bold text-zinc-500 tabular-nums px-2.5 py-0.5 rounded-md bg-zinc-200/60">
+                              Challenge 0{i + 1}
+                            </span>
+                            {/* <span className="w-2 h-2 rounded-full bg-amber-500/80" /> */}
+                          </div>
+                          <h3 className="text-lg font-semibold text-zinc-900 tracking-tight mb-2 group-hover:text-black">
+                            {item.title}
+                          </h3>
+                          <p className="text-sm md:text-base text-zinc-600 leading-relaxed">
+                            {item.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </article>
-              </Reveal>
-            )}
-          </div>
+                )}
+
+                {/* Strategic Interventions (Solutions) */}
+                {hasSolutions && (
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between pb-2 border-b border-zinc-200/60">
+                      <span className="text-xs font-semibold text-emerald-800 font-mono">
+                        Strategic Interventions
+                      </span>
+                      <span className="font-mono text-xs text-emerald-600 tabular-nums">
+                        0{detail.solutions.length} Solutions
+                      </span>
+                    </div>
+
+                    <div className="space-y-4">
+                      {detail.solutions.map((item, i) => (
+                        <div
+                          key={i}
+                          className="group relative rounded-2xl p-6 bg-white border border-zinc-200/80 shadow-xs transition-all duration-300 hover:shadow-lg hover:border-zinc-950/20"
+                        >
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="font-mono text-xs font-bold text-emerald-800 tabular-nums px-2.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-200/60">
+                              Solution 0{i + 1}
+                            </span>
+                            {/* <span className="w-2 h-2 rounded-full bg-emerald-500" /> */}
+                          </div>
+                          <h3 className="text-lg font-semibold text-zinc-950 tracking-tight mb-2">
+                            {item.title}
+                          </h3>
+                          <p className="text-sm md:text-base text-zinc-600 leading-relaxed">
+                            {item.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </article>
+          </Reveal>
         )}
 
         {/* --- GROUP 2: VISUAL IDENTITY (Design System + Logo) --- */}
         {showVisuals && (
-          // Wrapper ini memiliki ID 'visuals' yang akan dideteksi oleh Sidebar
-          <div id="visuals" className="scroll-mt-32 space-y-24">
-            {/* Design System Content */}
+          <div id="visuals" className="scroll-mt-32 space-y-16">
+            {/* Design System Content (Colors & Typography Reverted to Original Style) */}
             {showDesignSystemContent && (
               <Reveal>
                 <article className="flex flex-col">
@@ -647,6 +736,7 @@ export default function ProjectDetailPage() {
                     </div>
                   )}
 
+                  {/* 4. UI Components & Icons (Kept) */}
                   {hasDesignImages && (
                     <div className="mt-8 flex flex-col">
                       <h3 className="text-xl font-semibold mb-6">
@@ -656,12 +746,14 @@ export default function ProjectDetailPage() {
                         {detail.designSystemImages.map((imgSrc, i) => (
                           <div
                             key={i}
-                            className="group relative rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 aspect-4/3"
+                            className="group relative rounded-xl overflow-hidden bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 aspect-4/3 flex items-center justify-center p-4"
                           >
                             <img
                               src={imgSrc}
                               alt={`Design System ${i + 1}`}
-                              className="w-full h-full object-contain p-4"
+                              className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                              loading="lazy"
+                              decoding="async"
                             />
                           </div>
                         ))}
@@ -672,33 +764,50 @@ export default function ProjectDetailPage() {
               </Reveal>
             )}
 
-            {/* Logo Content */}
+            {/* 3. Brand Identity & Logomark (Kept: Dual Light & Dark Canvas Exhibition Frames) */}
             {showLogoContent && (
               <Reveal>
                 <article className="flex flex-col">
-                  <h2 className="text-3xl font-semibold text-black mb-6">
+                  <h2 className="text-xl font-semibold mb-6">
                     Logo
                   </h2>
-                  <div className={`grid ${logoGridClass} gap-8`}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {logoImagesToRender.map((logo, idx) => (
-                      <div
-                        key={logo.label + '-' + idx}
-                        className="flex flex-col items-center group"
-                      >
-                        <div
-                          className={`flex justify-center items-center w-full aspect-square rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 ${logo.label.includes('Dark') ? 'bg-black' : 'bg-white border border-gray-200'}`}
-                          style={{ minHeight: '200px' }}
-                        >
+                      <React.Fragment key={logo.label + '-' + idx}>
+                        {/* Light Canvas Frame */}
+                        <div className="group relative rounded-3xl p-8 sm:p-12 bg-zinc-50/80 border border-zinc-200/80 shadow-xs flex flex-col items-center justify-center min-h-[220px] overflow-hidden transition-all duration-300 hover:shadow-md">
+                          <div className="absolute top-4 left-4 font-mono text-[11px] text-zinc-400 font-medium">
+                            {logo.label || 'Brandmark'} — Light Surface
+                          </div>
                           <img
                             src={logo.src}
                             alt={logo.label}
-                            className="max-w-[80%] max-h-[80%] object-contain group-hover:scale-105 transition-transform duration-300"
+                            className="max-h-24 sm:max-h-28 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                            decoding="async"
                           />
+                          <div className="absolute bottom-4 right-4 font-mono text-[11px] text-zinc-400 font-medium">
+                            Vector / Lossless
+                          </div>
                         </div>
-                        <p className="mt-4 text-sm font-medium text-gray-700 text-center">
-                          {logo.label}
-                        </p>
-                      </div>
+
+                        {/* Dark Canvas Frame */}
+                        <div className="group relative rounded-3xl p-8 sm:p-12 bg-zinc-950 border border-zinc-800 shadow-md flex flex-col items-center justify-center min-h-[220px] overflow-hidden transition-all duration-300 hover:shadow-xl">
+                          <div className="absolute top-4 left-4 font-mono text-[11px] text-zinc-500 font-medium">
+                            {logo.label || 'Brandmark'} — Dark Surface
+                          </div>
+                          <img
+                            src={logo.src}
+                            alt={logo.label}
+                            className="max-h-24 sm:max-h-28 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                          <div className="absolute bottom-4 right-4 font-mono text-[11px] text-zinc-500 font-medium">
+                            High Contrast
+                          </div>
+                        </div>
+                      </React.Fragment>
                     ))}
                   </div>
                 </article>
@@ -707,39 +816,87 @@ export default function ProjectDetailPage() {
           </div>
         )}
 
-        {/* --- Design Result (Bento) --- */}
+        {/* --- 5. DESIGN RESULT (Kept: Expansive Showcase without squishing) --- */}
         {showResult && (
           <Reveal>
             <article id="design-result" className="scroll-mt-24">
-              <h2 className="text-3xl font-semibold text-black mb-6">
-                Design Result
-              </h2>
-              <div className="grid grid-cols-2 grid-rows-2 gap-4 h-[600px]">
+              <div className="flex flex-col gap-2 mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-zinc-950">
+                  Design Result
+                </h2>
+                <p className="text-base text-zinc-600 max-w-2xl">
+                  Final production screens and key user flows engineered with pixel-level precision.
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-6 sm:gap-8">
+                {/* Primary Hero Feature (Full Width) */}
                 {detail.bentoImages[0] && (
-                  <div className="col-span-2 row-span-1 rounded-2xl overflow-hidden group relative">
-                    <img
-                      src={detail.bentoImages[0]}
-                      alt="Design 1"
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="group relative rounded-3xl overflow-hidden bg-zinc-100 border border-zinc-200/80 shadow-md transition-all duration-500 hover:shadow-xl">
+                    <div className="overflow-hidden aspect-[16/10] sm:aspect-[16/9] w-full bg-zinc-50 flex items-center justify-center">
+                      <img
+                        src={detail.bentoImages[0]}
+                        alt="Design Result Primary Hero"
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-102"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
                   </div>
                 )}
-                {detail.bentoImages[1] && (
-                  <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden group relative">
-                    <img
-                      src={detail.bentoImages[1]}
-                      alt="Design 2"
-                      className="w-full h-full object-cover"
-                    />
+
+                {/* Secondary Dual Showcase (2-Column) */}
+                {(detail.bentoImages[1] || detail.bentoImages[2]) && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                    {detail.bentoImages[1] && (
+                      <div className="group relative rounded-3xl overflow-hidden bg-zinc-100 border border-zinc-200/80 shadow-sm transition-all duration-500 hover:shadow-lg">
+                        <div className="overflow-hidden aspect-[4/3] w-full bg-zinc-50 flex items-center justify-center">
+                          <img
+                            src={detail.bentoImages[1]}
+                            alt="Design Result Flow 2"
+                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {detail.bentoImages[2] && (
+                      <div className="group relative rounded-3xl overflow-hidden bg-zinc-100 border border-zinc-200/80 shadow-sm transition-all duration-500 hover:shadow-lg">
+                        <div className="overflow-hidden aspect-[4/3] w-full bg-zinc-50 flex items-center justify-center">
+                          <img
+                            src={detail.bentoImages[2]}
+                            alt="Design Result Flow 3"
+                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
-                {detail.bentoImages[2] && (
-                  <div className="col-span-1 row-span-1 rounded-2xl overflow-hidden group relative">
-                    <img
-                      src={detail.bentoImages[2]}
-                      alt="Design 3"
-                      className="w-full h-full object-cover"
-                    />
+
+                {/* Additional Images (if any) */}
+                {detail.bentoImages.length > 3 && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                    {detail.bentoImages.slice(3).map((img, extraIdx) => (
+                      <div
+                        key={extraIdx}
+                        className="group relative rounded-3xl overflow-hidden bg-zinc-100 border border-zinc-200/80 shadow-sm transition-all duration-500 hover:shadow-lg"
+                      >
+                        <div className="overflow-hidden aspect-[4/3] w-full bg-zinc-50 flex items-center justify-center">
+                          <img
+                            src={img}
+                            alt={`Design Result ${extraIdx + 4}`}
+                            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>
@@ -747,13 +904,16 @@ export default function ProjectDetailPage() {
           </Reveal>
         )}
 
-        {/* --- Prototype --- */}
+        {/* --- Prototype (Original) --- */}
         {showPrototype && (
           <Reveal>
             <article id="prototype" className="scroll-mt-24">
-              <h2 className="text-3xl font-semibold text-black mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-zinc-950 mb-6">
                 Prototype
               </h2>
+              {/* <p className="text-base text-zinc-600 max-w-2xl mb-6">
+                Explore the interactive prototype of the latest design.
+              </p> */}
               <div className="bg-gray-100 rounded-2xl overflow-hidden">
                 <iframe
                   style={{ border: 'none' }}
@@ -763,19 +923,16 @@ export default function ProjectDetailPage() {
                   allowFullScreen
                   loading="lazy"
                   title="Figma Prototype"
-                ></iframe>
+                />
               </div>
             </article>
           </Reveal>
         )}
 
-        {/* --- Footer Navigation --- */}
+        {/* --- Footer Navigation (Next Project Card - Slimmer, No Circle behind Logo) --- */}
         {allProjects.length > 0 && (
           <Reveal>
-            <section className="border-t border-gray-200 pt-8 mt-12">
-              <h3 className="text-lg font-medium text-gray-500 mb-2">
-                Next Project
-              </h3>
+            <section className="pt-4 sm:pt-6">
               {(() => {
                 const currentIndex = allProjects.findIndex(
                   (p) => p.id === id
@@ -784,14 +941,51 @@ export default function ProjectDetailPage() {
                 const nextIndex = (currentIndex + 1) % allProjects.length;
                 const nextProject = allProjects[nextIndex];
                 if (!nextProject) return null;
+
+                const rawColor = nextProject.primaryColor || '#18181B';
+                const bgHex = rawColor.startsWith('#') ? rawColor : `#${rawColor}`;
+
                 return (
                   <Link
                     to={`/portfolio/${nextProject.id}`}
-                    className="group block"
+                    className="group relative block w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
+                    style={{ backgroundColor: bgHex }}
                   >
-                    <h2 className="text-3xl font-semibold text-black group-hover:underline">
-                      {nextProject.appName}
-                    </h2>
+                    {/* Subtle gradient vignette */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/10 pointer-events-none" />
+
+                    {/* Card Content Layout (Slim & Compact) */}
+                    <div className="relative z-10 flex flex-row items-center justify-between px-6 py-5 sm:px-8 sm:py-6 md:px-10 md:py-6 gap-6">
+                      {/* Left Side: Up next + Title + Action */}
+                      <div className="flex flex-col items-start gap-1 sm:gap-1.5">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs sm:text-sm font-medium text-white/80">
+                            Up Next
+                          </span>
+                          <span className="w-5 h-[1.5px] bg-white/40 rounded-full" />
+                        </div>
+
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight leading-tight">
+                          {nextProject.appName}
+                        </h2>
+
+                        <div className="pt-1 inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-white/90 group-hover:text-white transition-colors">
+                          <span>Explore Case Study</span>
+                          <HiExternalLink className="text-base transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" />
+                        </div>
+                      </div>
+
+                      {/* Right Side: Clean Brand Logo directly on card (No circle) */}
+                      {nextProject.logo && (
+                        <div className="shrink-0 flex items-center justify-center">
+                          <img
+                            src={nextProject.logo}
+                            alt={`${nextProject.appName} logo`}
+                            className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </div>
+                      )}
+                    </div>
                   </Link>
                 );
               })()}
@@ -799,6 +993,9 @@ export default function ProjectDetailPage() {
           </Reveal>
         )}
       </section>
+
+      {/* 1. Progressive Scroll to Top (Kept) */}
+      <ScrollToTopProgress />
     </main>
   );
 }

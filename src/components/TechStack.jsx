@@ -94,7 +94,7 @@ function TechStack({ items = [], title = 'Tech Stack', variant = 'strip' }) {
       <Reveal>
         <div className={`${containerBase} p-4`}>
           <div className="flex items-center justify-between mb-8">
-            <h3 className="text-3xl md:text-4xl font-bold text-black">
+            <h3 className="text-2xl md:text-xl font-bold text-black">
               {title}
             </h3>
           </div>

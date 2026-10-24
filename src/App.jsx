@@ -27,7 +27,16 @@ function App() {
   }
 
   return (
-    <ReactLenis root>
+    <ReactLenis
+      root
+      options={{
+        lerp: 0.12,
+        duration: 0.85,
+        smoothWheel: true,
+        wheelMultiplier: 1.15,
+        touchMultiplier: 1.5,
+      }}
+    >
       <main className="min-h-screen">
         <CustomCursor />
         <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
