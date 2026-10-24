@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { LuArrowRight } from 'react-icons/lu';
 import { goeyToast, GoeyToaster } from '@/components/ui/goey-toaster';
 
 import Hero from '../components/Hero';
@@ -136,12 +138,23 @@ function HomePage() {
       {/* Selected Work Section */}
       <Reveal>
         <section className="mt-24 md:mt-40 mb-40">
-          <div className="mb-8">
-            <h2>
-              <span className="text-3xl md:text-4xl font-bold text-black">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-10 gap-4">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-zinc-950">
                 Selected Work
-              </span>
-            </h2>
+              </h2>
+            </div>
+
+            <Link
+              to="/portfolio"
+              className="group inline-flex items-center gap-1.5 text-sm font-medium text-zinc-600 hover:text-zinc-950 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 rounded-md"
+            >
+              <span>View all portfolio</span>
+              <LuArrowRight
+                className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              />
+            </Link>
           </div>
           <div className="grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2">
             {displayedProjects.map((project, index) => {

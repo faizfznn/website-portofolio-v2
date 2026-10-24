@@ -14,26 +14,30 @@ export default function ProjectCard({ project, isFullWidth }) {
     >
       <div className="rounded-3xl bg-[#FAFAFA] transition-shadow duration-300 flex flex-col">
         <div className="pb-6 p-6">
-          <div className="flex justify-between items-start mb-1">
-            <h3 className="text-lg md:text-2xl font-bold text-black leading-tight">
-              {project.appName}
-            </h3>
+          {/* Judul & Tahun/Role dari versi sekarang */}
+          <div className="flex items-start justify-between gap-4 mb-2">
+            <div>
+              <h3 className="text-xl sm:text-2xl font-semibold text-zinc-950 tracking-tight transition-colors group-hover:text-black">
+                {project.appName}
+              </h3>
+            </div>
 
-            <div className="flex flex-col items-end ml-4">
-              <span className="text-lg md:text-xl text-black font-bold whitespace-nowrap">
+            <div className="flex flex-col items-end shrink-0">
+              <span className="font-mono text-xs sm:text-sm text-zinc-500 font-medium tabular-nums">
                 {project.year || '2025'}
               </span>
-
-              <span className="text-xs md:text-sm text-gray-500 mt-1 hidden md:block whitespace-nowrap">
+              <span className="text-xs text-zinc-400 mt-0.5 hidden sm:block">
                 {project.role || 'Product Design'}
               </span>
             </div>
           </div>
-          <p className="mt-1 md:mt-2 text-sm md:text-base text-gray-600  leading-relaxed">
+
+          <p className="mt-1 md:mt-2 text-sm md:text-base text-gray-600 leading-relaxed">
             {project.description}
           </p>
+
           <div className="mt-4 flex flex-wrap gap-2">
-            {project.tags.map((tag) => {
+            {project.tags?.map((tag) => {
               const isLive =
                 tag.toLowerCase() === 'live' || tag.toLowerCase() === 'figma';
               const tagClasses = isLive
@@ -51,7 +55,7 @@ export default function ProjectCard({ project, isFullWidth }) {
           </div>
         </div>
 
-        {/* Image container with proper aspect ratio */}
+        {/* Image container dengan rasio asli seperti sebelumnya */}
         <div
           className={`mt-6 overflow-hidden mx-auto transition-all duration-500 ${
             isFullWidth ? 'w-full md:w-[840px] h-96' : 'w-full h-96'

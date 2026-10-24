@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiArrowUpRight, FiFilter, FiLock } from 'react-icons/fi';
@@ -58,17 +59,17 @@ const staggerContainer = {
 const FilterButton = ({ active, label, onClick }) => {
   return (
     <button
+      type="button"
       onClick={onClick}
       className={`
-        flex h-10 px-4 py-2
-        md:h-11 md:px-[18px] 
+        flex h-[32px] lg:h-[36px] px-3.5 sm:px-4 lg:px-5
         justify-center items-center
-        rounded-[49px] text-[14px] md:text-[16px] font-medium 
-        transition-all duration-300 whitespace-nowrap
+        rounded-full text-[13px] lg:text-[14px] font-medium transition-all duration-300 cursor-pointer
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950
         ${
           active
-            ? 'bg-[#F6F6F6] text-black'
-            : 'text-[#4B4B4B] hover:bg-[#F6F6F6]/60 hover:text-black'
+            ? 'bg-black/[0.06] text-black font-semibold shadow-xs'
+            : 'text-[#4B4B4B] hover:text-black hover:bg-black/[0.03]'
         }
       `}
     >
@@ -78,13 +79,16 @@ const FilterButton = ({ active, label, onClick }) => {
 };
 
 const PortfolioItem = ({ project, index, isDetailAvailable }) => {
-  // Komponen pembungkus: Link jika ada detail, div biasa jika tidak ada
   const Wrapper = isDetailAvailable ? Link : 'div';
-
-  // Props untuk pembungkus
   const wrapperProps = isDetailAvailable
-    ? { to: `/portfolio/${project.id}`, state: { from: 'portfolio' } }
-    : { className: 'cursor-not-allowed' }; // Ubah kursor jadi tanda stop/default
+    ? {
+        to: `/portfolio/${project.id}`,
+        state: { from: 'portfolio' },
+        'data-cursor-project': 'true',
+        'data-cursor-text': 'View',
+        className: 'group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 rounded-3xl',
+      }
+    : { className: 'cursor-not-allowed group block opacity-75' };
 
   return (
     <motion.div
@@ -95,51 +99,38 @@ const PortfolioItem = ({ project, index, isDetailAvailable }) => {
       exit="exit"
       viewport={{ once: true, margin: '-50px' }}
       custom={index}
-      className={`group relative`}
+      className="relative"
     >
       <Wrapper {...wrapperProps}>
         {/* Container Image */}
         <div
-          className={`relative overflow-hidden rounded-[2rem] bg-gray-100 transition-all duration-500 ${
-            isDetailAvailable
-              ? 'group-hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)]'
-              : ''
-          }`}
+          className="relative overflow-hidden rounded-3xl bg-zinc-100 border border-zinc-200/80 shadow-xs transition-all duration-300 group-hover:shadow-xl group-hover:border-zinc-300"
         >
-          {/* Gradient Overlay on Hover */}
-          <div
-            className="absolute inset-0 z-[1] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            style={{
-              background:
-                'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.4) 100%)',
-            }}
-          />
-
           {/* Image */}
-          <div className="overflow-hidden">
+          <div className="overflow-hidden aspect-[4/3] md:aspect-[16/10] bg-zinc-50 flex items-center justify-center">
             <img
               src={project.image}
               alt={project.appName}
-              className={`w-full h-auto object-cover aspect-[4/3] md:aspect-[16/10] transition-all duration-300 ${
-                !isDetailAvailable ? 'opacity-80 grayscale-[0.5]' : ''
+              className={`w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${
+                !isDetailAvailable ? 'grayscale-[0.4] opacity-80' : ''
               }`}
+              loading="lazy"
+              decoding="async"
             />
           </div>
 
-          {/* OVERLAY: Logic Tampilan */}
+          {/* Overlay button */}
           {isDetailAvailable ? (
-            // JIKA ADA DETAIL: Tampilkan tombol panah saat hover
-            <div className="absolute top-6 right-6 z-[2] opacity-0 group-hover:opacity-100 transition-all duration-500">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-shadow duration-300">
-                <FiArrowUpRight className="text-xl text-black" />
+            <div className="absolute top-4 right-4 z-[2] opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <div className="w-10 h-10 rounded-full bg-white/95 backdrop-blur-md border border-zinc-200/80 flex items-center justify-center shadow-md">
+                <FiArrowUpRight className="text-lg text-zinc-950" aria-hidden="true" />
               </div>
             </div>
           ) : (
-            // JIKA TIDAK ADA DETAIL: Tampilkan Badge "Coming Soon"
-            <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/10">
-              <div className="bg-white/90 backdrop-blur-sm border border-white/20 px-6 py-2 rounded-full shadow-lg">
-                <span className="text-sm font-bold text-gray-800 tracking-wide uppercase">
-                  Coming Soon
+            <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/20 backdrop-blur-[2px]">
+              <div className="bg-white/95 backdrop-blur-md border border-zinc-200/80 px-4 py-1.5 rounded-full shadow-md">
+                <span className="text-xs font-semibold text-zinc-800 tracking-wider uppercase">
+                  Case Study Coming Soon
                 </span>
               </div>
             </div>
@@ -147,29 +138,29 @@ const PortfolioItem = ({ project, index, isDetailAvailable }) => {
         </div>
 
         {/* Content Description */}
-        <div className="mt-6 flex items-start justify-between">
+        <div className="mt-5 flex items-start justify-between gap-4">
           <div>
             <h3
-              className={`text-2xl md:text-3xl font-bold mb-2 leading-tight transition-colors duration-300 ${
+              className={`text-xl sm:text-2xl font-semibold tracking-tight mb-2 leading-tight transition-colors duration-200 ${
                 isDetailAvailable
-                  ? 'text-gray-900 group-hover:text-black'
-                  : 'text-gray-500'
+                  ? 'text-zinc-950 group-hover:text-black'
+                  : 'text-zinc-500'
               }`}
             >
               {project.appName}
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {project.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="text-sm text-gray-500 border border-gray-200 rounded-full px-3 py-1"
+                  className="text-xs text-zinc-600 bg-zinc-50 border border-zinc-200/80 rounded-full px-2.5 py-0.5"
                 >
                   {tag}
                 </span>
               ))}
             </div>
           </div>
-          <span className="font-mono text-sm text-gray-400 group-hover:text-black transition-colors">
+          <span className="font-mono text-xs sm:text-sm text-zinc-400 font-medium tabular-nums group-hover:text-zinc-950 transition-colors">
             {project.year}
           </span>
         </div>
@@ -266,7 +257,18 @@ export default function PortfolioPage() {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="flex justify-start"
         >
-          <div className="inline-flex items-center gap-1 sm:gap-2 h-[50px] md:h-[60px] px-2 rounded-full bg-white/90 shadow-lg backdrop-blur-sm border border-gray-200/50">
+          <div
+            className="
+              inline-flex items-center justify-center 
+              gap-1
+              p-1
+              rounded-full 
+              bg-white/75
+              shadow-[0_2px_12px_-2px_rgba(0,0,0,0.08),0_1px_3px_rgba(0,0,0,0.04)]
+              backdrop-blur-xl
+              border border-black/[0.08]
+            "
+          >
             {categories.map((cat) => (
               <FilterButton
                 key={cat}

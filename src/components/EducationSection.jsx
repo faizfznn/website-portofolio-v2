@@ -4,22 +4,24 @@ import { supabase } from '../lib/supabaseClient';
 import { sortTimelineItems } from '../lib/dateUtils';
 
 const TimelineItem = ({ date, institution, degree, isActive = false }) => (
-  <div className="relative pl-8 group">
-    <div className="absolute left-0 top-2">
+  <div className="relative pl-7 group">
+    <div className="absolute left-[-4.5px] top-1.5 flex items-center justify-center">
       {isActive ? (
-        <span className="relative flex h-2.5 w-2.5 -translate-x-px -translate-y-px">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#2A9F47]"></span>
+        <span className="relative flex h-2.5 w-2.5">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600" />
         </span>
       ) : (
-        <div className="w-2 h-2 bg-gray-400 rounded-full transition-transform duration-300 group-hover:scale-125"></div>
+        <div className="w-2 h-2 bg-zinc-300 rounded-full transition-transform duration-200 group-hover:scale-125 group-hover:bg-zinc-500" />
       )}
     </div>
 
-    <div className="transition-opacity duration-300 group-hover:opacity-70">
-      <p className="text-sm md:text-base text-gray-500">{date}</p>
-      <h3 className="text-lg md:text-xl font-bold text-black">{institution}</h3>
-      <p className="text-base md:text-lg text-gray-600">{degree}</p>
+    <div className="transition-opacity duration-200 group-hover:opacity-90">
+      <p className="font-mono text-xs text-zinc-500 tabular-nums mb-0.5">{date}</p>
+      <h3 className="text-base sm:text-lg font-semibold text-zinc-950 group-hover:text-black">
+        {institution}
+      </h3>
+      <p className="text-sm text-zinc-600 mt-0.5">{degree}</p>
     </div>
   </div>
 );
@@ -68,4 +70,4 @@ function EducationSection() {
   );
 }
 
-export default EducationSection;
+export default EducationSection;
