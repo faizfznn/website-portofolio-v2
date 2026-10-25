@@ -3,6 +3,7 @@ import organizationalExperience from '../data/organizationalExperience';
 import achievements from '../data/achievementsExperience';
 import { supabase } from '../lib/supabaseClient';
 import { sortTimelineItems } from '../lib/dateUtils';
+import FastworkTimelineItem from './FastworkTimelineItem';
 
 const TimelineItem = ({ date, company, role, isActive = false }) => (
   <div className="relative pl-7 group">
@@ -90,9 +91,21 @@ function ExperienceSection() {
             Organizational
           </h3>
           <div className="space-y-10">
-            {dbExperiences.map((exp, index) => (
-              <TimelineItem key={index} {...exp} />
-            ))}
+            {dbExperiences.map((exp, index) => {
+              const isFastwork = (exp.company || '').toLowerCase().includes('fastwork');
+              if (isFastwork) {
+                return (
+                  <FastworkTimelineItem
+                    key={exp.id || index}
+                    date={exp.date}
+                    institution={exp.company}
+                    position={exp.role}
+                    isActive={exp.isActive}
+                  />
+                );
+              }
+              return <TimelineItem key={exp.id || index} {...exp} />;
+            })}
           </div>
         </div>
 
@@ -102,15 +115,31 @@ function ExperienceSection() {
             <h3 className="text-xl md:text-2xl font-bold text-gray-500">
               Achievements
             </h3>
-            <span className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded">
-              <span className="inline-block h-2 w-2 rounded-full bg-[#2A9F47] mr-1.5"></span>
-              Still Active / LFT
-            </span>
+            <div className='flex flex-row gap-2 items-center border border-gray-300 px-2 py-1 rounded'>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
+              </span>
+              <p className='text-xs text-gray-500'> Still Active / LFT
+              </p>
+            </div>
           </div>
           <div className="space-y-10">
-            {dbAchievements.map((exp, index) => (
-              <TimelineItem key={index} {...exp} />
-            ))}
+            {dbAchievements.map((exp, index) => {
+              const isFastwork = (exp.company || '').toLowerCase().includes('fastwork');
+              if (isFastwork) {
+                return (
+                  <FastworkTimelineItem
+                    key={exp.id || index}
+                    date={exp.date}
+                    institution={exp.company}
+                    position={exp.role}
+                    isActive={exp.isActive}
+                  />
+                );
+              }
+              return <TimelineItem key={exp.id || index} {...exp} />;
+            })}
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import educationData from '../data/educationData';
 import { supabase } from '../lib/supabaseClient';
 import { sortTimelineItems } from '../lib/dateUtils';
+import BrawijayaTimelineItem from './BrawijayaTimelineItem';
 
 const TimelineItem = ({ date, institution, degree, isActive = false }) => (
   <div className="relative pl-7 group">
@@ -61,13 +62,25 @@ function EducationSection() {
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-black">Education</h2>
       <div className="relative border-l-2 border-gray-200 pl-4">
         <div className="space-y-10">
-          {dbEducation.map((edu, index) => (
-            <TimelineItem key={index} {...edu} />
-          ))}
+          {dbEducation.map((item, index) => {
+            const isBrawijaya = (item.institution || '').toLowerCase().includes('brawijaya');
+            if (isBrawijaya) {
+              return (
+                <BrawijayaTimelineItem
+                  key={item.id || index}
+                  date={item.date}
+                  institution={item.institution}
+                  degree={item.degree}
+                  isActive={item.isActive}
+                />
+              );
+            }
+            return <TimelineItem key={item.id || index} {...item} />;
+          })}
         </div>
       </div>
     </section>
   );
 }
 
-export default EducationSection;
+export default EducationSection;
