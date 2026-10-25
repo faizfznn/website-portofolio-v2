@@ -118,7 +118,7 @@ function AboutMePage() {
                 {/* Button 1: Resume */}
                 <div className="flex p-2.5 flex-col items-start self-stretch gap-2.5 rounded-3xl bg-[#FAFAFA]">
                   <a
-                    href="https://docs.google.com/document/d/1MUVU7px2PdNLKCUQPGYkxkPEeKpSIObc74uD_KbiTvE/edit?usp=sharing"
+                    href="https://drive.google.com/file/d/1VtQ0JYPt2LvFaLs9Ug2IdYcumOhVbay-/view?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group flex items-center justify-between w-full p-4 rounded-3xl border border-[#E9E9E9] transition-transform duration-300 ease-in-out hover:scale-[0.98]"

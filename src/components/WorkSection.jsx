@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import workData from '../data/workData';
 import { supabase } from '../lib/supabaseClient';
 import { sortTimelineItems } from '../lib/dateUtils';
+import FastworkTimelineItem from './FastworkTimelineItem';
 
 const TimelineItem = ({ date, institution, position, isActive = false }) => (
   <div className="relative pl-7 group">
@@ -61,9 +62,21 @@ function WorkSection() {
       <h2 className="text-3xl md:text-4xl font-bold mb-12 text-black">Work</h2>
       <div className="relative border-l-2 border-gray-200 pl-4">
         <div className="space-y-10">
-          {dbWork.map((edu, index) => (
-            <TimelineItem key={index} {...edu} />
-          ))}
+          {dbWork.map((item, index) => {
+            const isFastwork = (item.institution || '').toLowerCase().includes('fastwork');
+            if (isFastwork) {
+              return (
+                <FastworkTimelineItem
+                  key={item.id || index}
+                  date={item.date}
+                  institution={item.institution}
+                  position={item.position}
+                  isActive={item.isActive}
+                />
+              );
+            }
+            return <TimelineItem key={item.id || index} {...item} />;
+          })}
         </div>
       </div>
     </section>
