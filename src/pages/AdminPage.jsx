@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { sortTimelineItems } from '../lib/dateUtils';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,8 +10,10 @@ import {
 
 export default function AdminPage() {
   const [session, setSession] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('projects');
+  const isDataFetchedRef = useRef(false);
 
   // Auth Form State
   const [email, setEmail] = useState('');
@@ -221,24 +223,50 @@ export default function AdminPage() {
   });
 
   useEffect(() => {
+    let mounted = true;
+
     // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (!mounted) return;
       setSession(session);
-      setLoading(false);
-      if (session) {
-        fetchAllData();
+      if (session && !isDataFetchedRef.current) {
+        isDataFetchedRef.current = true;
+        await fetchAllData();
       }
+      if (mounted) {
+        setInitialLoading(false);
+      }
+    }).catch(err => {
+      console.error('Session initialization error:', err);
+      if (mounted) setInitialLoading(false);
     });
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      if (session) {
-        fetchAllData();
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, newSession) => {
+      if (!mounted) return;
+      setSession(newSession);
+
+      // Only fetch all data if the user explicitly signs in (avoiding refetch on TOKEN_REFRESHED / tab switch)
+      if (event === 'SIGNED_IN') {
+        if (!isDataFetchedRef.current) {
+          isDataFetchedRef.current = true;
+          await fetchAllData();
+        }
+      } else if (event === 'SIGNED_OUT') {
+        isDataFetchedRef.current = false;
+        setProjects([]);
+        setAchievements([]);
+        setExperiences([]);
+        setEducation([]);
+        setWork([]);
       }
+      // On 'TOKEN_REFRESHED' (e.g. when returning to the tab) we do nothing to prevent disruptive re-renders/scroll reset
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const fetchAllData = async () => {
@@ -867,7 +895,7 @@ export default function AdminPage() {
 
   // --- Rendering Functions ---
 
-  if (loading && !session) {
+  if (initialLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA]">
         <div className="flex flex-col items-center gap-4">
@@ -972,8 +1000,14 @@ export default function AdminPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-100 pb-6 mb-8 gap-4">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <h1 className="text-3xl font-extrabold tracking-tight">Portfolio Control Panel</h1>
+            {loading && (
+              <span className="inline-flex items-center gap-1.5 text-xs text-neutral-500 bg-neutral-100 px-2.5 py-1 rounded-full font-medium animate-pulse">
+                <Loader2 className="w-3.5 h-3.5 animate-spin text-black" />
+                Syncing...
+              </span>
+            )}
           </div>
           <p className="text-gray-500 text-sm mt-1">Hello, Faiz. Customize your website layout and contents in real-time.</p>
         </div>
@@ -989,7 +1023,7 @@ export default function AdminPage() {
       {/* Tabs */}
       <div className="flex border-b border-gray-200 mb-8 overflow-x-auto gap-2">
         <button
-          onClick={() => { setActiveTab('projects'); resetProjectForm(); }}
+          onClick={() => setActiveTab('projects')}
           className={`flex items-center gap-2 px-6 py-3 border-b-2 font-semibold text-sm transition-all whitespace-nowrap ${activeTab === 'projects'
             ? 'border-black text-black'
             : 'border-transparent text-gray-400 hover:text-gray-600'
@@ -1041,16 +1075,9 @@ export default function AdminPage() {
       </div>
 
       {/* Main CMS Sections */}
-      {loading && (
-        <div className="flex items-center justify-center py-12">
-          <Loader2 className="w-8 h-8 animate-spin text-black" />
-        </div>
-      )}
-
-      {!loading && (
-        <div>
-          {/* PROJECTS MANAGER */}
-          {activeTab === 'projects' && (
+      <div>
+        {/* PROJECTS MANAGER */}
+        {activeTab === 'projects' && (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Projects List (Left Column) */}
               <div className="lg:col-span-1 space-y-4">
@@ -2549,7 +2576,6 @@ export default function AdminPage() {
             </div>
           )}
         </div>
-      )}
-    </div>
+      </div>
   );
 }
